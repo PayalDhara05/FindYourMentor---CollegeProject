@@ -1,0 +1,140 @@
+﻿@model FindYourMentorProject.Models.UserLogin
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+@*@if (ViewBag.Message != null)
+    {
+        <div class="alert alert-success">
+            @ViewBag.Message
+        </div>
+    }
+    @using (Html.BeginForm())
+        {
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>UserLogin</h4>
+        <hr />
+        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.EmailID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EmailID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.EmailID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.UserRole, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EnumDropDownListFor(m => m.UserRole, "--Select Role--")
+                @Html.ValidationMessageFor(model => model.UserRole, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.RememberMe, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.RememberMe)
+                    @Html.ValidationMessageFor(model => model.RememberMe, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+        }
+    }
+    <div>
+        @Html.ActionLink("Register Now", "RegistrationStudent", "User")
+        @Html.ActionLink("Forgot Password?", "ForgotPassword", "User")
+    </div>*@
+<link href="~/Custom/css/Login.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+<body>
+    <div class="common-login">
+        <div class="wrapper">
+
+            <header>Login</header>
+            @if (ViewBag.Message != null)
+            {
+                <div class="loginmsg">
+                    @ViewBag.Message
+                </div>
+            }
+            @if (ViewBag.Message != null)
+            {
+                <div class="loginmsg">
+                    @ViewBag.message1
+                </div>
+            }
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                //@Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                <div class="field email">
+                    <div class="input-area">
+                        @*<input type="text" placeholder="Email Address" class="input-area-field">*@
+                        @Html.EditorFor(model => model.EmailID, new { htmlAttributes = new { @class = "input-area-field", @placeholder = "Email Address" } })
+                        @Html.ValidationMessageFor(model => model.EmailID, "", new { @class = "text-danger" })
+                        <i class="icon fas fa-envelope"></i>
+                    </div>
+                </div>
+
+                <div class="field password">
+                    <div class="input-area">
+                        @*<input id="password1" type="password" placeholder="Enter Password" class="input-area-field">*@
+                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "input-area-field", @id = "password1", @placeholder = "Email Password" } })
+                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                        <i class="icon fas fa-lock"></i>
+                        <i class="show-btn fas fa-eye" id="show-pass"></i>
+                    </div>
+                </div>
+
+                <div class="Role-selection">
+                    @Html.EnumDropDownListFor(m => m.UserRole, "--Select Role--")
+                    @Html.ValidationMessageFor(model => model.UserRole, "", new { @class = "text-danger" })
+                    @*<select>
+                    Role
+                    <option disabled>Select Role--</option>
+                    <option>Student</option>
+                    <option>Mentor</option>
+                </select>*@
+                </div>
+
+                <div class="remember">
+                    @*<input type="checkbox" id="checkbox" name="vehicle1" value="Bike">*@
+                    @Html.EditorFor(model => model.RememberMe)
+                    @Html.ValidationMessageFor(model => model.RememberMe, "", new { @class = "text-danger" })
+                    <span>Remember Me</span>
+                </div>
+
+                <div class="pass-txt"><a href="/User/ForgotPassword">Forgot password?</a></div>
+
+                <input type="submit" value="Login" class="input-area-field">
+            }
+
+            <div class="sign-txt">Not yet joined? <a href="/User/Registration">Signup now</a></div>
+
+        </div>
+    </div>
+    <script src="js/login.js"></script>
+    <script src="~/Custom/js/Login.js"></script>
+</body>

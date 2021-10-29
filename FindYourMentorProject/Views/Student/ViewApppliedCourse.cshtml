@@ -1,0 +1,79 @@
+﻿@model IEnumerable<FindYourMentorProject.Models.Application>
+
+@{
+    ViewBag.Title = "ViewApppliedCourse";
+    Layout = "~/Views/Shared/_StudentLayout.cshtml";
+}
+
+<h2>ViewApppliedCourse</h2>
+<div>
+    @foreach (var item in Model)
+    {
+        @Html.DisplayNameFor(model => model.MenteeName)<br />
+        @Html.DisplayFor(modelItem => item.MenteeName)<br />
+
+        @Html.DisplayNameFor(model => model.MenteeEmailID)<br />
+        @Html.DisplayFor(modelItem => item.MenteeEmailID)<br />
+
+        @Html.DisplayNameFor(model => model.MenteeContactNo)<br />
+        @Html.DisplayFor(modelItem => item.MenteeContactNo)<br />
+
+        @Html.DisplayNameFor(model => model.MenteeAddress)<br />
+        @Html.DisplayFor(modelItem => item.MenteeAddress)<br />
+
+        <button onclick="PopupForm(@item.ApplicationID)">View Your Application</button>
+        <button onclick="PopupForm2(@item.AdvertisementID)">View Course Advertisement you have applied for</button>
+
+        <p>Application status - </p>
+        @Html.DisplayFor(modelItem => item.ApplicationStatus)<br />
+    }
+</div>
+<br />
+<br />
+
+<script type="text/javascript">
+
+    function PopupForm(id)
+    {
+        url = '@Url.Action("ViewAppliedApplication", "Student")/' + id;
+        var formDiv =
+            $('<div />');
+            $.get(url).done(function (response) {
+            formDiv.html(response);
+
+            Popup = formDiv.dialog({
+            autoOpen: true,
+            resizable: true,
+            title: 'Apply',
+            height: 500,
+            width: 700,
+            close: function () {
+            Popup.dialog('destroy').remove();
+            }
+
+            });
+        });
+    }
+
+    function PopupForm2(id)
+    {
+        url = '@Url.Action("ViewCourseApplication", "Student")/' + id;
+        var formDiv =
+            $('<div />');
+            $.get(url).done(function (response) {
+            formDiv.html(response);
+
+            Popup = formDiv.dialog({
+            autoOpen: true,
+            resizable: true,
+            title: 'Apply',
+            height: 500,
+            width: 700,
+            close: function () {
+            Popup.dialog('destroy').remove();
+            }
+
+            });
+        });
+    }
+</script>

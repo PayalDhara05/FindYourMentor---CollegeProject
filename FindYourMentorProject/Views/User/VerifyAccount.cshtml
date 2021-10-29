@@ -1,0 +1,9 @@
+﻿<link href="~/Custom/css/VerifyAccount.css" rel="stylesheet" />
+
+@if (ViewBag.Status != null && Convert.ToBoolean(ViewBag.Status))
+{ 
+        <div class="verifyacc-msg">
+            <strong>Success!</strong><p>Your account is verified successfully. You can continue <span>@Html.ActionLink("Login", "Login", "User")</span></p>
+            <img src="~/uiImages/VerifyAccount/welcome.gif" alt="Welcome-img" />
+        </div>
+}

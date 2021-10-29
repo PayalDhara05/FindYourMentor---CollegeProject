@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "Registration";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+
+<link href="~/Custom/css/commonSignup.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+<body>
+    <div class="common-signup">
+    <div class="wrapper">
+        <header>Signup</header>
+        <form action="#">
+            @Html.ActionLink("Join as a Mentor", "RegistrationMentor", "User", new { @class = "link-area-field" })
+            @Html.ActionLink("Join as a Mentee", "RegistrationStudent", "User", new { @class = "link-area-field" })
+        </form>
+        <div class="sign-txt">Already joined? @Html.ActionLink("Signin", "Login", "User", new { @class = "link-area-field" })</div>
+    </div>
+    </div>
+</body>

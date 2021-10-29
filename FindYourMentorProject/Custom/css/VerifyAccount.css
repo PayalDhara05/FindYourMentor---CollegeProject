@@ -1,0 +1,46 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 10px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.verifyacc-msg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    flex-direction: column;
+}
+
+img {
+    height: 70rem;
+    width: 60rem;
+}
+
+strong {
+    margin-top: 3rem;
+    color: #833471;
+    font-weight: bold;
+    font-size: 4rem;
+}
+
+.verifyacc-msg p {
+    font-size: 3rem;
+    color: rgb(9, 9, 94);
+}
+
+.verifyacc-msg span a {
+    color: #833471;
+    font-weight: bold;
+    font-size: 3rem;
+    cursor: pointer;
+    transition: all .3s linear;
+    text-decoration:none;
+}
+
+    .verifyacc-msg span a:hover {
+        text-decoration: underline;
+    }

@@ -1,0 +1,1009 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="FindYourMentorProjectModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AddNotesMentee">
+          <Key>
+            <PropertyRef Name="NoteID" />
+          </Key>
+          <Property Name="NoteID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="50" />
+          <Property Name="Description" Type="varchar" MaxLength="1000" />
+          <Property Name="CreationDate" Type="datetime" />
+          <Property Name="UserID" Type="int" />
+        </EntityType>
+        <EntityType Name="Application">
+          <Key>
+            <PropertyRef Name="ApplicationID" />
+          </Key>
+          <Property Name="ApplicationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AdvertisementID" Type="int" Nullable="false" />
+          <Property Name="MentorID" Type="int" Nullable="false" />
+          <Property Name="MenteeID" Type="int" Nullable="false" />
+          <Property Name="MenteeMessage" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="MenteeBackground" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="MenteeExpectations" Type="varchar" MaxLength="100" />
+          <Property Name="ApplicationStatus" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="MenteeName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="MenteeEmailID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="MenteeState" Type="varchar" MaxLength="50" />
+          <Property Name="MenteeContactNo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="MenteeAge" Type="int" />
+          <Property Name="MenteeAddress" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="WorkingStatus" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="MenteeGithub" Type="varchar" MaxLength="50" />
+          <Property Name="MenteeLinkedin" Type="varchar" MaxLength="50" />
+          <Property Name="MentorEmailID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="statusCounter" Type="int" Nullable="false" />
+          <Property Name="StatusUpdateTime" Type="datetime" />
+          <Property Name="AppliedTime" Type="datetime" />
+          <Property Name="MentorRemoveStatus" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Appointment">
+          <Key>
+            <PropertyRef Name="AppointmentID" />
+          </Key>
+          <Property Name="AppointmentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MenteeName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="MenteeState" Type="varchar" MaxLength="50" />
+          <Property Name="MenteeAddress" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="MenteeAge" Type="int" Nullable="false" />
+          <Property Name="MenteeContactNo" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="MenteeEmailID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="MenteeWorkingStatus" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="MenteeGithubID" Type="varchar" MaxLength="50" />
+          <Property Name="MenteeLinkedinID" Type="varchar" MaxLength="50" />
+          <Property Name="MentorEmailID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="AdvertisementID" Type="int" Nullable="false" />
+          <Property Name="MenteeID" Type="int" Nullable="false" />
+          <Property Name="AppointmentDate" Type="date" />
+          <Property Name="StartTime" Type="int" />
+          <Property Name="EndTime" Type="int" />
+          <Property Name="StatusCounter" Type="int" Nullable="false" />
+          <Property Name="AppointmentStatus" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="MentorID" Type="int" Nullable="false" />
+          <Property Name="AppointmentApplied" Type="datetime" />
+          <Property Name="AppointmentUpdateStatusTime" Type="datetime" />
+          <Property Name="AppointmentRemoveStatus" Type="varchar" MaxLength="50" />
+          <Property Name="AppointmentTime" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ContactUs">
+          <Key>
+            <PropertyRef Name="ContactID" />
+          </Key>
+          <Property Name="ContactID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="EmailID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ContactNo" Type="varchar" MaxLength="10" />
+          <Property Name="Message" Type="varchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CourseAdvertisement">
+          <Key>
+            <PropertyRef Name="AdvertisementID" />
+          </Key>
+          <Property Name="AdvertisementID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClassName" Type="varchar" MaxLength="100" />
+          <Property Name="CourseName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="MentorName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="ContactNo" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="EmailID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="BatchesFull" Type="int" />
+          <Property Name="BatchesAvailable" Type="int" />
+          <Property Name="TotalStudents" Type="int" Nullable="false" />
+          <Property Name="Fees" Type="int" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="SpokenLanguage" Type="varchar" MaxLength="50" />
+          <Property Name="GitHubAccount" Type="varchar" MaxLength="50" />
+          <Property Name="Field" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="State" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="City" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Location" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="MentorID" Type="int" Nullable="false" />
+          <Property Name="CreationDate" Type="datetime" Nullable="false" />
+          <Property Name="DemoLec1" Type="varchar(max)" />
+          <Property Name="YearsOfExperience" Type="int" Nullable="false" />
+          <Property Name="DemoLec2" Type="varchar(max)" />
+          <Property Name="LinkedIn" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Fees">
+          <Key>
+            <PropertyRef Name="FeesID" />
+          </Key>
+          <Property Name="FeesID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AdvertisementID" Type="int" Nullable="false" />
+          <Property Name="MentorID" Type="int" Nullable="false" />
+          <Property Name="MenteeID" Type="int" Nullable="false" />
+          <Property Name="Fees" Type="int" />
+          <Property Name="PaymentMode" Type="varchar" MaxLength="50" />
+          <Property Name="CardDetails" Type="varchar" MaxLength="20" />
+          <Property Name="AmountEntered" Type="int" />
+          <Property Name="PaymentStatus" Type="varchar" MaxLength="20" />
+          <Property Name="MenteeEmailID" Type="varchar" MaxLength="50" />
+          <Property Name="MentorEmailID" Type="varchar" MaxLength="50" />
+          <Property Name="MenteeName" Type="varchar" MaxLength="50" />
+          <Property Name="MenteeState" Type="varchar" MaxLength="50" />
+          <Property Name="MenteeContactNo" Type="varchar" MaxLength="10" />
+          <Property Name="MenteeAge" Type="int" />
+          <Property Name="MenteeLinkedIn" Type="varchar" MaxLength="50" />
+          <Property Name="MenteeGitHub" Type="varchar" MaxLength="50" />
+          <Property Name="PaymentTime" Type="datetime" />
+          <Property Name="StatusUpdateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="RegisterMentor">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="EmailID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="State" Type="varchar" MaxLength="50" />
+          <Property Name="Pincode" Type="int" />
+          <Property Name="ProfilePicture" Type="varchar(max)" />
+          <Property Name="Password" Type="varchar(max)" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="500" />
+          <Property Name="Role" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsEmailVerified" Type="bit" Nullable="false" />
+          <Property Name="ActivationCode" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ResetPasswordCode" Type="nvarchar(max)" />
+          <Property Name="Age" Type="int" Nullable="false" />
+          <Property Name="ContactNo" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="GithubID" Type="varchar" MaxLength="50" />
+          <Property Name="LinkedinID" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="RegisterStudent">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="EmailID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="State" Type="varchar" MaxLength="50" />
+          <Property Name="Pincode" Type="int" />
+          <Property Name="ProfilePicture" Type="varchar(max)" />
+          <Property Name="Password" Type="varchar(max)" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="500" />
+          <Property Name="Role" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsEmailVerified" Type="bit" Nullable="false" />
+          <Property Name="ActivationCode" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ResetPasswordCode" Type="nvarchar(max)" />
+          <Property Name="Age" Type="int" Nullable="false" />
+          <Property Name="ContactNo" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="GitHubID" Type="varchar" MaxLength="50" />
+          <Property Name="LinkedInID" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="SavedList">
+          <Key>
+            <PropertyRef Name="SavedPostID" />
+          </Key>
+          <Property Name="SavedPostID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClassName" Type="varchar" MaxLength="100" />
+          <Property Name="CourseName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="MentorName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="BatchesFull" Type="int" />
+          <Property Name="BatchesAvailable" Type="int" />
+          <Property Name="TotalStudents" Type="int" Nullable="false" />
+          <Property Name="Fees" Type="int" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="SpokenLanguage" Type="varchar" MaxLength="50" />
+          <Property Name="GitHub" Type="varchar" MaxLength="50" />
+          <Property Name="Field" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="State" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="City" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Location" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="YearsOfExperience" Type="int" Nullable="false" />
+          <Property Name="DemoLec1" Type="varchar(max)" />
+          <Property Name="DemoLec2" Type="varchar(max)" />
+          <Property Name="MentorID" Type="int" Nullable="false" />
+          <Property Name="AdvertisementID" Type="int" Nullable="false" />
+          <Property Name="MenteeID" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__AddNotesM__UserI__571DF1D5">
+          <End Role="RegisterStudent" Type="Self.RegisterStudent" Multiplicity="0..1" />
+          <End Role="AddNotesMentee" Type="Self.AddNotesMentee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RegisterStudent">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="AddNotesMentee">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Applicati__Adver__1F98B2C1">
+          <End Role="CourseAdvertisement" Type="Self.CourseAdvertisement" Multiplicity="1" />
+          <End Role="Application" Type="Self.Application" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CourseAdvertisement">
+              <PropertyRef Name="AdvertisementID" />
+            </Principal>
+            <Dependent Role="Application">
+              <PropertyRef Name="AdvertisementID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Applicati__Mente__208CD6FA">
+          <End Role="RegisterStudent" Type="Self.RegisterStudent" Multiplicity="1" />
+          <End Role="Application" Type="Self.Application" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RegisterStudent">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Application">
+              <PropertyRef Name="MenteeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Appointme__Adver__4B7734FF">
+          <End Role="CourseAdvertisement" Type="Self.CourseAdvertisement" Multiplicity="1" />
+          <End Role="Appointment" Type="Self.Appointment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CourseAdvertisement">
+              <PropertyRef Name="AdvertisementID" />
+            </Principal>
+            <Dependent Role="Appointment">
+              <PropertyRef Name="AdvertisementID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Appointme__Mente__4A8310C6">
+          <End Role="RegisterStudent" Type="Self.RegisterStudent" Multiplicity="1" />
+          <End Role="Appointment" Type="Self.Appointment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RegisterStudent">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Appointment">
+              <PropertyRef Name="MenteeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CourseAdv__Mento__73BA3083">
+          <End Role="RegisterMentor" Type="Self.RegisterMentor" Multiplicity="1" />
+          <End Role="CourseAdvertisement" Type="Self.CourseAdvertisement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RegisterMentor">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="CourseAdvertisement">
+              <PropertyRef Name="MentorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Fees__Advertisem__0880433F">
+          <End Role="CourseAdvertisement" Type="Self.CourseAdvertisement" Multiplicity="1" />
+          <End Role="Fees" Type="Self.Fees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CourseAdvertisement">
+              <PropertyRef Name="AdvertisementID" />
+            </Principal>
+            <Dependent Role="Fees">
+              <PropertyRef Name="AdvertisementID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Fees__MenteeID__09746778">
+          <End Role="RegisterStudent" Type="Self.RegisterStudent" Multiplicity="1" />
+          <End Role="Fees" Type="Self.Fees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RegisterStudent">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Fees">
+              <PropertyRef Name="MenteeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SavedList__Adver__18EBB532">
+          <End Role="CourseAdvertisement" Type="Self.CourseAdvertisement" Multiplicity="1" />
+          <End Role="SavedList" Type="Self.SavedList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CourseAdvertisement">
+              <PropertyRef Name="AdvertisementID" />
+            </Principal>
+            <Dependent Role="SavedList">
+              <PropertyRef Name="AdvertisementID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SavedList__Mente__17F790F9">
+          <End Role="RegisterStudent" Type="Self.RegisterStudent" Multiplicity="1" />
+          <End Role="SavedList" Type="Self.SavedList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RegisterStudent">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="SavedList">
+              <PropertyRef Name="MenteeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FindYourMentorProjectModelStoreContainer">
+          <EntitySet Name="AddNotesMentee" EntityType="Self.AddNotesMentee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Application" EntityType="Self.Application" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Appointment" EntityType="Self.Appointment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ContactUs" EntityType="Self.ContactUs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CourseAdvertisement" EntityType="Self.CourseAdvertisement" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Fees" EntityType="Self.Fees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RegisterMentor" EntityType="Self.RegisterMentor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RegisterStudent" EntityType="Self.RegisterStudent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SavedList" EntityType="Self.SavedList" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__AddNotesM__UserI__571DF1D5" Association="Self.FK__AddNotesM__UserI__571DF1D5">
+            <End Role="RegisterStudent" EntitySet="RegisterStudent" />
+            <End Role="AddNotesMentee" EntitySet="AddNotesMentee" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Applicati__Adver__1F98B2C1" Association="Self.FK__Applicati__Adver__1F98B2C1">
+            <End Role="CourseAdvertisement" EntitySet="CourseAdvertisement" />
+            <End Role="Application" EntitySet="Application" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Applicati__Mente__208CD6FA" Association="Self.FK__Applicati__Mente__208CD6FA">
+            <End Role="RegisterStudent" EntitySet="RegisterStudent" />
+            <End Role="Application" EntitySet="Application" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Appointme__Adver__4B7734FF" Association="Self.FK__Appointme__Adver__4B7734FF">
+            <End Role="CourseAdvertisement" EntitySet="CourseAdvertisement" />
+            <End Role="Appointment" EntitySet="Appointment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Appointme__Mente__4A8310C6" Association="Self.FK__Appointme__Mente__4A8310C6">
+            <End Role="RegisterStudent" EntitySet="RegisterStudent" />
+            <End Role="Appointment" EntitySet="Appointment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CourseAdv__Mento__73BA3083" Association="Self.FK__CourseAdv__Mento__73BA3083">
+            <End Role="RegisterMentor" EntitySet="RegisterMentor" />
+            <End Role="CourseAdvertisement" EntitySet="CourseAdvertisement" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Fees__Advertisem__0880433F" Association="Self.FK__Fees__Advertisem__0880433F">
+            <End Role="CourseAdvertisement" EntitySet="CourseAdvertisement" />
+            <End Role="Fees" EntitySet="Fees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Fees__MenteeID__09746778" Association="Self.FK__Fees__MenteeID__09746778">
+            <End Role="RegisterStudent" EntitySet="RegisterStudent" />
+            <End Role="Fees" EntitySet="Fees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SavedList__Adver__18EBB532" Association="Self.FK__SavedList__Adver__18EBB532">
+            <End Role="CourseAdvertisement" EntitySet="CourseAdvertisement" />
+            <End Role="SavedList" EntitySet="SavedList" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SavedList__Mente__17F790F9" Association="Self.FK__SavedList__Mente__17F790F9">
+            <End Role="RegisterStudent" EntitySet="RegisterStudent" />
+            <End Role="SavedList" EntitySet="SavedList" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FindYourMentorProjectModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="FindYourMentorProjectEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AddNotesMentees" EntityType="FindYourMentorProjectModel.AddNotesMentee" />
+          <EntitySet Name="Applications" EntityType="FindYourMentorProjectModel.Application" />
+          <EntitySet Name="Appointments" EntityType="FindYourMentorProjectModel.Appointment" />
+          <EntitySet Name="ContactUs" EntityType="FindYourMentorProjectModel.ContactU" />
+          <EntitySet Name="CourseAdvertisements" EntityType="FindYourMentorProjectModel.CourseAdvertisement" />
+          <EntitySet Name="Fees" EntityType="FindYourMentorProjectModel.Fee" />
+          <EntitySet Name="RegisterMentors" EntityType="FindYourMentorProjectModel.RegisterMentor" />
+          <EntitySet Name="RegisterStudents" EntityType="FindYourMentorProjectModel.RegisterStudent" />
+          <EntitySet Name="SavedLists" EntityType="FindYourMentorProjectModel.SavedList" />
+          <AssociationSet Name="FK__AddNotesM__UserI__571DF1D5" Association="FindYourMentorProjectModel.FK__AddNotesM__UserI__571DF1D5">
+            <End Role="RegisterStudent" EntitySet="RegisterStudents" />
+            <End Role="AddNotesMentee" EntitySet="AddNotesMentees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Applicati__Adver__1F98B2C1" Association="FindYourMentorProjectModel.FK__Applicati__Adver__1F98B2C1">
+            <End Role="CourseAdvertisement" EntitySet="CourseAdvertisements" />
+            <End Role="Application" EntitySet="Applications" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Applicati__Mente__208CD6FA" Association="FindYourMentorProjectModel.FK__Applicati__Mente__208CD6FA">
+            <End Role="RegisterStudent" EntitySet="RegisterStudents" />
+            <End Role="Application" EntitySet="Applications" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Appointme__Adver__4B7734FF" Association="FindYourMentorProjectModel.FK__Appointme__Adver__4B7734FF">
+            <End Role="CourseAdvertisement" EntitySet="CourseAdvertisements" />
+            <End Role="Appointment" EntitySet="Appointments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Appointme__Mente__4A8310C6" Association="FindYourMentorProjectModel.FK__Appointme__Mente__4A8310C6">
+            <End Role="RegisterStudent" EntitySet="RegisterStudents" />
+            <End Role="Appointment" EntitySet="Appointments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CourseAdv__Mento__73BA3083" Association="FindYourMentorProjectModel.FK__CourseAdv__Mento__73BA3083">
+            <End Role="RegisterMentor" EntitySet="RegisterMentors" />
+            <End Role="CourseAdvertisement" EntitySet="CourseAdvertisements" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Fees__Advertisem__0880433F" Association="FindYourMentorProjectModel.FK__Fees__Advertisem__0880433F">
+            <End Role="CourseAdvertisement" EntitySet="CourseAdvertisements" />
+            <End Role="Fee" EntitySet="Fees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SavedList__Adver__18EBB532" Association="FindYourMentorProjectModel.FK__SavedList__Adver__18EBB532">
+            <End Role="CourseAdvertisement" EntitySet="CourseAdvertisements" />
+            <End Role="SavedList" EntitySet="SavedLists" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Fees__MenteeID__09746778" Association="FindYourMentorProjectModel.FK__Fees__MenteeID__09746778">
+            <End Role="RegisterStudent" EntitySet="RegisterStudents" />
+            <End Role="Fee" EntitySet="Fees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SavedList__Mente__17F790F9" Association="FindYourMentorProjectModel.FK__SavedList__Mente__17F790F9">
+            <End Role="RegisterStudent" EntitySet="RegisterStudents" />
+            <End Role="SavedList" EntitySet="SavedLists" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="AddNotesMentee">
+          <Key>
+            <PropertyRef Name="NoteID" />
+          </Key>
+          <Property Name="NoteID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="CreationDate" Type="DateTime" Precision="3" />
+          <Property Name="UserID" Type="Int32" />
+          <NavigationProperty Name="RegisterStudent" Relationship="FindYourMentorProjectModel.FK__AddNotesM__UserI__571DF1D5" FromRole="AddNotesMentee" ToRole="RegisterStudent" />
+        </EntityType>
+        <EntityType Name="Application">
+          <Key>
+            <PropertyRef Name="ApplicationID" />
+          </Key>
+          <Property Name="ApplicationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AdvertisementID" Type="Int32" Nullable="false" />
+          <Property Name="MentorID" Type="Int32" Nullable="false" />
+          <Property Name="MenteeID" Type="Int32" Nullable="false" />
+          <Property Name="MenteeMessage" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="MenteeBackground" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="MenteeExpectations" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ApplicationStatus" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MenteeName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MenteeEmailID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MenteeState" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MenteeContactNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MenteeAge" Type="Int32" />
+          <Property Name="MenteeAddress" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="WorkingStatus" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MenteeGithub" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MenteeLinkedin" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MentorEmailID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="statusCounter" Type="Int32" Nullable="false" />
+          <Property Name="StatusUpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="AppliedTime" Type="DateTime" Precision="3" />
+          <Property Name="MentorRemoveStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CourseAdvertisement" Relationship="FindYourMentorProjectModel.FK__Applicati__Adver__1F98B2C1" FromRole="Application" ToRole="CourseAdvertisement" />
+          <NavigationProperty Name="RegisterStudent" Relationship="FindYourMentorProjectModel.FK__Applicati__Mente__208CD6FA" FromRole="Application" ToRole="RegisterStudent" />
+        </EntityType>
+        <EntityType Name="Appointment">
+          <Key>
+            <PropertyRef Name="AppointmentID" />
+          </Key>
+          <Property Name="AppointmentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MenteeName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MenteeState" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MenteeAddress" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MenteeAge" Type="Int32" Nullable="false" />
+          <Property Name="MenteeContactNo" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="MenteeEmailID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MenteeWorkingStatus" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MenteeGithubID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MenteeLinkedinID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MentorEmailID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AdvertisementID" Type="Int32" Nullable="false" />
+          <Property Name="MenteeID" Type="Int32" Nullable="false" />
+          <Property Name="AppointmentDate" Type="DateTime" Precision="0" />
+          <Property Name="StartTime" Type="Int32" />
+          <Property Name="EndTime" Type="Int32" />
+          <Property Name="StatusCounter" Type="Int32" Nullable="false" />
+          <Property Name="AppointmentStatus" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MentorID" Type="Int32" Nullable="false" />
+          <Property Name="AppointmentApplied" Type="DateTime" Precision="3" />
+          <Property Name="AppointmentUpdateStatusTime" Type="DateTime" Precision="3" />
+          <Property Name="AppointmentRemoveStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AppointmentTime" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CourseAdvertisement" Relationship="FindYourMentorProjectModel.FK__Appointme__Adver__4B7734FF" FromRole="Appointment" ToRole="CourseAdvertisement" />
+          <NavigationProperty Name="RegisterStudent" Relationship="FindYourMentorProjectModel.FK__Appointme__Mente__4A8310C6" FromRole="Appointment" ToRole="RegisterStudent" />
+        </EntityType>
+        <EntityType Name="ContactU">
+          <Key>
+            <PropertyRef Name="ContactID" />
+          </Key>
+          <Property Name="ContactID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EmailID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ContactNo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Message" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="CourseAdvertisement">
+          <Key>
+            <PropertyRef Name="AdvertisementID" />
+          </Key>
+          <Property Name="AdvertisementID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClassName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CourseName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="MentorName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="ContactNo" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="EmailID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BatchesFull" Type="Int32" />
+          <Property Name="BatchesAvailable" Type="Int32" />
+          <Property Name="TotalStudents" Type="Int32" Nullable="false" />
+          <Property Name="Fees" Type="Int32" Nullable="false" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="SpokenLanguage" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="GitHubAccount" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Field" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Location" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MentorID" Type="Int32" Nullable="false" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DemoLec1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="YearsOfExperience" Type="Int32" Nullable="false" />
+          <Property Name="DemoLec2" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="LinkedIn" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Applications" Relationship="FindYourMentorProjectModel.FK__Applicati__Adver__1F98B2C1" FromRole="CourseAdvertisement" ToRole="Application" />
+          <NavigationProperty Name="Appointments" Relationship="FindYourMentorProjectModel.FK__Appointme__Adver__4B7734FF" FromRole="CourseAdvertisement" ToRole="Appointment" />
+          <NavigationProperty Name="RegisterMentor" Relationship="FindYourMentorProjectModel.FK__CourseAdv__Mento__73BA3083" FromRole="CourseAdvertisement" ToRole="RegisterMentor" />
+          <NavigationProperty Name="Fees1" Relationship="FindYourMentorProjectModel.FK__Fees__Advertisem__0880433F" FromRole="CourseAdvertisement" ToRole="Fee" />
+          <NavigationProperty Name="SavedLists" Relationship="FindYourMentorProjectModel.FK__SavedList__Adver__18EBB532" FromRole="CourseAdvertisement" ToRole="SavedList" />
+        </EntityType>
+        <EntityType Name="Fee">
+          <Key>
+            <PropertyRef Name="FeesID" />
+          </Key>
+          <Property Name="FeesID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AdvertisementID" Type="Int32" Nullable="false" />
+          <Property Name="MentorID" Type="Int32" Nullable="false" />
+          <Property Name="MenteeID" Type="Int32" Nullable="false" />
+          <Property Name="Fees" Type="Int32" />
+          <Property Name="PaymentMode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CardDetails" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="AmountEntered" Type="Int32" />
+          <Property Name="PaymentStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="MenteeEmailID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MentorEmailID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MenteeName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MenteeState" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MenteeContactNo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="MenteeAge" Type="Int32" />
+          <Property Name="MenteeLinkedIn" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MenteeGitHub" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PaymentTime" Type="DateTime" Precision="3" />
+          <Property Name="StatusUpdateTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CourseAdvertisement" Relationship="FindYourMentorProjectModel.FK__Fees__Advertisem__0880433F" FromRole="Fee" ToRole="CourseAdvertisement" />
+          <NavigationProperty Name="RegisterStudent" Relationship="FindYourMentorProjectModel.FK__Fees__MenteeID__09746778" FromRole="Fee" ToRole="RegisterStudent" />
+        </EntityType>
+        <EntityType Name="RegisterMentor">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EmailID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Pincode" Type="Int32" />
+          <Property Name="ProfilePicture" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Role" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsEmailVerified" Type="Boolean" Nullable="false" />
+          <Property Name="ActivationCode" Type="Guid" Nullable="false" />
+          <Property Name="ResetPasswordCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Age" Type="Int32" Nullable="false" />
+          <Property Name="ContactNo" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="GithubID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LinkedinID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CourseAdvertisements" Relationship="FindYourMentorProjectModel.FK__CourseAdv__Mento__73BA3083" FromRole="RegisterMentor" ToRole="CourseAdvertisement" />
+        </EntityType>
+        <EntityType Name="RegisterStudent">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EmailID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Pincode" Type="Int32" />
+          <Property Name="ProfilePicture" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Role" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsEmailVerified" Type="Boolean" Nullable="false" />
+          <Property Name="ActivationCode" Type="Guid" Nullable="false" />
+          <Property Name="ResetPasswordCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Age" Type="Int32" Nullable="false" />
+          <Property Name="ContactNo" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="GitHubID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LinkedInID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AddNotesMentees" Relationship="FindYourMentorProjectModel.FK__AddNotesM__UserI__571DF1D5" FromRole="RegisterStudent" ToRole="AddNotesMentee" />
+          <NavigationProperty Name="Applications" Relationship="FindYourMentorProjectModel.FK__Applicati__Mente__208CD6FA" FromRole="RegisterStudent" ToRole="Application" />
+          <NavigationProperty Name="Appointments" Relationship="FindYourMentorProjectModel.FK__Appointme__Mente__4A8310C6" FromRole="RegisterStudent" ToRole="Appointment" />
+          <NavigationProperty Name="Fees" Relationship="FindYourMentorProjectModel.FK__Fees__MenteeID__09746778" FromRole="RegisterStudent" ToRole="Fee" />
+          <NavigationProperty Name="SavedLists" Relationship="FindYourMentorProjectModel.FK__SavedList__Mente__17F790F9" FromRole="RegisterStudent" ToRole="SavedList" />
+        </EntityType>
+        <EntityType Name="SavedList">
+          <Key>
+            <PropertyRef Name="SavedPostID" />
+          </Key>
+          <Property Name="SavedPostID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClassName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CourseName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="MentorName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="BatchesFull" Type="Int32" />
+          <Property Name="BatchesAvailable" Type="Int32" />
+          <Property Name="TotalStudents" Type="Int32" Nullable="false" />
+          <Property Name="Fees" Type="Int32" Nullable="false" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="SpokenLanguage" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="GitHub" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Field" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Location" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="YearsOfExperience" Type="Int32" Nullable="false" />
+          <Property Name="DemoLec1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="DemoLec2" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="MentorID" Type="Int32" Nullable="false" />
+          <Property Name="AdvertisementID" Type="Int32" Nullable="false" />
+          <Property Name="MenteeID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CourseAdvertisement" Relationship="FindYourMentorProjectModel.FK__SavedList__Adver__18EBB532" FromRole="SavedList" ToRole="CourseAdvertisement" />
+          <NavigationProperty Name="RegisterStudent" Relationship="FindYourMentorProjectModel.FK__SavedList__Mente__17F790F9" FromRole="SavedList" ToRole="RegisterStudent" />
+        </EntityType>
+        <Association Name="FK__AddNotesM__UserI__571DF1D5">
+          <End Type="FindYourMentorProjectModel.RegisterStudent" Role="RegisterStudent" Multiplicity="0..1" />
+          <End Type="FindYourMentorProjectModel.AddNotesMentee" Role="AddNotesMentee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RegisterStudent">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="AddNotesMentee">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Applicati__Adver__1F98B2C1">
+          <End Type="FindYourMentorProjectModel.CourseAdvertisement" Role="CourseAdvertisement" Multiplicity="1" />
+          <End Type="FindYourMentorProjectModel.Application" Role="Application" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CourseAdvertisement">
+              <PropertyRef Name="AdvertisementID" />
+            </Principal>
+            <Dependent Role="Application">
+              <PropertyRef Name="AdvertisementID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Applicati__Mente__208CD6FA">
+          <End Type="FindYourMentorProjectModel.RegisterStudent" Role="RegisterStudent" Multiplicity="1" />
+          <End Type="FindYourMentorProjectModel.Application" Role="Application" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RegisterStudent">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Application">
+              <PropertyRef Name="MenteeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Appointme__Adver__4B7734FF">
+          <End Type="FindYourMentorProjectModel.CourseAdvertisement" Role="CourseAdvertisement" Multiplicity="1" />
+          <End Type="FindYourMentorProjectModel.Appointment" Role="Appointment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CourseAdvertisement">
+              <PropertyRef Name="AdvertisementID" />
+            </Principal>
+            <Dependent Role="Appointment">
+              <PropertyRef Name="AdvertisementID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Appointme__Mente__4A8310C6">
+          <End Type="FindYourMentorProjectModel.RegisterStudent" Role="RegisterStudent" Multiplicity="1" />
+          <End Type="FindYourMentorProjectModel.Appointment" Role="Appointment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RegisterStudent">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Appointment">
+              <PropertyRef Name="MenteeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CourseAdv__Mento__73BA3083">
+          <End Type="FindYourMentorProjectModel.RegisterMentor" Role="RegisterMentor" Multiplicity="1" />
+          <End Type="FindYourMentorProjectModel.CourseAdvertisement" Role="CourseAdvertisement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RegisterMentor">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="CourseAdvertisement">
+              <PropertyRef Name="MentorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Fees__Advertisem__0880433F">
+          <End Type="FindYourMentorProjectModel.CourseAdvertisement" Role="CourseAdvertisement" Multiplicity="1" />
+          <End Type="FindYourMentorProjectModel.Fee" Role="Fee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CourseAdvertisement">
+              <PropertyRef Name="AdvertisementID" />
+            </Principal>
+            <Dependent Role="Fee">
+              <PropertyRef Name="AdvertisementID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SavedList__Adver__18EBB532">
+          <End Type="FindYourMentorProjectModel.CourseAdvertisement" Role="CourseAdvertisement" Multiplicity="1" />
+          <End Type="FindYourMentorProjectModel.SavedList" Role="SavedList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CourseAdvertisement">
+              <PropertyRef Name="AdvertisementID" />
+            </Principal>
+            <Dependent Role="SavedList">
+              <PropertyRef Name="AdvertisementID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Fees__MenteeID__09746778">
+          <End Type="FindYourMentorProjectModel.RegisterStudent" Role="RegisterStudent" Multiplicity="1" />
+          <End Type="FindYourMentorProjectModel.Fee" Role="Fee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RegisterStudent">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Fee">
+              <PropertyRef Name="MenteeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SavedList__Mente__17F790F9">
+          <End Type="FindYourMentorProjectModel.RegisterStudent" Role="RegisterStudent" Multiplicity="1" />
+          <End Type="FindYourMentorProjectModel.SavedList" Role="SavedList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RegisterStudent">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="SavedList">
+              <PropertyRef Name="MenteeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FindYourMentorProjectModelStoreContainer" CdmEntityContainer="FindYourMentorProjectEntities">
+          <EntitySetMapping Name="AddNotesMentees">
+            <EntityTypeMapping TypeName="FindYourMentorProjectModel.AddNotesMentee">
+              <MappingFragment StoreEntitySet="AddNotesMentee">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="NoteID" ColumnName="NoteID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Applications">
+            <EntityTypeMapping TypeName="FindYourMentorProjectModel.Application">
+              <MappingFragment StoreEntitySet="Application">
+                <ScalarProperty Name="MentorRemoveStatus" ColumnName="MentorRemoveStatus" />
+                <ScalarProperty Name="AppliedTime" ColumnName="AppliedTime" />
+                <ScalarProperty Name="StatusUpdateTime" ColumnName="StatusUpdateTime" />
+                <ScalarProperty Name="statusCounter" ColumnName="statusCounter" />
+                <ScalarProperty Name="MentorEmailID" ColumnName="MentorEmailID" />
+                <ScalarProperty Name="MenteeLinkedin" ColumnName="MenteeLinkedin" />
+                <ScalarProperty Name="MenteeGithub" ColumnName="MenteeGithub" />
+                <ScalarProperty Name="WorkingStatus" ColumnName="WorkingStatus" />
+                <ScalarProperty Name="MenteeAddress" ColumnName="MenteeAddress" />
+                <ScalarProperty Name="MenteeAge" ColumnName="MenteeAge" />
+                <ScalarProperty Name="MenteeContactNo" ColumnName="MenteeContactNo" />
+                <ScalarProperty Name="MenteeState" ColumnName="MenteeState" />
+                <ScalarProperty Name="MenteeEmailID" ColumnName="MenteeEmailID" />
+                <ScalarProperty Name="MenteeName" ColumnName="MenteeName" />
+                <ScalarProperty Name="ApplicationStatus" ColumnName="ApplicationStatus" />
+                <ScalarProperty Name="MenteeExpectations" ColumnName="MenteeExpectations" />
+                <ScalarProperty Name="MenteeBackground" ColumnName="MenteeBackground" />
+                <ScalarProperty Name="MenteeMessage" ColumnName="MenteeMessage" />
+                <ScalarProperty Name="MenteeID" ColumnName="MenteeID" />
+                <ScalarProperty Name="MentorID" ColumnName="MentorID" />
+                <ScalarProperty Name="AdvertisementID" ColumnName="AdvertisementID" />
+                <ScalarProperty Name="ApplicationID" ColumnName="ApplicationID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Appointments">
+            <EntityTypeMapping TypeName="FindYourMentorProjectModel.Appointment">
+              <MappingFragment StoreEntitySet="Appointment">
+                <ScalarProperty Name="AppointmentTime" ColumnName="AppointmentTime" />
+                <ScalarProperty Name="AppointmentRemoveStatus" ColumnName="AppointmentRemoveStatus" />
+                <ScalarProperty Name="AppointmentUpdateStatusTime" ColumnName="AppointmentUpdateStatusTime" />
+                <ScalarProperty Name="AppointmentApplied" ColumnName="AppointmentApplied" />
+                <ScalarProperty Name="MentorID" ColumnName="MentorID" />
+                <ScalarProperty Name="AppointmentStatus" ColumnName="AppointmentStatus" />
+                <ScalarProperty Name="StatusCounter" ColumnName="StatusCounter" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="AppointmentDate" ColumnName="AppointmentDate" />
+                <ScalarProperty Name="MenteeID" ColumnName="MenteeID" />
+                <ScalarProperty Name="AdvertisementID" ColumnName="AdvertisementID" />
+                <ScalarProperty Name="MentorEmailID" ColumnName="MentorEmailID" />
+                <ScalarProperty Name="MenteeLinkedinID" ColumnName="MenteeLinkedinID" />
+                <ScalarProperty Name="MenteeGithubID" ColumnName="MenteeGithubID" />
+                <ScalarProperty Name="MenteeWorkingStatus" ColumnName="MenteeWorkingStatus" />
+                <ScalarProperty Name="MenteeEmailID" ColumnName="MenteeEmailID" />
+                <ScalarProperty Name="MenteeContactNo" ColumnName="MenteeContactNo" />
+                <ScalarProperty Name="MenteeAge" ColumnName="MenteeAge" />
+                <ScalarProperty Name="MenteeAddress" ColumnName="MenteeAddress" />
+                <ScalarProperty Name="MenteeState" ColumnName="MenteeState" />
+                <ScalarProperty Name="MenteeName" ColumnName="MenteeName" />
+                <ScalarProperty Name="AppointmentID" ColumnName="AppointmentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ContactUs">
+            <EntityTypeMapping TypeName="FindYourMentorProjectModel.ContactU">
+              <MappingFragment StoreEntitySet="ContactUs">
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+                <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ContactID" ColumnName="ContactID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CourseAdvertisements">
+            <EntityTypeMapping TypeName="FindYourMentorProjectModel.CourseAdvertisement">
+              <MappingFragment StoreEntitySet="CourseAdvertisement">
+                <ScalarProperty Name="LinkedIn" ColumnName="LinkedIn" />
+                <ScalarProperty Name="DemoLec2" ColumnName="DemoLec2" />
+                <ScalarProperty Name="YearsOfExperience" ColumnName="YearsOfExperience" />
+                <ScalarProperty Name="DemoLec1" ColumnName="DemoLec1" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="MentorID" ColumnName="MentorID" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Field" ColumnName="Field" />
+                <ScalarProperty Name="GitHubAccount" ColumnName="GitHubAccount" />
+                <ScalarProperty Name="SpokenLanguage" ColumnName="SpokenLanguage" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Fees" ColumnName="Fees" />
+                <ScalarProperty Name="TotalStudents" ColumnName="TotalStudents" />
+                <ScalarProperty Name="BatchesAvailable" ColumnName="BatchesAvailable" />
+                <ScalarProperty Name="BatchesFull" ColumnName="BatchesFull" />
+                <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+                <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="MentorName" ColumnName="MentorName" />
+                <ScalarProperty Name="CourseName" ColumnName="CourseName" />
+                <ScalarProperty Name="ClassName" ColumnName="ClassName" />
+                <ScalarProperty Name="AdvertisementID" ColumnName="AdvertisementID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Fees">
+            <EntityTypeMapping TypeName="FindYourMentorProjectModel.Fee">
+              <MappingFragment StoreEntitySet="Fees">
+                <ScalarProperty Name="StatusUpdateTime" ColumnName="StatusUpdateTime" />
+                <ScalarProperty Name="PaymentTime" ColumnName="PaymentTime" />
+                <ScalarProperty Name="MenteeGitHub" ColumnName="MenteeGitHub" />
+                <ScalarProperty Name="MenteeLinkedIn" ColumnName="MenteeLinkedIn" />
+                <ScalarProperty Name="MenteeAge" ColumnName="MenteeAge" />
+                <ScalarProperty Name="MenteeContactNo" ColumnName="MenteeContactNo" />
+                <ScalarProperty Name="MenteeState" ColumnName="MenteeState" />
+                <ScalarProperty Name="MenteeName" ColumnName="MenteeName" />
+                <ScalarProperty Name="MentorEmailID" ColumnName="MentorEmailID" />
+                <ScalarProperty Name="MenteeEmailID" ColumnName="MenteeEmailID" />
+                <ScalarProperty Name="PaymentStatus" ColumnName="PaymentStatus" />
+                <ScalarProperty Name="AmountEntered" ColumnName="AmountEntered" />
+                <ScalarProperty Name="CardDetails" ColumnName="CardDetails" />
+                <ScalarProperty Name="PaymentMode" ColumnName="PaymentMode" />
+                <ScalarProperty Name="Fees" ColumnName="Fees" />
+                <ScalarProperty Name="MenteeID" ColumnName="MenteeID" />
+                <ScalarProperty Name="MentorID" ColumnName="MentorID" />
+                <ScalarProperty Name="AdvertisementID" ColumnName="AdvertisementID" />
+                <ScalarProperty Name="FeesID" ColumnName="FeesID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RegisterMentors">
+            <EntityTypeMapping TypeName="FindYourMentorProjectModel.RegisterMentor">
+              <MappingFragment StoreEntitySet="RegisterMentor">
+                <ScalarProperty Name="LinkedinID" ColumnName="LinkedinID" />
+                <ScalarProperty Name="GithubID" ColumnName="GithubID" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="ResetPasswordCode" ColumnName="ResetPasswordCode" />
+                <ScalarProperty Name="ActivationCode" ColumnName="ActivationCode" />
+                <ScalarProperty Name="IsEmailVerified" ColumnName="IsEmailVerified" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="ProfilePicture" ColumnName="ProfilePicture" />
+                <ScalarProperty Name="Pincode" ColumnName="Pincode" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RegisterStudents">
+            <EntityTypeMapping TypeName="FindYourMentorProjectModel.RegisterStudent">
+              <MappingFragment StoreEntitySet="RegisterStudent">
+                <ScalarProperty Name="LinkedInID" ColumnName="LinkedInID" />
+                <ScalarProperty Name="GitHubID" ColumnName="GitHubID" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="ResetPasswordCode" ColumnName="ResetPasswordCode" />
+                <ScalarProperty Name="ActivationCode" ColumnName="ActivationCode" />
+                <ScalarProperty Name="IsEmailVerified" ColumnName="IsEmailVerified" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="ProfilePicture" ColumnName="ProfilePicture" />
+                <ScalarProperty Name="Pincode" ColumnName="Pincode" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SavedLists">
+            <EntityTypeMapping TypeName="FindYourMentorProjectModel.SavedList">
+              <MappingFragment StoreEntitySet="SavedList">
+                <ScalarProperty Name="MenteeID" ColumnName="MenteeID" />
+                <ScalarProperty Name="AdvertisementID" ColumnName="AdvertisementID" />
+                <ScalarProperty Name="MentorID" ColumnName="MentorID" />
+                <ScalarProperty Name="DemoLec2" ColumnName="DemoLec2" />
+                <ScalarProperty Name="DemoLec1" ColumnName="DemoLec1" />
+                <ScalarProperty Name="YearsOfExperience" ColumnName="YearsOfExperience" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Field" ColumnName="Field" />
+                <ScalarProperty Name="GitHub" ColumnName="GitHub" />
+                <ScalarProperty Name="SpokenLanguage" ColumnName="SpokenLanguage" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Fees" ColumnName="Fees" />
+                <ScalarProperty Name="TotalStudents" ColumnName="TotalStudents" />
+                <ScalarProperty Name="BatchesAvailable" ColumnName="BatchesAvailable" />
+                <ScalarProperty Name="BatchesFull" ColumnName="BatchesFull" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="MentorName" ColumnName="MentorName" />
+                <ScalarProperty Name="CourseName" ColumnName="CourseName" />
+                <ScalarProperty Name="ClassName" ColumnName="ClassName" />
+                <ScalarProperty Name="SavedPostID" ColumnName="SavedPostID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

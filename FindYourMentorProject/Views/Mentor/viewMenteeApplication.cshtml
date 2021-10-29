@@ -1,0 +1,221 @@
+﻿@model IEnumerable<FindYourMentorProject.Models.Application>
+
+@{
+    ViewBag.Title = "viewMenteeApplication";
+    Layout = "~/Views/Shared/_MentorLayout.cshtml";
+}
+<link href="~/Custom/css/Loader.css" rel="stylesheet" />
+
+<h2>ViewMenteeApplication</h2>
+
+<div id="loader" style="display:none;">
+    <img src="~/uiImages/Loader.gif" />
+    <p>Processing ...</p>
+</div>
+
+<table id="MenteeAppln" style="width:100%;height:auto">
+    <thead>
+        <tr>
+            <th>Mentee Name</th>
+            <th>Working Status</th>
+            <th>Mentee State</th>
+            <th>Mentee Message</th>
+            <th>Application Status</th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+    </tbody>
+</table>
+
+
+<link href="//cdn.datatables.net/1.11.1/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+@section ScriptsNew{
+    <script src="//cdn.datatables.net/1.11.1/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript">
+    var Popup, dataTable;
+
+             $(document).ready(function () {
+
+                 dataTable = $("#MenteeAppln").DataTable({
+                "ajax": {
+                         "url": "/Mentor/viewMenteeApplicationData",
+                    "type": "GET",
+                    "datatype": "json",
+                    "dataSrc": ""
+                },
+                "responsive": "true",
+                "scrollX": true,
+                "columns": [
+                    { "mData": "MenteeName" },
+                    { "mData": "WorkingStatus" },
+                    { "mData": "MenteeState" },
+                    { "mData": "MenteeMessage" },
+                    { "mData": "ApplicationStatus" },
+                    {
+                        "mData":"ApplicationID" , "render" : function (data) {
+                            return "<button onclick=PopupForm('" + data + "')>View Mentee Application</button>";
+                    },
+                        "orderable": false,
+                        "searchable":false,
+                    },
+                    {
+                        "mData":"AdvertisementID" , "render" : function (data) {
+                         return "<button onclick=PopupForm2('" + data + "')>View Course Advertisement</button>";
+                    },
+                        "orderable": false,
+                        "searchable":false,
+                    },
+                    {
+                        "mData":"ApplicationID" , "render" : function (data) {
+                         return "<button onclick=Approve('" + data + "')>Approve</button><button onclick=Reject('" + data + "')>Reject</button>";
+                    },
+                        "orderable": false,
+                        "searchable":false,
+                    },
+                    {
+                        "mData": "ApplicationID", "render": function (data) {
+                            return "<button onclick=Remove('" + data + "')><i class='fa fa-trash'></i></button>";
+                        },
+                        "orderable": false,
+                        "searchable": false,
+                    }
+                    //< a style = 'margin-left:5px' onclick = Delete(" + data + ") > <i class='fa fa-trash'></i></a >
+                   ],
+
+                "language": {
+
+                    "emptyTable": "No data found, Please click on <b>Create/b> Button"
+                }
+            });
+             });
+
+    function Approve(id) {
+        var url = '@Url.Action("ApproveStatus", "Mentor")/' + id;
+
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: {
+                id: id
+            },
+            beforeSend: function () {
+                $("#loader").show();
+            },
+            complete: function () {
+                $("#loader").hide();
+            },
+            success: function (data) {
+                if (data.success) {
+                    dataTable.ajax.reload();
+                    $.notify(data.message, {
+                        globalPosition: "top center",
+                        className: "success"
+                    })
+                }
+            }
+        });
+    };
+
+    function Reject(id) {
+        var url = '@Url.Action("RejectStatus", "Mentor")/' + id;
+
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: {
+                id: id
+            },
+            beforeSend: function () {
+                $("#loader").show();
+            },
+            complete: function () {
+                $("#loader").hide();
+            },
+            success: function (data) {
+                if (data.success) {
+                    dataTable.ajax.reload();
+
+                    $.notify(data.message, {
+                        globalPosition: "top center",
+                        className: "success"
+                    })
+                }
+            }
+        });
+        };
+
+        function Remove(id) {
+        var url = '@Url.Action("UpdateRemoveStatus", "Mentor")/' + id;
+
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: {
+                id: id
+            },
+            success: function (data) {
+                if (data.success) {
+                    dataTable.ajax.reload();
+
+                    $.notify(data.message, {
+                        globalPosition: "top center",
+                        className: "success"
+                    })
+                }
+            }
+        });
+    };
+
+    function PopupForm(id)
+    {
+        url = '@Url.Action("ViewFullMenteeApplication", "Mentor")/' + id;
+        var formDiv =
+            $('<div />');
+            $.get(url).done(function (response) {
+            formDiv.html(response);
+
+            Popup = formDiv.dialog({
+            autoOpen: true,
+            resizable: true,
+            title: 'Apply',
+            height: 500,
+            width: 700,
+            close: function () {
+            Popup.dialog('destroy').remove();
+            }
+
+            });
+        });
+    }
+
+    function PopupForm2(id)
+    {
+        url = '@Url.Action("ViewCourseApplication", "Mentor")/' + id;
+        var formDiv =
+            $('<div />');
+            $.get(url).done(function (response) {
+            formDiv.html(response);
+
+            Popup = formDiv.dialog({
+            autoOpen: true,
+            resizable: true,
+            title: 'Apply',
+            height: 500,
+            width: 700,
+            close: function () {
+            Popup.dialog('destroy').remove();
+            }
+
+            });
+        });
+    }
+    </script>
+}
+

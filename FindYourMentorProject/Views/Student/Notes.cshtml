@@ -1,0 +1,152 @@
+﻿
+@{
+    ViewBag.Title = "NotesMentee";
+    Layout = "~/Views/Shared/_StudentLayout.cshtml";
+}
+
+<style>
+    .ui-dialog-titlebar-close:after {
+        content: 'X' !important;
+        position: absolute;
+        top: -2px;
+        right: 3px;
+    }
+</style>
+
+<h2>NotesMentee</h2>
+
+<a class="btn btn-success" style="margin-bottom:20px" onclick="PopupForm('@Url.Action("AddorEditNotes","Student")')"><i class="fa fa-plus"></i> Create</a>
+<table id="Notes" class="display" style="width:100%;height:auto">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>CreationDate</th>
+            <th></th>
+
+        </tr>
+    </thead>
+
+    <tbody>
+    </tbody>
+</table>
+
+<link href="//cdn.datatables.net/1.11.1/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+@section Scripts{
+    <script src="//cdn.datatables.net/1.11.1/js/jquery.dataTables.min.js"></script>
+
+    <script>
+        var Popup, dataTable;
+
+
+        $(document).ready(function () {
+            dataTable = $("#Notes").DataTable({
+                "ajax": {
+                    "url": "/Student/NotesData",
+                    "type": "GET",
+                    "datatype": "json",
+                    "dataSrc": ""
+                },
+                "responsive": "true",
+                "columns": [
+                    { "mData": "Title" },
+                    { "mData": "Description" },
+                    {
+                        "mData": "CreationDate",
+                        'render': function (jsonDate) {
+                            if (jsonDate != null) {
+                                var date = new Date(parseInt(jsonDate.substr(6)));
+                                var time = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+                                var seconds = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
+                                var hours = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
+                                var period = hours < 12 ? "AM" : "PM";
+                                return date.toLocaleDateString() + " " + hours + ":" + time + ":" + seconds + " " + period;
+                            }
+                            return "-";
+                        }
+
+                    },
+
+                   {"mData":"NoteID" , "render" : function (data) {
+                       return "<a onclick=PopupForm('@Url.Action("AddorEditNotes", "Student")/" + data + "')><i class='fa fa-pencil'></i></a><a style='margin-left:5px' onclick=Delete(" + data + ")><i class='fa fa-trash'></i></a><a style='margin-left:5px' href='/Student/ViewNotes/"+ data + "')><i class='fa fa-eye'></i></a>";
+                    },
+                        "orderable": false,
+                        "searchable":false,
+                    }
+                   ],
+
+                "language": {
+
+                    "emptyTable": "No data found, Please click on <b>Add New</b> Button"
+                }
+            });
+        });
+
+        function PopupForm(url) {
+            var formDiv = $('<div />');
+            $.get(url)
+                .done(function (response) {
+                    formDiv.html(response);
+
+                    Popup = formDiv.dialog({
+                        autoOpen: true,
+                        resizable: true,
+                        title: 'Add Notes',
+                        height: 500,
+                        width: 700,
+                        close: function () {
+                            Popup.dialog('destroy').remove();
+                        }
+
+                    });
+                });
+        }
+
+
+        function SubmitForm(form) {
+            $.validator.unobtrusive.parse(form);
+            if ($(form).valid()) {
+                $.ajax({
+                    type: "POST",
+                    url: form.action,
+                    data: $(form).serialize(),
+                    success: function (data) {
+                        if (data.success) {
+                            Popup.dialog('close');
+                            dataTable.ajax.reload();
+
+                            $.notify(data.message, {
+                                globalPosition: "top center",
+                                className: "success"
+                            })
+                        }
+                    }
+                });
+            }
+            return false;
+        }
+
+        function Delete(id) {
+            if (confirm('Are You Sure to Delete this Note ?')) {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("DeleteNotes", "Student")/' + id,
+                    success: function (data) {
+                        if (data.success) {
+                            dataTable.ajax.reload();
+
+                            $.notify(data.message, {
+                                globalPosition: "top center",
+                                className: "success"
+                            })
+
+                        }
+                    }
+
+                });
+            }
+        }
+    </script>
+}

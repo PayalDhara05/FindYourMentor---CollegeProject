@@ -1,0 +1,106 @@
+﻿
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Custom/css/mainLayout.css" rel="stylesheet" />
+    <script src="~/Custom/js/header.js" defer></script>
+</head>
+<body>
+    <nav id="navbar">
+        <div class="logo-section">
+            <a href="/"><img src="~/uiImages/search.png" alt="Fym-Logo" id="logo-img"></a>
+            <a href="/">Find Your Mentor</a>
+        </div>
+        <a id="open-nav" onclick="openNav()">&#9776;</a>
+        <div class="nav-section">
+            <ul>
+                @Html.ActionLink("SIGN UP", "Registration", "User", new { @class = "auth-btn" })
+                @Html.ActionLink("SIGN IN", "Login", "User", new { @class = "auth-btn" })
+            </ul>
+        </div>
+    </nav>
+
+    <p id="home"></p>
+
+    <div class="sidenav" id="mynav">
+        <ul>
+            <a id="closebtn" onclick="closeNav()">&times;</a>
+            @Html.ActionLink("SIGN UP", "Login", "User", new { @class = "auth-btn" })
+            @Html.ActionLink("SIGN IN", "RegistrationStudent", "User", new { @class = "auth-btn" })
+        </ul>
+    </div>
+ 
+    <div>
+        @RenderBody()
+    </div>
+
+    <div class="chat-wrapper">
+        <a href="https://wa.me/919892836276" target="_blank"><img src="~/uiImages/mainlayout/whatsapp.png" alt="whatsapp-img" id="whatsapp-img"></a>
+    </div>
+
+    <footer>
+        <div class="footer-up">
+            <div class="contact">
+
+                @{
+                    Html.RenderPartial("ContactUs");
+                }
+                
+                <div>
+                    <img src="~/uiImages/mainlayout/Contact2.gif" alt="contact-img-fym">
+                </div>
+            </div>
+                </div>
+
+        <div class="footer-down">
+            <p class="copyright">Designed by FindYourMentor | © Copyright FindYourMentor All Rights Reserved</p>
+
+            <div class="social-media">
+                <div class="all-social-links">
+                    <a href="#" target="_blank"><img src="~/uiImages/mainlayout/facebook.png" alt="facebook" class="footer-logo"></a>
+                    <a href="#" target="_blank"><img src="~/uiImages/mainlayout/instagram.png" alt="instagram" class="footer-logo"></a>
+                    <a href="#" target="_blank"><img src="~/uiImages/mainlayout/youtube.png" alt="youtube" class="footer-logo"></a>
+                </div>
+                <div class="top-scroll">
+                    <a href="#home">Back to Top</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="~/Scripts/jquery-1.12.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js" integrity="sha512-o6XqxgrUsKmchwy9G5VRNWSSxTS4Urr4loO6/0hYdpWmFUfHqGzawGxeQGMDqYzxjY9sbktPbNlkIQJWagVZQg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script src="~/Scripts/notify.min.js"></script>
+    <script>
+
+        function SubmitForm(form) {
+            $.validator.unobtrusive.parse(form);
+            if ($(form).valid()) {
+                $.ajax({
+                    type: "POST",
+                    url: form.action,
+                    data: $(form).serialize(),
+                    success: function (data) {
+                        if (data.success) {
+                            $.notify(data.message, {
+                                globalPosition: "top center",
+                                className: "success"
+                            })
+
+                            form.reset();
+                        }
+                    }
+                });
+            }
+            
+            return false;   // Prevent page refresh
+        }
+
+    </script>
+    @RenderSection("Mentee", required: false) ;
+</body>
+</html>

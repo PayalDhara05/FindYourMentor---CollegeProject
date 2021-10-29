@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/site.css" rel="stylesheet" />
+    @*<link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />*@
+    <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+    <style>
+        .field-validation-error {
+            color: #ff0000;
+        }
+
+        .validation-summary-errors {
+            color: #ff0000;
+            font-weight: bold;
+        }
+
+        .input-validation-error {
+            color: #ff0000;
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+    <navbar>
+        @if (Request.IsAuthenticated)
+        {
+            using (Html.BeginForm("Logout", "User", FormMethod.Post, new { id = "logoutForm" }))
+            {
+                <a href="javascript:document.getElementById('logoutForm').submit()">Logout</a>
+            }
+        }
+
+        @Html.ActionLink("My Profile", "Profile", "Mentor")>
+        @Html.ActionLink("Home", "Index", "Mentor")>
+        @Html.ActionLink("Advertisement", "Advertisement", "Mentor")>
+    </navbar>
+    <div>
+        @RenderBody()
+    </div>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery-1.12.4.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js" integrity="sha512-o6XqxgrUsKmchwy9G5VRNWSSxTS4Urr4loO6/0hYdpWmFUfHqGzawGxeQGMDqYzxjY9sbktPbNlkIQJWagVZQg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script src="~/Scripts/notify.min.js"></script>
+
+
+    @RenderSection("Scripts", required: false) ;
+    @RenderSection("ScriptsNew", required: false) ;
+</body>
+</html>

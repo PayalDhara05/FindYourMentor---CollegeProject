@@ -1,0 +1,56 @@
+﻿@model IEnumerable<FindYourMentorProject.Models.Application>
+
+@{
+    ViewBag.Title = "ViewApprovedApplication";
+    Layout = "~/Views/Shared/_StudentLayout.cshtml";
+}
+
+<h2>ViewApprovedApplication</h2>
+
+@foreach (var item in Model)
+{
+    <h2>Name: </h2>@Html.DisplayFor(modelItem => item.MenteeName, "", new { id = "advid" })
+    <h3>State: </h3> @Html.DisplayFor(modelItem => item.MenteeState, "", new { id = "advid" })
+    <h3>Application you applied on: </h3> @Html.DisplayFor(modelItem => item.AppliedTime, "", new { id = "advid" })
+    <h3>Your EmailID: </h3> @Html.DisplayFor(modelItem => item.MenteeEmailID, "", new { id = "advid" })
+    <h3>Mentor EmailID: </h3> @Html.DisplayFor(modelItem => item.MentorEmailID, "", new { id = "advid" })<br />
+    <button onclick="PopupForm(@item.AdvertisementID)">Pay Fees</button>
+    <br /><br /><br /><br />
+}
+
+
+<script type="text/javascript">
+
+    var Popup1;
+
+    function PopupForm(id) {
+        url = '@Url.Action("ViewPayFees", "Student")/' + id;
+        var formDiv = $('<div />');
+        $.get(url)
+            .done(function (response) {
+                formDiv.html(response);
+
+                Popup1 = formDiv.dialog({
+                    autoOpen: true,
+                    resizable: true,
+                    title: 'Apply',
+                    height: 500,
+                    width: 700,
+                    show: { effect: 'drop', direction: "up" },
+                    modal: true,
+                    draggable: true,
+                    success: function (data) {
+                        if (data.success) {
+
+                            $.notify(data.message, {
+                                globalPosition: "top center",
+                                className: "success"
+                            })
+                        }
+                    },
+                })
+            })
+        }
+
+</script>
+

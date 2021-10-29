@@ -1,0 +1,340 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+}
+
+::selection {
+    color: #fff;
+    background-color: #833471;
+}
+.common-login {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.wrapper {
+    margin-top:15rem;
+    width: 380px;
+    padding: 40px 30px 50px 30px;
+    background-color: #f8cbc1;
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 10px 10px 15px rgba(0,0,0,0.1);
+}
+.wrapper-resetpassword 
+{
+    margin-top:10rem;
+    width: 380px;
+    padding: 40px 30px 50px 30px;
+    background-color: #f8cbc1;
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 10px 10px 15px rgba(0,0,0,0.1);
+}
+    .wrapper-resetpassword header {
+        font-size: 35px;
+        font-weight: 600;
+        color: #833471;
+    }
+    .wrapper header {
+        font-size: 35px;
+        font-weight: 600;
+        color: #833471;
+    }
+
+    .wrapper form {
+        margin: 40px 0;
+    }
+
+form .field {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+    form .field.shake {
+        animation: shake 0.3s ease-in-out;
+    }
+
+@keyframes shake {
+    0%, 100% {
+        margin-left: 0px;
+    }
+
+    20%, 80% {
+        margin-left: -12px;
+    }
+
+    40%, 60% {
+        margin-left: 12px;
+    }
+}
+
+form .field .input-area {
+    height: 50px;
+    width: 100%;
+    position: relative;
+}
+
+.input-area-field {
+    width: 100%;
+    height: 100%;
+    outline: none;
+    padding: 0 45px;
+    font-size: 18px;
+    background: none;
+    caret-color: #833471;
+    border-radius: 5px;
+    border: 1px solid #833471;
+    border-bottom-width: 2px;
+    transition: all 0.2s ease;
+}
+
+form .field input:focus,
+form .field.valid input {
+    border-color: #833471;
+}
+
+form .field.shake input,
+form .field.error input {
+    border-color: #dc3545;
+}
+
+.field .input-area i {
+    position: absolute;
+    top: 50%;
+    font-size: 18px;
+    transform: translateY(-50%);
+}
+
+.input-area .icon {
+    left: 15px;
+    color: #833471;
+    transition: color 0.2s ease;
+}
+
+.input-area .show-btn {
+    right: 37px;
+    cursor: pointer !important;
+    color: #833471;
+}
+
+.Role-selection select {
+    width: 100%;
+    height: 100%;
+    outline: none;
+    padding: 10px 15px;
+    font-size: 18px;
+    background: none;
+    caret-color: #833471;
+    border-radius: 5px;
+    border: 1px solid #833471;
+    border-bottom-width: 2px;
+    transition: all 0.2s ease;
+}
+
+.hide-btn {
+    display: none;
+}
+
+.input-area .error-icon {
+    right: 15px;
+    color: #dc3545;
+}
+
+form input:focus ~ .icon,
+form .field.valid .icon {
+    color: black;
+}
+
+form .field.shake input:focus ~ .icon,
+form .field.error input:focus ~ .icon {
+    color: #bfbfbf;
+}
+
+form input::placeholder {
+    color: #833471;
+    font-size: 17px;
+}
+
+form .field .error-txt {
+    color: #dc3545;
+    text-align: left;
+    margin-top: 5px;
+}
+
+form .field .error {
+    display: none;
+}
+
+    form .field.shake .error,
+    form .field.error .error {
+        display: block;
+    }
+
+form .pass-txt {
+    text-align: left;
+    margin-top: -10px;
+}
+
+.wrapper a {
+    color: #833471;
+    text-decoration: none;
+}
+
+    .wrapper a:hover {
+        text-decoration: underline;
+    }
+
+form input[type="submit"] {
+    height: 50px;
+    margin-top: 30px;
+    color: #fff;
+    padding: 0;
+    border: none;
+    background: #833471;
+    border: 2px solid #833471;
+    font-weight: bold;
+    cursor: pointer;
+    border-bottom: 2px solid rgba(0,0,0,0.1);
+    transition: all 0.5s ease;
+}
+
+    form input[type="submit"]:hover {
+        background: white;
+        font-weight: bold;
+        color: #833471;
+        border: 2px solid #833471;
+    }
+
+form input[type="checkbox"] {
+    accent-color: #833471;
+}
+/* #show-pass 
+{
+  display: none;
+}
+  .wrapper #password:valid ~ #show-pass{
+    display: block;
+  }  */
+#checkbox {
+    color: black;
+}
+
+input[type="checkbox"] {
+    appearance: checkbox !important;
+    width: 17px;
+    height: 19px;
+}
+
+input.checkbox {
+    display: inline-block !important;
+}
+
+.Role-selection select {
+    color: #833471;
+    background-color: #f8cbc1;
+}
+
+.remember {
+    margin: 20px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+    .remember span {
+        margin-left: 3px;
+        font-size: 18px;
+        color: #833471;
+    }
+
+::placeholder {
+    color: #833471 !important;
+}
+
+@media screen and (max-width:518px) {
+    .wrapper {
+        width: 100%;
+        margin: 2rem 1rem;
+    }
+
+    textarea, select, form {
+        width: 100%;
+    }
+
+    ::placeholder {
+        font-size: 0.3rem;
+    }
+}
+
+@media screen and (max-width:340px) {
+    ::placeholder {
+        font-size: 1rem !important;
+    }
+
+    .input-area-field {
+        width: 100%;
+    }
+
+    .show-btn {
+        margin-right: -24px !important;
+    }
+}
+
+form input[type="button"] {
+    height: 50px;
+    margin-top: 30px;
+    color: #fff;
+    padding: 0;
+    border: none;
+    background: #833471;
+    border: 2px solid #833471;
+    font-weight: bold;
+    cursor: pointer;
+    border-bottom: 2px solid rgba(0,0,0,0.1);
+    transition: all 0.5s ease;
+}
+
+    form input[type="button"]:hover {
+        background: white;
+        font-weight: bold;
+        color: #833471;
+        border: 2px solid #833471;
+    }
+.pass-txt a {
+    color: #833471;
+    text-decoration: none;
+    font-size:1.5rem;
+}
+.sign-txt {
+    font-size: 1.5rem;
+}
+.forgotpassword-text-success 
+{
+    color:green;
+    background-color:white;
+    font-size:1.5rem;
+    margin:-2rem 0 2rem 0;
+}
+/*#resetpass-form
+{
+    height:25rem;
+    width:70rem;
+}*/
+.text-danger, .loginmsg {
+    color: red;
+    background-color: white;
+    font-weight: bold;
+    font-size: 1rem;
+    font-family: "Open Sans", sans-serif;
+}

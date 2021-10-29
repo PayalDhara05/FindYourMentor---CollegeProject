@@ -1,0 +1,90 @@
+﻿@model IEnumerable<FindYourMentorProject.Models.SavedList>
+
+@{
+    ViewBag.Title = "ViewSavedList";
+    Layout = "~/Views/Shared/_StudentLayout.cshtml";
+}
+
+<h2>ViewSavedList</h2>
+
+<div>
+    <h4>SavedList</h4>
+    <hr />
+    div>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ClassName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CourseName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MentorName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.BatchesAvailable)
+            </th>
+
+            <th>
+
+            </th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ClassName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CourseName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MentorName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.BatchesAvailable)
+                </td>
+                <td>
+                    @Html.ActionLink("ViewFullAdvertisement", "ViewFullAdvertisement", new { id = item.AdvertisementID })
+                </td>
+
+                <td>
+                    <button class="btn-link glyphicon glyphicon-trash" id="onsave" onclick="Del(@item.AdvertisementID)"></button>
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+
+<script type="text/javascript">
+
+    function Del(id) {
+
+       if (confirm('Are You Sure to Delete this Advertisement from saved list ?')) {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("RemoveFromSavedList", "Student")/' + id,
+                    success: function (data) {
+                        if (data.success) {
+                            $.notify(data.message, {
+                                globalPosition: "top center",
+                                className: "success"
+                            })
+                            document.location.reload()
+                        }
+                    }
+
+                });
+            }
+    };
+</script>
+

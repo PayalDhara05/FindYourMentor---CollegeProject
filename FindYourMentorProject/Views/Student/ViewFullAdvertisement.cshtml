@@ -1,0 +1,175 @@
+﻿@model FindYourMentorProject.Models.CourseAdvertisement
+
+@{
+    ViewBag.Title = "ViewFullAdvertisement";
+    Layout = "~/Views/Shared/_StudentLayout.cshtml";
+}
+
+<h2>ViewFullAdvertisement</h2>
+
+<div>
+    <h4>CourseAdvertisement</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ClassName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ClassName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CourseName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CourseName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MentorName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MentorName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BatchesFull)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BatchesFull)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BatchesAvailable)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BatchesAvailable)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalStudents)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalStudents)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fees)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fees)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SpokenLanguage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SpokenLanguage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GitHubAccount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GitHubAccount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Field)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Field)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.State)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.State)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.City)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.City)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Location)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Location)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreationDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreationDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.YearsOfExperience)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.YearsOfExperience)
+        </dd>
+
+
+    </dl>
+    @if (!string.IsNullOrEmpty(Model.DemoLec1))
+    {
+        <video style="width:700px;height:500px;" controls>
+            <source src="@Url.Content(Model.DemoLec1)" type="video/mp4" />
+        </video>
+    }
+    else
+    {
+        <p>Video Lecture not added</p>
+    }
+
+
+    @if (!string.IsNullOrEmpty(Model.DemoLec2))
+    {
+        <video style="width:700px;height:500px;" controls>
+            <source src="@Url.Content(Model.DemoLec2)" type="video/mp4" />
+        </video>
+    }
+    else
+    {
+        <p>Video Lecture not added</p>
+    }
+
+</div>

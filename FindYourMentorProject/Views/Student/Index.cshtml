@@ -1,0 +1,15 @@
+﻿@model FindYourMentorProject.Models.RegisterStudent
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_StudentLayout.cshtml";
+}
+
+<h2>Student Page</h2>
+
+
+Welcome @HttpContext.Current.User.Identity.Name;
+
+Hello @Session["UserID"];
+
+@Html.ActionLink("View Advertisement", "ViewAdvertisement","Student")

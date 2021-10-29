@@ -1,0 +1,219 @@
+﻿
+@{
+    ViewBag.Title = "Advertisement";
+    Layout = "~/Views/Shared/_MentorLayout.cshtml";
+}
+<style>
+    .ui-dialog-titlebar-close:after {
+        content: 'X' !important;
+        position: absolute;
+        top: -2px;
+        right: 3px;
+    }
+    div.dataTables_wrapper {
+        width: 1500px;
+        margin: 0 auto;
+    }
+</style>
+
+<h2>NotesMentee</h2>
+
+<a class="btn btn-success" style="margin-bottom:20px" onclick="PopupForm('@Url.Action("AddorEditAdvertisements","Mentor")')"><i class="fa fa-plus"></i> Create</a>
+@Html.ActionLink("View Mentees Application", "viewMenteeApplication", "Mentor");
+<table id="Advertisement" style="width:100%;height:auto">
+    <thead>
+        <tr>
+            <th>Class Name</th>
+            <th>Course Name</th>
+            <th>Mentor Name</th>
+            <th>Description</th>
+            <th>EmailID</th>
+            <th>Contact number</th>
+            <th>Full Batch</th>
+            <th>Available Batch</th>
+            <th>Total Students</th>
+            <th>Fees</th>
+            <th>Address</th>
+            <th>Spoken Language</th>
+            <th>Years Of Experience</th>
+            <th>GitHub Account</th>
+            <th>Field</th>
+            <th>State</th>
+            <th>City</th>
+            <th>Location</th>
+            <th>DemoVideo1</th>
+            <th>DemoVideo2</th>
+            <th>Creation Date</th>
+            <th></th>
+
+        </tr>
+    </thead>
+
+    <tbody>
+    </tbody>
+</table>
+
+<link href="//cdn.datatables.net/1.11.1/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+@section Scripts{
+    <script src="//cdn.datatables.net/1.11.1/js/jquery.dataTables.min.js"></script>
+
+    <script>
+        var Popup, dataTable;
+       
+        $(document).ready(function () {
+
+           
+
+            dataTable = $("#Advertisement").DataTable({
+                "ajax": {
+                    "url": "/Mentor/AdvertisementData",
+                    "type": "GET",
+                    "datatype": "json",
+                    "dataSrc": ""
+                },
+                "responsive": "true",
+                "scrollX": true,
+                "columns": [
+                    { "mData": "ClassName" },
+                    { "mData": "CourseName" },
+                    { "mData": "MentorName" },
+                    { "mData": "Description" },
+                    { "mData": "EmailID" },
+                    { "mData": "ContactNo" },
+                    { "mData": "BatchesFull" },
+                    { "mData": "BatchesAvailable" },
+                    { "mData": "TotalStudents" },
+                    { "mData": "Fees" },
+                    { "mData": "Address" },
+                    { "mData": "SpokenLanguage" },
+                    { "mData": "YearsOfExperience" },
+                    { "mData": "GitHubAccount" },
+                    { "mData": "Field" },
+                    { "mData": "State" },
+                    { "mData": "City" },
+                    { "mData": "Location" },
+                    { "mData": "DemoLec1" },
+                    { "mData": "DemoLec2" },
+                    {
+                        "mData": "CreationDate",
+                        'render': function (jsonDate) {
+                            if (jsonDate != null) {
+                                var date = new Date(parseInt(jsonDate.substr(6)));
+                                var time = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+                                var seconds = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
+                                var hours = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
+                                var period = hours < 12 ? "AM" : "PM";
+                                return date.toLocaleDateString() + " " + hours + ":" + time + ":" + seconds + " " + period;
+                            }
+                            return "-";
+                        }
+
+                    },
+                     {"mData":"AdvertisementID" , "render" : function (data) {
+                         return "<a onclick=PopupForm('@Url.Action("AddorEditAdvertisements", "Mentor")/" + data + "')><i class='fa fa-pencil'></i></a><a style='margin-left:5px' onclick=Delete(" + data + ")><i class='fa fa-trash'></i></a><a style='margin-left:5px' href='/Mentor/ViewAdvertisement/"+ data + "')><i class='fa fa-eye'></i></a>";
+                    },
+                        "orderable": false,
+                        "searchable":false,
+                    }
+                   ],
+
+                "language": {
+
+                    "emptyTable": "No data found, Please click on <b>Create</b> Button"
+                }
+            });
+        });
+
+        function PopupForm(url) {
+            var formDiv = $('<div />');
+            $.get(url)
+                .done(function (response) {
+                    formDiv.html(response);
+
+                    Popup = formDiv.dialog({
+                        autoOpen: true,
+                        resizable: true,
+                        title: 'Add Advertisement',
+                        height: 500,
+                        width: 700,
+                        close: function () {
+                            Popup.dialog('destroy').remove();
+                        }
+
+                    });
+                });
+        }
+
+        //function suc() {
+        //    alert("added");
+        //}
+
+        function SubmitForm(form) {
+            $.validator.unobtrusive.parse(form);
+            $("#file").change(function () {
+                var formData = new FormData();
+                var totalFiles = document.getElementById("file").files.length;
+                for (var i = 0; i < totalFiles; i++) {
+                    var allfile1 = document.getElementById("file").files[i];
+                    formData.append("file", allfile1);
+                }
+            });
+
+            $("#file1").change(function () {
+                var formData = new FormData();
+                var totalFiles = document.getElementById("file1").files.length;
+                for (var i = 0; i < totalFiles; i++) {
+                    var allfile2 = document.getElementById("file1").files[i];
+                    formData.append("file", allfile2);
+                }
+            });
+            if ($(form).valid()) {
+               // alert("Inside submit form");
+                $.ajax({
+                    type: "POST",
+                    url: form.action,
+                    data: $(form).serialize(),
+                    success: function (data) {
+                        if (data.success) {
+                            Popup.dialog('close');
+                            dataTable.ajax.reload();
+
+                            $.notify(data.message, {
+                                globalPosition: "top center",
+                                className: "success"
+                            })
+
+                        }
+                    }
+                        
+                });
+
+               // suc();
+            };
+                return false;
+            }
+        
+        function Delete(id) {
+            if (confirm('Are You Sure to Delete this Advertisement ?')) {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("DeleteAdvertisement", "Mentor")/' + id,
+                    success: function (data) {
+                        if (data.success) {
+                            dataTable.ajax.reload();
+
+                            $.notify(data.message, {
+                                globalPosition: "top center",
+                                className: "success"
+                            })
+
+                        }
+                    }
+
+                });
+            }
+        }
+    </script>
+}

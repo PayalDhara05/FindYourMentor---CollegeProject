@@ -1,0 +1,232 @@
+﻿@model FindYourMentorProject.Models.Application
+
+
+@if (ViewBag.status == "Applied")
+{
+    <h3>You have already applied for the course. Below is your submitted application</h3>
+    <div class="form-group">
+        @Html.LabelFor(model => model.MenteeName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.MenteeName, new { htmlAttributes = new { @Value = ViewBag.Mentee, @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
+            @Html.ValidationMessageFor(model => model.MenteeName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.MenteeEmailID, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.MenteeEmailID, new { htmlAttributes = new { @Value = ViewBag.EmailID, @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
+            @Html.ValidationMessageFor(model => model.MenteeEmailID, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.MenteeContactNo, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.MenteeContactNo, new { htmlAttributes = new { @Value = ViewBag.Contact, @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
+            @Html.ValidationMessageFor(model => model.MenteeContactNo, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.MenteeAge, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.MenteeAge, new { htmlAttributes = new { @Value = ViewBag.Age, @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
+            @Html.ValidationMessageFor(model => model.MenteeAge, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.MenteeAddress, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.MenteeAddress, new { htmlAttributes = new { @Value = ViewBag.Address, @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
+            @Html.ValidationMessageFor(model => model.MenteeAddress, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.MenteeState, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.MenteeState, new { htmlAttributes = new { @Value = ViewBag.State, @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
+            @Html.ValidationMessageFor(model => model.MenteeState, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.MenteeLinkedin, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.MenteeLinkedin, new { htmlAttributes = new { @Value = ViewBag.Linkedin, @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
+            @Html.ValidationMessageFor(model => model.MenteeLinkedin, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.MenteeGithub, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.MenteeGithub, new { htmlAttributes = new { @Value = ViewBag.GitHub, @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
+            @Html.ValidationMessageFor(model => model.MenteeGithub, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.MenteeMessage, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.MenteeMessage, new { htmlAttributes = new { @Value = ViewBag.MenteeMessage, @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
+            @Html.ValidationMessageFor(model => model.MenteeMessage, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.MenteeBackground, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.MenteeBackground, new { htmlAttributes = new { @Value = ViewBag.MenteeExpectations, @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
+            @Html.ValidationMessageFor(model => model.MenteeBackground, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.MenteeExpectations, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.MenteeExpectations, new { htmlAttributes = new { @Value = ViewBag.MenteeExpectations, @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
+            @Html.ValidationMessageFor(model => model.MenteeExpectations, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.AppliedTime, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.AppliedTime, new { htmlAttributes = new { @Value = ViewBag.Time, @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
+            @Html.ValidationMessageFor(model => model.AppliedTime, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    @Html.LabelFor(model => model.WorkingStatus, htmlAttributes: new { @class = "control-label col-md-2" })
+    @Html.EditorFor(model => model.WorkingStatus, new { htmlAttributes = new { @Value = ViewBag.MenteeWorkingStatus, @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
+}
+else
+{
+    using (Html.BeginForm("SubmitApppliedCourse", "Student", FormMethod.Post, new { onSubmit = "return SubmitForm(this)" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+            @Html.TextBoxFor(m => m.AdvertisementID, new { @Value = @ViewBag.Message, @type = "hidden" })
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.MenteeName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.MenteeName, new { htmlAttributes = new { @Value = ViewBag.Mentee, @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.MenteeName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.MentorEmailID, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.MentorEmailID, new { htmlAttributes = new { @Value = ViewBag.EmailID, @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.MentorEmailID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.MenteeContactNo, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.MenteeContactNo, new { htmlAttributes = new { @Value = ViewBag.Contact, @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.MenteeContactNo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.MenteeAge, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.MenteeAge, new { htmlAttributes = new { @Value = ViewBag.Age, @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.MenteeAge, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.MenteeAddress, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.MenteeAddress, new { htmlAttributes = new { @Value = ViewBag.Address, @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.MenteeAddress, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.MenteeState, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.MenteeState, new { htmlAttributes = new { @Value = ViewBag.State, @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.MenteeState, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.MenteeLinkedin, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.MenteeLinkedin, new { htmlAttributes = new { @Value = ViewBag.Linkedin, @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.MenteeLinkedin, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.MenteeGithub, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.MenteeGithub, new { htmlAttributes = new { @Value = ViewBag.GitHub, @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.MenteeGithub, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.MenteeMessage, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.MenteeMessage, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.MenteeMessage, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.MenteeBackground, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.MenteeBackground, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.MenteeBackground, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.MenteeExpectations, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.MenteeExpectations, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.MenteeExpectations, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.WorkingStatus, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.ValidationMessageFor(model => model.WorkingStatus, "", new { @class = "text-danger" })
+                <div class="col-md-10">
+                    Student
+                    @Html.RadioButtonFor(model => model.WorkingStatus, "Student")
+                    Employed
+                    @Html.RadioButtonFor(model => model.WorkingStatus, "Employed")
+                    Unemployed
+                    @Html.RadioButtonFor(model => model.WorkingStatus, "Unemployed")
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="1e744190d441401bb05b2ae910db4f71" Name="Diagram1" ZoomLevel="86">
+        <EntityTypeShape EntityType="FindYourMentorProjectModel.AddNotesMentee" Width="1.5" PointX="3" PointY="41" />
+        <EntityTypeShape EntityType="FindYourMentorProjectModel.Application" Width="1.5" PointX="3" PointY="14.125" />
+        <EntityTypeShape EntityType="FindYourMentorProjectModel.Appointment" Width="1.5" PointX="3" PointY="7.125" />
+        <EntityTypeShape EntityType="FindYourMentorProjectModel.ContactU" Width="1.5" PointX="3.75" PointY="1.875" />
+        <EntityTypeShape EntityType="FindYourMentorProjectModel.CourseAdvertisement" Width="1.5" PointX="0.75" PointY="6.75" />
+        <EntityTypeShape EntityType="FindYourMentorProjectModel.Fee" Width="1.5" PointX="9" PointY="14.5" />
+        <EntityTypeShape EntityType="FindYourMentorProjectModel.RegisterMentor" Width="1.5" PointX="1.5" PointY="0.75" />
+        <EntityTypeShape EntityType="FindYourMentorProjectModel.RegisterStudent" Width="1.5" PointX="0.75" PointY="14.375" />
+        <EntityTypeShape EntityType="FindYourMentorProjectModel.SavedList" Width="1.5" PointX="6" PointY="14.125" />
+        <AssociationConnector Association="FindYourMentorProjectModel.FK__AddNotesM__UserI__571DF1D5" />
+        <AssociationConnector Association="FindYourMentorProjectModel.FK__Applicati__Adver__1F98B2C1" />
+        <AssociationConnector Association="FindYourMentorProjectModel.FK__Applicati__Mente__208CD6FA" />
+        <AssociationConnector Association="FindYourMentorProjectModel.FK__Appointme__Adver__4B7734FF" />
+        <AssociationConnector Association="FindYourMentorProjectModel.FK__Appointme__Mente__4A8310C6" />
+        <AssociationConnector Association="FindYourMentorProjectModel.FK__CourseAdv__Mento__73BA3083" />
+        <AssociationConnector Association="FindYourMentorProjectModel.FK__Fees__Advertisem__0880433F" />
+        <AssociationConnector Association="FindYourMentorProjectModel.FK__SavedList__Adver__18EBB532" />
+        <AssociationConnector Association="FindYourMentorProjectModel.FK__Fees__MenteeID__09746778" />
+        <AssociationConnector Association="FindYourMentorProjectModel.FK__SavedList__Mente__17F790F9" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

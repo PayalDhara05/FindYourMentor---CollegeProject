@@ -1,0 +1,245 @@
+﻿@model IEnumerable<FindYourMentorProject.Models.CourseAdvertisement>
+
+@{
+    ViewBag.Title = "ViewAdvertisement";
+    Layout = "~/Views/Shared/_StudentLayout.cshtml";
+}
+
+<style>
+    /*    .ui-dialog {
+        z-index: 1000000000;
+        top: 0;
+        left: 0;
+        margin: auto;
+        max-width: 100%;
+        height: auto;
+        display: flex;
+        justify-content:center;
+        align-items:center;
+        flex-direction: column;
+        position:center;
+
+    }
+
+        .ui-dialog .ui-dialog-content {
+            flex: 1;
+        }*/
+</style>
+
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<h2>ViewAdvertisement</h2>
+@Html.ActionLink("Save List", "ViewSavedList", "student");
+@Html.ActionLink("AppliedFor", "ViewApppliedCourse", "student");
+@Html.ActionLink("View Approved Application", "ViewApprovedApplication", "student");
+
+<div>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ClassName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CourseName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MentorName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.BatchesAvailable)
+            </th>
+
+            <th>
+
+            </th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ClassName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CourseName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MentorName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BatchesAvailable)
+                </td>
+                <td>
+                    @Html.ActionLink("ViewFullAdvertisement", "ViewFullAdvertisement", new { id = item.AdvertisementID })
+                </td>
+
+                <td>
+                    <button onclick="PopupForm(@item.AdvertisementID)" id="Apply">Apply</button>
+                </td>
+                <td>
+                    <button onclick="PopupForm2(@item.AdvertisementID)" id="Apply">Appointment</button>
+                </td>
+                <td>
+                    <button class="btn-link glyphicon glyphicon-heart-empty" id="onsave" onclick="Fav(@item.AdvertisementID)"></button>
+                </td>
+            </tr>
+        }
+    </table>
+
+</div>
+
+<script type="text/javascript">
+
+    var Popup1, Popup2;
+    function Fav(id) {
+        var url = '@Url.Action("AddToSavedList", "Student")';
+
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: {
+                id: id
+            },
+            success: function (data) {
+
+                    $.notify(data.message, {
+                        globalPosition: "top center",
+                        className: "success"
+                    })
+
+            }
+        });
+    };
+
+    function PopupForm(id) {
+        url = '@Url.Action("ApplyCourse", "Student")/' + id;
+        var formDiv = $('<div />');
+        $.get(url)
+            .done(function (response) {
+                formDiv.html(response);
+
+                Popup1 = formDiv.dialog({
+                    autoOpen: true,
+                    resizable: true,
+                    title: 'Apply',
+                    height: 500,
+                    width: 700,
+                    show: { effect: 'drop', direction: "up" },
+                    modal: true,
+                    draggable: true,
+                    success: function (data) {
+                        if (data.success) {
+
+                            $.notify(data.message, {
+                                globalPosition: "top center",
+                                className: "success"
+                            })
+                        }
+                    },
+
+
+
+                    close: function () {
+                        Popup1.dialog('destroy').remove();
+                    }
+
+                });
+            });
+    }
+
+    function PopupForm2(id) {
+        url = '@Url.Action("ApplyAppointment", "Student")/' + id;
+        var formDiv = $('<div />');
+        $.get(url)
+            .done(function (response) {
+                formDiv.html(response);
+
+                Popup2 = formDiv.dialog({
+                    autoOpen: true,
+                    resizable: true,
+                    title: 'Apply',
+                    height: 500,
+                    width: 700,
+                    show: { effect: 'drop', direction: "up" },
+                    modal: true,
+                    draggable: true,
+                    success: function (data) {
+                        if (data.success) {
+
+                            $.notify(data.message, {
+                                globalPosition: "top center",
+                                className: "success"
+                            })
+                        }
+                    },
+
+
+                    close: function () {
+                        Popup2.dialog('destroy').remove();
+                    }
+
+                });
+            });
+    }
+
+
+
+
+    function SubmitForm(form) {
+        $.validator.unobtrusive.parse(form);
+
+        if ($(form).valid()) {
+
+            $.ajax({
+                type: "POST",
+                url: form.action,
+                data: $(form).serialize(),
+                success: function (data) {
+                    if (data.success) {
+
+                        //dataTable.ajax.reload();
+                        Popup1.dialog('close');
+                        $.notify(data.message, {
+                            globalPosition: "top center",
+                            className: "success"
+                        })
+                    }
+                }
+            });
+        }
+        return false;
+    }
+
+    function SubmitFormAppointment(form) {
+        $.validator.unobtrusive.parse(form);
+
+        if ($(form).valid()) {
+
+            $.ajax({
+                type: "POST",
+                url: form.action,
+                data: $(form).serialize(),
+                success: function (data) {
+                    if (data.success) {
+
+                        //dataTable.ajax.reload();
+                        Popup2.dialog('close');
+                        $.notify(data.message, {
+                            globalPosition: "top center",
+                            className: "success"
+                        })
+                    }
+                }
+            });
+        }
+        return false;
+    }
+</script>
+
+
+

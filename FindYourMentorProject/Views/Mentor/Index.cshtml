@@ -1,0 +1,11 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MentorLayout.cshtml";
+}
+
+<h2>Mentor page </h2>
+
+Welcome @HttpContext.Current.User.Identity.Name;
+
+Hello @Session["UserID"];
