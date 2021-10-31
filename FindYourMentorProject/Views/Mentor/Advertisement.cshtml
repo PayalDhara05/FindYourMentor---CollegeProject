@@ -150,31 +150,121 @@
         //    alert("added");
         //}
 
-        function SubmitForm(form) {
-            $.validator.unobtrusive.parse(form);
-            $("#file").change(function () {
-                var formData = new FormData();
-                var totalFiles = document.getElementById("file").files.length;
-                for (var i = 0; i < totalFiles; i++) {
-                    var allfile1 = document.getElementById("file").files[i];
-                    formData.append("file", allfile1);
-                }
-            });
+        //function SubmitForm(form) {
+        //    $.validator.unobtrusive.parse(form);
+        //    if ($(form).valid()) {
+        //       // alert("Inside submit form");
+        //        $.ajax({
+        //            type: "POST",
+        //            url: form.action,
+        //            data: $(form).serialize(),
+        //            success: function (data) {
+        //                if (data.success) {
+        //                    Popup.dialog('close');
+        //                    dataTable.ajax.reload();
 
-            $("#file1").change(function () {
-                var formData = new FormData();
-                var totalFiles = document.getElementById("file1").files.length;
-                for (var i = 0; i < totalFiles; i++) {
-                    var allfile2 = document.getElementById("file1").files[i];
-                    formData.append("file", allfile2);
-                }
-            });
+        //                    $.notify(data.message, {
+        //                        globalPosition: "top center",
+        //                        className: "success"
+        //                    })
+
+        //                }
+        //            }
+                        
+        //        });
+
+        //       // suc();
+        //    };
+        //        return false;
+        //    }
+
+        //function submitData() {
+
+        //    var AdID = $("#AdID").val();
+        //    var cname = $("#cname").val();
+        //    var courseName = $("#courseName").val();
+        //    var mname = $("#mname").val();
+        //    var desc = $("#desc").val();
+        //    var emailID = $("#emailID").val();
+        //    var contactNo = $("#contactNo").val();
+        //    var Bfull = $("#Bfull").val();
+        //    var BAvailable = $("#BAvailable").val();
+        //    var TStudents = $("#TStudents").val();
+        //    var Fees = $("#Fees").val();
+        //    var address = $("#address").val();
+        //    var spokenLanguage = $("#spokenLanguage").val();
+        //    var GAccount = $("#GAccount").val();
+        //    var Field = $("#Field").val();
+        //    var State = $("#State").val();
+        //    var City = $("#City").val();
+        //    var Location = $("#Location").val();
+        //    var YOE = $("#YOE").val();
+        //    var file = $("#file").val();
+        //    var file1 = $("#file1").val();
+
+        //    var obj =
+        //    {
+        //        AdvertisementID: AdID,
+        //        ClassName: cname,
+        //        CourseName: courseName,
+        //        MentorName: mname,
+        //        Description: desc,
+        //        ContactNo: contactNo,
+        //        EmailID: emailID,
+        //        BatchesFull: Bfull,
+        //        BatchesAvailable: BAvailable,
+        //        TotalStudents: TStudents,
+        //        Fees: Fees,
+        //        Field: Field,
+        //        Address: address,
+        //        SpokenLanguage: spokenLanguage,
+        //        GitHubAccount: GAccount,
+        //        State: State,
+        //        City: City,
+        //        Location: Location,
+        //        YearsOfExperience: YOE,
+        //        videoFile1: file,
+        //        DemoLec2: file1
+        //    };
+
+        //    SubmitForm(obj);
+        //}
+        //function SubmitForm(obj) {
+        //    /*$.validator.unobtrusive.parse(form);*/
+        //    /*if ($(form).valid()) {*/
+        //        // alert("Inside submit form");
+        //        $.ajax({
+        //            type: "POST",
+        //            url: "/Mentor/AddorEditAdvertisements" ,
+        //            data: obj,
+        //            success: function (data) {
+        //                if (data.success) {
+        //                    Popup.dialog('close');
+        //                    dataTable.ajax.reload();
+
+        //                    $.notify(data.message, {
+        //                        globalPosition: "top center",
+        //                        className: "success"
+        //                    })
+
+        //                }
+        //            }
+
+        //        });
+
+        //        return false;
+        //        // suc();
+        //    }
+
+        function jQueryAjaxPost(form) {
+            alert("Inside ajax call 1")
+            $.validator.unobtrusive.parse(form);
             if ($(form).valid()) {
-               // alert("Inside submit form");
-                $.ajax({
-                    type: "POST",
+                alert("Inside ajax call 2")
+                var ajaxConfig = {
+                    type: 'POST',
                     url: form.action,
-                    data: $(form).serialize(),
+                    data: new FormData(form),
                     success: function (data) {
                         if (data.success) {
                             Popup.dialog('close');
@@ -187,13 +277,17 @@
 
                         }
                     }
-                        
-                });
-
-               // suc();
-            };
-                return false;
+                }
+                if($(form).attr('enctype') == "multipart/form-data") {
+                    ajaxConfig["contentType"] = false;
+                    ajaxConfig["processData"] = false;
+                }
+                $.ajax(ajaxConfig);
             }
+            return false;
+        }
+
+
         
         function Delete(id) {
             if (confirm('Are You Sure to Delete this Advertisement ?')) {

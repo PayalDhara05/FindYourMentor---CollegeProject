@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -9,7 +11,7 @@ namespace FindYourMentorProject.Models
         [MetadataType(typeof(CourseAdvertisementMetadata))]
         public partial class CourseAdvertisement
         {
-            public HttpPostedFileBase VideoFile1 { get; set; }
+            
         }
         public class CourseAdvertisementMetadata
         {
@@ -93,14 +95,20 @@ namespace FindYourMentorProject.Models
         public string Location { get; set; }
         public System.DateTime CreationDate { get; set; }
 
-        [Display(Name = "Demo Video 1")]
-        public string DemoLec1 { get; set; }
-
-        [Display(Name = "Total Years of Experience")]
+        [Display(Name = "Total Years of Experience hello")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "This field is required")]
         public int YearsOfExperience { get; set; }
 
-        [Display(Name = "Demo Video 2")]
+        [NotMapped]
+        public HttpPostedFileBase VideoUpload1 { get; set; }
+
+        [NotMapped]
+        public HttpPostedFileBase VideoUpload2 { get; set; }
+
+        [Display(Name = "Demo Lecture 1")]
+        public string DemoLec1 { get; set; }
+
+        [Display(Name = "Demo Lecture 2")]
         public string DemoLec2 { get; set; }
     }
 }

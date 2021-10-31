@@ -311,8 +311,8 @@ namespace FindYourMentorProject.Controllers
                     save.TotalStudents = cAdv.TotalStudents;
                     save.Fees = cAdv.Fees;
                     save.YearsOfExperience = cAdv.YearsOfExperience;
-                    save.DemoLec1 = cAdv.DemoLec1;
-                    save.DemoLec2 = cAdv.DemoLec2;
+                    //save.DemoLec1 = cAdv.DemoLec1;
+                    //save.DemoLec2 = cAdv.DemoLec2;
                     save.Field = cAdv.Field;
                     save.Location = cAdv.Location;
                     save.Address = cAdv.Address;

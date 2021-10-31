@@ -165,104 +165,257 @@ namespace FindYourMentorProject.Controllers
         }
 
 
+        //[HttpGet]
+        //public ActionResult AddorEditAdvertisements(int id=0)
+        //{
+        //    if (id == 0)
+        //    {
+        //        CourseAdvertisement cAdv = new CourseAdvertisement();
+
+        //        return View(cAdv);
+        //    }
+        //    else
+        //    {
+        //        using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
+        //        {
+        //            return View(db.CourseAdvertisements.Where(x => x.AdvertisementID == id).FirstOrDefault<CourseAdvertisement>());
+        //        }
+        //    }
+        //}
+
         [HttpGet]
-        public ActionResult AddorEditAdvertisements(int id=0)
+        public ActionResult AddorEditAdvertisements(int id = 0)
         {
-            if (id == 0)
-            {
-                return View(new CourseAdvertisement());
-            }
-            else
+            CourseAdvertisement cAdv = new CourseAdvertisement();
+            if (id != 0)
             {
                 using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
                 {
-                    return View(db.CourseAdvertisements.Where(x => x.AdvertisementID == id).FirstOrDefault<CourseAdvertisement>());
+                    cAdv = db.CourseAdvertisements.Where(x => x.AdvertisementID == id).FirstOrDefault<CourseAdvertisement>();
                 }
+            }
+            return View(cAdv);
+        }
+
+        //[HttpPost]
+        //public ActionResult AddorEditAdvertisements(CourseAdvertisement adv, HttpPostedFileBase file, HttpPostedFileBase file1)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        int userid = Convert.ToInt32(Session["UserID"]);
+
+        //        using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
+        //        {
+        //            if (adv.AdvertisementID == 0)
+        //            {
+        //                adv.MentorID = userid;
+        //                adv.CreationDate = System.DateTime.Now;
+
+        //                if (file != null)
+        //                {
+        //                    string fileName = Path.GetFileName(file.FileName);
+        //                    String filepath = Path.Combine(Server.MapPath("~/VideoFile/"), fileName);
+        //                    if (file.ContentLength<104857600)
+        //                    {
+        //                        file.SaveAs(filepath);
+        //                    }
+        //                    adv.DemoLec1 = "/VideoFile/" + fileName;
+        //                }
+
+        //                if (file1 != null)
+        //                {
+        //                    string fileName = Path.GetFileName(file1.FileName);
+        //                    String filepath = Path.Combine(Server.MapPath("~/VideoFile/"), fileName);
+        //                    if (file1.ContentLength < 104857600)
+        //                    {
+        //                        file1.SaveAs(filepath);
+        //                    }
+        //                    adv.DemoLec2 = "/VideoFile/" + fileName;
+        //                }
+
+        //                db.CourseAdvertisements.Add(adv);
+        //                db.Configuration.ValidateOnSaveEnabled = false;
+        //                db.SaveChanges();
+        //                return Json(new { success = true, message = "Saved Successfully !!!" }, JsonRequestBehavior.AllowGet);
+        //                //return RedirectToAction("Advertisement", "Mentor");
+        //            }
+        //            else
+        //            {
+        //                adv.MentorID = userid;
+        //                adv.CreationDate = System.DateTime.Now;
+
+        //                if (file != null)
+        //                {
+        //                    string fileName = Path.GetFileName(file.FileName);
+        //                    String filepath = Path.Combine(Server.MapPath("~/VideoFile/"), fileName);
+        //                    if (file.ContentLength < 104857600)
+        //                    {
+        //                        file.SaveAs(filepath);
+        //                    }
+        //                    adv.DemoLec1 = "/VideoFile/" + fileName;
+        //                }
+
+        //                if (file1 != null)
+        //                { 
+        //                    string fileName = Path.GetFileName(file1.FileName);
+        //                    String filepath = Path.Combine(Server.MapPath("~/VideoFile/"), fileName);
+        //                    if (file1.ContentLength < 104857600)
+        //                    {
+        //                        file1.SaveAs(filepath);
+        //                    }
+        //                    adv.DemoLec2 = "/VideoFile/" + fileName;
+        //                }
+
+        //                db.Entry(adv).State = EntityState.Modified;
+        //                db.SaveChanges();
+        //                return Json(new { success = true, message = "Updated Successfully" }, JsonRequestBehavior.AllowGet);
+        //                //return RedirectToAction("Advertisement", "Mentor");
+        //            }
+
+        //        }
+
+        //    }
+        //    else
+        //    {
+        //        return Json(new { success = false, message = "Error !!!" }, JsonRequestBehavior.AllowGet);
+        //    }
+        //}
+
+
+        //[HttpPost]
+        //public ActionResult AddorEditAdvertisements(CourseAdvertisement adv)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        int userid = Convert.ToInt32(Session["UserID"]);
+
+        //        using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
+        //        {
+        //            if (adv.AdvertisementID == 0)
+        //            {
+        //                adv.MentorID = userid;
+        //                adv.CreationDate = System.DateTime.Now;
+        //                //var path1 = saveToPhysicalLocation(adv.videoFile1);      
+        //                //var path2 = saveToPhysicalLocation(adv.videoFile2);
+
+        //                //adv.DemoLec1 = path1;
+        //                //adv.DemoLec2 = path2;
+
+        //                db.CourseAdvertisements.Add(adv);
+        //                db.Configuration.ValidateOnSaveEnabled = false;
+        //                db.SaveChanges();
+        //                return Json(new { success = true, message = "Saved Successfully !!!" }, JsonRequestBehavior.AllowGet);
+        //                //return RedirectToAction("Advertisement", "Mentor");
+        //            }
+        //            else
+        //            {
+        //                adv.MentorID = userid;
+        //                adv.CreationDate = System.DateTime.Now;
+
+        //                //if (file != null)
+        //                //{
+        //                //    string fileName = Path.GetFileName(file.FileName);
+        //                //    String filepath = Path.Combine(Server.MapPath("~/VideoFile/"), fileName);
+        //                //    if (file.ContentLength < 104857600)
+        //                //    {
+        //                //        file.SaveAs(filepath);
+        //                //    }
+        //                //    adv.DemoLec1 = "/VideoFile/" + fileName;
+        //                //}
+
+        //                //if (file1 != null)
+        //                //{
+        //                //    string fileName = Path.GetFileName(file1.FileName);
+        //                //    String filepath = Path.Combine(Server.MapPath("~/VideoFile/"), fileName);
+        //                //    if (file1.ContentLength < 104857600)
+        //                //    {
+        //                //        file1.SaveAs(filepath);
+        //                //    }
+        //                //    adv.DemoLec2 = "/VideoFile/" + fileName;
+        //                //}
+
+        //                db.Entry(adv).State = EntityState.Modified;
+        //                db.SaveChanges();
+        //                return Json(new { success = true, message = "Updated Successfully" }, JsonRequestBehavior.AllowGet);
+        //                //return RedirectToAction("Advertisement", "Mentor");
+        //            }
+
+        //        }
+
+        //    }
+        //    else
+        //    {
+        //        return Json(new { success = false, message = "Error !!!" }, JsonRequestBehavior.AllowGet);
+        //    }
+        //}
+
+        [HttpPost]
+        public ActionResult AddorEditAdvertisements(CourseAdvertisement adv)
+        {
+            try
+            {
+                int userid = Convert.ToInt32(Session["UserID"]);
+                if (ModelState.IsValid)
+                {
+                    if (adv.VideoUpload1 != null)
+                    {
+                        string fileName = Path.GetFileNameWithoutExtension(adv.VideoUpload1.FileName);
+                        string extension = Path.GetExtension(adv.VideoUpload1.FileName);
+                        fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                        adv.DemoLec1 = "~/VideoFile/" + fileName;
+                        adv.VideoUpload1.SaveAs(Path.Combine(Server.MapPath("~/VideoFile/"), fileName));
+                    }
+                    if (adv.VideoUpload2 != null)
+                    {
+                        string fileName = Path.GetFileNameWithoutExtension(adv.VideoUpload2.FileName);
+                        string extension = Path.GetExtension(adv.VideoUpload2.FileName);
+                        fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                        adv.DemoLec2 = "~/VideoFile/" + fileName;
+                        adv.VideoUpload2.SaveAs(Path.Combine(Server.MapPath("~/VideoFile/"), fileName));
+                    }
+                    using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
+                    {
+                        if (adv.AdvertisementID == 0)
+                        {
+                            db.CourseAdvertisements.Add(adv);
+                            adv.MentorID = userid;
+                            adv.CreationDate = System.DateTime.Now;
+                            db.SaveChanges();
+                            return Json(new { success = true, message = "Added Successfully" }, JsonRequestBehavior.AllowGet);
+                        }
+                        else
+                        {
+                            db.Entry(adv).State = EntityState.Modified;
+                            db.SaveChanges();
+                            return Json(new { success = true, message = "Updated Successfully" }, JsonRequestBehavior.AllowGet);
+                        }
+                    }
+                    //return Json(new { success = true, html = GlobalClass.RenderRazorViewToString(this, "ViewAll", GetAllEmployee()), message = "Submitted Successfully" }, JsonRequestBehavior.AllowGet);
+                }
+                return Json(new { success = true, message = "Overall Successfully" }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+
+                return Json(new { success = false, message = ex.Message }, JsonRequestBehavior.AllowGet);
             }
         }
 
-        [HttpPost]
-        public ActionResult AddorEditAdvertisements(CourseAdvertisement adv, HttpPostedFileBase file, HttpPostedFileBase file1)
+
+        [NonAction]
+        public string saveToPhysicalLocation(HttpPostedFileBase file)
         {
-            if (ModelState.IsValid)
+            if (file != null)
             {
-                int userid = Convert.ToInt32(Session["UserID"]);
-
-                using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
+                string fileName = Path.GetFileName(file.FileName);
+                String filepath = Path.Combine(Server.MapPath("~/VideoFile/"), fileName);
+                if (file.ContentLength < 104857600)
                 {
-                    if (adv.AdvertisementID == 0)
-                    {
-                        adv.MentorID = userid;
-                        adv.CreationDate = System.DateTime.Now;
-
-                        if (file != null)
-                        {
-                            string fileName = Path.GetFileName(file.FileName);
-                            String filepath = Path.Combine(Server.MapPath("~/VideoFile/"), fileName);
-                            if (file.ContentLength<104857600)
-                            {
-                                file.SaveAs(filepath);
-                            }
-                            adv.DemoLec1 = "/VideoFile/" + fileName;
-                        }
-
-                        if (file1 != null)
-                        {
-                            string fileName = Path.GetFileName(file1.FileName);
-                            String filepath = Path.Combine(Server.MapPath("~/VideoFile/"), fileName);
-                            if (file1.ContentLength < 104857600)
-                            {
-                                file1.SaveAs(filepath);
-                            }
-                            adv.DemoLec2 = "/VideoFile/" + fileName;
-                        }
-
-                        db.CourseAdvertisements.Add(adv);
-                        db.Configuration.ValidateOnSaveEnabled = false;
-                        db.SaveChanges();
-                        return Json(new { success = true, message = "Saved Successfully !!!" }, JsonRequestBehavior.AllowGet);
-                        //return RedirectToAction("Advertisement", "Mentor");
-                    }
-                    else
-                    {
-                        adv.MentorID = userid;
-                        adv.CreationDate = System.DateTime.Now;
-
-                        if (file != null)
-                        {
-                            string fileName = Path.GetFileName(file.FileName);
-                            String filepath = Path.Combine(Server.MapPath("~/VideoFile/"), fileName);
-                            if (file.ContentLength < 104857600)
-                            {
-                                file.SaveAs(filepath);
-                            }
-                            adv.DemoLec1 = "/VideoFile/" + fileName;
-                        }
-
-                        if (file1 != null)
-                        { 
-                            string fileName = Path.GetFileName(file1.FileName);
-                            String filepath = Path.Combine(Server.MapPath("~/VideoFile/"), fileName);
-                            if (file1.ContentLength < 104857600)
-                            {
-                                file1.SaveAs(filepath);
-                            }
-                            adv.DemoLec2 = "/VideoFile/" + fileName;
-                        }
-
-                        db.Entry(adv).State = EntityState.Modified;
-                        db.SaveChanges();
-                        return Json(new { success = true, message = "Updated Successfully" }, JsonRequestBehavior.AllowGet);
-                        //return RedirectToAction("Advertisement", "Mentor");
-                    }
-
-                }
-
+                    file.SaveAs(filepath);
+                    return filepath;
+                }   
             }
-            else
-            {
-                return Json(new { success = false, message = "Error !!!" }, JsonRequestBehavior.AllowGet);
-            }
+            return String.Empty;
         }
 
         [HttpPost]

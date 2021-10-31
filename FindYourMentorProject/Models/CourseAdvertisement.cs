@@ -11,18 +11,23 @@ namespace FindYourMentorProject.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Web;
+
     public partial class CourseAdvertisement
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public CourseAdvertisement()
         {
-            this.Applications = new HashSet<Application>();
-            this.Appointments = new HashSet<Appointment>();
-            this.Fees1 = new HashSet<Fee>();
-            this.SavedLists = new HashSet<SavedList>();
+              this.Applications = new HashSet<Application>();
+              this.Appointments = new HashSet<Appointment>();
+              this.Fees1 = new HashSet<Fee>();
+              this.SavedLists = new HashSet<SavedList>();
+              DemoLec1 = "~/VideoFile/Demo.mp4";
+              DemoLec2 = "~/VideoFile/Demo.mp4";
+            ClassName = "Debvar";
         }
-    
+
         public int AdvertisementID { get; set; }
         public string ClassName { get; set; }
         public string CourseName { get; set; }
@@ -46,8 +51,15 @@ namespace FindYourMentorProject.Models
         public string DemoLec1 { get; set; }
         public int YearsOfExperience { get; set; }
         public string DemoLec2 { get; set; }
+
+        [NotMapped]
+        public HttpPostedFileBase VideoUpload1 { get; set; }
+
+        [NotMapped]
+        public HttpPostedFileBase VideoUpload2{ get; set; }
+
         public string LinkedIn { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Application> Applications { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

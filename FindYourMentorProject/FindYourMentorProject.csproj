@@ -195,6 +195,7 @@
     <Content Include="Custom\css\owl.theme.default.min.css" />
     <Content Include="Custom\css\Register.css" />
     <Content Include="Custom\css\VerifyAccount.css" />
+    <Content Include="Custom\js\Advertisement.js" />
     <Content Include="Custom\js\common.js" />
     <Content Include="Custom\js\header.js" />
     <Content Include="Custom\js\lightbox-plus-jquery.min.js" />
@@ -238,6 +239,7 @@
     <Content Include="uiImages\search.png" />
     <Content Include="uiImages\VerifyAccount\welcome.gif" />
     <Content Include="uiImages\waves\book-wave.svg" />
+    <Content Include="VideoFile\Demo.mp4" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -391,7 +393,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Image\" />
-    <Folder Include="VideoFile\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
