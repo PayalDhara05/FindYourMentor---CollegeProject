@@ -10,62 +10,70 @@
 <div>
     <h4>SavedList</h4>
     <hr />
-    div>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ClassName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CourseName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MentorName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
 
-            <th>
-                @Html.DisplayNameFor(model => model.BatchesAvailable)
-            </th>
+    @using (Html.BeginForm())
+    {
+        <B>Search By</B> <br /> @Html.RadioButton("searchby", "CourseName", true)<text>Course Name</text> <br /> @Html.RadioButton("searchby", "MentorName")<text>Mentor Name</text> <br /> @Html.RadioButton("searchby", "ClassName")<text>Class Name</text>
+        <br /><input type="text" name="search" onchange="filterAdvert()"> <input type="submit"  />
+    }
 
-            <th>
-
-            </th>
-        </tr>
-        @foreach (var item in Model)
-        {
+    <div>
+        <table class="table">
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ClassName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CourseName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.MentorName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.ClassName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CourseName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MentorName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.BatchesAvailable)
-                </td>
-                <td>
-                    @Html.ActionLink("ViewFullAdvertisement", "ViewFullAdvertisement", new { id = item.AdvertisementID })
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.BatchesAvailable)
+                </th>
 
-                <td>
-                    <button class="btn-link glyphicon glyphicon-trash" id="onsave" onclick="Del(@item.AdvertisementID)"></button>
-                </td>
+                <th>
+
+                </th>
             </tr>
-        }
-    </table>
-</div>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ClassName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CourseName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MentorName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
 
-<script type="text/javascript">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BatchesAvailable)
+                    </td>
+                    <td>
+                        @Html.ActionLink("ViewFullAdvertisement", "ViewFullAdvertisement", new { id = item.AdvertisementID })
+                    </td>
+
+                    <td>
+                        <button class="btn-link glyphicon glyphicon-trash" id="onsave" onclick="Del(@item.AdvertisementID)"></button>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+    </div>
+
+    <script type="text/javascript">
 
     function Del(id) {
 
@@ -85,6 +93,15 @@
 
                 });
             }
-    };
-</script>
+        };
+
+
+        function filterAdvert()
+        {
+                $.ajax({
+                    type: "GET",
+                    url: '@Url.Action("ViewSavedList", "Student")'
+                });
+        }
+    </script>
 

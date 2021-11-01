@@ -164,25 +164,6 @@ namespace FindYourMentorProject.Controllers
 
         }
 
-
-        //[HttpGet]
-        //public ActionResult AddorEditAdvertisements(int id=0)
-        //{
-        //    if (id == 0)
-        //    {
-        //        CourseAdvertisement cAdv = new CourseAdvertisement();
-
-        //        return View(cAdv);
-        //    }
-        //    else
-        //    {
-        //        using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
-        //        {
-        //            return View(db.CourseAdvertisements.Where(x => x.AdvertisementID == id).FirstOrDefault<CourseAdvertisement>());
-        //        }
-        //    }
-        //}
-
         [HttpGet]
         public ActionResult AddorEditAdvertisements(int id = 0)
         {
@@ -383,56 +364,11 @@ namespace FindYourMentorProject.Controllers
                         }
                         else
                         {
-                        //CourseAdvertisement existingAdv = db.CourseAdvertisements.Where(x => x.AdvertisementID == adv.AdvertisementID).FirstOrDefault();
-                        //existingAdv.CourseName = adv.CourseName;
-                        //existingAdv.ClassName = adv.ClassName;
-                        //existingAdv.MentorName = adv.MentorName;
-                        //existingAdv.Description = adv.CourseName;
-                        //existingAdv.EmailID = adv.CourseName;
-                        //existingAdv.ContactNo = adv.CourseName;
-                        //existingAdv.BatchesAvailable = adv.BatchesAvailable;
-                        //existingAdv.BatchesFull = adv.BatchesFull;
-                        //existingAdv.TotalStudents = adv.TotalStudents;
-                        //existingAdv.Fees = adv.Fees;
-                        //existingAdv.Address = adv.CourseName;
-                        //existingAdv.SpokenLanguage = adv.CourseName;
-                        //existingAdv.YearsOfExperience = adv.YearsOfExperience;
-                        //existingAdv.GitHubAccount = adv.CourseName;
-                        //existingAdv.Field = adv.CourseName;
-                        //existingAdv.State = adv.CourseName;
-                        //existingAdv.City = adv.CourseName;
-                        //existingAdv.Location = adv.CourseName;
-                        //existingAdv.Address = adv.CourseName;
-                        //existingAdv.CreationDate = System.DateTime.Now;
-                        //existingAdv.MentorID = userid;
-
-                        //if (adv.VideoUpload1 != null)
-                        //{
-                        //    string fileName = Path.GetFileNameWithoutExtension(adv.VideoUpload1.FileName);
-                        //    string extension = Path.GetExtension(adv.VideoUpload1.FileName);
-                        //    fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-                        //    existingAdv.DemoLec1 = "~/VideoFile/" + fileName;
-                        //    adv.VideoUpload1.SaveAs(Path.Combine(Server.MapPath("~/VideoFile/"), fileName));
-                        //}
-                        //if (adv.VideoUpload2 != null)
-                        //{
-                        //    string fileName = Path.GetFileNameWithoutExtension(adv.VideoUpload2.FileName);
-                        //    string extension = Path.GetExtension(adv.VideoUpload2.FileName);
-                        //    fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-                        //    existingAdv.DemoLec2 = "~/VideoFile/" + fileName;
-                        //    adv.VideoUpload2.SaveAs(Path.Combine(Server.MapPath("~/VideoFile/"), fileName));
-                        //}
-                        //db.Configuration.ValidateOnSaveEnabled = false;
-                        //db.SaveChanges();
-                        adv.MentorID = userid;
-                        adv.CreationDate = System.DateTime.Now;
-                        db.Entry(adv).State = EntityState.Modified;
-                        //var existinguser = db.AddNotesMentees.Find(userid);
-                        //existinguser.Title = mentee.Title;
-                        //existinguser.Description = mentee.Description;
-                        //db.Configuration.ValidateOnSaveEnabled = false;
-                        db.SaveChanges();
-                        return Json(new { success = true, message = "Updated Successfully" }, JsonRequestBehavior.AllowGet);
+                            adv.MentorID = userid;
+                            adv.CreationDate = System.DateTime.Now;
+                            db.Entry(adv).State = EntityState.Modified;
+                            db.SaveChanges();
+                            return Json(new { success = true, message = "Updated Successfully" }, JsonRequestBehavior.AllowGet);
                         }
                     }
                 }

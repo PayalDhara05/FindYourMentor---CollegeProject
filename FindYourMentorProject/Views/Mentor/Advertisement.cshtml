@@ -257,10 +257,8 @@
         //    }
 
         function jQueryAjaxPost(form) {
-            alert("Inside ajax call 1")
             $.validator.unobtrusive.parse(form);
             if ($(form).valid()) {
-                alert("Inside ajax call 2")
                 var ajaxConfig = {
                     type: 'POST',
                     url: form.action,

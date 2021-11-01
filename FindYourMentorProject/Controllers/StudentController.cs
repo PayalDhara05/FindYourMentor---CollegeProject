@@ -328,18 +328,30 @@ namespace FindYourMentorProject.Controllers
             }
         }
 
-        public ActionResult ViewSavedList()
+        public ActionResult ViewSavedList(string searchby, string search)
         {
             int userid = Convert.ToInt32(Session["UserID"]);
-            List<SavedList> saveList = new List<SavedList>();
+            //List<SavedList> saveList = new List<SavedList>();
             using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
             {
 
-                saveList = db.SavedLists.Where(a=>a.MenteeID == userid).OrderByDescending(r => r.SavedPostID).ToList();
-                return View(saveList);
+                //saveList = db.SavedLists.Where(a=>a.MenteeID == userid).OrderByDescending(r => r.SavedPostID).ToList();
+                //return View(saveList);
                 //HttpResponseMessage response;
                 //response = Request.CreateResponse(HttpStatusCode.OK, saveList);
                 //return response;
+                if(searchby == "CourseName")
+                {
+                    return View(db.SavedLists.Where(a => a.MenteeID == userid && a.CourseName.StartsWith(search) || search == null).OrderByDescending(r => r.SavedPostID).ToList());
+                }
+                else if (searchby == "MentorName")
+                {
+                    return View(db.SavedLists.Where(a => a.MenteeID == userid && a.MentorName.StartsWith(search) || search == null).OrderByDescending(r => r.SavedPostID).ToList());
+                }
+                else
+                {
+                    return View(db.SavedLists.Where(a => a.MenteeID == userid && a.ClassName.StartsWith(search) || search == null).OrderByDescending(r => r.SavedPostID).ToList());
+                }
             }
         }
 
