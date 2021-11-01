@@ -276,6 +276,9 @@
                             })
 
                         }
+                    },
+                    error: function (e) {
+                        $.notify(e.message);
                     }
                 }
                 if($(form).attr('enctype') == "multipart/form-data") {

@@ -352,9 +352,7 @@ namespace FindYourMentorProject.Controllers
         [HttpPost]
         public ActionResult AddorEditAdvertisements(CourseAdvertisement adv)
         {
-            try
-            {
-                int userid = Convert.ToInt32(Session["UserID"]);
+          int userid = Convert.ToInt32(Session["UserID"]);
                 if (ModelState.IsValid)
                 {
                     if (adv.VideoUpload1 != null)
@@ -385,21 +383,64 @@ namespace FindYourMentorProject.Controllers
                         }
                         else
                         {
-                            db.Entry(adv).State = EntityState.Modified;
-                            db.SaveChanges();
-                            return Json(new { success = true, message = "Updated Successfully" }, JsonRequestBehavior.AllowGet);
+                        //CourseAdvertisement existingAdv = db.CourseAdvertisements.Where(x => x.AdvertisementID == adv.AdvertisementID).FirstOrDefault();
+                        //existingAdv.CourseName = adv.CourseName;
+                        //existingAdv.ClassName = adv.ClassName;
+                        //existingAdv.MentorName = adv.MentorName;
+                        //existingAdv.Description = adv.CourseName;
+                        //existingAdv.EmailID = adv.CourseName;
+                        //existingAdv.ContactNo = adv.CourseName;
+                        //existingAdv.BatchesAvailable = adv.BatchesAvailable;
+                        //existingAdv.BatchesFull = adv.BatchesFull;
+                        //existingAdv.TotalStudents = adv.TotalStudents;
+                        //existingAdv.Fees = adv.Fees;
+                        //existingAdv.Address = adv.CourseName;
+                        //existingAdv.SpokenLanguage = adv.CourseName;
+                        //existingAdv.YearsOfExperience = adv.YearsOfExperience;
+                        //existingAdv.GitHubAccount = adv.CourseName;
+                        //existingAdv.Field = adv.CourseName;
+                        //existingAdv.State = adv.CourseName;
+                        //existingAdv.City = adv.CourseName;
+                        //existingAdv.Location = adv.CourseName;
+                        //existingAdv.Address = adv.CourseName;
+                        //existingAdv.CreationDate = System.DateTime.Now;
+                        //existingAdv.MentorID = userid;
+
+                        //if (adv.VideoUpload1 != null)
+                        //{
+                        //    string fileName = Path.GetFileNameWithoutExtension(adv.VideoUpload1.FileName);
+                        //    string extension = Path.GetExtension(adv.VideoUpload1.FileName);
+                        //    fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                        //    existingAdv.DemoLec1 = "~/VideoFile/" + fileName;
+                        //    adv.VideoUpload1.SaveAs(Path.Combine(Server.MapPath("~/VideoFile/"), fileName));
+                        //}
+                        //if (adv.VideoUpload2 != null)
+                        //{
+                        //    string fileName = Path.GetFileNameWithoutExtension(adv.VideoUpload2.FileName);
+                        //    string extension = Path.GetExtension(adv.VideoUpload2.FileName);
+                        //    fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                        //    existingAdv.DemoLec2 = "~/VideoFile/" + fileName;
+                        //    adv.VideoUpload2.SaveAs(Path.Combine(Server.MapPath("~/VideoFile/"), fileName));
+                        //}
+                        //db.Configuration.ValidateOnSaveEnabled = false;
+                        //db.SaveChanges();
+                        adv.MentorID = userid;
+                        adv.CreationDate = System.DateTime.Now;
+                        db.Entry(adv).State = EntityState.Modified;
+                        //var existinguser = db.AddNotesMentees.Find(userid);
+                        //existinguser.Title = mentee.Title;
+                        //existinguser.Description = mentee.Description;
+                        //db.Configuration.ValidateOnSaveEnabled = false;
+                        db.SaveChanges();
+                        return Json(new { success = true, message = "Updated Successfully" }, JsonRequestBehavior.AllowGet);
                         }
                     }
-                    //return Json(new { success = true, html = GlobalClass.RenderRazorViewToString(this, "ViewAll", GetAllEmployee()), message = "Submitted Successfully" }, JsonRequestBehavior.AllowGet);
                 }
-                return Json(new { success = true, message = "Overall Successfully" }, JsonRequestBehavior.AllowGet);
+                else
+                {
+                    return Json(new { success = false, message = "Some error" }, JsonRequestBehavior.AllowGet);
+                }       
             }
-            catch (Exception ex)
-            {
-
-                return Json(new { success = false, message = ex.Message }, JsonRequestBehavior.AllowGet);
-            }
-        }
 
 
         [NonAction]
@@ -424,6 +465,22 @@ namespace FindYourMentorProject.Controllers
             using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
             {
                 CourseAdvertisement advert = db.CourseAdvertisements.Where(x => x.AdvertisementID == id).FirstOrDefault<CourseAdvertisement>();
+                //Application appAdv = db.Applications.Where(x => x.AdvertisementID == id).FirstOrDefault<Application>();
+                //if (appAdv!=null)
+                //{
+                //    db.Applications.Remove(appAdv);
+                //}
+                //Appointment apptmtAdv = db.Appointments.Where(x => x.AdvertisementID == id).FirstOrDefault<Appointment>();
+                //if(apptmtAdv!=null)
+                //{
+                //    db.Appointments.Remove(apptmtAdv);
+                //}
+                //SavedList saveAdv = db.SavedLists.Where(x => x.AdvertisementID == id).FirstOrDefault<SavedList>();
+                //if(saveAdv!=null)
+                //{
+                //    db.SavedLists.Remove(saveAdv);
+                //}
+
                 db.CourseAdvertisements.Remove(advert);
                 db.SaveChanges();
                 return Json(new { success = true, message = "Deleted Successfully" }, JsonRequestBehavior.AllowGet);
