@@ -115,7 +115,7 @@ namespace FindYourMentorProject.Controllers
                     }  
                 }
             }
-            return RedirectToAction("Avatar", "Student");
+            return RedirectToAction("PersonalInfo", "Student");
         }
 
         [HttpGet]
@@ -138,14 +138,19 @@ namespace FindYourMentorProject.Controllers
                 using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
                 {
                     var existinguser = db.RegisterStudents.Find(userid);
-                    existinguser.Username = obj.Username.Trim();
-                    existinguser.State = obj.State.Trim();
+                    existinguser.Username = obj.Username;
+                    existinguser.State = obj.State;
                     existinguser.Pincode = obj.Pincode;
-                    existinguser.Description = obj.Description.Trim();
+                    existinguser.ContactNo = obj.ContactNo;
+                    existinguser.GitHubID = obj.GitHubID;
+                    existinguser.LinkedInID = obj.LinkedInID;
+                    existinguser.Description = obj.Description;
+                    existinguser.Age = obj.Age;
+                    existinguser.Address = obj.Address;
                     db.Configuration.ValidateOnSaveEnabled = false;
                     db.SaveChanges();
-                    return Json("Updated successfully!");
-                }
+                return RedirectToAction("PersonalInfo", "Student");
+            }
             //return RedirectToAction("PersonalInfo", "Student");
         }
 
@@ -258,12 +263,19 @@ namespace FindYourMentorProject.Controllers
             }
         }
 
+        [HttpGet]
         public ActionResult ViewNotes(int id=0)
         {
             using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
             {
                 return View(db.AddNotesMentees.Where(x => x.NoteID == id).FirstOrDefault<AddNotesMentee>());
             }
+        }
+
+        [HttpGet]
+        public ActionResult ViewVideos()
+        {
+            return View();
         }
 
 

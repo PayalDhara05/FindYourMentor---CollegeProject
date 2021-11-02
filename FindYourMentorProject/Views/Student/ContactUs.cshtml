@@ -1,0 +1,17 @@
+﻿<form action="/User/Contact" id="form-contact" method="post" onsubmit="return SubmitForm(this)" novalidate="novalidate">
+    <input name="__RequestVerificationToken" type="hidden" value="4ztTYwnIPHn_VZIyk39Fxeyeg0XdXwAX8SUIFasGQQGyJZn4oqAzmp7TNW4h7pdvVcT3HTUGYXv22TsraTkuTdPa9JJj3k34ON7t5SGll1k1">
+    <h2>Reach out to us</h2>
+    <input class="contact-input text-box single-line" data-val="true" data-val-minlength="Atleast 2 characters are expected" data-val-minlength-min="2" data-val-required="Name is required" id="Name" name="Name" placeholder="Enter your name" type="text" value="">
+    <span class="field-validation-valid text-danger" data-valmsg-for="Name" data-valmsg-replace="true"></span>
+
+    <input class="contact-input text-box single-line" data-val="true" data-val-length="The field ContactNo must be a string with a minimum length of 10 and a maximum length of 13." data-val-length-max="13" data-val-length-min="10" data-val-regex="Contact Number is in invalid format" data-val-regex-pattern="^(\d{10})$" id="ContactNo" name="ContactNo" placeholder="Enter Contact Number" type="tel" value="">
+    <span class="field-validation-valid text-danger" data-valmsg-for="ContactNo" data-valmsg-replace="true"></span>
+
+    <input class="contact-input text-box single-line" data-val="true" data-val-email="Invalid Email Address" data-val-required="EmailID required" id="EmailID" name="EmailID" placeholder="Enter EmailID" type="email" value="">
+    <span class="field-validation-valid text-danger" data-valmsg-for="EmailID" data-valmsg-replace="true"></span>
+
+    <textarea class="text-box multi-line" rows="5" cols="46" data-val="true" data-val-maxlength="Limit is 500 characters" data-val-maxlength-max="500" data-val-minlength="Atleast 3 characters are expected" data-val-minlength-min="3" data-val-required="Message is required" id="contact-message" name="Message" placeholder="Message .." type="multiline" value="" aria-describedby="contact-message-error"></textarea>
+    <span class="field-validation-valid text-danger" data-valmsg-for="Message" data-valmsg-replace="true"></span>
+
+    <input type="submit" value="Send" class="contact-input">
+</form>

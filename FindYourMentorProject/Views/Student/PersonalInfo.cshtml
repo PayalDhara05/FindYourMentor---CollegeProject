@@ -5,92 +5,213 @@
     Layout = "~/Views/Shared/_StudentLayout.cshtml";
 }
 
-<h2>PersonalInfo</h2>
+@*<h2>PersonalInfo</h2>
 
-<table border="1" cellpadding="10">
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <tr>
-        <td>Username</td>
-        <td><div id="Username" contenteditable="true">@Model.Username</div></td>
-    </tr>
-    <tr>
-        <td nowrap>Email Id :</td>
-        <td>
-            <div id="EmailID">
-                @Model.EmailID
-            </div>
-        </td>
-    </tr>
-    <tr>
-        <td>Role :</td>
-        <td>
-            <div id="role">
-                @Model.Role
-            </div>
-        </td>
-    </tr>
-    <tr>
-        <td>State:</td>
-        <td>
-            <div id="state" contenteditable="true">
-                @Model.State
-                @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
-            </div>
-        </td>
-    </tr>
+    <table border="1" cellpadding="10">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <tr>
+            <td>Username</td>
+            <td><div id="Username" contenteditable="true">@Model.Username</div></td>
+        </tr>
+        <tr>
+            <td nowrap>Email Id :</td>
+            <td>
+                <div id="EmailID">
+                    @Model.EmailID
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Role :</td>
+            <td>
+                <div id="role">
+                    @Model.Role
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>State:</td>
+            <td>
+                <div id="state" contenteditable="true">
+                    @Model.State
+                    @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
+                </div>
+            </td>
+        </tr>
 
-    <tr>
-        <td>Pincode :</td>
-        <td>
-            <div id="pincode" contenteditable="true">
-                @Model.Pincode
-                @Html.ValidationMessageFor(model => model.Pincode, "", new { @class = "text-danger" })
-            </div>
-        </td>
-    </tr>
+        <tr>
+            <td>Pincode :</td>
+            <td>
+                <div id="pincode" contenteditable="true">
+                    @Model.Pincode
+                    @Html.ValidationMessageFor(model => model.Pincode, "", new { @class = "text-danger" })
+                </div>
+            </td>
+        </tr>
 
-    <tr>
-        <td>Description :</td>
-        <td>
-            <div id="desc" contenteditable="true">
-                @Model.Description
-            </div>
-        </td>
-    </tr>
-    <tr>
-        <td colspan="2">
-            <input id="save" type="button" value="Save" />
-        </td>
-    </tr>
-</table>
-<br />
-<span id="msg"></span>
+        <tr>
+            <td>Description :</td>
+            <td>
+                <div id="desc" contenteditable="true">
+                    @Model.Description
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input id="save" type="button" value="Save" />
+            </td>
+        </tr>
+    </table>
+    <br />
+    <span id="msg"></span>
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
-<script>
-    $(document).ready(function () {
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
 
-        alert('jQuery Load.If this message box shows it means jQuery is correctly referenced and can be used on this page');
+            alert('jQuery Load.If this message box shows it means jQuery is correctly referenced and can be used on this page');
 
-        $("#save").prop("disabled", true);
+            $("#save").prop("disabled", true);
 
-        $("div").on('input', function () {
-            $("#save").prop("disabled", false);
-        });
-
-        $("#save").click(function () {
-            var modifiedEmployee = {}
-            modifiedEmployee.Username = $("#Username").text();
-            modifiedEmployee.EmailID = $("#EmailID").text();
-            modifiedEmployee.State = $("#state").text();
-            modifiedEmployee.Pincode = $("#pincode").text();
-            modifiedEmployee.Description = $("#desc").text();
-
-            $.post("/Student/UpdatePersonalInfo", modifiedEmployee, function (msg) {
-                $("#save").prop("disabled", true);
-                $("#msg").html("<strong>" + msg + "</strong>");
+            $("div").on('input', function () {
+                $("#save").prop("disabled", false);
             });
 
+            $("#save").click(function () {
+                var modifiedEmployee = {}
+                modifiedEmployee.Username = $("#Username").text();
+                modifiedEmployee.EmailID = $("#EmailID").text();
+                modifiedEmployee.State = $("#state").text();
+                modifiedEmployee.Pincode = $("#pincode").text();
+                modifiedEmployee.Description = $("#desc").text();
+
+                $.post("/Student/UpdatePersonalInfo", modifiedEmployee, function (msg) {
+                    $("#save").prop("disabled", true);
+                    $("#msg").html("<strong>" + msg + "</strong>");
+                });
+
+            });
         });
-    });
+    </script>*@
+<link href="~/Custom/css/Profile.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+<div class="main-container">
+
+    <div class="profile-container">
+        <form action="/Student/ProfilePicture" method="post" enctype="multipart/form-data">
+            <div class="Image-container">
+                <img src="@Model.ProfilePicture" alt="user-profile-picture" id="imagePreview" />
+                <div class="user-profile-info">
+                    <h1>@Model.Username</h1>
+                    <h3 id="stateText">@Model.State</h3>
+                    <h3>@Model.Role</h3>
+                </div>
+            </div>
+            <div class="Image-operations">
+                <div class="Image-op-1">
+                    <div class="profile-upload">
+                        <p>Choose Profile Picture</p>
+                        <div class="profile-flex">
+                            <i class="icon fas fa-user-circle" id="profile-pic"></i>
+
+                            <input type="file" id="file" name="file" accept="image/jpeg, image/png" onchange="ShowImagePreview(this,document.getElementById('imagePreview'))">
+                            <span id="remove-img" onclick="document.getElementById('file').value = ''"><i class="fas fa-times"></i></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="Image-op-2">
+                    <button type="submit" class="upload-pic">Upload Picture</button>
+                    <button class="remove-pic">Remove Picture</button>
+                </div>
+            </div>
+            </form>
+    </div>
+
+    <div class="userinfo-container">
+        <h1>User Information</h1>
+        <form action="/Student/UpdatePersonalInfo" method="POST">
+            <div class="input-fields">
+                <fieldset class="field_set">
+                    <legend>Firstname</legend>
+                    <input type="text" name="Username" value="@Model.Username">
+                </fieldset>
+                <fieldset class="field_set">
+                    <legend>Lastname</legend>
+                    <input type="text" name="name">
+                </fieldset>
+            </div>
+
+            <div class="input-fields">
+                <fieldset class="field_set">
+                    <legend>EmailID</legend>
+                    <input type="email" name="EmailID" value="@Model.EmailID" disabled>
+                </fieldset>
+                <fieldset class="field_set">
+                    <legend>Contact Number</legend>
+                    <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number" maxlength="12" name="ContactNo" value="@Model.ContactNo">
+                </fieldset>
+            </div>
+
+            <div class="input-fields">
+                <fieldset class="field_set">
+                    <legend>Age</legend>
+                    <!-- <input type="text" pattern="[0-9]+" name="email"> -->
+                    <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number" maxlength="3" name="Age" value="@Model.Age">
+                </fieldset>
+                <fieldset class="field_set">
+                    <legend>Location</legend>
+                    <input type="text" name="">
+                </fieldset>
+            </div>
+
+            <div class="input-fields">
+                <fieldset class="field_set">
+                    <legend>State</legend>
+                    <input type="text" name="State" value="@Model.State">
+                </fieldset>
+                <fieldset class="field_set">
+                    <legend>Pincode</legend>
+                    <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number" maxlength="6" name="Pincode" value="@Model.Pincode">
+                </fieldset>
+            </div>
+
+            <div class="input-fields">
+                <fieldset class="field_set">
+                    <legend>LinkedIN</legend>
+                    <input type="text" name="LinkedInID" value="@Model.LinkedInID">
+                </fieldset>
+                <fieldset class="field_set">
+                    <legend>GitHub</legend>
+                    <input type="text" name="GithHubID" value="@Model.GitHubID">
+                </fieldset>
+            </div>
+
+            <div class="input-fields">
+                <fieldset class="field_set">
+                    <legend>Address</legend>
+                    <textarea rows="5" cols="35" name="Address">@Model.Address</textarea>
+                </fieldset>
+                <fieldset class="field_set">
+                    <legend>Description</legend>
+                    <textarea rows="5" cols="35" name="Description"> @Model.Description</textarea>
+                </fieldset>
+            </div>
+
+            <input type="submit" value="Save Changes" class="Submit-btn">
+        </form>
+    </div>
+</div>
+
+<script>
+    function ShowImagePreview(imageUploader, previewImage) {
+        if (imageUploader.files && imageUploader.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $(previewImage).attr('src', e.target.result);
+            }
+            reader.readAsDataURL(imageUploader.files[0]);
+        }
+    }
+
 </script>

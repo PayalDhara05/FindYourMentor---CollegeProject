@@ -1,4 +1,4 @@
-﻿<img src="@Html.ViewData["Image"]" alt="profileimage" height="500" width="700" />
+﻿@*<img src="@Html.ViewData["Image"]" alt="profileimage" height="500" width="700" />
 
 @using (Html.BeginForm("ProfilePicture", "Student", FormMethod.Post, new { enctype = "multipart/Form-data" }))
 {
@@ -14,5 +14,6 @@
     <input type="file" name="file">
     <br />
     <input type="submit" value="Update Profile Picture" />
-}
+}*@
+
 

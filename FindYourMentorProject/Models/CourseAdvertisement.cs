@@ -25,7 +25,6 @@ namespace FindYourMentorProject.Models
               this.SavedLists = new HashSet<SavedList>();
               DemoLec1 = "~/VideoFile/Demo.mp4";
               DemoLec2 = "~/VideoFile/Demo.mp4";
-            ClassName = "Debvar";
         }
 
         public int AdvertisementID { get; set; }

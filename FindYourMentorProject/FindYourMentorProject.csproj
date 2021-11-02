@@ -187,14 +187,18 @@
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="Custom\css\commonSignup.css" />
+    <Content Include="Custom\css\Footer.css" />
     <Content Include="Custom\css\Loader.css" />
     <Content Include="Custom\css\Login.css" />
     <Content Include="Custom\css\mainIndex.css" />
     <Content Include="Custom\css\mainLayout.css" />
     <Content Include="Custom\css\owl.carousel.min.css" />
     <Content Include="Custom\css\owl.theme.default.min.css" />
+    <Content Include="Custom\css\Profile.css" />
     <Content Include="Custom\css\Register.css" />
+    <Content Include="Custom\css\StudentLayout.css" />
     <Content Include="Custom\css\VerifyAccount.css" />
+    <Content Include="Custom\css\ViewVideos.css" />
     <Content Include="Custom\js\Advertisement.js" />
     <Content Include="Custom\js\common.js" />
     <Content Include="Custom\js\header.js" />
@@ -203,6 +207,7 @@
     <Content Include="Custom\js\owl.carousel.min.js" />
     <Content Include="Custom\js\Register.js" />
     <Content Include="Custom\js\typed.js" />
+    <Content Include="Custom\js\ViewVideos.js" />
     <Content Include="Global.asax" />
     <Content Include="Models\Allmodels.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -226,6 +231,7 @@
     <Content Include="Scripts\jquery-ui-1.12.1.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
     <Content Include="Scripts\notify.min.js" />
+    <Content Include="Image\defaultProfile1.jpg" />
     <Content Include="uiImages\Loader.gif" />
     <Content Include="uiImages\mainlayout\bg.mp4" />
     <Content Include="uiImages\mainlayout\Contact1.gif" />
@@ -383,6 +389,8 @@
     <Content Include="uiImages\mainlayout\new-anime-book.webp" />
     <Content Include="Views\User\Registration.cshtml" />
     <Content Include="Views\User\ContactUs.cshtml" />
+    <Content Include="Views\Student\ContactUs.cshtml" />
+    <Content Include="Views\Student\ViewVideos.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -392,7 +400,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Image\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

@@ -22,6 +22,7 @@ namespace FindYourMentorProject.Models
             this.Appointments = new HashSet<Appointment>();
             this.Fees = new HashSet<Fee>();
             this.SavedLists = new HashSet<SavedList>();
+            ProfilePicture = "~/Image/defaultProfile1.jpg";
         }
     
         public int UserID { get; set; }

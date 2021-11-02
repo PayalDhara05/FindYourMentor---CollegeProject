@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewBag.Title = "ViewVideos";
+    Layout = "~/Views/Shared/_StudentLayout.cshtml";
+}
+
+<link href="~/Custom/css/ViewVideos.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+<div class="main-container">
+    <h1>Search Video Online</h1><br>
+
+    <div class="container">
+        <form id="video-form">
+            <div class="search-field">
+                <input type="text" id="search" class="form-control" maxlength="150">
+                <button type="button" onclick="document.getElementById('video-form').submit();'"><i class="fas fa-search"></i></button>
+            </div>
+        </form>
+    </div>
+
+    <div class="videos-box">
+        <fieldset class="field_set">
+            <legend>SEARCHED VIDEO</legend>
+            <div id="videos"></div>
+        </fieldset>
+        <!-- <div class="col-md-12">
+
+        </div> -->
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="~/Custom/js/ViewVideos.js"></script>
