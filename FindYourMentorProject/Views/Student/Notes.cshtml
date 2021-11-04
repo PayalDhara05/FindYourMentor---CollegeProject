@@ -13,26 +13,26 @@
     }
 </style>
 
-<h2>NotesMentee</h2>
+<link href="~/Custom/css/Notes.css" rel="stylesheet" />
+<div class="main-table-container">
+    <a class="create-btn" onclick="PopupForm('@Url.Action("AddorEditNotes","Student")')"><i class="fa fa-plus"></i>&nbsp;Create</a>
+        <table id="Notes" class="display" style="width:100%;height:auto">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>CreationDate</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
 
-<a class="btn btn-success" style="margin-bottom:20px" onclick="PopupForm('@Url.Action("AddorEditNotes","Student")')"><i class="fa fa-plus"></i> Create</a>
-<table id="Notes" class="display" style="width:100%;height:auto">
-    <thead>
-        <tr>
-            <th>Title</th>
-            <th>Description</th>
-            <th>CreationDate</th>
-            <th></th>
+            <tbody>
+            </tbody>
+        </table>
+</div>
 
-        </tr>
-    </thead>
-
-    <tbody>
-    </tbody>
-</table>
 
 <link href="//cdn.datatables.net/1.11.1/css/jquery.dataTables.min.css" rel="stylesheet" />
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
 
 @section Scripts{
     <script src="//cdn.datatables.net/1.11.1/js/jquery.dataTables.min.js"></script>
@@ -50,6 +50,7 @@
                     "dataSrc": ""
                 },
                 "responsive": "true",
+                /*"scrollX": true,*/
                 "columns": [
                     { "mData": "Title" },
                     { "mData": "Description" },
@@ -70,7 +71,7 @@
                     },
 
                    {"mData":"NoteID" , "render" : function (data) {
-                       return "<a onclick=PopupForm('@Url.Action("AddorEditNotes", "Student")/" + data + "')><i class='fa fa-pencil'></i></a><a style='margin-left:5px' onclick=Delete(" + data + ")><i class='fa fa-trash'></i></a><a style='margin-left:5px' href='/Student/ViewNotes/"+ data + "')><i class='fa fa-eye'></i></a>";
+                       return "<a onclick=PopupForm('@Url.Action("AddorEditNotes", "Student")/" + data + "')><i class='fa fa-pencil'></i>&nbsp;</a><a style='margin-left:5px' onclick=Delete(" + data + ")><i class='fa fa-trash'></i>&nbsp;</a><a style='margin-left:5px' href='/Student/ViewNotes/" + data + "')><i class='fa fa-eye'></i>&nbsp;</a>";
                     },
                         "orderable": false,
                         "searchable":false,

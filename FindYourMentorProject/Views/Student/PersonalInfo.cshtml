@@ -101,7 +101,15 @@
     <div class="profile-container">
         <form action="/Student/ProfilePicture" method="post" enctype="multipart/form-data">
             <div class="Image-container">
-                <img src="@Model.ProfilePicture" alt="user-profile-picture" id="imagePreview" />
+                @if (Model.ProfilePicture != null)
+                {
+                    <img src="@Model.ProfilePicture" alt="user-profile-picture" id="imagePreview" />
+                }
+                else
+                {
+                    <img src="~/Image/defaultProfile1.jpg" alt="user-profile-picture" id="imagePreview" />
+                }
+
                 <div class="user-profile-info">
                     <h1>@Model.Username</h1>
                     <h3 id="stateText">@Model.State</h3>
@@ -121,8 +129,8 @@
                     </div>
                 </div>
                 <div class="Image-op-2">
-                    <button type="submit" class="upload-pic">Upload Picture</button>
-                    <button class="remove-pic">Remove Picture</button>
+                    <button type="submit" name="submitButton" class="upload-pic" value="Upload">Upload Picture</button>
+                    <button type="submit" name="submitButton" class="remove-pic" value="Remove">Remove Picture</button>
                 </div>
             </div>
             </form>

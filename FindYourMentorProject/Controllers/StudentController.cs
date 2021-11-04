@@ -87,33 +87,61 @@ namespace FindYourMentorProject.Controllers
 
         [HttpPost]
         [Authorize]
-        public ActionResult ProfilePicture(HttpPostedFileBase file)
+        public ActionResult ProfilePicture(HttpPostedFileBase file, string submitButton)
         {
             if (Session["UserID"] != null)
             {
                 int userid = Convert.ToInt32(Session["UserID"]);
 
-                if (file!= null && file.ContentLength>0)
+                if(submitButton == "Upload")
                 {
-                    string fileName = Path.GetFileName(file.FileName);
-                    String filepath = Path.Combine(Server.MapPath("/Image/"), fileName);
-                    file.SaveAs(filepath);
+                    if (file != null && file.ContentLength > 0)
+                    {
+                        string fileName = Path.GetFileName(file.FileName);
+                        String filepath = Path.Combine(Server.MapPath("/Image/"), fileName);
+                        file.SaveAs(filepath);
+                        using (FindYourMentorProjectEntities dc = new FindYourMentorProjectEntities())
+                        {
+                            var user = dc.RegisterStudents.Single(c => c.UserID == userid);
+                            string oldFileName = user.ProfilePicture;
+                            user.ProfilePicture = "/Image/" + fileName;
+                            dc.Configuration.ValidateOnSaveEnabled = false;
+                            dc.SaveChanges();
+
+                            string fullPath = Request.MapPath("~" + oldFileName);
+                            if(fullPath != "~/Image/defaultProfile1.jpg")
+                            {
+                                if (System.IO.File.Exists(fullPath))
+                                {
+                                    System.IO.File.Delete(fullPath);
+                                    Response.Write("Deleted");
+                                }
+                            }   
+                        }
+                    }
+                }
+                else
+                {
                     using (FindYourMentorProjectEntities dc = new FindYourMentorProjectEntities())
                     {
                         var user = dc.RegisterStudents.Single(c => c.UserID == userid);
                         string oldFileName = user.ProfilePicture;
-                        user.ProfilePicture = "/Image/" + fileName;
+                        user.ProfilePicture = "/Image/defaultProfile1.jpg";
                         dc.Configuration.ValidateOnSaveEnabled = false;
                         dc.SaveChanges();
 
                         string fullPath = Request.MapPath("~" + oldFileName);
-                        if (System.IO.File.Exists(fullPath))
+                        if (fullPath != "~/Image/defaultProfile1.jpg")
                         {
-                            System.IO.File.Delete(fullPath);
-                            Response.Write("Deleted");
+                            if (System.IO.File.Exists(fullPath))
+                            {
+                                System.IO.File.Delete(fullPath);
+                                Response.Write("Deleted");
+                            }
                         }
-                    }  
+                    }
                 }
+                
             }
             return RedirectToAction("PersonalInfo", "Student");
         }

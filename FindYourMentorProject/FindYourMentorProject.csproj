@@ -192,6 +192,7 @@
     <Content Include="Custom\css\Login.css" />
     <Content Include="Custom\css\mainIndex.css" />
     <Content Include="Custom\css\mainLayout.css" />
+    <Content Include="Custom\css\Notes.css" />
     <Content Include="Custom\css\owl.carousel.min.css" />
     <Content Include="Custom\css\owl.theme.default.min.css" />
     <Content Include="Custom\css\Profile.css" />
@@ -209,6 +210,7 @@
     <Content Include="Custom\js\typed.js" />
     <Content Include="Custom\js\ViewVideos.js" />
     <Content Include="Global.asax" />
+    <Content Include="Image\defaultProfile1.jpg" />
     <Content Include="Models\Allmodels.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Allmodels.Context.cs</LastGenOutput>
@@ -231,7 +233,6 @@
     <Content Include="Scripts\jquery-ui-1.12.1.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
     <Content Include="Scripts\notify.min.js" />
-    <Content Include="Image\defaultProfile1.jpg" />
     <Content Include="uiImages\Loader.gif" />
     <Content Include="uiImages\mainlayout\bg.mp4" />
     <Content Include="uiImages\mainlayout\Contact1.gif" />

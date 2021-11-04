@@ -11,9 +11,11 @@
 
 html, body {
     width: 100%;
-    min-height: 100vh;
+    height:100vh;
     margin: 0px;
     padding: 0px;
+    display:flex;
+    flex-direction:column;
     font-size: 10px;
 }
 .contact #form-contact h2 {
@@ -23,6 +25,7 @@ html, body {
 
 footer {
     width: 100%;
+    margin-top:auto;
 }
 
 .copyright {
