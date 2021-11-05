@@ -99,6 +99,7 @@
 <div class="main-container">
 
     <div class="profile-container">
+        <h2>Profile Picture</h2>
         <form action="/Student/ProfilePicture" method="post" enctype="multipart/form-data">
             <div class="Image-container">
                 @if (Model.ProfilePicture != null)
@@ -133,7 +134,7 @@
                     <button type="submit" name="submitButton" class="remove-pic" value="Remove">Remove Picture</button>
                 </div>
             </div>
-            </form>
+        </form>
     </div>
 
     <div class="userinfo-container">
@@ -142,45 +143,62 @@
             <div class="input-fields">
                 <fieldset class="field_set">
                     <legend>Firstname</legend>
-                    <input type="text" name="Username" value="@Model.Username">
+                    <input type="text" name="name">
                 </fieldset>
                 <fieldset class="field_set">
                     <legend>Lastname</legend>
                     <input type="text" name="name">
+                </fieldset>
+                <fieldset class="field_set">
+                    <legend>Contact Number</legend>
+                    <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number" maxlength="12">
                 </fieldset>
             </div>
 
             <div class="input-fields">
                 <fieldset class="field_set">
                     <legend>EmailID</legend>
-                    <input type="email" name="EmailID" value="@Model.EmailID" disabled>
-                </fieldset>
-                <fieldset class="field_set">
-                    <legend>Contact Number</legend>
-                    <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number" maxlength="12" name="ContactNo" value="@Model.ContactNo">
-                </fieldset>
-            </div>
-
-            <div class="input-fields">
-                <fieldset class="field_set">
-                    <legend>Age</legend>
-                    <!-- <input type="text" pattern="[0-9]+" name="email"> -->
-                    <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number" maxlength="3" name="Age" value="@Model.Age">
+                    <input type="email" name="name" disabled>
                 </fieldset>
                 <fieldset class="field_set">
                     <legend>Location</legend>
-                    <input type="text" name="">
+                    <input type="text" name="email">
+                </fieldset>
+                <fieldset class="field_set">
+                    <legend>Age</legend>
+                    <!-- <input type="text" pattern="[0-9]+" name="email"> -->
+                    <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number" maxlength="3">
                 </fieldset>
             </div>
 
             <div class="input-fields">
                 <fieldset class="field_set">
                     <legend>State</legend>
-                    <input type="text" name="State" value="@Model.State">
+                    <input type="text" name="name">
                 </fieldset>
                 <fieldset class="field_set">
                     <legend>Pincode</legend>
-                    <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number" maxlength="6" name="Pincode" value="@Model.Pincode">
+                    <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number" maxlength="6">
+                </fieldset>
+                <fieldset class="field_set">
+                    <legend>Profile</legend>
+                    <select name="State" id="State" data-val="true" data-val-required="State is required" aria-describedby="State-error" class="valid" aria-invalid="false">
+                        <option value="" disabled selected hidden>Select Profile ...</option>
+                        <option value="Student">Student</option>
+                        <option value="Business Professional">Business Professional</option>
+                        <option value="Entrepreneur">Entrepreneur</option>
+                    </select>
+                </fieldset>
+            </div>
+
+            <div class="input-fields">
+                <fieldset class="field_set">
+                    <legend>Address</legend>
+                    <textarea rows="3" cols="35" name="Address">@Model.Address</textarea>
+                </fieldset>
+                <fieldset class="field_set">
+                    <legend>Description</legend>
+                    <textarea rows="3" cols="35" name="Description"> @Model.Description</textarea>
                 </fieldset>
             </div>
 
@@ -193,20 +211,10 @@
                     <legend>GitHub</legend>
                     <input type="text" name="GithHubID" value="@Model.GitHubID">
                 </fieldset>
+                <input type="submit" value="Save Changes" class="Submit-btn">
             </div>
 
-            <div class="input-fields">
-                <fieldset class="field_set">
-                    <legend>Address</legend>
-                    <textarea rows="5" cols="35" name="Address">@Model.Address</textarea>
-                </fieldset>
-                <fieldset class="field_set">
-                    <legend>Description</legend>
-                    <textarea rows="5" cols="35" name="Description"> @Model.Description</textarea>
-                </fieldset>
-            </div>
-
-            <input type="submit" value="Save Changes" class="Submit-btn">
+            @*<input type="submit" value="Save Changes" class="Submit-btn">*@
         </form>
     </div>
 </div>

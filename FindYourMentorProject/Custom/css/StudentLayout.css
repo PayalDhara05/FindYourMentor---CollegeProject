@@ -107,6 +107,8 @@ nav {
     .nav-section ul li {
         list-style: none;
         padding: 1rem;
+        margin-bottom:1.5rem;
+        margin-top:1.5rem;
         position: relative;
     }
 
@@ -264,9 +266,10 @@ body {
     outline: none;
     -webkit-transition: all .2s linear;
     transition: all .2s linear;
-    padding: 0.1rem 0.5rem;
     color: white;
-    padding: 0rem 4rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    padding: 0rem 4rem !important;
     font-size: 1.3rem;
     margin-right: .5rem;
     font-family: 'Open Sans', sans-serif;
@@ -372,8 +375,13 @@ body {
         #open-nav i {
             font-weight: bold;
         }
-
+    .logo-section 
+    {
+        margin-top:1rem;
+        margin-bottom:1rem;
+    }
     nav {
+        height: 12rem;
         -webkit-box-pack: justify;
         -ms-flex-pack: justify;
         justify-content: space-between;
@@ -409,8 +417,5 @@ body {
     .logo-section a:nth-child(2) {
         font: bold 1.5rem "Open Sans", sans-serif;
     }
-}
-a:visited {
-    color:black;
 }
 /*# sourceMappingURL=mainNavStud.css.map */

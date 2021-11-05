@@ -109,7 +109,7 @@ namespace FindYourMentorProject.Controllers
                             dc.SaveChanges();
 
                             string fullPath = Request.MapPath("~" + oldFileName);
-                            if(fullPath != "~/Image/defaultProfile1.jpg")
+                            if(oldFileName != "/Image/defaultProfile1.jpg")
                             {
                                 if (System.IO.File.Exists(fullPath))
                                 {
@@ -131,7 +131,7 @@ namespace FindYourMentorProject.Controllers
                         dc.SaveChanges();
 
                         string fullPath = Request.MapPath("~" + oldFileName);
-                        if (fullPath != "~/Image/defaultProfile1.jpg")
+                        if (oldFileName != "/Image/defaultProfile1.jpg")
                         {
                             if (System.IO.File.Exists(fullPath))
                             {
