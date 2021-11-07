@@ -1,36 +1,54 @@
 ﻿@model FindYourMentorProject.Models.AddNotesMentee
 
+@*<link href="~/Custom/css/AddorEditNotes.css" rel="stylesheet" />
 @using (Html.BeginForm("AddorEditNotes","Student",FormMethod.Post, new { onSubmit = "return SubmitForm(this)" }))
 {
     @Html.AntiForgeryToken()
-    
-<div class="form-horizontal">
-    @Html.HiddenFor(model => model.NoteID)
-    <div class="form-group">
+ 
+<div class="notes-container">
+    <table>
+        @Html.HiddenFor(model => model.NoteID)
         @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
-        </div>
-    </div>
+        @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
 
-    <div class="form-group">
+
         @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
-        </div>
-    </div>
+        @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", rows="5" } })
+        @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
 
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Done" class="btn btn-success" />
-            <input type="reset" value="Reset" class="btn btn-warning" />
-        </div>
-    </div>
+        <input type="submit" value="Done" class="btn-success" />
+        <input type="reset" value="Reset" class="btn-reset" />
+    </table>
 </div>
-}
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+}*@
+
+<link href="~/Custom/css/AddorEditNotes.css" rel="stylesheet" />
+<div class="notes-container">
+    @using (Html.BeginForm("AddorEditNotes", "Student", FormMethod.Post, new { onSubmit = "return SubmitForm(this)" }))
+    {
+        <input data-val="true" data-val-number="The field NoteID must be a number." data-val-required="The NoteID field is required." id="NoteID" name="NoteID" type="hidden" value="0">
+
+        <div class="notes-caption">
+            <label class="form-label" for="Title">Title</label>
+        </div>
+        <div class="notes-data">
+            <input placeholder="Give a title" data-val="true" data-val-minlength="Atleast 3 characters are expected" data-val-minlength-min="3" data-val-required="Title required" id="Title" name="Title" type="text" value="">
+            <span class="field-validation-valid text-danger" data-valmsg-for="Title" data-valmsg-replace="true"></span>
+        </div>
+
+        <div class="notes-caption">
+            <label class="form-label" for="Description">Description</label>
+        </div>
+        <div class="notes-data">
+            <input placeholder="Description .." data-val="true" data-val-minlength="Atleast 3 characters are expected" data-val-minlength-min="3" data-val-required="Description required" id="Description" name="Description" rows="5" type="text" value="">
+            <span class="field-validation-valid text-danger" data-valmsg-for="Description" data-valmsg-replace="true"></span>
+        </div>
+
+        <div class="form-btns">
+            <input type="submit" value="Done" class="btn-success">
+            <input type="reset" value="Reset" class="btn-reset">
+        </div>
+    }
+    </div>

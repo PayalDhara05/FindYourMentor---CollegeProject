@@ -49,7 +49,7 @@ html, body {
     #Notes_wrapper {
         font-size: 2rem;
         margin: 4rem 2rem 4rem 2rem;
-        overflow-x: scroll;
+       overflow-x: scroll;
     }
 #Notes_length, #Notes_filter {
     font-family: 'Open Sans', sans-serif;

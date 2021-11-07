@@ -39,8 +39,18 @@
                 <div class="field name">
                     <div class="input-area">
                         @*@Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "input-area-field", @placeholder = "Your Name" } })*@
-                        <input class="input-area-field text-box single-line" data-val="true" data-val-minlength="Atleast 3 characters are expected" data-val-minlength-min="3" data-val-required="Username required" id="Username" name="Username" placeholder="Your Name" type="text">
-                        @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+                        <input class="input-area-field text-box single-line" data-val="true" data-val-minlength="Atleast 3 characters are expected" data-val-minlength-min="3" data-val-required="Firstname required" id="FirstName" name="FirstName" placeholder="Enter your firstname" type="text">
+                        @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                        <!-- <input type="text" placeholder="Your Name" class="input-area-field"> -->
+                        <i class="icon fas fa-user-circle"></i>
+                    </div>
+                </div>
+
+                <div class="field name">
+                    <div class="input-area">
+                        @*@Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "input-area-field", @placeholder = "Your Name" } })*@
+                        <input class="input-area-field text-box single-line" data-val="true" data-val-minlength="Atleast 3 characters are expected" data-val-minlength-min="3" id="LastName" name="LastName" placeholder="Enter your lastname" type="text">
+                        @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
                         <!-- <input type="text" placeholder="Your Name" class="input-area-field"> -->
                         <i class="icon fas fa-user-circle"></i>
                     </div>
@@ -78,13 +88,13 @@
 
 
                 @*<div class="field Age">
-                        <div class="input-area">
-                            <input class="input-area-field text-box single-line input-validation-error" data-val="true" data-val-number="The field Your Age must be a number." data-val-range="Age must be between 5-85 years" data-val-range-max="85" data-val-range-min="5" data-val-required="Please enter your age !!" id="Age" name="Age" placeholder="Enter Age" type="number" value="0" aria-describedby="Age-error" aria-invalid="true">
-                            <span class="text-danger field-validation-error" data-valmsg-for="Age" data-valmsg-replace="true"><span id="Age-error" class="">Age must be between 5-85 years</span></span>
+                <div class="input-area">
+                    <input class="input-area-field text-box single-line input-validation-error" data-val="true" data-val-number="The field Your Age must be a number." data-val-range="Age must be between 5-85 years" data-val-range-max="85" data-val-range-min="5" data-val-required="Please enter your age !!" id="Age" name="Age" placeholder="Enter Age" type="number" value="0" aria-describedby="Age-error" aria-invalid="true">
+                    <span class="text-danger field-validation-error" data-valmsg-for="Age" data-valmsg-replace="true"><span id="Age-error" class="">Age must be between 5-85 years</span></span>
 
-                            <i class="icon fas fa-user"></i>
-                        </div>
-                    </div>*@
+                    <i class="icon fas fa-user"></i>
+                </div>
+            </div>*@
 
                 <div class="field Address">
                     <div class="input-area">
@@ -95,11 +105,20 @@
                     </div>
                 </div>
 
+                <div class="field City">
+                    <div class="input-area">
+                        <textarea class="text-box multi-line" rows="5" cols="46" data-val="true" data-val-minlength="Atleast 3 characters are expected" data-val-minlength-min="3" data-val-required="City is required" id="City" name="City" placeholder="Enter your City name" aria-describedby="City-error" aria-invalid="true"></textarea>
+                        @*@Html.EditorFor(model => model.Address, new { htmlAttributes = new { @id = "Address", @placeholder = "Enter your Address", @type = "multiline" } })*@
+                        @*<textarea id="Address" placeholder="Enter your address" rows="5" cols="46" name="Address"></textarea>*@
+                        @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
                 @*<select data-val="true" data-val-required="Role is required" id="UserRole" name="UserRole" aria-describedby="UserRole-error" class="valid" aria-invalid="false">
-                        <option value="">--Select Role--</option>
-                        <option selected="selected" value="0">Student</option>
-                        <option value="1">Mentor</option>
-                    </select>*@
+                <option value="">--Select Role--</option>
+                <option selected="selected" value="0">Student</option>
+                <option value="1">Mentor</option>
+            </select>*@
                 <div class="State-section">
                     <span>Select State:</span>
                     <select name="State" id="State" data-val="true" data-val-required="State is required" aria-describedby="State-error" class="valid" aria-invalid="false">

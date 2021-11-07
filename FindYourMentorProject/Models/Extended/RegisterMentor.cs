@@ -15,16 +15,21 @@ namespace FindYourMentorProject.Models
     }
     public class RegisterMentorMetadata
     {
-        [Display(Name = "Username")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Username required")]
+        [Display(Name = "Lastname")]
         [MinLength(3, ErrorMessage = "Atleast 3 characters are expected")]
-        public string Username { get; set; }
+        public string LastName { get; set; }
+
+        [Display(Name = "Firstname")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Firstname required")]
+        [MinLength(3, ErrorMessage = "Atleast 3 characters are expected")]
+        public string FirstName { get; set; }
 
         [Display(Name = "EmailID")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "EmailID required")]
         [DataType(DataType.EmailAddress)]
         [Remote("ValidateMentorEmailID", "User")]
-        [EmailAddress(ErrorMessage = "Invalid Email Address")]
+        //[EmailAddress(ErrorMessage = "Invalid Email Address")]
+        [RegularExpression("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", ErrorMessage = "Invalid Email Address")]
         public string EmailID { get; set; }
 
         [Display(Name = "State")]

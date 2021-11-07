@@ -31,20 +31,48 @@
                 </div>
             }
 
-            @using (Html.BeginForm("RegistrationStudent", "User", FormMethod.Post, new { @id = "form1", @name= "register-form" }))
+            @using (Html.BeginForm("RegistrationStudent", "User", FormMethod.Post, new { @id = "form1", @name = "register-form" }))
             {
                 @Html.AntiForgeryToken()
 
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
                 <div class="field name">
+
                     <div class="input-area">
-                        @*@Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "input-area-field", @placeholder = "Your Name" } })*@
-                        <input class="input-area-field text-box single-line" data-val="true" data-val-minlength="Atleast 3 characters are expected" data-val-minlength-min="3" data-val-required="Username required" id="Username" name="Username" placeholder="Your Name" type="text">
-                        @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+
+                        @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "input-area-field", @placeholder = "Your Firstname" } })
+
+                        @*<input class="input-area-field text-box single-line" data-val="true" data-val-minlength="Atleast 3 characters are expected" data-val-minlength-min="3" data-val-required="Firstname required" id="FirstName" name="FirstName" placeholder="Enter your firstname" type="text">*@
+
+                        @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+
                         <!-- <input type="text" placeholder="Your Name" class="input-area-field"> -->
+
                         <i class="icon fas fa-user-circle"></i>
+
                     </div>
+
+                </div>
+
+
+
+                <div class="field name">
+
+                    <div class="input-area">
+
+                        @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "input-area-field", @placeholder = "Your Lastname" } })
+
+                        @*<input class="input-area-field text-box single-line" data-val="true" data-val-minlength="Atleast 3 characters are expected" data-val-minlength-min="3" id="LastName" name="LastName" placeholder="Enter your lastname" type="text">*@
+
+                        @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+
+                        <!-- <input type="text" placeholder="Your Name" class="input-area-field"> -->
+
+                        <i class="icon fas fa-user-circle"></i>
+
+                    </div>
+
                 </div>
 
                 <div class="field email">
@@ -78,7 +106,7 @@
                 </div>
 
 
-            @*<div class="field Age">
+                @*<div class="field Age">
                 <div class="input-area">
                     <input class="input-area-field text-box single-line input-validation-error" data-val="true" data-val-number="The field Your Age must be a number." data-val-range="Age must be between 5-85 years" data-val-range-max="85" data-val-range-min="5" data-val-required="Please enter your age !!" id="Age" name="Age" placeholder="Enter Age" type="number" value="0" aria-describedby="Age-error" aria-invalid="true">
                     <span class="text-danger field-validation-error" data-valmsg-for="Age" data-valmsg-replace="true"><span id="Age-error" class="">Age must be between 5-85 years</span></span>
@@ -87,145 +115,162 @@
                 </div>
             </div>*@
 
-                        <div class="field Address">
-                            <div class="input-area">
-                                <textarea class="text-box multi-line" rows="5" cols="46" data-val="true" data-val-minlength="Atleast 3 characters are expected" data-val-minlength-min="3" data-val-required="Address is required" id="Address" name="Address" placeholder="Enter your Address" type="multiline" aria-describedby="Address-error" aria-invalid="true"></textarea>
-                                @*@Html.EditorFor(model => model.Address, new { htmlAttributes = new { @id = "Address", @placeholder = "Enter your Address", @type = "multiline" } })*@
-                                @*<textarea id="Address" placeholder="Enter your address" rows="5" cols="46" name="Address"></textarea>*@
-                                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
+                <div class="field Address">
+                    <div class="input-area">
+                        <textarea class="text-box multi-line" rows="5" cols="46" data-val="true" data-val-minlength="Atleast 3 characters are expected" data-val-minlength-min="3" data-val-required="Address is required" id="Address" name="Address" placeholder="Enter your Address" type="multiline" aria-describedby="Address-error" aria-invalid="true"></textarea>
+                        @*@Html.EditorFor(model => model.Address, new { htmlAttributes = new { @id = "Address", @placeholder = "Enter your Address", @type = "multiline" } })*@
+                        @*<textarea id="Address" placeholder="Enter your address" rows="5" cols="46" name="Address"></textarea>*@
+                        @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                    </div>
+                </div>
 
-                        @*<select data-val="true" data-val-required="Role is required" id="UserRole" name="UserRole" aria-describedby="UserRole-error" class="valid" aria-invalid="false">
-            <option value="">--Select Role--</option>
-            <option selected="selected" value="0">Student</option>
-            <option value="1">Mentor</option>
-        </select>*@
-                        <div class="State-section">
-                            <span>Select State:</span>
-                            <select name="State" id="State" data-val="true" data-val-required="State is required" aria-describedby="State-error" class="valid" aria-invalid="false">
-                                <option value="" disabled selected hidden>Select State...</option>
-                                <option value="Andhra Pradesh">Andhra Pradesh</option>
-                                <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
-                                <option value="Arunachal Pradesh">Arunachal Pradesh</option>
-                                <option value="Assam">Assam</option>
-                                <option value="Bihar">Bihar</option>
-                                <option value="Chandigarh">Chandigarh</option>
-                                <option value="Chhattisgarh">Chhattisgarh</option>
-                                <option value="Dadar and Nagar Haveli">Dadar and Nagar Haveli</option>
-                                <option value="Daman and Diu">Daman and Diu</option>
-                                <option value="Delhi">Delhi</option>
-                                <option value="Lakshadweep">Lakshadweep</option>
-                                <option value="Puducherry">Puducherry</option>
-                                <option value="Goa">Goa</option>
-                                <option value="Gujarat">Gujarat</option>
-                                <option value="Haryana">Haryana</option>
-                                <option value="Himachal Pradesh">Himachal Pradesh</option>
-                                <option value="Jammu and Kashmir">Jammu and Kashmir</option>
-                                <option value="Jharkhand">Jharkhand</option>
-                                <option value="Karnataka">Karnataka</option>
-                                <option value="Kerala">Kerala</option>
-                                <option value="Madhya Pradesh">Madhya Pradesh</option>
-                                <option value="Maharashtra">Maharashtra</option>
-                                <option value="Manipur">Manipur</option>
-                                <option value="Meghalaya">Meghalaya</option>
-                                <option value="Mizoram">Mizoram</option>
-                                <option value="Nagaland">Nagaland</option>
-                                <option value="Odisha">Odisha</option>
-                                <option value="Punjab">Punjab</option>
-                                <option value="Rajasthan">Rajasthan</option>
-                                <option value="Sikkim">Sikkim</option>
-                                <option value="Tamil Nadu">Tamil Nadu</option>
-                                <option value="Telangana">Telangana</option>
-                                <option value="Tripura">Tripura</option>
-                                <option value="Uttar Pradesh">Uttar Pradesh</option>
-                                <option value="Uttarakhand">Uttarakhand</option>
-                                <option value="West Bengal">West Bengal</option>
-                            </select>
-                        </div>
-                        <span class="text-danger field-validation-valid" data-valmsg-for="State" data-valmsg-replace="true"></span>
+                <div class="field name">
 
-                        <div class="field Pincode">
-                            <div class="input-area">
-                                @Html.EditorFor(model => model.Pincode, new { htmlAttributes = new { @class = "input-area-field", @placeholder = "Enter Your Pincode", @type = "number" } })
-                                @Html.ValidationMessageFor(model => model.Pincode, "", new { @class = "text-danger" })
-                                @*<input id="PinCode" type="number" placeholder="Enter Your Pincode" class="input-area-field">*@
-                                <i class="icon fas fa-map-pin"></i>
-                            </div>
-                        </div>
+                    <div class="input-area">
 
-                        <div class="field GitHub">
-                            <div class="input-area">
-                                @Html.EditorFor(model => model.GitHubID, new { htmlAttributes = new { @class = "input-area-field", @placeholder = "GitHub ID" } })
-                                @Html.ValidationMessageFor(model => model.GitHubID, "", new { @class = "text-danger" })
-                                @*<input type="text" placeholder="Your GitHub ID" class="input-area-field">*@
-                                <i class="icon fas fa-user-circle"></i>
-                            </div>
-                        </div>
+                        @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "input-area-field", @placeholder = "Your City name" } })
 
-                        <div class="field LinkedIn">
-                            <div class="input-area">
-                                @Html.EditorFor(model => model.LinkedInID, new { htmlAttributes = new { @class = "input-area-field", @placeholder = "linkedIN ID" } })
-                                @Html.ValidationMessageFor(model => model.LinkedInID, "", new { @class = "text-danger" })
-                                @*<input type="text" placeholder="Your LinkedIn ID" class="input-area-field">*@
-                                <i class="icon fas fa-user-circle"></i>
-                            </div>
-                        </div>
+                        @*<input class="input-area-field text-box single-line" data-val="true" data-val-minlength="Atleast 3 characters are expected" data-val-minlength-min="3" id="LastName" name="LastName" placeholder="Enter your lastname" type="text">*@
 
-                        <div class="profile-upload">
-                            <p>Choose Profile Picture</p>
-                            <div class="profile-flex">
-                                <i class="icon fas fa-user-circle" id="profile-pic"></i>
-                                <input type="file" id="file" name="file">
-                                <span id="remove-img" onclick="document.getElementById('file').value = ''"><i class="fas fa-times"></i></span>
-                                @*<span id="remove-img"><i class="fas fa-times"></i></span>*@
-                            </div>
-                        </div>
+                        @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
 
-                        <div class="field Description">
-                            <div class="input-area">
-                                <textarea id="Address" placeholder="Description ..." rows="5" cols="46" name="Description"></textarea>
-                                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
+                        <!-- <input type="text" placeholder="Your Name" class="input-area-field"> -->
 
-                        <div class="field password">
-                            <div class="input-area">
-                                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "input-area-field", @placeholder = "Enter Password", @id = "password1", @type = "password" } })
-                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-                                @*<input id="password1" type="password" placeholder="Enter Password" class="input-area-field">*@
-                                <i class="icon fas fa-lock"></i>
-                                <i class="show-btn fas fa-eye" id="show-pass"></i>
-                            </div>
-                        </div>
-
-                        <div class="field password">
-                            <div class="input-area">
-                                @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "input-area-field", @placeholder = "Confirm Password", @id = "password2", @type = "password" } })
-                                @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
-                                @*<input id="password2" type="password" placeholder="Confirm Password" class="input-area-field">*@
-                                <i class="icon fas fa-lock"></i>
-                                <i class="show-btn fas fa-eye" id="show-confirm-pass"></i>
-                            </div>
-                        </div>
-
-
-
-                        }
-
-                        <button type="submit" value="REGISTER" class="submit-field" form="form1">REGISTER</button>
-
-
-                        <div class="end-txt1">
-                            <span>Already joined?</span>
-                            <a href="#">Signin now</a>
-                        </div>
-
-                        <div class="end-txt1">
-                            <a href="#">Join as a Mentee</a>
-                        </div>
+                        <i class="icon fas fa-city"></i>
 
                     </div>
+
+                </div>
+                @*<select data-val="true" data-val-required="Role is required" id="UserRole" name="UserRole" aria-describedby="UserRole-error" class="valid" aria-invalid="false">
+                <option value="">--Select Role--</option>
+                <option selected="selected" value="0">Student</option>
+                <option value="1">Mentor</option>
+            </select>*@
+                <div class="State-section">
+                    <span>Select State:</span>
+                    <select name="State" id="State" data-val="true" data-val-required="State is required" aria-describedby="State-error" class="valid" aria-invalid="false">
+                        <option value="" disabled selected hidden>Select State...</option>
+                        <option value="Andhra Pradesh">Andhra Pradesh</option>
+                        <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+                        <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                        <option value="Assam">Assam</option>
+                        <option value="Bihar">Bihar</option>
+                        <option value="Chandigarh">Chandigarh</option>
+                        <option value="Chhattisgarh">Chhattisgarh</option>
+                        <option value="Dadar and Nagar Haveli">Dadar and Nagar Haveli</option>
+                        <option value="Daman and Diu">Daman and Diu</option>
+                        <option value="Delhi">Delhi</option>
+                        <option value="Lakshadweep">Lakshadweep</option>
+                        <option value="Puducherry">Puducherry</option>
+                        <option value="Goa">Goa</option>
+                        <option value="Gujarat">Gujarat</option>
+                        <option value="Haryana">Haryana</option>
+                        <option value="Himachal Pradesh">Himachal Pradesh</option>
+                        <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                        <option value="Jharkhand">Jharkhand</option>
+                        <option value="Karnataka">Karnataka</option>
+                        <option value="Kerala">Kerala</option>
+                        <option value="Madhya Pradesh">Madhya Pradesh</option>
+                        <option value="Maharashtra">Maharashtra</option>
+                        <option value="Manipur">Manipur</option>
+                        <option value="Meghalaya">Meghalaya</option>
+                        <option value="Mizoram">Mizoram</option>
+                        <option value="Nagaland">Nagaland</option>
+                        <option value="Odisha">Odisha</option>
+                        <option value="Punjab">Punjab</option>
+                        <option value="Rajasthan">Rajasthan</option>
+                        <option value="Sikkim">Sikkim</option>
+                        <option value="Tamil Nadu">Tamil Nadu</option>
+                        <option value="Telangana">Telangana</option>
+                        <option value="Tripura">Tripura</option>
+                        <option value="Uttar Pradesh">Uttar Pradesh</option>
+                        <option value="Uttarakhand">Uttarakhand</option>
+                        <option value="West Bengal">West Bengal</option>
+                    </select>
+                </div>
+                <span class="text-danger field-validation-valid" data-valmsg-for="State" data-valmsg-replace="true"></span>
+
+                <div class="field Pincode">
+                    <div class="input-area">
+                        @Html.EditorFor(model => model.Pincode, new { htmlAttributes = new { @class = "input-area-field", @placeholder = "Enter Your Pincode", @type = "number" } })
+                        @Html.ValidationMessageFor(model => model.Pincode, "", new { @class = "text-danger" })
+                        @*<input id="PinCode" type="number" placeholder="Enter Your Pincode" class="input-area-field">*@
+                        <i class="icon fas fa-map-pin"></i>
+                    </div>
+                </div>
+
+                <div class="field GitHub">
+                    <div class="input-area">
+                        @Html.EditorFor(model => model.GitHubID, new { htmlAttributes = new { @class = "input-area-field", @placeholder = "GitHub ID" } })
+                        @Html.ValidationMessageFor(model => model.GitHubID, "", new { @class = "text-danger" })
+                        @*<input type="text" placeholder="Your GitHub ID" class="input-area-field">*@
+                        <i class="icon fas fa-user-circle"></i>
+                    </div>
+                </div>
+
+                <div class="field LinkedIn">
+                    <div class="input-area">
+                        @Html.EditorFor(model => model.LinkedInID, new { htmlAttributes = new { @class = "input-area-field", @placeholder = "linkedIN ID" } })
+                        @Html.ValidationMessageFor(model => model.LinkedInID, "", new { @class = "text-danger" })
+                        @*<input type="text" placeholder="Your LinkedIn ID" class="input-area-field">*@
+                        <i class="icon fas fa-user-circle"></i>
+                    </div>
+                </div>
+
+                <div class="profile-upload">
+                    <p>Choose Profile Picture</p>
+                    <div class="profile-flex">
+                        <i class="icon fas fa-user-circle" id="profile-pic"></i>
+                        <input type="file" id="file" name="file">
+                        <span id="remove-img" onclick="document.getElementById('file').value = ''"><i class="fas fa-times"></i></span>
+                        @*<span id="remove-img"><i class="fas fa-times"></i></span>*@
+                    </div>
+                </div>
+
+                <div class="field Description">
+                    <div class="input-area">
+                        <textarea id="Address" placeholder="Description ..." rows="5" cols="46" name="Description"></textarea>
+                        @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="field password">
+                    <div class="input-area">
+                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "input-area-field", @placeholder = "Enter Password", @id = "password1", @type = "password" } })
+                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                        @*<input id="password1" type="password" placeholder="Enter Password" class="input-area-field">*@
+                        <i class="icon fas fa-lock"></i>
+                        <i class="show-btn fas fa-eye" id="show-pass"></i>
+                    </div>
+                </div>
+
+                <div class="field password">
+                    <div class="input-area">
+                        @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "input-area-field", @placeholder = "Confirm Password", @id = "password2", @type = "password" } })
+                        @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                        @*<input id="password2" type="password" placeholder="Confirm Password" class="input-area-field">*@
+                        <i class="icon fas fa-lock"></i>
+                        <i class="show-btn fas fa-eye" id="show-confirm-pass"></i>
+                    </div>
+                </div>
+
+
+
+            }
+
+            <button type="submit" value="REGISTER" class="submit-field" form="form1">REGISTER</button>
+
+
+            <div class="end-txt1">
+                <span>Already joined?</span>
+                <a href="#">Signin now</a>
+            </div>
+
+            <div class="end-txt1">
+                <a href="#">Join as a Mentee</a>
+            </div>
+
+        </div>
     </div>
 
 

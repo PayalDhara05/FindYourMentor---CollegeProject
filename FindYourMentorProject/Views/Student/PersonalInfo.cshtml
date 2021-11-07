@@ -112,7 +112,7 @@
                 }
 
                 <div class="user-profile-info">
-                    <h1>@Model.Username</h1>
+                    <h1>@Model.FirstName&nbsp;@Model.LastName</h1>
                     <h3 id="stateText">@Model.State</h3>
                     <h3>@Model.Role</h3>
                 </div>
@@ -143,51 +143,46 @@
             <div class="input-fields">
                 <fieldset class="field_set">
                     <legend>Firstname</legend>
-                    <input type="text" name="name">
+                    <input type="text" name="FirstName" value="@Model.FirstName">
                 </fieldset>
                 <fieldset class="field_set">
                     <legend>Lastname</legend>
-                    <input type="text" name="name">
+                    <input type="text" name="LastName" value="@Model.LastName">
                 </fieldset>
                 <fieldset class="field_set">
                     <legend>Contact Number</legend>
-                    <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number" maxlength="12">
+                    <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number" maxlength="12" name="ContactNo" value="@Model.ContactNo">
                 </fieldset>
             </div>
 
             <div class="input-fields">
                 <fieldset class="field_set">
                     <legend>EmailID</legend>
-                    <input type="email" name="name" disabled>
+                    <input type="email" name="EmailID" disabled value="@Model.EmailID">
                 </fieldset>
                 <fieldset class="field_set">
-                    <legend>Location</legend>
-                    <input type="text" name="email">
+                    <legend>Rolee</legend>
+                    <input type="text" name="Role" value="@Model.Role">
                 </fieldset>
                 <fieldset class="field_set">
                     <legend>Age</legend>
                     <!-- <input type="text" pattern="[0-9]+" name="email"> -->
-                    <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number" maxlength="3">
+                    <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number" maxlength="3" name="Age" value="@Model.Age">
                 </fieldset>
             </div>
 
             <div class="input-fields">
                 <fieldset class="field_set">
                     <legend>State</legend>
-                    <input type="text" name="name">
+                    <input type="text" name="State" value="@Model.State">
                 </fieldset>
                 <fieldset class="field_set">
                     <legend>Pincode</legend>
-                    <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number" maxlength="6">
+                    <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number" maxlength="6" name="Pincode" value="@Model.Pincode">
                 </fieldset>
                 <fieldset class="field_set">
-                    <legend>Profile</legend>
-                    <select name="State" id="State" data-val="true" data-val-required="State is required" aria-describedby="State-error" class="valid" aria-invalid="false">
-                        <option value="" disabled selected hidden>Select Profile ...</option>
-                        <option value="Student">Student</option>
-                        <option value="Business Professional">Business Professional</option>
-                        <option value="Entrepreneur">Entrepreneur</option>
-                    </select>
+                    <legend>City</legend>
+                    <input type="text" name="City" value="@Model.City">
                 </fieldset>
             </div>
 
@@ -209,7 +204,7 @@
                 </fieldset>
                 <fieldset class="field_set">
                     <legend>GitHub</legend>
-                    <input type="text" name="GithHubID" value="@Model.GitHubID">
+                    <input type="text" name="GitHubID" value="@Model.GitHubID">
                 </fieldset>
                 <input type="submit" value="Save Changes" class="Submit-btn">
             </div>

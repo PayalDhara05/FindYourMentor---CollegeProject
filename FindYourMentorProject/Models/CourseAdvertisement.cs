@@ -19,14 +19,14 @@ namespace FindYourMentorProject.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public CourseAdvertisement()
         {
-              this.Applications = new HashSet<Application>();
-              this.Appointments = new HashSet<Appointment>();
-              this.Fees1 = new HashSet<Fee>();
-              this.SavedLists = new HashSet<SavedList>();
-              DemoLec1 = "~/VideoFile/Demo.mp4";
-              DemoLec2 = "~/VideoFile/Demo.mp4";
+            this.Applications = new HashSet<Application>();
+            this.Appointments = new HashSet<Appointment>();
+            this.Fees1 = new HashSet<Fee>();
+            this.SavedLists = new HashSet<SavedList>();
+            DemoLec1 = "~/VideoFile/Demo.mp4";
+            DemoLec2 = "~/VideoFile/Demo.mp4";
         }
-
+    
         public int AdvertisementID { get; set; }
         public string ClassName { get; set; }
         public string CourseName { get; set; }
@@ -39,25 +39,29 @@ namespace FindYourMentorProject.Models
         public int TotalStudents { get; set; }
         public int Fees { get; set; }
         public string Address { get; set; }
-        public string SpokenLanguage { get; set; }
+        public string SpokenLanguage1 { get; set; }
         public string GitHubAccount { get; set; }
         public string Field { get; set; }
         public string State { get; set; }
         public string City { get; set; }
-        public string Location { get; set; }
+        public string SpokenLanguage2 { get; set; }
         public int MentorID { get; set; }
         public System.DateTime CreationDate { get; set; }
         public string DemoLec1 { get; set; }
         public int YearsOfExperience { get; set; }
         public string DemoLec2 { get; set; }
+        public string LinkedIn { get; set; }
+        public string RemovalStatus { get; set; }
+        public string SpokenLanguage3 { get; set; }
+        public string SpokenLanguage4 { get; set; }
+        public string DemoLec3 { get; set; }
+        public string DemoLec4 { get; set; }
 
         [NotMapped]
         public HttpPostedFileBase VideoUpload1 { get; set; }
 
         [NotMapped]
-        public HttpPostedFileBase VideoUpload2{ get; set; }
-
-        public string LinkedIn { get; set; }
+        public HttpPostedFileBase VideoUpload2 { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Application> Applications { get; set; }

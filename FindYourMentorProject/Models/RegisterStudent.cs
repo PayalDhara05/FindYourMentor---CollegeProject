@@ -22,11 +22,12 @@ namespace FindYourMentorProject.Models
             this.Appointments = new HashSet<Appointment>();
             this.Fees = new HashSet<Fee>();
             this.SavedLists = new HashSet<SavedList>();
-            ProfilePicture = "~/Image/defaultProfile1.jpg";
+            ProfilePicture = "/Image/defaultProfile1.jpg";
         }
     
         public int UserID { get; set; }
-        public string Username { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public string EmailID { get; set; }
         public string State { get; set; }
         public Nullable<int> Pincode { get; set; }
@@ -42,6 +43,7 @@ namespace FindYourMentorProject.Models
         public string Address { get; set; }
         public string GitHubID { get; set; }
         public string LinkedInID { get; set; }
+        public string City { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AddNotesMentee> AddNotesMentees { get; set; }

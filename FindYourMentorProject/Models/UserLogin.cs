@@ -11,7 +11,8 @@ namespace FindYourMentorProject.Models
             [Display(Name = "EmailID")]
             [Required(AllowEmptyStrings = false, ErrorMessage = "EmailID required")]
             [DataType(DataType.EmailAddress)]
-            [EmailAddress(ErrorMessage = "Invalid Email Address")]
+            //[EmailAddress(ErrorMessage = "Invalid Email Address")]
+            [RegularExpression("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", ErrorMessage = "Invalid Email Address")]
             public string EmailID { get; set; }
 
             [Display(Name = "Password")]

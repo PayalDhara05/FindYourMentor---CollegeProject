@@ -49,7 +49,7 @@ namespace FindYourMentorProject.Controllers
             if (ModelState.IsValid)
             {
 
-                studentuser.Role = "Student";
+                studentuser.Role = "Mentee";
                 #region //Email is already Exist 
                 var isExist = IsEmailExist(studentuser.EmailID,studentuser.Role);
                 if (isExist)
@@ -109,7 +109,7 @@ namespace FindYourMentorProject.Controllers
                 {
                     Response.Write(e);
                 }
-                ModelState.Clear();
+                //ModelState.Clear();
             }
             else
             {
@@ -314,7 +314,7 @@ namespace FindYourMentorProject.Controllers
                 }
                 else
                 {
-                    if (v.Role == "Student")
+                    if (v.Role == "Mentee")
                     {
                         if (v != null)
                         {

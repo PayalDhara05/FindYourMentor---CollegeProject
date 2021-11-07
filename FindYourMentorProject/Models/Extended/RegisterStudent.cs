@@ -15,16 +15,21 @@ namespace FindYourMentorProject.Models
     }
     public class RegisterStudentMetadata
     {
-        [Display(Name = "Username")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Username required")]
-        [MinLength(3,ErrorMessage ="Atleast 3 characters are expected")] 
-        public string Username { get; set; }
+        [Display(Name = "Lastname")]
+        [MinLength(3, ErrorMessage = "Atleast 3 characters are expected")]
+        public string LastName { get; set; }
+
+        [Display(Name = "Firstname")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Firstname required")]
+        [MinLength(3,ErrorMessage ="Atleast 3 characters are expected")]
+        public string FirstName { get; set; }
 
         [Display(Name = "EmailID")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "EmailID required")]
         [DataType(DataType.EmailAddress)]
         [Remote("ValidateMenteeEmailID", "User")]
-        [EmailAddress(ErrorMessage = "Invalid Email Address")]
+        //[EmailAddress(ErrorMessage = "Invalid Email Address")]
+        [RegularExpression("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", ErrorMessage = "Invalid Email Address")]
         public string EmailID { get; set; }
 
         [Display(Name = "State")]
@@ -78,5 +83,9 @@ namespace FindYourMentorProject.Models
         [Display(Name = "LinkedIn Profile ID")]
         [MinLength(3, ErrorMessage = "Atleast 3 characters are expected")]
         public string LinkedInID { get; set; }
+
+        [Display(Name = "City")]
+        [MinLength(3, ErrorMessage = "Atleast 3 characters are expected")]
+        public string City { get; set; }
     }
 }

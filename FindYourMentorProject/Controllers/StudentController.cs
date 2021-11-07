@@ -166,7 +166,9 @@ namespace FindYourMentorProject.Controllers
                 using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
                 {
                     var existinguser = db.RegisterStudents.Find(userid);
-                    existinguser.Username = obj.Username;
+                    existinguser.FirstName = obj.FirstName;
+                    existinguser.LastName = obj.LastName;
+                    existinguser.City = obj.City;
                     existinguser.State = obj.State;
                     existinguser.Pincode = obj.Pincode;
                     existinguser.ContactNo = obj.ContactNo;
@@ -354,12 +356,12 @@ namespace FindYourMentorProject.Controllers
                     //save.DemoLec1 = cAdv.DemoLec1;
                     //save.DemoLec2 = cAdv.DemoLec2;
                     save.Field = cAdv.Field;
-                    save.Location = cAdv.Location;
+                    save.SpokenLanguage1 = cAdv.SpokenLanguage1;
                     save.Address = cAdv.Address;
                     save.State = cAdv.State;
                     save.GitHub = cAdv.GitHubAccount;
                     save.City = cAdv.City;
-                    save.SpokenLanguage = cAdv.SpokenLanguage;
+                    save.SpokenLanguage2 = cAdv.SpokenLanguage2;
                     db.SavedLists.Add(save);
                     db.Configuration.ValidateOnSaveEnabled = false;
                     db.SaveChanges();
@@ -418,7 +420,7 @@ namespace FindYourMentorProject.Controllers
                 if (appln != null)
                 {
                     ViewBag.status = "Applied";
-                    ViewBag.Mentee = user.Username;
+                    ViewBag.Mentee = user.FirstName;
                     ViewBag.EmailID = user.EmailID;
                     ViewBag.Contact = user.ContactNo;
                     ViewBag.Age = user.Age;
@@ -437,7 +439,7 @@ namespace FindYourMentorProject.Controllers
                 {
                     
                     ViewBag.Id = userid;
-                    ViewBag.Mentee = user.Username;
+                    ViewBag.Mentee = user.FirstName;
                     ViewBag.EmailID = user.EmailID;
                     ViewBag.Contact = user.ContactNo;
                     ViewBag.Age = user.Age;
@@ -465,7 +467,7 @@ namespace FindYourMentorProject.Controllers
                     var advdetails = db.CourseAdvertisements.Find(advid);
                     app_form.MentorID = advdetails.MentorID;
                     app_form.MenteeID = userid;
-                    app_form.MenteeName = user.Username;
+                    app_form.MenteeName = user.FirstName;
                     app_form.MenteeEmailID = user.EmailID;
                     app_form.MenteeAge = user.Age;
                     app_form.MenteeContactNo = user.ContactNo;
@@ -485,7 +487,7 @@ namespace FindYourMentorProject.Controllers
                     db.Applications.Add(app_form);
                     db.Configuration.ValidateOnSaveEnabled = false;
                     db.SaveChanges();
-                    applicationnotificationmentor(user.Username, user.State, advdetails.EmailID, advdetails.CourseName, advdetails.MentorName, advdetails.CreationDate);
+                    applicationnotificationmentor(user.FirstName, user.State, advdetails.EmailID, advdetails.CourseName, advdetails.MentorName, advdetails.CreationDate);
                     return Json(new { success = true, message = "Applied !!!" }, JsonRequestBehavior.AllowGet);
                 }   
             }
@@ -532,7 +534,7 @@ namespace FindYourMentorProject.Controllers
                 if (appln != null)
                 {
                     ViewBag.status = "Applied";
-                    ViewBag.Mentee = user.Username;
+                    ViewBag.Mentee = user.FirstName;
                     ViewBag.EmailID = user.EmailID;
                     ViewBag.Contact = user.ContactNo;
                     ViewBag.Age = user.Age;
@@ -550,7 +552,7 @@ namespace FindYourMentorProject.Controllers
                 {
 
                     ViewBag.Id = userid;
-                    ViewBag.Mentee = user.Username;
+                    ViewBag.Mentee = user.FirstName;
                     ViewBag.EmailID = user.EmailID;
                     ViewBag.Contact = user.ContactNo;
                     ViewBag.Age = user.Age;
@@ -579,7 +581,7 @@ namespace FindYourMentorProject.Controllers
                     var advdetails = db.CourseAdvertisements.Find(advid);
                     app_form.MentorID = advdetails.MentorID;
                     app_form.MenteeID = userid;
-                    app_form.MenteeName = user.Username;
+                    app_form.MenteeName = user.FirstName;
                     app_form.MenteeEmailID = user.EmailID;
                     app_form.MenteeAge = user.Age;
                     app_form.MenteeContactNo = user.ContactNo;
@@ -654,7 +656,7 @@ namespace FindYourMentorProject.Controllers
                 if (feeappln != null)
                 {
                     ViewBag.status = "Paid";
-                    ViewBag.Mentee = user.Username;
+                    ViewBag.Mentee = user.FirstName;
                     ViewBag.EmailID = user.EmailID;
                     ViewBag.Contact = user.ContactNo;
                     ViewBag.Age = user.Age;
@@ -673,7 +675,8 @@ namespace FindYourMentorProject.Controllers
 
                     ViewBag.Id = userid;
                     ViewBag.Fees = cdv.Fees;
-                    ViewBag.Mentee = user.Username;
+                    ViewBag.Firstname = user.FirstName;
+                    ViewBag.Lastname = user.LastName;
                     ViewBag.EmailID = user.EmailID;
                     ViewBag.Contact = user.ContactNo;
                     ViewBag.Age = user.Age;
@@ -698,7 +701,7 @@ namespace FindYourMentorProject.Controllers
             var fromEmailPassword = "priyapayu";
 
             subject = "Mentee Application Request";
-            body = "Name : "+menteeName+"<br>"+"Location : "+State+"<br>"+"Above mentee has requested to apply for the Course Advertisement that you have posted on "+creationDate+" for courses "+CourseName+" under Mentor "+mentorName+".<br> Please visit our portal for more infomation.<br><br><br><br>Thanks & Regards<br>Find Your Mentor";
+            body = "Name : " + menteeName + "<br>" + "Location : " + State + "<br>" + "Above mentee has requested to apply for the Course Advertisement that you have posted on " + creationDate + " for courses " + CourseName + " under Mentor " + mentorName + ".<br> Please visit our portal for more infomation.<br><br><br><br>Thanks & Regards<br>Find Your Mentor";
 
             var smtp = new SmtpClient
             {

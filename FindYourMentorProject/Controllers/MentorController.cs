@@ -94,7 +94,7 @@ namespace FindYourMentorProject.Controllers
             using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
             {
                 var existinguser = db.RegisterMentors.Find(userid);
-                existinguser.Username = obj.Username.Trim();
+                existinguser.FirstName = obj.FirstName.Trim();
                 existinguser.State = obj.State.Trim();
                 existinguser.Pincode = obj.Pincode;
                 existinguser.Description = obj.Description.Trim();
