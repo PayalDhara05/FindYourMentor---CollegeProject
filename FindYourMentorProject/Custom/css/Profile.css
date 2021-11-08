@@ -14,7 +14,7 @@ html, body {
     height: 100%;
     padding: 0px;
     font-size: 10px;
-    overflow-y: scroll;
+    /*overflow-y: scroll;*/
     margin: 0;
 }
 
@@ -366,6 +366,8 @@ input[type="file"] {
     -webkit-box-pack: space-evenly;
     -ms-flex-pack: space-evenly;
     justify-content: space-evenly;
+    overflow:hidden;
+    width:100vw;
 }
 
 .profile-container {
@@ -493,9 +495,8 @@ input[type="file"] {
 }
 @media screen and (max-width: 430px) 
 {
-    textarea
-    {
-        width:23rem!important;
+    .field_set textarea {
+        width: 23rem !important;
     }
 }
 @media screen and (max-width: 360px) {

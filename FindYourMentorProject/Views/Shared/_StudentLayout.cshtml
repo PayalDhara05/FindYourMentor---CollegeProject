@@ -98,35 +98,49 @@
         <a id="open-nav" href="#1" onclick="openNav()" style="font-size: 3rem;cursor: pointer;text-decoration: none;">&#9776;</a>
         <div class="nav-section">
             <a id="abc"></a><ul>
-                <li><a>Welcome @HttpContext.Current.User.Identity.Name</a></li>
-                <li><a href="/Student"><i class="fas fa-home"></i>Home</a></li>
-                <li>
-                    <a><i class="fas fa-user-circle"></i>Profile&nbsp;<i class="fas fa-sort-down" id="arrowdown"></i></a>
-                    <ul>
-                        <li><a href="/Student/PersonalInfo">Personal Information</a></li>
-                        <li><a href="/Student/ViewSavedList">Saved List</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#catalogue"><i class="fas fa-book-reader"></i>Course&nbsp;<i class="fas fa-sort-down" id="arrowdown"></i></a>
-                    <ul>
-                        <li><a href="">Application</a></li>
-                        <li><a href="">Appointment</a></li>
-                        <li><a href="">Fees</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a><i class="fas fa-clipboard"></i>Personal Space&nbsp;<i class="fas fa-sort-down" id="arrowdown"></i></a>
-                    <ul>
-                        <li><a href="/Student/ViewVideos">Search Video Online</a></li>
-                        <li><a href="/Student/Notes">Notes</a></li>
-                    </ul>
-                </li>
-                <button class="auth-btn">LOGOUT</button>
-            </ul>
+    <li><a>Welcome @HttpContext.Current.User.Identity.Name</a></li>
+    <li><a href="/Student"><i class="fas fa-home"></i>Home</a></li>
+    <li>
+        <a><i class="fas fa-user-circle"></i>Profile&nbsp;<i class="fas fa-sort-down" id="arrowdown"></i></a>
+        <ul>
+            <li><a href="/Student/PersonalInfo">Personal Information</a></li>
+            <li><a href="/Student/ViewSavedList">Saved List</a></li>
+        </ul>
+    </li>
+    <li>
+        <a href="#catalogue"><i class="fas fa-book-reader"></i>Course&nbsp;<i class="fas fa-sort-down" id="arrowdown"></i></a>
+        <ul>
+            <li><a href="">Application</a></li>
+            <li><a href="">Appointment</a></li>
+            <li><a href="">Fees</a></li>
+        </ul>
+    </li>
+    <li>
+        <a><i class="fas fa-clipboard"></i>Personal Space&nbsp;<i class="fas fa-sort-down" id="arrowdown"></i></a>
+        <ul>
+            <li><a href="/Student/ViewVideos">Search Video Online</a></li>
+            <li><a href="/Student/Notes">Notes</a></li>
+        </ul>
+    </li>
+    @if (Request.IsAuthenticated)
+    {
+        using (Html.BeginForm("Logout", "User", FormMethod.Post, new { @id = "logoutForm" }))
+        {
+            <button class="auth-btn">LOGOUT</button>
+        }
+    }
+        </ul>
         </div>
     </nav>
 
+    @*@if (Request.IsAuthenticated)
+    {
+        using (Html.BeginForm("Logout", "User", FormMethod.Post, new { id = "logoutForm" }))
+        {
+            <button type="submit" class="auth-btn">Logout</button>
+        }
+    }*@
+    <p id="home"></p>
 
     <div class="sidenav" id="mynav">
         <ul>

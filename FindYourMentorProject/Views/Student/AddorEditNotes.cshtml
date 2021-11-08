@@ -24,25 +24,25 @@
 
 }*@
 
-<link href="~/Custom/css/AddorEditNotes.css" rel="stylesheet" />
+@*<link href="~/Custom/css/AddorEditNotes.css" rel="stylesheet" />*@
 <div class="notes-container">
-    @using (Html.BeginForm("AddorEditNotes", "Student", FormMethod.Post, new { onSubmit = "return SubmitForm(this)" }))
+    @using (Html.BeginForm("AddorEditNotes", "Student", FormMethod.Post, new { onSubmit = "return SubmitForm(this)", @id="notes-form" }))
     {
-        <input data-val="true" data-val-number="The field NoteID must be a number." data-val-required="The NoteID field is required." id="NoteID" name="NoteID" type="hidden" value="0">
+        <input data-val="true" data-val-number="The field NoteID must be a number." data-val-required="The NoteID field is required." id="NoteID" name="NoteID" type="hidden" value="@Model.NoteID">
 
         <div class="notes-caption">
             <label class="form-label" for="Title">Title</label>
         </div>
         <div class="notes-data">
-            <input placeholder="Give a title" data-val="true" data-val-minlength="Atleast 3 characters are expected" data-val-minlength-min="3" data-val-required="Title required" id="Title" name="Title" type="text" value="">
-            <span class="field-validation-valid text-danger" data-valmsg-for="Title" data-valmsg-replace="true"></span>
+            <input placeholder="Give a title" data-val="true" data-val-minlength="Atleast 3 characters are expected" data-val-minlength-min="3" data-val-required="Title required" id="Title" name="Title" type="text" value="@Model.Title">
+            <span class="field-validation-valid text-danger" data-valmsg-for="Title" data-valmsg-replace="true" id="title-error"></span>
         </div>
 
         <div class="notes-caption">
-            <label class="form-label" for="Description">Description</label>
+            <label class="form-label" for="Description" id="Desc">Description</label>
         </div>
         <div class="notes-data">
-            <input placeholder="Description .." data-val="true" data-val-minlength="Atleast 3 characters are expected" data-val-minlength-min="3" data-val-required="Description required" id="Description" name="Description" rows="5" type="text" value="">
+            <textarea placeholder="Description .." data-val="true" data-val-minlength="Atleast 3 characters are expected" data-val-minlength-min="3" data-val-required="Description required" id="Description" name="Description" rows="5" type="text">@Model.Description</textarea>
             <span class="field-validation-valid text-danger" data-valmsg-for="Description" data-valmsg-replace="true"></span>
         </div>
 

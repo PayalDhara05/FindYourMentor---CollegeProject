@@ -186,6 +186,7 @@ namespace FindYourMentorProject.Controllers
 
         
         [HttpGet]
+        [Authorize]
         public ActionResult Notes()
         {
             return View();
@@ -202,6 +203,7 @@ namespace FindYourMentorProject.Controllers
         //    }
         //}
 
+        [Authorize]
         public JsonResult NotesData()
         {
             int userid = Convert.ToInt32(Session["UserID"]);
@@ -226,6 +228,7 @@ namespace FindYourMentorProject.Controllers
 
 
         [HttpGet]
+        [Authorize]
         public ActionResult AddorEditNotes(int id=0)
         {
             if(id==0)
@@ -242,6 +245,7 @@ namespace FindYourMentorProject.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public ActionResult AddorEditNotes(AddNotesMentee mentee)
        {
             if (ModelState.IsValid)
@@ -282,6 +286,7 @@ namespace FindYourMentorProject.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public ActionResult DeleteNotes(int id)
         {
             using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
@@ -294,6 +299,7 @@ namespace FindYourMentorProject.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public ActionResult ViewNotes(int id=0)
         {
             using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
@@ -303,6 +309,7 @@ namespace FindYourMentorProject.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public ActionResult ViewVideos()
         {
             return View();

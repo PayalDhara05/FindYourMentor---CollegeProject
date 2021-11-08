@@ -4,96 +4,6 @@
     ViewBag.Title = "PersonalInfo";
     Layout = "~/Views/Shared/_StudentLayout.cshtml";
 }
-
-@*<h2>PersonalInfo</h2>
-
-    <table border="1" cellpadding="10">
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <tr>
-            <td>Username</td>
-            <td><div id="Username" contenteditable="true">@Model.Username</div></td>
-        </tr>
-        <tr>
-            <td nowrap>Email Id :</td>
-            <td>
-                <div id="EmailID">
-                    @Model.EmailID
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td>Role :</td>
-            <td>
-                <div id="role">
-                    @Model.Role
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td>State:</td>
-            <td>
-                <div id="state" contenteditable="true">
-                    @Model.State
-                    @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
-                </div>
-            </td>
-        </tr>
-
-        <tr>
-            <td>Pincode :</td>
-            <td>
-                <div id="pincode" contenteditable="true">
-                    @Model.Pincode
-                    @Html.ValidationMessageFor(model => model.Pincode, "", new { @class = "text-danger" })
-                </div>
-            </td>
-        </tr>
-
-        <tr>
-            <td>Description :</td>
-            <td>
-                <div id="desc" contenteditable="true">
-                    @Model.Description
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                <input id="save" type="button" value="Save" />
-            </td>
-        </tr>
-    </table>
-    <br />
-    <span id="msg"></span>
-
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
-    <script>
-        $(document).ready(function () {
-
-            alert('jQuery Load.If this message box shows it means jQuery is correctly referenced and can be used on this page');
-
-            $("#save").prop("disabled", true);
-
-            $("div").on('input', function () {
-                $("#save").prop("disabled", false);
-            });
-
-            $("#save").click(function () {
-                var modifiedEmployee = {}
-                modifiedEmployee.Username = $("#Username").text();
-                modifiedEmployee.EmailID = $("#EmailID").text();
-                modifiedEmployee.State = $("#state").text();
-                modifiedEmployee.Pincode = $("#pincode").text();
-                modifiedEmployee.Description = $("#desc").text();
-
-                $.post("/Student/UpdatePersonalInfo", modifiedEmployee, function (msg) {
-                    $("#save").prop("disabled", true);
-                    $("#msg").html("<strong>" + msg + "</strong>");
-                });
-
-            });
-        });
-    </script>*@
 <link href="~/Custom/css/Profile.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 <div class="main-container">
@@ -143,15 +53,16 @@
             <div class="input-fields">
                 <fieldset class="field_set">
                     <legend>Firstname</legend>
-                    <input type="text" name="FirstName" value="@Model.FirstName">
+                    <input type="text" name="FirstName" value="@Model.FirstName" maxlength="20" minlength="3">
                 </fieldset>
                 <fieldset class="field_set">
                     <legend>Lastname</legend>
-                    <input type="text" name="LastName" value="@Model.LastName">
+                    <input type="text" name="LastName" value="@Model.LastName" maxlength="20" minlength="3">
                 </fieldset>
                 <fieldset class="field_set">
                     <legend>Contact Number</legend>
-                    <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number" maxlength="12" name="ContactNo" value="@Model.ContactNo">
+                    <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)/g, '');" pattern="[6789][0-9]{9}" title="Please enter valid phone number" minlength="10" maxlength="12" name="ContactNo" value="@Model.ContactNo">
+                    @*<input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number" maxlength="12" minlength="10" name="ContactNo" value="@Model.ContactNo">*@
                 </fieldset>
             </div>
 
@@ -162,54 +73,53 @@
                 </fieldset>
                 <fieldset class="field_set">
                     <legend>Rolee</legend>
-                    <input type="text" name="Role" value="@Model.Role">
+                    <input type="text" name="Role" value="@Model.Role" disabled>
                 </fieldset>
                 <fieldset class="field_set">
                     <legend>Age</legend>
-                    <!-- <input type="text" pattern="[0-9]+" name="email"> -->
-                    <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number" maxlength="3" name="Age" value="@Model.Age">
+                    <input type="number" min="5" max="85" title="Please enter your correct age"  name="Age" value="@Model.Age">
+                    @*<input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number" maxlength="3" name="Age" value="@Model.Age">*@
                 </fieldset>
             </div>
 
             <div class="input-fields">
                 <fieldset class="field_set">
                     <legend>State</legend>
-                    <input type="text" name="State" value="@Model.State">
+                    <input type="text" name="State" value="@Model.State" maxlength="20" minlength="3">
                 </fieldset>
                 <fieldset class="field_set">
                     <legend>Pincode</legend>
-                    <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number" maxlength="6" name="Pincode" value="@Model.Pincode">
+                    <input type="text" placeholder="Pincode" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)/g, '');" pattern="[1-9][0-9]{5}" title="Please enter valid pincode" minlength="6" maxlength="6"  name="Pincode" value="@Model.Pincode">
                 </fieldset>
                 <fieldset class="field_set">
                     <legend>City</legend>
-                    <input type="text" name="City" value="@Model.City">
+                    <input type="text" name="City" value="@Model.City"  maxlength="20" minlength="3">
                 </fieldset>
             </div>
 
             <div class="input-fields">
                 <fieldset class="field_set">
                     <legend>Address</legend>
-                    <textarea rows="3" cols="35" name="Address">@Model.Address</textarea>
+                    <textarea rows="3" cols="35" name="Address" maxlength="100" minlength="3">@Model.Address</textarea>
                 </fieldset>
                 <fieldset class="field_set">
                     <legend>Description</legend>
-                    <textarea rows="3" cols="35" name="Description"> @Model.Description</textarea>
+                    <textarea rows="3" cols="35" name="Description" maxlength="100" minlength="3"> @Model.Description</textarea>
                 </fieldset>
             </div>
 
             <div class="input-fields">
                 <fieldset class="field_set">
                     <legend>LinkedIN</legend>
-                    <input type="text" name="LinkedInID" value="@Model.LinkedInID">
+                    <input type="text" name="LinkedInID" value="@Model.LinkedInID"  maxlength="20" minlength="3">
                 </fieldset>
                 <fieldset class="field_set">
                     <legend>GitHub</legend>
-                    <input type="text" name="GitHubID" value="@Model.GitHubID">
+                    <input type="text" name="GitHubID" value="@Model.GitHubID"  maxlength="20" minlength="3">
                 </fieldset>
                 <input type="submit" value="Save Changes" class="Submit-btn">
             </div>
 
-            @*<input type="submit" value="Save Changes" class="Submit-btn">*@
         </form>
     </div>
 </div>

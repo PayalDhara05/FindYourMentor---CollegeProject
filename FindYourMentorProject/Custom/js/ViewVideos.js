@@ -7,12 +7,12 @@
         // enter has keyCode = 13, change it if you want to use another button
         if (event.keyCode == 13) {
             // this.form.submit();
-            $("form").submit();
+            $("#video-form").submit();
             return false;
         }
     });
 
-    $("form").submit(function (e) {
+    $("#video-form").submit(function (e) {
         e.preventDefault();
 
         var search = $("#search").val();

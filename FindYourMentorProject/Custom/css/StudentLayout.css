@@ -34,7 +34,7 @@ nav {
     -ms-flex-pack: space-evenly;
     justify-content: space-evenly;
     height: 7rem;
-    width: 100%;
+    width: 100vw;
     background-color: white;
     z-index: 500;
 }
@@ -89,7 +89,7 @@ nav {
     -ms-flex-pack: space-evenly;
     justify-content: space-evenly;
     height: 7rem;
-    width: 100%;
+    width: 100vw;
     position: -webkit-sticky;
     position: sticky;
     top: 0;
@@ -267,9 +267,9 @@ body {
     -webkit-transition: all .2s linear;
     transition: all .2s linear;
     color: white;
-    margin-top: 1.5rem;
+    margin-top: 0.5rem;
     margin-bottom: 1.5rem;
-    padding: 0rem 4rem !important;
+    padding: 1rem 4rem !important;
     font-size: 1.3rem;
     margin-right: .5rem;
     font-family: 'Open Sans', sans-serif;
@@ -417,5 +417,9 @@ body {
     .logo-section a:nth-child(2) {
         font: bold 1.5rem "Open Sans", sans-serif;
     }
+}
+#logoutForm 
+{
+    width:none!important;
 }
 /*# sourceMappingURL=mainNavStud.css.map */
