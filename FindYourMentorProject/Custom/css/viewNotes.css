@@ -1,0 +1,239 @@
+﻿@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;600;700&family=PT+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    font-size: 10px;
+}
+
+.main-container {
+    width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+.main-notes-title input {
+    margin-top: 10rem;
+    width: 130rem;
+    text-align: center;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+    font-size: 4rem;
+    border: none;
+    outline: none;
+    color: #833471;
+    font-weight: bold;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.creation-date-container h3 {
+    float: right;
+    font-size: 2rem;
+    margin-right: 1rem;
+    font-family: 'Open Sans', sans-serif;
+    color: #666;
+}
+
+.main-notes-description {
+    width: 130rem;
+    height: 60rem;
+    border: 2px dotted #833471;
+    margin-bottom: 2rem;
+}
+
+    .main-notes-description textarea {
+        width: 129rem;
+        height: 50rem;
+        font-size: 2rem;
+        padding: 1rem;
+        border: none;
+        outline: none;
+        font-family: 'Open Sans', sans-serif;
+    }
+
+.notes-btn button, .notes-btn a {
+    font-size: 2rem;
+    padding: 1rem 4rem;
+    border: none;
+    outline: none;
+    border-radius: 50px;
+    color: white;
+    -webkit-transition: all .3s linear;
+    transition: all .3s linear;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+}
+
+.notes-btn a {
+    text-decoration: none;
+}
+
+.homenew-btn {
+    -webkit-transition: all .3s linear;
+    transition: all .3s linear;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    font-size: 3rem;
+    margin-left: 2rem;
+    margin-bottom: 1.5rem;
+    text-decoration: none;
+    color: #833471 !important;
+}
+
+    .homenew-btn:hover {
+        text-decoration: underline;
+    }
+
+.updatenew-btn {
+    float: right;
+    font-size: 2rem;
+    padding: 1rem 4rem;
+    border: none;
+    outline: none;
+    border-radius: 50px;
+    color: white;
+    -webkit-transition: all .3s linear;
+    transition: all .3s linear;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    background-color: #097969;
+    border: 2px solid #097969;
+    margin-right: 2rem;
+}
+
+    .updatenew-btn:hover {
+        background-color: white;
+        border: 2px solid #097969;
+        color: #097969;
+    }
+
+@media screen and (max-width: 1492px) {
+    .main-notes-title input, .main-notes-description {
+        width: 90rem;
+    }
+
+        .main-notes-description textarea {
+            width: 88rem;
+        }
+
+    .main-container {
+        width: 100vw;
+    }
+}
+
+@media screen and (max-width: 899px) {
+    .main-notes-title input, .main-notes-description {
+        width: 60rem;
+    }
+
+        .main-notes-description textarea {
+            width: 59rem;
+        }
+
+    .main-container {
+        width: 100vw;
+    }
+}
+
+@media screen and (max-width: 606px) {
+    .main-notes-title input {
+        font-size: 2.5rem;
+    }
+
+    .main-notes-title input, .main-notes-description {
+        width: 100%;
+    }
+
+    .main-notes-description {
+        height: 70rem;
+    }
+
+        .main-notes-description textarea {
+            width: 100%;
+            height: 60rem;
+            font-size: 1.5rem;
+        }
+
+    .main-container {
+        width: 100vw;
+    }
+}
+
+@media screen and (max-width: 340px) {
+    .main-notes-title input {
+        font-size: 2.5rem;
+    }
+
+    .main-notes-title input, .main-notes-description {
+        width: 100%;
+    }
+
+    .main-notes-description {
+        height: 90rem;
+    }
+
+        .main-notes-description textarea {
+            width: 100%;
+            height: 70rem;
+            font-size: 1.5rem;
+        }
+
+    .main-container {
+        width: 100vw;
+    }
+    .creation-date-container h3
+    {
+        font-size:1.5rem;
+    }
+    .updatenew-btn 
+    {
+        font-size:1.5rem;
+    }
+    .homenew-btn
+    {
+        font-size:2rem;
+    }
+}
+
+@media screen and (max-width: 364px) {
+    .notes-btn {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+    }
+
+    .updatenew-btn {
+        margin-right: 0;
+    }
+
+    .homenew-btn {
+        margin-left: 0;
+    }
+}
+/*# sourceMappingURL=viewNotes.css.map */

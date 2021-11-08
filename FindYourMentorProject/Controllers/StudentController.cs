@@ -287,6 +287,29 @@ namespace FindYourMentorProject.Controllers
 
         [HttpPost]
         [Authorize]
+        public ActionResult AddorEditNotesExternal(AddNotesMentee mentee)
+        {
+            if (ModelState.IsValid)
+            {
+                int userid = Convert.ToInt32(Session["UserID"]);
+
+                using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
+                { 
+                        mentee.UserID = userid;
+                        mentee.CreationDate = System.DateTime.Now;
+                        db.Entry(mentee).State = EntityState.Modified;
+                        //var existinguser = db.AddNotesMentees.Find(userid);
+                        //existinguser.Title = mentee.Title;
+                        //existinguser.Description = mentee.Description;
+                        //db.Configuration.ValidateOnSaveEnabled = false;
+                        db.SaveChanges();
+                }
+            }
+            return RedirectToAction("Notes", "Student");
+        }
+
+        [HttpPost]
+        [Authorize]
         public ActionResult DeleteNotes(int id)
         {
             using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
