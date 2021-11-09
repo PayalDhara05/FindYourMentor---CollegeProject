@@ -18,53 +18,70 @@ namespace FindYourMentorProject.Controllers
     public class MentorController : Controller
     {
         // GET: Mentor
+        [Authorize]
         public ActionResult Index()
         {
             return View();
         }
 
-        public ActionResult Avatar()
-        {
-            int userid = Convert.ToInt32(Session["UserID"]);
-            using (FindYourMentorProjectEntities dc = new FindYourMentorProjectEntities())
-            {
-                var user = dc.RegisterMentors.Find(userid);
-                ViewData["Image"] = user.ProfilePicture;
-            }
-            return View();
-        }
-
         [HttpPost]
         [Authorize]
-        public ActionResult ProfilePicture(HttpPostedFileBase file)
+        public ActionResult ProfilePicture(HttpPostedFileBase file, string submitButton)
         {
             if (Session["UserID"] != null)
             {
                 int userid = Convert.ToInt32(Session["UserID"]);
 
-                if (file != null && file.ContentLength > 0)
+                if (submitButton == "Upload")
                 {
-                    string fileName = Path.GetFileName(file.FileName);
-                    String filepath = Path.Combine(Server.MapPath("/Image/"), fileName);
-                    file.SaveAs(filepath);
+                    if (file != null && file.ContentLength > 0)
+                    {
+                        string fileName = Path.GetFileName(file.FileName);
+                        String filepath = Path.Combine(Server.MapPath("/Image/"), fileName);
+                        file.SaveAs(filepath);
+                        using (FindYourMentorProjectEntities dc = new FindYourMentorProjectEntities())
+                        {
+                            var user = dc.RegisterMentors.Single(c => c.UserID == userid);
+                            string oldFileName = user.ProfilePicture;
+                            user.ProfilePicture = "/Image/" + fileName;
+                            dc.Configuration.ValidateOnSaveEnabled = false;
+                            dc.SaveChanges();
+
+                            string fullPath = Request.MapPath("~" + oldFileName);
+                            if (oldFileName != "/Image/defaultProfile1.jpg")
+                            {
+                                if (System.IO.File.Exists(fullPath))
+                                {
+                                    System.IO.File.Delete(fullPath);
+                                    Response.Write("Deleted");
+                                }
+                            }
+                        }
+                    }
+                }
+                else
+                {
                     using (FindYourMentorProjectEntities dc = new FindYourMentorProjectEntities())
                     {
                         var user = dc.RegisterMentors.Single(c => c.UserID == userid);
                         string oldFileName = user.ProfilePicture;
-                        user.ProfilePicture = "/Image/" + fileName;
+                        user.ProfilePicture = "/Image/defaultProfile1.jpg";
                         dc.Configuration.ValidateOnSaveEnabled = false;
                         dc.SaveChanges();
 
                         string fullPath = Request.MapPath("~" + oldFileName);
-                        if (System.IO.File.Exists(fullPath))
+                        if (oldFileName != "/Image/defaultProfile1.jpg")
                         {
-                            System.IO.File.Delete(fullPath);
-                            Response.Write("Deleted");
+                            if (System.IO.File.Exists(fullPath))
+                            {
+                                System.IO.File.Delete(fullPath);
+                                Response.Write("Deleted");
+                            }
                         }
                     }
                 }
             }
-            return RedirectToAction("Avatar", "Mentor");
+            return RedirectToAction("PersonalInfo", "Mentor");
         }
 
         [HttpGet]
@@ -88,19 +105,26 @@ namespace FindYourMentorProject.Controllers
 
         [HttpPost]
         [Authorize]
-        public ActionResult UpdatePersonalInfo(RegisterStudent obj)
+        public ActionResult UpdatePersonalInfo(RegisterMentor obj)
         {
             int userid = Convert.ToInt32(Session["UserID"]);
             using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
             {
                 var existinguser = db.RegisterMentors.Find(userid);
-                existinguser.FirstName = obj.FirstName.Trim();
-                existinguser.State = obj.State.Trim();
+                existinguser.FirstName = obj.FirstName;
+                existinguser.LastName = obj.LastName;
+                existinguser.City = obj.City;
+                existinguser.State = obj.State;
                 existinguser.Pincode = obj.Pincode;
-                existinguser.Description = obj.Description.Trim();
+                existinguser.ContactNo = obj.ContactNo;
+                existinguser.GithubID = obj.GithubID;
+                existinguser.LinkedinID = obj.LinkedinID;
+                existinguser.Description = obj.Description;
+                existinguser.Age = obj.Age;
+                existinguser.Address = obj.Address;
                 db.Configuration.ValidateOnSaveEnabled = false;
                 db.SaveChanges();
-                return Json("Updated successfully!");
+                return RedirectToAction("PersonalInfo", "Mentor");
             }
             //return RedirectToAction("PersonalInfo", "Student");
         }

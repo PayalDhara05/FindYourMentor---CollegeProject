@@ -2,19 +2,20 @@
 
 @{
     ViewBag.Title = "AddorEditAdvertisement";
-    Layout = "~/Views/Shared/_MentorLayout.cshtml";
 }
 
 <h2>AddorEditAdvertisement</h2>
 
 @*@using (Html.BeginForm("AddorEditAdvertisements", "Mentor", FormMethod.Post, new { onsubmit = "return SubmitForm(this)", enctype = "multipart/Form-data" }))*@
 @*@using (Html.BeginForm("AddorEditAdvertisements", "Mentor", FormMethod.Post, new { onsubmit = "return SubmitForm(this)", enctype = "multipart/Form-data" }))*@
-@using (Html.BeginForm("AddorEditAdvertisements", "Mentor", FormMethod.Post, new { enctype = "multipart/form-data", onSubmit = "return jQueryAjaxPost(this);"}))//data-resetUrl
+@using (Html.BeginForm("AddorEditAdvertisements", "Mentor", FormMethod.Post, new { enctype = "multipart/form-data", onSubmit = "return jQueryAjaxPost(this);" }))//data-resetUrl
 {
     @Html.AntiForgeryToken()
     @Html.HiddenFor(model => model.AdvertisementID)
     @Html.HiddenFor(model => model.DemoLec1)
     @Html.HiddenFor(model => model.DemoLec2)
+    @Html.HiddenFor(model => model.DemoLec3)
+    @Html.HiddenFor(model => model.DemoLec4)
 
     <div class="form-horizontal">
         <h4>CourseAdvertisement</h4>
@@ -109,10 +110,31 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.SpokenLanguage, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.SpokenLanguage1, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.SpokenLanguage, new { htmlAttributes = new { @class = "form-control", @id = "spokenLanguage" } })
-                @Html.ValidationMessageFor(model => model.SpokenLanguage, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.SpokenLanguage1, new { htmlAttributes = new { @class = "form-control", @id = "spokenLanguage" } })
+                @Html.ValidationMessageFor(model => model.SpokenLanguage1, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.SpokenLanguage2, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SpokenLanguage2, new { htmlAttributes = new { @class = "form-control", @id = "spokenLanguage" } })
+                @Html.ValidationMessageFor(model => model.SpokenLanguage2, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.SpokenLanguage3, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SpokenLanguage3, new { htmlAttributes = new { @class = "form-control", @id = "spokenLanguage" } })
+                @Html.ValidationMessageFor(model => model.SpokenLanguage3, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.SpokenLanguage4, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SpokenLanguage4, new { htmlAttributes = new { @class = "form-control", @id = "spokenLanguage" } })
+                @Html.ValidationMessageFor(model => model.SpokenLanguage4, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -145,14 +167,6 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control", @id = "City" } })
                 @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Location, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Location, new { htmlAttributes = new { @class = "form-control", @id = "Location" } })
-                @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -203,6 +217,30 @@
             </div>
         </div>
 
+        <div class="col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(model => model.DemoLec3, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <video style="width:700px;height:500px;" controls>
+                        <source src="@Url.Content(Model.DemoLec3)" type="video/mp4" id="videoPreview2" />
+                    </video>
+                    <input type="file" name="VideoUpload3" accept=".mp4,.3gp,.wmv.mkv,.flv" id='videoUpload' onchange="Preview(1)" />
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(model => model.DemoLec4, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <video style="width:700px;height:500px;" controls>
+                        <source src="@Url.Content(Model.DemoLec4)" type="video/mp4" id="videoPreview2" />
+                    </video>
+                    <input type="file" name="VideoUpload4" accept=".mp4,.3gp,.wmv.mkv,.flv" id='videoUpload' onchange="Preview(1)" />
+                </div>
+            </div>
+        </div>
+
         @*<input type='file' id='videoUpload' />
 
             <video width="320" height="240" controls>
@@ -217,18 +255,18 @@
                 let blobURL = URL.createObjectURL(file);
                 document.querySelectorAll("video")[VideoID].src = blobURL;
             }
-                    //document.getElementById("videoUpload")
-                    //    .onchange = function (event) {
-                    //        let file = event.target.files[0];
-                    //        let blobURL = URL.createObjectURL(file);
-                    //        document.querySelectorAll("video")[1].src = blobURL;
-                    //    }
+                                                        //document.getElementById("videoUpload")
+                                                        //    .onchange = function (event) {
+                                                        //        let file = event.target.files[0];
+                                                        //        let blobURL = URL.createObjectURL(file);
+                                                        //        document.querySelectorAll("video")[1].src = blobURL;
+                                                        //    }
 
-                    //function preview() {
-                    //    let file = event.target.files[0];
-                    //    let blobURL = URL.createObjectURL(file);
-                    //    document.querySelector("video")[1].src = blobURL;
-                    //}
+                                                        //function preview() {
+                                                        //    let file = event.target.files[0];
+                                                        //    let blobURL = URL.createObjectURL(file);
+                                                        //    document.querySelector("video")[1].src = blobURL;
+                                                        //}
         </script>
 
         @*<div class="col-md-6">

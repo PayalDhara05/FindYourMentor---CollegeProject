@@ -25,6 +25,8 @@ namespace FindYourMentorProject.Models
             this.SavedLists = new HashSet<SavedList>();
             DemoLec1 = "~/VideoFile/Demo.mp4";
             DemoLec2 = "~/VideoFile/Demo.mp4";
+            DemoLec3 = "~/VideoFile/Demo.mp4";
+            DemoLec4 = "~/VideoFile/Demo.mp4";
         }
     
         public int AdvertisementID { get; set; }
@@ -62,6 +64,12 @@ namespace FindYourMentorProject.Models
 
         [NotMapped]
         public HttpPostedFileBase VideoUpload2 { get; set; }
+
+        [NotMapped]
+        public HttpPostedFileBase VideoUpload3 { get; set; }
+
+        [NotMapped]
+        public HttpPostedFileBase VideoUpload4 { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Application> Applications { get; set; }

@@ -140,8 +140,7 @@ namespace FindYourMentorProject.Controllers
                             }
                         }
                     }
-                }
-                
+                }   
             }
             return RedirectToAction("PersonalInfo", "Student");
         }
@@ -179,7 +178,7 @@ namespace FindYourMentorProject.Controllers
                     existinguser.Address = obj.Address;
                     db.Configuration.ValidateOnSaveEnabled = false;
                     db.SaveChanges();
-                return RedirectToAction("PersonalInfo", "Student");
+                    return RedirectToAction("PersonalInfo", "Student");
             }
             //return RedirectToAction("PersonalInfo", "Student");
         }

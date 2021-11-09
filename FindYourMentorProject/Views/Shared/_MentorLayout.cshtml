@@ -1,13 +1,13 @@
-﻿<!DOCTYPE html>
+﻿<!--<!DOCTYPE html>
 
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>@ViewBag.Title</title>
+    <title></title>
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/Content/site.css" rel="stylesheet" />
-    @*<link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />*@
-    <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+    <link href="~/Content/site.css" rel="stylesheet" />-->
+@*<link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />*@
+<!--<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
     <style>
         .field-validation-error {
             color: #ff0000;
@@ -26,7 +26,7 @@
 </head>
 <body>
     <navbar>
-        @if (Request.IsAuthenticated)
+        @@if (Request.IsAuthenticated)
         {
             using (Html.BeginForm("Logout", "User", FormMethod.Post, new { id = "logoutForm" }))
             {
@@ -34,12 +34,12 @@
             }
         }
 
-        @Html.ActionLink("My Profile", "Profile", "Mentor")>
-        @Html.ActionLink("Home", "Index", "Mentor")>
-        @Html.ActionLink("Advertisement", "Advertisement", "Mentor")>
+        @@Html.ActionLink("My Profile", "Profile", "Mentor")>
+        @@Html.ActionLink("Home", "Index", "Mentor")>
+        @@Html.ActionLink("Advertisement", "Advertisement", "Mentor")>
     </navbar>
     <div>
-        @RenderBody()
+        @@RenderBody()
     </div>
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Scripts/jquery-1.12.4.min.js"></script>
@@ -50,7 +50,203 @@
     <script src="~/Scripts/notify.min.js"></script>
 
 
+    @@RenderSection("Scripts", required: false) ;
+    @@RenderSection("ScriptsNew", required: false) ;
+</body>
+</html>-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+    <link href="~/Custom/css/StudentLayout.css" rel="stylesheet" />
+    <link href="~/Custom/css/Footer.css" rel="stylesheet" />
+    <!-- font-awesome cdn -->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+
+</head>
+<body>
+    <nav>
+        <div class="logo-section">
+            <a href="/Mentor/"><img src="~/uiImages/search.png" alt="Fym-Logo" id="logo-img"></a>
+            <a href="/Mentor/">Find Your Mentor</a>
+        </div>
+        <a id="open-nav" href="#1" onclick="openNav()" style="font-size: 3rem;cursor: pointer;text-decoration: none;">&#9776;</a>
+        <div class="nav-section">
+            <a id="abc"></a><ul>
+                <li><a>Welcome @HttpContext.Current.User.Identity.Name</a></li>
+                <li><a href="/Mentor/"><i class="fas fa-home"></i>Home</a></li>
+                <li>
+                    <a href="#catalogue"><i class="fas fa-user-circle"></i>Profile&nbsp;<i class="fas fa-sort-down" id="arrowdown"></i></a>
+                    <ul>
+                        <li><a href="/Mentor/PersonalInfo">Personal Information</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#catalogue"><i class="fas fa-book-reader"></i>Mentee&nbsp;<i class="fas fa-sort-down" id="arrowdown"></i></a>
+                    <ul>
+                        <li><a href="">Application</a></li>
+                        <li><a href="">Appointment</a></li>
+                        <li>
+                            <a href="">Fees&nbsp;<i class="fas fa-caret-right" id="arrowright"></i></a>
+                            <ul>
+                                <li><a href="">Offline</a></li>
+                                <li><a href="">Online</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#catalogue"><i class="fas fa-clipboard"></i>Personal Space&nbsp;<i class="fas fa-sort-down" id="arrowdown"></i></a>
+                    <ul>
+                        <li><a href="">Notes</a></li>
+                    </ul>
+                </li>
+                @if (Request.IsAuthenticated)
+                {
+                    using (Html.BeginForm("Logout", "User", FormMethod.Post, new { @id = "logoutForm" }))
+                    {
+                        <button class="auth-btn">LOGOUT</button>
+                    }
+                }
+            </ul>
+        </div>
+    </nav>
+
+    <p id="home"></p>
+
+    <div class="sidenav" id="mynav">
+        <ul>
+            <a href="#1" id="closebtn" onclick="closeNav()" style="font-weight: bold;font-size: 3.7rem;">&times;</a>
+            <li><p>Welcome</p><p> @HttpContext.Current.User.Identity.Name</p></li>
+            <li><a href="/Mentor/"><i class="fas fa-home"></i>Home</a></li>
+            <li>
+                <a href="#1" class="sub-btn"><i class="fas fa-user-circle"></i>Profile&nbsp;<i class="fas fa-chevron-right dropdown"></i></a>
+                <div class="sub-menu">
+                    <a href="" class="sub-item">Personal Information</a>
+                    <a href="" class="sub-item">Saved List</a>
+                </div>
+            </li>
+            <li>
+                <a href="#1" class="sub-btn"><i class="fas fa-book-reader"></i>Mentee&nbsp;<i class="fas fa-chevron-right dropdown"></i></a>
+                <div class="sub-menu">
+                    <a href="" class="sub-item">Application</a>
+                    <a href="" class="sub-item">Appointment</a>
+                    <a href="#1" class="sub-item" id="Fees-sec">Fees&nbsp;<i class="fas fa-chevron-right dropdown"></i></a>
+                    <div class="sub-sub-menu">
+                        <a href="" class="sub-item">Offline</a>
+                        <a href="" class="sub-item">Online</a>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <a href="#1" class="sub-btn"><i class="fas fa-clipboard"></i>Personal Space&nbsp;<i class="fas fa-chevron-right dropdown"></i></a>
+                <div class="sub-menu">
+                    <a href="" class="sub-item">Search Video Online</a>
+                    <a href="" class="sub-item">Notes</a>
+                </div>
+            </li>
+            @if (Request.IsAuthenticated)
+            {
+                using (Html.BeginForm("Logout", "User", FormMethod.Post, new { @id = "logoutForm" }))
+                {
+                    <button class="auth-btn">LOGOUT</button>
+                }
+            }
+        </ul>
+    </div>
+
+    <script>
+        function openNav() {
+            document.getElementById("mynav").style.transform = "translateX(0)";
+        };
+        function closeNav() {
+            document.getElementById("mynav").style.transform = "translateX(100%)";
+        };
+    </script>
+
+    <div>
+        @RenderBody()
+    </div>
+
+    <footer>
+        <div class="footer-up">
+            <div class="contact">
+
+                @{
+                    Html.RenderPartial("ContactUs");
+                }
+
+                <div>
+                    <img src="~/uiImages/mainlayout/Contact2.gif" alt="contact-img-fym">
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-down">
+            <p class="copyright">Designed by FindYourMentor | © Copyright FindYourMentor All Rights Reserved</p>
+
+            <div class="social-media">
+                <div class="all-social-links">
+                    <a href="#" target="_blank"><img src="~/uiImages/mainlayout/facebook.png" alt="facebook" class="footer-logo"></a>
+                    <a href="#" target="_blank"><img src="~/uiImages/mainlayout/instagram.png" alt="instagram" class="footer-logo"></a>
+                    <a href="#" target="_blank"><img src="~/uiImages/mainlayout/youtube.png" alt="youtube" class="footer-logo"></a>
+                </div>
+                <div class="top-scroll">
+                    <a href="#home">Back to Top</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script>
+        $('.sub-btn').click(function () {
+            $(this).next('.sub-menu').slideToggle();
+            $(this).find('.dropdown').toggleClass('rotate');
+        })
+
+        $('#Fees-sec').click(function () {
+            $(this).next('.sub-sub-menu').slideToggle();
+            $(this).find('.dropdown').toggleClass('rotate');
+        })
+
+        function SubmitForm(form) {
+            $.validator.unobtrusive.parse(form);
+            if ($(form).valid()) {
+                $.ajax({
+                    type: "POST",
+                    url: form.action,
+                    data: $(form).serialize(),
+                    success: function (data) {
+                        if (data.success) {
+                            $.notify(data.message, {
+                                globalPosition: "top center",
+                                className: "success"
+                            })
+
+                            form.reset();
+                        }
+                    }
+                });
+            }
+
+            return false;   // Prevent page refresh
+        }
+    </script>
+
+    <script src="~/Scripts/jquery-1.12.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js" integrity="sha512-o6XqxgrUsKmchwy9G5VRNWSSxTS4Urr4loO6/0hYdpWmFUfHqGzawGxeQGMDqYzxjY9sbktPbNlkIQJWagVZQg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script src="~/Scripts/notify.min.js"></script>
+
     @RenderSection("Scripts", required: false) ;
     @RenderSection("ScriptsNew", required: false) ;
+
 </body>
 </html>

@@ -109,6 +109,8 @@ form .field .input-area {
     border-radius: 5px;
     border: 1px solid #833471;
     border-bottom-width: 2px;
+    padding:0.5rem;
+    margin-bottom:1.5rem!important;
 }
 
     #Address::-webkit-input-placeholder {

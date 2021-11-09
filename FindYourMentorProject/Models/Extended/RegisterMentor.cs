@@ -37,6 +37,9 @@ namespace FindYourMentorProject.Models
         public string State { get; set; }
 
         [Display(Name = "Pincode")]
+        //[MinLength(6,ErrorMessage = "Invalid Pincode")]
+        //[MaxLength(6,ErrorMessage = "Invalid Pincode")]
+        [RegularExpression("^[1-9][0-9]{5}$", ErrorMessage = "Invalid Pincode")]
         public int? Pincode { get; set; }
 
         [Display(Name = "Profile Picture")]
@@ -64,10 +67,10 @@ namespace FindYourMentorProject.Models
         public int Age { get; set; }
 
         [Display(Name = "Contact number")]
-        [StringLength(13, MinimumLength = 10)]
+        [StringLength(10, MinimumLength = 10)]
         [DataType(DataType.PhoneNumber)]
         [Required(AllowEmptyStrings = false, ErrorMessage = "Contact Number is required")]
-        [RegularExpression(@"^(\d{10})$", ErrorMessage = "Contact Number is in invalid format")]
+        [RegularExpression(@"^[6789][0-9]{9}$", ErrorMessage = "Must be 10 Digits")]
         public string ContactNo { get; set; }
 
         [Display(Name = "Address")]

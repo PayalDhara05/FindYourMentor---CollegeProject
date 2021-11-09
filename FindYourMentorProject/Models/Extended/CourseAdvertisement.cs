@@ -68,7 +68,7 @@ namespace FindYourMentorProject.Models
 
         [Display(Name = "Spoken Language")]
         [MinLength(3, ErrorMessage = "Atleast 3 characters are expected")]
-        public string SpokenLanguage { get; set; }
+        public string SpokenLanguage1 { get; set; }
 
         [Display(Name = "GitHub Account")]
         [MinLength(3, ErrorMessage = "Atleast 3 characters are expected")]
@@ -89,10 +89,6 @@ namespace FindYourMentorProject.Models
         [MinLength(3, ErrorMessage = "Atleast 3 characters are expected")]
         public string City { get; set; }
 
-        [Display(Name = "Location")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Location name is required")]
-        [MinLength(3, ErrorMessage = "Atleast 3 characters are expected")]
-        public string Location { get; set; }
         public System.DateTime CreationDate { get; set; }
 
         [Display(Name = "Total Years of Experience hello")]
@@ -104,6 +100,12 @@ namespace FindYourMentorProject.Models
 
         [NotMapped]
         public HttpPostedFileBase VideoUpload2 { get; set; }
+
+        [NotMapped]
+        public HttpPostedFileBase VideoUpload3 { get; set; }
+
+        [NotMapped]
+        public HttpPostedFileBase VideoUpload4 { get; set; }
 
         [Display(Name = "Demo Lecture 1")]
         public string DemoLec1 { get; set; }
