@@ -238,3 +238,15 @@ form {
     display: flex;
     flex-direction: column;
 }
+#Notes td:nth-child(2) {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    height: 6rem;
+    line-height:6rem;
+}
+#Notes td:nth-child(1)
+{
+    width:16rem;
+}

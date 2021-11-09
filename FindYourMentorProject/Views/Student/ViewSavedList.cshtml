@@ -5,11 +5,11 @@
     Layout = "~/Views/Shared/_StudentLayout.cshtml";
 }
 
-<h2>ViewSavedList</h2>
+@*<h2>ViewSavedList</h2>
 
 <div>
     <h4>SavedList</h4>
-    <hr />
+    <hr />*@
 
     @using (Html.BeginForm())
     {
@@ -17,7 +17,7 @@
         <br /><input type="text" name="search" onchange="filterAdvert()"> <input type="submit"  />
     }
 
-    if(@Model.Count() == 0)
+    @*@if(@Model.Count() == 0)
     {
         <p>No data found</p>
     }
@@ -79,7 +79,67 @@
         </div>
     }
     
-    </div>
+    </div>*@
+<link href="~/Custom/css/SavedList.css" rel="stylesheet" />
+<body>
+    @*<form>
+        <div class="saved-list-filter">
+            <label>Filter by Name:- </label>
+            <div class="grp-radios">
+                <input type="radio" name="searchby" id="" value="ClassName">Class
+                <input type="radio" name="searchby" id="" value="CourseName">Course
+                <input type="radio" name="searchby" id="" value="MentorName">Mentor
+            </div>
+            <div class="grp-radios-1">
+                <input type="radio" name="searchby" id="" value="MentorName">Mentor<br>
+                <input type="radio" name="searchby" id="" value="CourseName">Course<br>
+                <input type="radio" name="searchby" id="" value="ClassName">Class<br>
+            </div>
+        </div>
+        <div class="container">
+            <div class="search-field">
+                <input type="text" id="search" class="form-control" maxlength="150" placeholder="Feel Free to Search ..." onchange="filterAdvert()" name="search">
+                <button type="submit"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </form>*@
+
+
+    @if (@Model.Count() == 0)
+    {
+        <div class="no-records-msg">
+            <p>No data found</p>
+        </div>   
+    }
+    else
+    {
+        foreach (var item in Model)
+        {
+            <div class="all-cards">
+                <div class="all-cards">
+                    <div class="indiv-card">
+                        <div class="course-info">
+                            <p>Science, Mathematics</p>
+                            <i class="fas fa-heart" onclick="Del(@item.AdvertisementID)"></i>
+                        </div>
+                        <div class="All-info">
+                            <p class="Description">We are here to provide quality information !!!</p>
+                            <p class="Class-name">Will get conducted at Aryan's Tutorial</p>
+                            <p class="mentor-name">By Mentor:&nbsp;&nbsp;&nbsp;<span>Vinod Yadav, Manoj Yadav</span></p>
+                            <div class="add-info">
+                                <p class="Address"><span class="Address-title">Address: </span>Room No 2, JayPrakash Building, Saibaba Road, Khar East, Mumbai-400051</p>
+                                <p class="State"><span class="state-title">State: </span>Maharashtra</p>
+                            </div>
+                        </div>
+                        <div class="card-btn">
+                            <button>FeedBack & More</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</body>
 
     <script type="text/javascript">
 

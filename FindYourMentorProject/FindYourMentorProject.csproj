@@ -197,6 +197,7 @@
     <Content Include="Custom\css\owl.theme.default.min.css" />
     <Content Include="Custom\css\Profile.css" />
     <Content Include="Custom\css\Register.css" />
+    <Content Include="Custom\css\SavedList.css" />
     <Content Include="Custom\css\StudentLayout.css" />
     <Content Include="Custom\css\VerifyAccount.css" />
     <Content Include="Custom\css\viewNotes.css" />
