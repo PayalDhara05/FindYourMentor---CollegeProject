@@ -3,70 +3,70 @@
     ViewBag.Title = "Advertisement";
     Layout = "~/Views/Shared/_MentorLayout.cshtml";
 }
-<style>
+@*<style>
     .ui-dialog-titlebar-close:after {
         content: 'X' !important;
         position: absolute;
         top: -2px;
         right: 3px;
     }
+
     div.dataTables_wrapper {
         width: 1500px;
         margin: 0 auto;
     }
-</style>
+</style>*@
+<link href="~/Custom/css/Advertisement.css" rel="stylesheet" />
 
-<h2>NotesMentee</h2>
+<div class="main-table-container">
+    <a class="create-btn" href="/Mentor/AddorEditAdvertisements"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add New Course Advertisement</a>
+    <table id="Advertisement">
+        <thead>
+            <tr>
+                <th>Class</th>
+                <th>Course</th>
+                <th>Mentor</th>
+                <th>Description</th>
+                <th>EmailID</th>
+                <th>Contact</th>
+                <th>FBatch</th>
+                <th>ABatch</th>
+                <th>TStudents</th>
+                <th>Fees</th>
+                <th>Address</th>
+                <th>Language1</th>
+                <th>Language2</th>
+                <th>Language3</th>
+                <th>Language4</th>
+                <th>YOE</th>
+                <th>GAccount</th>
+                <th>Field</th>
+                <th>State</th>
+                <th>City</th>
+                <th>Video1</th>
+                <th>Video2</th>
+                <th>Creation Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
 
-<a class="btn btn-success" style="margin-bottom:20px" onclick="PopupForm('@Url.Action("AddorEditAdvertisements","Mentor")')"><i class="fa fa-plus"></i> Create</a>
-@Html.ActionLink("View Mentees Application", "viewMenteeApplication", "Mentor");
-<table id="Advertisement" style="width:100%;height:auto">
-    <thead>
-        <tr>
-            <th>Class Name</th>
-            <th>Course Name</th>
-            <th>Mentor Name</th>
-            <th>Description</th>
-            <th>EmailID</th>
-            <th>Contact number</th>
-            <th>Full Batch</th>
-            <th>Available Batch</th>
-            <th>Total Students</th>
-            <th>Fees</th>
-            <th>Address</th>
-            <th>Spoken Language1</th>
-            <th>Spoken Language2</th>
-            <th>Spoken Language3</th>
-            <th>Spoken Language4</th>
-            <th>Years Of Experience</th>
-            <th>GitHub Account</th>
-            <th>Field</th>
-            <th>State</th>
-            <th>City</th>
-            <th>DemoVideo1</th>
-            <th>DemoVideo2</th>
-            <th>Creation Date</th>
-            <th></th>
+        <tbody>
+        </tbody>
+    </table>
+</div>
 
-        </tr>
-    </thead>
+        <link href="//cdn.datatables.net/1.11.1/css/jquery.dataTables.min.css" rel="stylesheet" />
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
 
-    <tbody>
-    </tbody>
-</table>
+        @section Scripts{
+            <script src="//cdn.datatables.net/1.11.1/js/jquery.dataTables.min.js"></script>
 
-<link href="//cdn.datatables.net/1.11.1/css/jquery.dataTables.min.css" rel="stylesheet" />
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
-
-@section Scripts{
-    <script src="//cdn.datatables.net/1.11.1/js/jquery.dataTables.min.js"></script>
-
-    <script>
+            <script>
         var Popup, dataTable;
-       
+
         $(document).ready(function () {
 
-           
+
 
             dataTable = $("#Advertisement").DataTable({
                 "ajax": {
@@ -125,7 +125,7 @@
 
                 "language": {
 
-                    "emptyTable": "No data found, Please click on <b>Create</b> Button"
+                    "emptyTable": "<p id='no-data'>No data found, Please click on <b id='add-data'>ADD</b> Button<p>"
                 }
             });
         });
@@ -174,7 +174,7 @@
 
         //                }
         //            }
-                        
+
         //        });
 
         //       // suc();
@@ -293,7 +293,7 @@
         }
 
 
-        
+
         function Delete(id) {
             if (confirm('Are You Sure to Delete this Advertisement ?')) {
                 $.ajax({
@@ -314,5 +314,5 @@
                 });
             }
         }
-    </script>
-}
+            </script>
+        }

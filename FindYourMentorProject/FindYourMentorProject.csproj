@@ -186,6 +186,7 @@
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="Custom\css\AddorEditNotes.css" />
+    <Content Include="Custom\css\Advertisement.css" />
     <Content Include="Custom\css\commonSignup.css" />
     <Content Include="Custom\css\Footer.css" />
     <Content Include="Custom\css\Loader.css" />

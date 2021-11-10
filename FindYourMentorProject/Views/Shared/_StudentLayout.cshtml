@@ -92,8 +92,8 @@
 <body>
     <nav>
         <div class="logo-section">
-            <a href="#"><img src="~/uiImages/search.png" alt="Fym-Logo" id="logo-img"></a>
-            <a href="#">Find Your Mentor</a>
+            <a href="/Student"><img src="~/uiImages/search.png" alt="Fym-Logo" id="logo-img"></a>
+            <a href="/Student">Find Your Mentor</a>
         </div>
         <a id="open-nav" href="#1" onclick="openNav()" style="font-size: 3rem;cursor: pointer;text-decoration: none;">&#9776;</a>
         <div class="nav-section">
@@ -105,6 +105,7 @@
         <ul>
             <li><a href="/Student/PersonalInfo">Personal Information</a></li>
             <li><a href="/Student/ViewSavedList">Saved List</a></li>
+            <li><a href="/Student/ChangePassword">Change Password</a></li>
         </ul>
     </li>
     <li>
@@ -146,12 +147,13 @@
         <ul>
             <a href="#1" id="closebtn" onclick="closeNav()" style="font-weight: bold;font-size: 3.7rem;">&times;</a>
             <li><p>Welcome</p><p> @HttpContext.Current.User.Identity.Name</p></li>
-            <li><a href="/blog"><i class="fas fa-home"></i>Home</a></li>
+            <li><a href="/Student"><i class="fas fa-home"></i>Home</a></li>
             <li>
                 <a href="#1" class="sub-btn"><i class="fas fa-user-circle"></i>Profile&nbsp;<i class="fas fa-chevron-right dropdown"></i></a>
                 <div class="sub-menu">
-                    <a href="" class="sub-item">Personal Information</a>
-                    <a href="" class="sub-item">Saved List</a>
+                    <a href="/Student/PersonalInfo" class="sub-item">Personal Information</a>
+                    <a href="/Student/ViewSavedList" class="sub-item">Saved List</a>
+                    <a href="/Student/ChangePassword" class="sub-item">Change Password</a>
                 </div>
             </li>
             <li>
@@ -169,7 +171,13 @@
                     <a href="" class="sub-item">Notes</a>
                 </div>
             </li>
-            <button id="auth-btn-side" class="a-button">LOGOUT</button>
+            @if (Request.IsAuthenticated)
+            {
+                using (Html.BeginForm("Logout", "User", FormMethod.Post, new { @id = "logoutForm" }))
+                {
+                    <button class="auth-btn">LOGOUT</button>
+                }
+            }
         </ul>
     </div>
 

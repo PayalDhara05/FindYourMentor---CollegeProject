@@ -376,7 +376,23 @@ namespace FindYourMentorProject.Controllers
                         adv.DemoLec2 = "~/VideoFile/" + fileName;
                         adv.VideoUpload2.SaveAs(Path.Combine(Server.MapPath("~/VideoFile/"), fileName));
                     }
-                    using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
+                    if (adv.VideoUpload3 != null)
+                    {
+                        string fileName = Path.GetFileNameWithoutExtension(adv.VideoUpload3.FileName);
+                        string extension = Path.GetExtension(adv.VideoUpload3.FileName);
+                        fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                        adv.DemoLec3 = "~/VideoFile/" + fileName;
+                        adv.VideoUpload3.SaveAs(Path.Combine(Server.MapPath("~/VideoFile/"), fileName));
+                    }
+                    if (adv.VideoUpload4 != null)
+                    {
+                        string fileName = Path.GetFileNameWithoutExtension(adv.VideoUpload4.FileName);
+                        string extension = Path.GetExtension(adv.VideoUpload4.FileName);
+                        fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                        adv.DemoLec4 = "~/VideoFile/" + fileName;
+                        adv.VideoUpload4.SaveAs(Path.Combine(Server.MapPath("~/VideoFile/"), fileName));
+                    }
+                using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
                     {
                         if (adv.AdvertisementID == 0)
                         {
@@ -384,7 +400,8 @@ namespace FindYourMentorProject.Controllers
                             adv.MentorID = userid;
                             adv.CreationDate = System.DateTime.Now;
                             db.SaveChanges();
-                            return Json(new { success = true, message = "Added Successfully" }, JsonRequestBehavior.AllowGet);
+                            //return Json(new { success = true, message = "Added Successfully" }, JsonRequestBehavior.AllowGet);
+                            return RedirectToAction("Advertisement", "Mentor");
                         }
                         else
                         {

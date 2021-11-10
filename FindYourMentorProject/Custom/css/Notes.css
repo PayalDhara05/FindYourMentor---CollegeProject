@@ -250,3 +250,6 @@ form {
 {
     width:16rem;
 }
+#Notes td {
+    padding:0.3rem!important;
+}
