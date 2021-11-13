@@ -113,31 +113,31 @@
     }
     else
     {
-        foreach (var item in Model)
-        {
-            <div class="all-cards">
-                <div class="all-cards">
-                    <div class="indiv-card">
-                        <div class="course-info">
-                            <p>Science, Mathematics</p>
-                            <i class="fas fa-heart" onclick="Del(@item.AdvertisementID)"></i>
-                        </div>
-                        <div class="All-info">
-                            <p class="Description">We are here to provide quality information !!!</p>
-                            <p class="Class-name">Will get conducted at Aryan's Tutorial</p>
-                            <p class="mentor-name">By Mentor:&nbsp;&nbsp;&nbsp;<span>Vinod Yadav, Manoj Yadav</span></p>
-                            <div class="add-info">
-                                <p class="Address"><span class="Address-title">Address: </span>Room No 2, JayPrakash Building, Saibaba Road, Khar East, Mumbai-400051</p>
-                                <p class="State"><span class="state-title">State: </span>Maharashtra</p>
-                            </div>
-                        </div>
-                        <div class="card-btn">
-                            <button>FeedBack & More</button>
-                        </div>
+        <div class="all-cards">
+            @foreach (var item in Model)
+            {
+
+            <div class="indiv-card">
+                <div class="course-info">
+                    <p>@item.CourseName</p>
+                    <i class="fas fa-heart" onclick="Del(@item.AdvertisementID)"></i>
+                </div>
+                <div class="All-info">
+                    <p class="Description">@item.Description</p>
+                    <p class="Class-name">@item.ClassName</p>
+                    <p class="mentor-name">By Mentor:&nbsp;&nbsp;&nbsp;<span>@item.MentorName</span></p>
+                    <div class="add-info">
+                        <p class="Address"><span class="Address-title">Address: </span>@item.Address</p>
+                        <p class="State"><span class="state-title">State: </span>@item.State</p>
                     </div>
                 </div>
+                <div class="card-btn">
+                    <button>FeedBack & More</button>
+                </div>
             </div>
-        }
+
+            }
+        </div>
     }
 </body>
 

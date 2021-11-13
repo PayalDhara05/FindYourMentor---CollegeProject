@@ -185,6 +185,7 @@
     <Content Include="Content\themes\base\tabs.css" />
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
+    <Content Include="Custom\css\AddorEditAdvertisements.css" />
     <Content Include="Custom\css\AddorEditNotes.css" />
     <Content Include="Custom\css\Advertisement.css" />
     <Content Include="Custom\css\commonSignup.css" />

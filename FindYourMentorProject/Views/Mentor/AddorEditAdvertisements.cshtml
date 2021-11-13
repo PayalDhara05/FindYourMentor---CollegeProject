@@ -1,331 +1,325 @@
 ﻿@model FindYourMentorProject.Models.CourseAdvertisement
 
 @{
-    ViewBag.Title = "AddorEditAdvertisement";
+    Layout = null;
 }
 
-<h2>AddorEditAdvertisement</h2>
+<!DOCTYPE html>
 
-@*@using (Html.BeginForm("AddorEditAdvertisements", "Mentor", FormMethod.Post, new { onsubmit = "return SubmitForm(this)", enctype = "multipart/Form-data" }))*@
-@*@using (Html.BeginForm("AddorEditAdvertisements", "Mentor", FormMethod.Post, new { onsubmit = "return SubmitForm(this)", enctype = "multipart/Form-data" }))*@
-@using (Html.BeginForm("AddorEditAdvertisements", "Mentor", FormMethod.Post, new { enctype = "multipart/form-data", onSubmit = "return jQueryAjaxPost(this);" }))//data-resetUrl
-{
-    @Html.AntiForgeryToken()
-    @Html.HiddenFor(model => model.AdvertisementID)
-    @Html.HiddenFor(model => model.DemoLec1)
-    @Html.HiddenFor(model => model.DemoLec2)
-    @Html.HiddenFor(model => model.DemoLec3)
-    @Html.HiddenFor(model => model.DemoLec4)
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AddorEditAdvertisements</title>
+</head>
+<body>
+    @using (Html.BeginForm("AddorEditAdvertisements", "Mentor", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.AdvertisementID)
 
-    <div class="form-horizontal">
-        <h4>CourseAdvertisement</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.ClassName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ClassName, new { htmlAttributes = new { @class = "form-control", @id = "cname" } })
-                @Html.ValidationMessageFor(model => model.ClassName, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.CourseName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CourseName, new { htmlAttributes = new { @class = "form-control", @id = "courseName" } })
-                @Html.ValidationMessageFor(model => model.CourseName, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.MentorName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.MentorName, new { htmlAttributes = new { @class = "form-control", @id = "mname" } })
-                @Html.ValidationMessageFor(model => model.MentorName, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", @id = "desc" } })
-                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.EmailID, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.EmailID, new { htmlAttributes = new { @class = "form-control", @id = "emailID" } })
-                @Html.ValidationMessageFor(model => model.EmailID, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ContactNo, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ContactNo, new { htmlAttributes = new { @class = "form-control", @id = "contactNo" } })
-                @Html.ValidationMessageFor(model => model.ContactNo, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.BatchesFull, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.BatchesFull, new { htmlAttributes = new { @class = "form-control", @id = "Bfull" } })
-                @Html.ValidationMessageFor(model => model.BatchesFull, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.BatchesAvailable, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.BatchesAvailable, new { htmlAttributes = new { @class = "form-control", @id = "BAvailable" } })
-                @Html.ValidationMessageFor(model => model.BatchesAvailable, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.TotalStudents, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.TotalStudents, new { htmlAttributes = new { @class = "form-control", @id = "TStudents" } })
-                @Html.ValidationMessageFor(model => model.TotalStudents, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Fees, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Fees, new { htmlAttributes = new { @class = "form-control", @id = "Fees" } })
-                @Html.ValidationMessageFor(model => model.Fees, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control", @id = "address" } })
-                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.SpokenLanguage1, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.SpokenLanguage1, new { htmlAttributes = new { @class = "form-control", @id = "spokenLanguage" } })
-                @Html.ValidationMessageFor(model => model.SpokenLanguage1, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.SpokenLanguage2, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.SpokenLanguage2, new { htmlAttributes = new { @class = "form-control", @id = "spokenLanguage" } })
-                @Html.ValidationMessageFor(model => model.SpokenLanguage2, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.SpokenLanguage3, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.SpokenLanguage3, new { htmlAttributes = new { @class = "form-control", @id = "spokenLanguage" } })
-                @Html.ValidationMessageFor(model => model.SpokenLanguage3, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.SpokenLanguage4, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.SpokenLanguage4, new { htmlAttributes = new { @class = "form-control", @id = "spokenLanguage" } })
-                @Html.ValidationMessageFor(model => model.SpokenLanguage4, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.GitHubAccount, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.GitHubAccount, new { htmlAttributes = new { @class = "form-control", @id = "GAccount" } })
-                @Html.ValidationMessageFor(model => model.GitHubAccount, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Field, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Field, new { htmlAttributes = new { @class = "form-control", @id = "Field" } })
-                @Html.ValidationMessageFor(model => model.Field, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.State, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.State, new { htmlAttributes = new { @class = "form-control", @id = "State" } })
-                @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control", @id = "City" } })
-                @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.YearsOfExperience, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.YearsOfExperience, new { htmlAttributes = new { @class = "form-control", @id = "YOE" } })
-                @Html.ValidationMessageFor(model => model.YearsOfExperience, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        @*<div class="form-group">
-                @Html.LabelFor(model => model.DemoLec1, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="form-horizontal">
+            <h4>CourseAdvertisement</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.ClassName, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    <input type="file" name="file" id="file" />
+                    @Html.EditorFor(model => model.ClassName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ClassName, "", new { @class = "text-danger" })
                 </div>
             </div>
-
 
             <div class="form-group">
-                @Html.LabelFor(model => model.DemoLec1, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.CourseName, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    <input type="file" name="file1" id="file1" />
-                </div>
-            </div>*@
-
-        <div class="col-md-6">
-            <div class="form-group">
-                @Html.LabelFor(model => model.DemoLec1, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    <video style="width:700px;height:500px;" controls>
-                        <source src="@Url.Content(Model.DemoLec1)" type="video/mp4" id="videoPreview1" />
-                    </video>
-                    <input type="file" name="VideoUpload1" accept=".mp4,.3gp,.wmv.mkv,.flv" onchange="Preview(0)" />
+                    @Html.EditorFor(model => model.CourseName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CourseName, "", new { @class = "text-danger" })
                 </div>
             </div>
-        </div>
 
-        <div class="col-md-6">
             <div class="form-group">
-                @Html.LabelFor(model => model.DemoLec2, new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.MentorName, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    <video style="width:700px;height:500px;" controls>
-                        <source src="@Url.Content(Model.DemoLec2)" type="video/mp4" id="videoPreview2" />
-                    </video>
-                    <input type="file" name="VideoUpload2" accept=".mp4,.3gp,.wmv.mkv,.flv" id='videoUpload' onchange="Preview(1)" />
+                    @Html.EditorFor(model => model.MentorName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.MentorName, "", new { @class = "text-danger" })
                 </div>
             </div>
-        </div>
 
-        <div class="col-md-6">
             <div class="form-group">
-                @Html.LabelFor(model => model.DemoLec3, new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    <video style="width:700px;height:500px;" controls>
-                        <source src="@Url.Content(Model.DemoLec3)" type="video/mp4" id="videoPreview2" />
-                    </video>
-                    <input type="file" name="VideoUpload3" accept=".mp4,.3gp,.wmv.mkv,.flv" id='videoUpload' onchange="Preview(2)" />
+                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
                 </div>
             </div>
-        </div>
 
-        <div class="col-md-6">
             <div class="form-group">
-                @Html.LabelFor(model => model.DemoLec4, new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.ContactNo, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    <video style="width:700px;height:500px;" controls>
-                        <source src="@Url.Content(Model.DemoLec4)" type="video/mp4" id="videoPreview2" />
-                    </video>
-                    <input type="file" name="VideoUpload4" accept=".mp4,.3gp,.wmv.mkv,.flv" id='videoUpload' onchange="Preview(3)" />
+                    @Html.EditorFor(model => model.ContactNo, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ContactNo, "", new { @class = "text-danger" })
                 </div>
             </div>
-        </div>
 
-        @*<input type='file' id='videoUpload' />
+            <div class="form-group">
+                @Html.LabelFor(model => model.EmailID, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.EmailID, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.EmailID, "", new { @class = "text-danger" })
+                </div>
+            </div>
 
-            <video width="320" height="240" controls>
-                Your browser does not support the video tag.
-            </video>*@
+            <div class="form-group">
+                @Html.LabelFor(model => model.BatchesFull, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.BatchesFull, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.BatchesFull, "", new { @class = "text-danger" })
+                </div>
+            </div>
 
-        <script>
+            <div class="form-group">
+                @Html.LabelFor(model => model.BatchesAvailable, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.BatchesAvailable, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.BatchesAvailable, "", new { @class = "text-danger" })
+                </div>
+            </div>
 
+            <div class="form-group">
+                @Html.LabelFor(model => model.TotalStudents, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.TotalStudents, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.TotalStudents, "", new { @class = "text-danger" })
+                </div>
+            </div>
 
-            function Preview(VideoID) {
-                let file = event.target.files[0];
-                let blobURL = URL.createObjectURL(file);
-                document.querySelectorAll("video")[VideoID].src = blobURL;
-            }
-                                                        //document.getElementById("videoUpload")
-                                                        //    .onchange = function (event) {
-                                                        //        let file = event.target.files[0];
-                                                        //        let blobURL = URL.createObjectURL(file);
-                                                        //        document.querySelectorAll("video")[1].src = blobURL;
-                                                        //    }
+            <div class="form-group">
+                @Html.LabelFor(model => model.Fees, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Fees, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Fees, "", new { @class = "text-danger" })
+                </div>
+            </div>
 
-                                                        //function preview() {
-                                                        //    let file = event.target.files[0];
-                                                        //    let blobURL = URL.createObjectURL(file);
-                                                        //    document.querySelector("video")[1].src = blobURL;
-                                                        //}
-        </script>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                </div>
+            </div>
 
-        @*<div class="col-md-6">
-                <div class="form-group">
+            <div class="form-group">
+                @Html.LabelFor(model => model.SpokenLanguage1, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.SpokenLanguage1, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.SpokenLanguage1, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.GitHubAccount, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.GitHubAccount, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.GitHubAccount, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Field, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Field, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Field, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.State, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.State, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.SpokenLanguage2, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.SpokenLanguage2, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.SpokenLanguage2, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.CreationDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.CreationDate, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CreationDate, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.YearsOfExperience, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.YearsOfExperience, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.YearsOfExperience, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.LinkedIn, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.LinkedIn, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.LinkedIn, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.SpokenLanguage3, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.SpokenLanguage3, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.SpokenLanguage3, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.SpokenLanguage4, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.SpokenLanguage4, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.SpokenLanguage4, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
                     @Html.LabelFor(model => model.DemoLec1, new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.DemoLec1, new { @class = "control-label col-md-2" })
-
-                        <video controls="controls">
-                            <source src="~/VideoFile/Demo.mp4" type="video/mp4" />
+                        <video style="width:700px;height:500px;" controls>
+                            <source src="@Url.Content(Model.DemoLec1)" type="video/mp4" id="videoPreview1" />
                         </video>
-                        <input type="file" name="VideoUpload2" accept=".mp4,.3gp,.wmv.mkv,.flv" />
+                        <input type="file" name="file1" accept=".mp4,.3gp,.wmv.mkv,.flv" onchange="Preview(0)" />
                     </div>
                 </div>
-            </div>
 
-
-            <div class="col-md-6">
                 <div class="form-group">
                     @Html.LabelFor(model => model.DemoLec2, new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.DemoLec2, new { @class = "control-label col-md-2" })
-
-                        <video controls="controls">
-                            <source src="~/VideoFile/Demo.mp4" type="video/mp4" />
+                        <video style="width:700px;height:500px;" controls>
+                            <source src="@Url.Content(Model.DemoLec2)" type="video/mp4" id="videoPreview2" />
                         </video>
-                        <input type="file" name="VideoUpload2" accept=".mp4,.3gp,.wmv.mkv,.flv" />
+                        <input type="file" name="file2" accept=".mp4,.3gp,.wmv.mkv,.flv" id='videoUpload' onchange="Preview(1)" />
                     </div>
                 </div>
-            </div>*@
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-                <input type="reset" value="Reset" class="btn btn-warning" />
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DemoLec3, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <video style="width:700px;height:500px;" controls>
+                            <source src="@Url.Content(Model.DemoLec3)" type="video/mp4" id="videoPreview2" />
+                        </video>
+                        <input type="file" name="file3" accept=".mp4,.3gp,.wmv.mkv,.flv" id='videoUpload' onchange="Preview(2)" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DemoLec4, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <video style="width:700px;height:500px;" controls>
+                            <source src="@Url.Content(Model.DemoLec4)" type="video/mp4" id="videoPreview2" />
+                        </video>
+                        <input type="file" name="file4" accept=".mp4,.3gp,.wmv.mkv,.flv" id='videoUpload' onchange="Preview(3)" />
+                    </div>
+                </div>
+            @*@if (@Model.DemoLec1 == null)
+            {
+                <video style="width:700px;height:500px;" controls>
+                    <source src="/VideoFile/Demo.mp4" type="video/mp4" id="videoPreview2" />
+                </video>
+            }
+            else
+            {
+                <video style="width:700px;height:500px;" controls>
+                    <source src="@Model.DemoLec1" type="video/mp4" id="videoPreview2" />
+                </video>
+            }
+            <input type="file" name="file1" accept=".mp4,.3gp,.wmv.mkv,.flv" id='videoUpload' onchange="Preview(0)" />*@
+
+            @*@if (@Model.DemoLec2 != null)
+                {
+                    <video style="width:700px;height:500px;" controls>
+                        <source src="@Model.DemoLec2" type="video/mp4" id="videoPreview2" />
+                    </video>
+                }
+                else
+                {
+                    <video style="width:700px;height:500px;" controls>
+                        <source src="~/VideoFile/Demo.mp4" type="video/mp4" id="videoPreview2" />
+                    </video>
+                }
+                <input type="file" name="file2" accept=".mp4,.3gp,.wmv.mkv,.flv" id='videoUpload' onchange="Preview(3)" />
+
+                @if (@Model.DemoLec3 != null)
+                {
+                    <video style="width:700px;height:500px;" controls>
+                        <source src="@Model.DemoLec3" type="video/mp4" id="videoPreview2" />
+                    </video>
+                }
+                else
+                {
+                    <video style="width:700px;height:500px;" controls>
+                        <source src="~/VideoFile/Demo.mp4" type="video/mp4" id="videoPreview2" />
+                    </video>
+                }
+                <input type="file" name="file3" accept=".mp4,.3gp,.wmv.mkv,.flv" id='videoUpload' onchange="Preview(3)" />
+
+
+                @if (@Model.DemoLec4 != null)
+                {
+                    <video style="width:700px;height:500px;" controls>
+                        <source src="@Model.DemoLec4" type="video/mp4" id="videoPreview2" />
+                    </video>
+                }
+                else
+                {
+                    <video style="width:700px;height:500px;" controls>
+                        <source src="~/VideoFile/Demo.mp4" type="video/mp4" id="videoPreview2" />
+                    </video>
+                }
+                <input type="file" name="file4" accept=".mp4,.3gp,.wmv.mkv,.flv" id='videoUpload' onchange="Preview(3)" />*@
+
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
             </div>
         </div>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
     </div>
-}
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-
-@*<script>
-        function ShowImagePreview(videoUploader, previewVideo) {
-            alert("Inside function");
-            if (videoUploader.files && videoUploader.files[0]) {
-                alert("inside if");
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    $(previewVideo).attr('src', e.target.result);
-                }
-                reader.readAsDataURL(videoUploader.files[0]);
-            }
-            else {
-                console.log("not a file");
-
-            }
+    <script>
+        function Preview(VideoID) {
+            let file = event.target.files[0];
+            let blobURL = URL.createObjectURL(file);
+            document.querySelectorAll("video")[VideoID].src = blobURL;
         }
+    </script>
 
-    </script>*@
+    <script src="~/Scripts/jquery-1.12.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js" integrity="sha512-o6XqxgrUsKmchwy9G5VRNWSSxTS4Urr4loO6/0hYdpWmFUfHqGzawGxeQGMDqYzxjY9sbktPbNlkIQJWagVZQg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script src="~/Scripts/notify.min.js"></script>
+</body>
+</html>
+
+

@@ -1,0 +1,192 @@
+﻿@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;600;700&family=PT+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    font-size: 10px;
+}
+
+.add-container {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+    .add-container fieldset {
+        border: 1rem double #833471;
+        margin: 10rem;
+    }
+
+        .add-container fieldset legend {
+            text-align: center;
+            font-size: 3.5rem;
+            font-family: 'Montserrat', sans-serif;
+            padding: 0 1rem 0 1rem;
+            color: #833471;
+            font-weight: bold;
+        }
+
+        .add-container fieldset span {
+            font-size: 2rem;
+            font-family: 'Montserrat', sans-serif;
+            display: inline-block;
+            word-wrap: break-word;
+            color: #003366;
+            font-weight: 700;
+        }
+
+        .add-container fieldset .fields {
+            margin: 2rem 5rem 2rem 5rem;
+        }
+
+        .add-container fieldset input {
+            margin-left: 5rem;
+            padding: 0.5rem;
+            width: 25rem;
+            margin-top: 1rem;
+            font-size: 2rem;
+        }
+
+        .add-container fieldset .all-fields {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+        }
+
+        .add-container fieldset input:nth-child(odd) {
+            margin-right: 4rem;
+        }
+
+        .add-container fieldset textarea {
+            margin-top: 1rem;
+            padding: 0.5rem;
+            font-size: 2rem;
+        }
+
+    .add-container .adv-ui-2 {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+    }
+
+    .add-container fieldset {
+        height: 60rem;
+        overflow-y: scroll;
+    }
+
+    .add-container .all-fields-indiv {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        margin-left: 0;
+    }
+
+        .add-container .all-fields-indiv span {
+            margin-top: 1.7rem;
+        }
+
+        .add-container .all-fields-indiv input {
+            margin-left: 0;
+        }
+
+fieldset {
+    height: 35rem;
+    scrollbar-color: #833471;
+    overflow-y: scroll;
+}
+
+#adv-2 {
+    display: none;
+}
+
+fieldset::-webkit-scrollbar {
+    width: 12px;
+    /* width of the entire scrollbar */
+}
+
+fieldset::-webkit-scrollbar-track {
+    background: #f8cbc1;
+    /* color of the tracking area */
+}
+
+fieldset::-webkit-scrollbar-thumb {
+    background-color: #833471;
+    /* color of the scroll thumb */
+    border-radius: 20px;
+    /* roundness of the scroll thumb */
+    border: 3px solid #f8cbc1;
+    /* creates padding around scroll thumb */
+}
+
+@media screen and (max-width: 1291px) {
+    input:nth-child(even)::before {
+        content: '\n';
+    }
+}
+
+@media screen and (max-width: 449px) {
+    html {
+        font-size: 7px;
+    }
+
+    fieldset {
+        width: 100%;
+        margin: 0rem !important;
+        margin-left: 3rem !important;
+    }
+}
+
+@media screen and (max-width: 1061px) {
+    #course-adv {
+        display: none;
+    }
+
+    #adv-2 {
+        display: block;
+    }
+}
+/*# sourceMappingURL=AddAdvertisement.css.map */

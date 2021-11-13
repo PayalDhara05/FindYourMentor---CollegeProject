@@ -19,7 +19,7 @@
 <link href="~/Custom/css/Advertisement.css" rel="stylesheet" />
 
 <div class="main-table-container">
-    <a class="create-btn" href="/Mentor/AddorEditAdvertisements"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add New Course Advertisement</a>
+    <a class="create-btn" href='/Mentor/AddorEditAdvertisements'><i class="fa fa-plus"></i>&nbsp;&nbsp;Add New Course Advertisement</a>
     <table id="Advertisement">
         <thead>
             <tr>
@@ -45,6 +45,8 @@
                 <th>City</th>
                 <th>Video1</th>
                 <th>Video2</th>
+                <th>Video3</th>
+                <th>Video4</th>
                 <th>Creation Date</th>
                 <th>Actions</th>
             </tr>
@@ -100,6 +102,8 @@
                     { "mData": "City" },
                     { "mData": "DemoLec1" },
                     { "mData": "DemoLec2" },
+                    { "mData": "DemoLec3" },
+                    { "mData": "DemoLec4" },
                     {
                         "mData": "CreationDate",
                         'render': function (jsonDate) {
@@ -116,7 +120,7 @@
 
                     },
                      {"mData":"AdvertisementID" , "render" : function (data) {
-                         return "<a onclick=PopupForm('@Url.Action("AddorEditAdvertisements", "Mentor")/" + data + "')><i class='fa fa-pencil'></i></a><a style='margin-left:5px' onclick=Delete(" + data + ")><i class='fa fa-trash'></i></a><a style='margin-left:5px' href='/Mentor/ViewAdvertisement/"+ data + "')><i class='fa fa-eye'></i></a>";
+                         return "<a  href='/Mentor/AddorEditAdvertisements/" + data + "'><i class='fa fa-pencil'></i></a><a style='margin-left:5px' onclick=Delete(" + data + ")><i class='fa fa-trash'></i></a><a style='margin-left:5px' href='/Mentor/ViewAdvertisement/"+ data + "')><i class='fa fa-eye'></i></a>";
                     },
                         "orderable": false,
                         "searchable":false,
@@ -130,38 +134,33 @@
             });
         });
 
-        function PopupForm(url) {
-            var formDiv = $('<div />');
-            $.get(url)
-                .done(function (response) {
-                    formDiv.html(response);
+        //function PopupForm(url) {
+        //    var formDiv = $('<div />');
+        //    $.get(url)
+        //        .done(function (response) {
+        //            formDiv.html(response);
 
-                    Popup = formDiv.dialog({
-                        autoOpen: true,
-                        resizable: true,
-                        title: 'Add Advertisement',
-                        height: 500,
-                        width: 700,
-                        close: function () {
-                            Popup.dialog('destroy').remove();
-                        }
+        //            Popup = formDiv.dialog({
+        //                autoOpen: true,
+        //                resizable: true,
+        //                title: 'Add Advertisement',
+        //                height: 500,
+        //                width: 700,
+        //                close: function () {
+        //                    Popup.dialog('destroy').remove();
+        //                }
 
-                    });
-                });
-        }
-
-        //function suc() {
-        //    alert("added");
+        //            });
+        //        });
         //}
 
-        //function SubmitForm(form) {
+        //function jQueryAjaxPost(form) {
         //    $.validator.unobtrusive.parse(form);
         //    if ($(form).valid()) {
-        //       // alert("Inside submit form");
-        //        $.ajax({
-        //            type: "POST",
+        //        var ajaxConfig = {
+        //            type: 'POST',
         //            url: form.action,
-        //            data: $(form).serialize(),
+        //            data: new FormData(form),
         //            success: function (data) {
         //                if (data.success) {
         //                    Popup.dialog('close');
@@ -173,124 +172,19 @@
         //                    })
 
         //                }
+        //            },
+        //            error: function (e) {
+        //                $.notify(e.message);
         //            }
-
-        //        });
-
-        //       // suc();
-        //    };
-        //        return false;
+        //        }
+        //        if($(form).attr('enctype') == "multipart/form-data") {
+        //            ajaxConfig["contentType"] = false;
+        //            ajaxConfig["processData"] = false;
+        //        }
+        //        $.ajax(ajaxConfig);
         //    }
-
-        //function submitData() {
-
-        //    var AdID = $("#AdID").val();
-        //    var cname = $("#cname").val();
-        //    var courseName = $("#courseName").val();
-        //    var mname = $("#mname").val();
-        //    var desc = $("#desc").val();
-        //    var emailID = $("#emailID").val();
-        //    var contactNo = $("#contactNo").val();
-        //    var Bfull = $("#Bfull").val();
-        //    var BAvailable = $("#BAvailable").val();
-        //    var TStudents = $("#TStudents").val();
-        //    var Fees = $("#Fees").val();
-        //    var address = $("#address").val();
-        //    var spokenLanguage = $("#spokenLanguage").val();
-        //    var GAccount = $("#GAccount").val();
-        //    var Field = $("#Field").val();
-        //    var State = $("#State").val();
-        //    var City = $("#City").val();
-        //    var Location = $("#Location").val();
-        //    var YOE = $("#YOE").val();
-        //    var file = $("#file").val();
-        //    var file1 = $("#file1").val();
-
-        //    var obj =
-        //    {
-        //        AdvertisementID: AdID,
-        //        ClassName: cname,
-        //        CourseName: courseName,
-        //        MentorName: mname,
-        //        Description: desc,
-        //        ContactNo: contactNo,
-        //        EmailID: emailID,
-        //        BatchesFull: Bfull,
-        //        BatchesAvailable: BAvailable,
-        //        TotalStudents: TStudents,
-        //        Fees: Fees,
-        //        Field: Field,
-        //        Address: address,
-        //        SpokenLanguage: spokenLanguage,
-        //        GitHubAccount: GAccount,
-        //        State: State,
-        //        City: City,
-        //        Location: Location,
-        //        YearsOfExperience: YOE,
-        //        videoFile1: file,
-        //        DemoLec2: file1
-        //    };
-
-        //    SubmitForm(obj);
+        //    return false;
         //}
-        //function SubmitForm(obj) {
-        //    /*$.validator.unobtrusive.parse(form);*/
-        //    /*if ($(form).valid()) {*/
-        //        // alert("Inside submit form");
-        //        $.ajax({
-        //            type: "POST",
-        //            url: "/Mentor/AddorEditAdvertisements" ,
-        //            data: obj,
-        //            success: function (data) {
-        //                if (data.success) {
-        //                    Popup.dialog('close');
-        //                    dataTable.ajax.reload();
-
-        //                    $.notify(data.message, {
-        //                        globalPosition: "top center",
-        //                        className: "success"
-        //                    })
-
-        //                }
-        //            }
-
-        //        });
-
-        //        return false;
-        //        // suc();
-        //    }
-
-        function jQueryAjaxPost(form) {
-            $.validator.unobtrusive.parse(form);
-            if ($(form).valid()) {
-                var ajaxConfig = {
-                    type: 'POST',
-                    url: form.action,
-                    data: new FormData(form),
-                    success: function (data) {
-                        if (data.success) {
-                            Popup.dialog('close');
-                            dataTable.ajax.reload();
-
-                            $.notify(data.message, {
-                                globalPosition: "top center",
-                                className: "success"
-                            })
-
-                        }
-                    },
-                    error: function (e) {
-                        $.notify(e.message);
-                    }
-                }
-                if($(form).attr('enctype') == "multipart/form-data") {
-                    ajaxConfig["contentType"] = false;
-                    ajaxConfig["processData"] = false;
-                }
-                $.ajax(ajaxConfig);
-            }
-            return false;
-        }
 
 
 

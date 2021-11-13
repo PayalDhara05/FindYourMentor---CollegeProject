@@ -434,7 +434,23 @@ namespace FindYourMentorProject.Controllers
                 SavedList savelist = db.SavedLists.Where(a => a.AdvertisementID == id && a.MenteeID == userid).FirstOrDefault();
                 db.SavedLists.Remove(savelist);
                 db.SaveChanges();
+                CheckAdvertisement(id);
                 return Json(new { success = true, message = "Deleted from Saved list successfully !!!" }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        [NonAction]
+        public void CheckAdvertisement(int id)
+        {
+            using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
+            {
+                SavedList saveAdv = db.SavedLists.Where(a => a.AdvertisementID == id).FirstOrDefault();
+                if (saveAdv == null)
+                {
+                    CourseAdvertisement cadv = db.CourseAdvertisements.Where(a => a.AdvertisementID == id).FirstOrDefault();
+                    db.CourseAdvertisements.Remove(cadv);
+                    db.SaveChanges();
+                }
             }
         }
 

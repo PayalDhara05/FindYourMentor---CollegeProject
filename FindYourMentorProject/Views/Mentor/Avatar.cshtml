@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewBag.Title = "Avatar";
+    Layout = "~/Views/Shared/_MentorLayout.cshtml";
+}
+
+<h2>Avatar</h2>
+
+<img src="@Html.ViewData["Image"]" alt="profileimage" height="500" width="700" />
+
+@using (Html.BeginForm("ProfilePicture", "Mentor", FormMethod.Post, new { enctype = "multipart/Form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    if (ViewBag.message != null)
+    {
+        <div class="alert alert-success">
+            @ViewBag.message
+        </div>
+    }
+
+    <input type="file" name="file">
+    <br />
+    <input type="submit" value="Update Profile Picture" />
+}
+

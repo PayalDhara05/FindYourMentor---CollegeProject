@@ -1,0 +1,52 @@
+﻿@model FindYourMentorProject.Models.RegisterStudent
+
+@{
+    ViewBag.Title = "Profile";
+    Layout = "~/Views/Shared/_StudentLayout.cshtml";
+}
+@Html.ActionLink("Home", "Index", "Student")
+<h2>Profile</h2>
+
+@Html.ActionLink("Personal Information", "PersonalInfo", "Student", new { @class = "personal-info" });
+@Html.ActionLink("Your Profile Picture", "Avatar", "Student", new { @class = "profile-picture" });
+@Html.ActionLink("ChangePassword", "ChangePassword", "Student", new { @class = "change-password" })
+
+<div id="mycodes"></div>
+
+<script>
+
+    $("#mycodes").load('@Url.Action("PersonalInfo", "Student")');
+
+    $('.personal-info').on('click', function () {
+        $.ajax({
+            type: "GET",
+            url: '/Student/PersonalInfo',
+            success: function (data, textStatus, jqXHR) {
+                $('#mycodes').html(data);
+            }
+        });
+    });
+
+    $('.profile-picture').on('click', function () {
+        $.ajax({
+            type: "GET",
+            url: '/Student/ProfilePicture',
+            success: function (data, textStatus, jqXHR) {
+                $('#mycodes').html(data);
+            }
+        });
+    });
+
+    $('.change-password').on('click', function () {
+        $.ajax({
+            type: "GET",
+            url: '/Student/ChangePassword',
+            success: function (data, textStatus, jqXHR) {
+                $('#mycodes').html(data);
+            }
+        });
+    });
+</script>
+
+
+
