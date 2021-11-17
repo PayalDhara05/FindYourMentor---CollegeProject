@@ -202,6 +202,7 @@
     <Content Include="Custom\css\SavedList.css" />
     <Content Include="Custom\css\StudentLayout.css" />
     <Content Include="Custom\css\VerifyAccount.css" />
+    <Content Include="Custom\css\ViewMenteeApplication.css" />
     <Content Include="Custom\css\viewNotes.css" />
     <Content Include="Custom\css\ViewVideos.css" />
     <Content Include="Custom\js\Advertisement.js" />

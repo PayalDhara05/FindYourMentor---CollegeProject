@@ -404,7 +404,7 @@ namespace FindYourMentorProject.Controllers
                         }
                         adv.DemoLec4 = "/VideoFile/" + fileName;
                     }
-                using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
+                    using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
                     {
                         if (adv.AdvertisementID == 0)
                         {
@@ -544,7 +544,7 @@ namespace FindYourMentorProject.Controllers
                     app.StatusUpdateTime = System.DateTime.Now;
                     db.Configuration.ValidateOnSaveEnabled = false;
                     db.SaveChanges();
-                    ApprovalNotificationMentee(app.MenteeName, app.MenteeEmailID, advid.MentorName, advid.CourseName, advid.Address, advid.State);
+                    //ApprovalNotificationMentee(app.MenteeName, app.MenteeEmailID, advid.MentorName, advid.CourseName, advid.Address, advid.State);
                     return Json(new { success = true, message = "Approve status updated Successfully" }, JsonRequestBehavior.AllowGet);
                 }
                 else

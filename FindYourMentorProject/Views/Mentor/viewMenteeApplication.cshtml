@@ -5,45 +5,46 @@
     Layout = "~/Views/Shared/_MentorLayout.cshtml";
 }
 <link href="~/Custom/css/Loader.css" rel="stylesheet" />
-
-<h2>ViewMenteeApplication</h2>
+<link href="~/Custom/css/ViewMenteeApplication.css" rel="stylesheet" />
 
 <div id="loader" style="display:none;">
     <img src="~/uiImages/Loader.gif" />
     <p>Processing ...</p>
 </div>
 
-<table id="MenteeAppln" style="width:100%;height:auto">
-    <thead>
-        <tr>
-            <th>Mentee Name</th>
-            <th>Working Status</th>
-            <th>Mentee State</th>
-            <th>Mentee Message</th>
-            <th>Application Status</th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-        </tr>
-    </thead>
+<h1 id="Appln_header">Mentee Applications</h1>
+<div class="main-table-container">
+    <table id="Application" style="width:100%;height:auto">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Working Status</th>
+                <th>State</th>
+                <th>Age</th>
+                <th>Application Status</th>
+                <th>Application</th>
+                <th>Course Advertisement</th>
+                <th>Update Status</th>
+                <th></th>
+            </tr>
+        </thead>
 
-    <tbody>
-    </tbody>
-</table>
+        <tbody>
+        </tbody>
+    </table>
+</div>
 
 
-<link href="//cdn.datatables.net/1.11.1/css/jquery.dataTables.min.css" rel="stylesheet" />
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="//cdn.datatables.net/1.11.1/css/jquery.dataTables.min.css" rel="stylesheet" />
 
-@section ScriptsNew{
-    <script src="//cdn.datatables.net/1.11.1/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript">
+    @section ScriptsNew{
+        <script src="//cdn.datatables.net/1.11.1/js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript">
     var Popup, dataTable;
 
              $(document).ready(function () {
 
-                 dataTable = $("#MenteeAppln").DataTable({
+                 dataTable = $("#Application").DataTable({
                 "ajax": {
                          "url": "/Mentor/viewMenteeApplicationData",
                     "type": "GET",
@@ -56,45 +57,47 @@
                     { "mData": "MenteeName" },
                     { "mData": "WorkingStatus" },
                     { "mData": "MenteeState" },
-                    { "mData": "MenteeMessage" },
+                    { "mData": "MenteeAge" },
                     { "mData": "ApplicationStatus" },
                     {
                         "mData":"ApplicationID" , "render" : function (data) {
-                            return "<button onclick=PopupForm('" + data + "')>View Mentee Application</button>";
+                            return "<i class='far fa-eye' class='View-btn' id='view-appln' onclick=PopupForm('" + data + "')></i>";
                     },
                         "orderable": false,
                         "searchable":false,
                     },
                     {
                         "mData":"AdvertisementID" , "render" : function (data) {
-                         return "<button onclick=PopupForm2('" + data + "')>View Course Advertisement</button>";
+                            return "<i class='far fa-eye' class='View-btn' id='view-adv' onclick=PopupForm2('" + data + "')></i>";
                     },
                         "orderable": false,
                         "searchable":false,
                     },
                     {
                         "mData":"ApplicationID" , "render" : function (data) {
-                         return "<button onclick=Approve('" + data + "')>Approve</button><button onclick=Reject('" + data + "')>Reject</button>";
+                            return "<i class='fas fa-check-square' id='approve' onclick=Approve('" + data + "')></i><i class='fas fa-window-close' id='approve' id='reject' onclick=Reject('" + data + "')>";
                     },
                         "orderable": false,
                         "searchable":false,
                     },
                     {
                         "mData": "ApplicationID", "render": function (data) {
-                            return "<button onclick=Remove('" + data + "')><i class='fa fa-trash'></i></button>";
+                            return "<i class='fa fa-trash' onclick=Remove('" + data + "')></i>";
                         },
                         "orderable": false,
                         "searchable": false,
                     }
-                    //< a style = 'margin-left:5px' onclick = Delete(" + data + ") > <i class='fa fa-trash'></i></a >
                    ],
-
-                "language": {
-
-                    "emptyTable": "No data found, Please click on <b>Create/b> Button"
+                   "language": {
+                    "emptyTable": "<p class='empty-row'>Sorry !!! No one has applied for your courses yet ... Visit soon</p>"
                 }
-            });
+                 });
              });
+
+            $(".fa-check-square").mouseover(function () {
+                tooltip.pop(this, 'Lorem ipsum dolor...mauris');
+            })
+
 
     function Approve(id) {
         var url = '@Url.Action("ApproveStatus", "Mentor")/' + id;
@@ -216,6 +219,6 @@
             });
         });
     }
-    </script>
-}
+        </script>
+    }
 

@@ -1,0 +1,298 @@
+﻿@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;600;700&family=PT+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    font-size: 10px;
+}
+
+.main-table-container {
+    display: flex;
+    flex-direction: column;
+}
+
+#Appln_header {
+    margin-top: 3rem;
+    text-align: center;
+    font-size: 4rem;
+    color: #833471;
+    font-family: 'Montserrat', sans-serif;
+    font-weight:bold;
+}
+.dataTables_empty {
+    font-size: 2rem;
+    color: #833471;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+}
+.empty-row {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+}
+.dataTable no-footer {
+    width: 100vw !important;
+}
+#Application_wrapper {
+    font-size: 2rem;
+    margin: 4rem 2rem 4rem 2rem;
+}
+
+#Application_length, #Application_filter {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    color: #5f27cd;
+    border-color: #5f27cd;
+    outline: none;
+}
+
+    #Application_length select {
+        width: 15rem;
+        font-size: 2rem;
+        color: #5f27cd;
+        border-color: #5f27cd;
+        outline: none;
+    }
+
+.dataTables_scroll 
+{
+    margin-top:10rem;
+}
+#Application {
+    width: 100%;
+    overflow-x: scroll;
+}
+
+.sorting, .sorting_disabled {
+    color: #833471;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    background-color: #ffcccc !important;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    border-left: 1px solid #833471;
+    border-top: 2px solid #833471;
+    border-bottom: 2px solid #833471;
+}
+
+#Application td {
+    text-align: center;
+    font-size: 1.8rem;
+    font-family: 'Open Sans', sans-serif;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    font-weight: bold;
+}
+
+.fa-pencil {
+    color: #1e3799;
+    cursor: pointer;
+}
+
+.fa-trash {
+    color: #ff3838;
+    cursor: pointer;
+    border:none;
+    outline:none;
+    font-size:3rem;
+}
+
+.fa-eye {
+    color: #833471;
+}
+.View-btn {
+    text-align: center;
+    font-size: 1.3rem;
+    font-family: 'Open Sans', sans-serif;
+    padding:1rem 3rem;
+    font-weight: bold;
+    border:none;
+    outline:none;
+}
+.dataTables_info, .paginate_button {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    color: #5f27cd !important;
+}
+
+.current {
+    background-color: #833471;
+}
+
+#Application tr:nth-child(even) {
+    background-color: #fab1a0 !important;
+}
+
+table.dataTable.display tbody tr.even > .sorting_1, table.dataTable.order-column.stripe tbody tr.even > .sorting_1 {
+    background-color: #ffeaa7 !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+    background: white !important;
+    border: 2px solid black !important;
+    background-color: white !important;
+    color: white !important;
+    font-weight: bold;
+}
+
+@media screen and (max-width: 354px) {
+    #Application_filter {
+        margin-top: 5rem;
+    }
+}
+
+.ui-dialog-titlebar {
+    background-color: #fab1a0;
+    margin: 0;
+    padding: 0;
+}
+
+.ui-dialog-title {
+    color: #833471;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.ui-widget input, .ui-widget textarea {
+    font-size: 2rem !important;
+    outline: none;
+    padding-left: 1rem;
+    width: 100%;
+}
+
+.ui-widget input {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+#Desc {
+    margin-top: 2rem;
+}
+
+.ui-widget textarea {
+    padding-top: 1rem;
+}
+
+    .ui-widget textarea::placeholder {
+        padding-top: 0rem;
+    }
+
+form {
+    margin-left: 0rem !important;
+    margin-top: 1rem !important;
+}
+
+.btn-success,
+.btn-reset {
+    background-color: #006400;
+    padding: 1rem 6rem !important;
+    color: white;
+    font-size: 2rem;
+    border: none;
+    outline: none;
+    border: 2px solid #006400;
+    transition: all .3s linear;
+    width: 30rem !important;
+    margin-top: 2rem;
+}
+
+    .btn-success:hover {
+        border: 2px solid #006400;
+        color: #006400;
+        background-color: white;
+    }
+
+.btn-reset {
+    background-color: #D2042D !important;
+    border: 2px solid #D2042D !important;
+}
+
+    .btn-reset:hover {
+        border: 2px solid #D2042D !important;
+        color: #D2042D !important;
+        background-color: white !important;
+    }
+
+@media screen and (max-width:705px) {
+    .btn-success,
+    .btn-reset {
+        width: 20rem !important;
+    }
+}
+
+@media screen and (max-width:500px) {
+    .btn-success,
+    .btn-reset {
+        width: 10rem !important;
+        padding: 1rem 3rem !important;
+        padding-left: 2rem !important;
+        text-align: center;
+    }
+}
+@media screen and (max-width:446px) {
+    #Appln_header 
+    {
+        font-size:3rem;
+    }
+}
+#Application-form {
+    margin-top: 5rem;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+}
+
+.ui-dialog-title {
+    font-size: 1.8rem;
+}
+
+.Application-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.Application-caption {
+    display: flex;
+    font-size: 2.5rem;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    color: #833471;
+}
+
+.Application-data {
+    display: flex;
+    flex-direction: column;
+}
+
+#Application td {
+    padding: 1rem !important;
+}
+#approve {
+    font-size: 2rem;
+    margin-left: 1rem;
+}
+.fa-check-square {
+    color: green;
+    cursor:pointer;
+}
+.fa-window-close {
+    color: red;
+    cursor: pointer;
+}
+.fa-eye {
+    color: blue;
+    cursor: pointer;
+}
