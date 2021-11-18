@@ -1,106 +1,67 @@
 ﻿@model FindYourMentorProject.Models.Application
+<link href="~/Custom/css/ViewMenteeApplication.css" rel="stylesheet" />
 
-<div>
-    <h4>Application</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.MenteeMessage)
-        </dt>
+<div class="Application-Mentee">
 
-        <dd>
-            @Html.DisplayFor(model => model.MenteeMessage)
-        </dd>
+    <table>
+        <tr class="Application-Mentee-indiv">
+            <td>Name: </td>
+            <td>@Model.MenteeName</td>
+        </tr>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.MenteeBackground)
-        </dt>
+        <tr class="Application-Mentee-indiv">
+            <td>Age: </td>
+            <td>@Model.MenteeAge</td>
+        </tr>
 
-        <dd>
-            @Html.DisplayFor(model => model.MenteeBackground)
-        </dd>
+        <tr class="Application-Mentee-indiv">
+            <td>EmailID: </td>
+            <td>@Model.MenteeEmailID</td>
+        </tr>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.MenteeExpectations)
-        </dt>
+        <tr class="Application-Mentee-indiv">
+            <td>Contact Number: </td>
+            <td>@Model.MenteeContactNo</td>
+        </tr>
 
-        <dd>
-            @Html.DisplayFor(model => model.MenteeExpectations)
-        </dd>
+        <tr class="Application-Mentee-indiv">
+            <td>GitHub-ID: </td>
+            <td>@Model.MenteeGithub</td>
+        </tr>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.MenteeName)
-        </dt>
+        <tr class="Application-Mentee-indiv">
+            <td>LinkedIn-ID: </td>
+            <td>@Model.MenteeLinkedin</td>
+        </tr>
 
-        <dd>
-            @Html.DisplayFor(model => model.MenteeName)
-        </dd>
+        <tr class="Application-Mentee-indiv">
+            <td>State: </td>
+            <td>@Model.MenteeState</td>
+        </tr>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.MenteeEmailID)
-        </dt>
+        <tr class="Application-Mentee-indiv">
+            <td>Address: </td>
+            <td>@Model.MenteeAddress</td>
+        </tr>
 
-        <dd>
-            @Html.DisplayFor(model => model.MenteeEmailID)
-        </dd>
+        <tr class="Application-Mentee-indiv">
+            <td>Background: </td>
+            <td>@Model.MenteeBackground</td>
+        </tr>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.MenteeState)
-        </dt>
+        <tr class="Application-Mentee-indiv">
+            <td>Message: </td>
+            <td>@Model.MenteeMessage</td>
+        </tr>
 
-        <dd>
-            @Html.DisplayFor(model => model.MenteeState)
-        </dd>
+        <tr class="Application-Mentee-indiv">
+            <td>Expectations: </td>
+            <td>@Model.MenteeExpectations</td>
+        </tr>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.MenteeContactNo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MenteeContactNo)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.MenteeAge)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MenteeAge)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.MenteeAddress)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MenteeAddress)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.WorkingStatus)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.WorkingStatus)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.MenteeGithub)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MenteeGithub)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.MenteeLinkedin)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MenteeLinkedin)
-        </dd>
-
-    </dl>
+        <tr class="Application-Mentee-indiv">
+            <td>Working Status: </td>
+            <td>@Model.WorkingStatus</td>
+        </tr>
+    </table>
 </div>
-
-

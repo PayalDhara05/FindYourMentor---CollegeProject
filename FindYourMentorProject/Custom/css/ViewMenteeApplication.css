@@ -137,21 +137,21 @@ html, body {
 table.dataTable.display tbody tr.even > .sorting_1, table.dataTable.order-column.stripe tbody tr.even > .sorting_1 {
     background-color: #ffeaa7 !important;
 }
-
 .dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
-    background: white !important;
-    border: 2px solid black !important;
-    background-color: white !important;
     color: white !important;
-    font-weight: bold;
 }
-
-@media screen and (max-width: 354px) {
-    #Application_filter {
-        margin-top: 5rem;
+    .dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+        background: white !important;
+        border: 2px solid white !important;
+        background-color: lightpink !important;
+        color: white !important;
+        font-weight: bold;
     }
+@media screen and (max-width: 354px) {
+#Application_filter {
+       margin-top: 5rem;
+     }
 }
-
 .ui-dialog-titlebar {
     background-color: #fab1a0;
     margin: 0;
@@ -162,6 +162,9 @@ table.dataTable.display tbody tr.even > .sorting_1, table.dataTable.order-column
     color: #833471;
     padding-top: 1rem;
     padding-bottom: 1rem;
+    text-align: center;
+    font-size: 2.3rem !important;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .ui-widget input, .ui-widget textarea {
@@ -295,4 +298,60 @@ form {
 .fa-eye {
     color: blue;
     cursor: pointer;
+}
+.Application-Mentee 
+{
+    display:flex;
+    justify-content:center;
+    flex-direction:column;
+    align-items:center;
+    background-color:floralwhite;
+}
+.Application-Mentee-indiv
+{
+    display:flex;
+}
+    .Application-Mentee-indiv td {
+        font-size: 2rem;
+        font-family: 'Montserrat', sans-serif;
+        margin-top:1rem;
+    }
+        .Application-Mentee-indiv td:nth-child(even) {
+            margin-left: 1rem;
+            font-family: 'Open Sans', sans-serif !important;
+            color: #833471;
+            font-weight: bold;
+        }
+        .Application-Mentee-indiv td:nth-child(odd) {
+            margin-left: 1rem;
+            font-family: 'Montserrat', sans-serif !important;
+            font-weight:bold;
+            color:#666;
+        }
+table::-webkit-scrollbar {
+    width: 12px;
+    /* width of the entire scrollbar */
+}
+
+table::-webkit-scrollbar-track {
+    background: #f8cbc1;
+    /* color of the tracking area */
+}
+
+table::-webkit-scrollbar-thumb {
+    background-color: #833471;
+    /* color of the scroll thumb */
+    border-radius: 20px;
+    /* roundness of the scroll thumb */
+    border: 3px solid #f8cbc1;
+    /* creates padding around scroll thumb */
+}
+@media screen and (max-width:494px)
+{
+    .Application-Mentee-indiv td {
+        font-size: 1.3rem;
+    }
+    .ui-dialog-title {
+        font-size: 1.7rem !important;
+    }
 }

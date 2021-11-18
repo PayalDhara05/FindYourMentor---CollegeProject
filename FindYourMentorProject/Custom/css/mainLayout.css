@@ -731,6 +731,24 @@ footer p {
     font-family: "Open Sans", sans-serif;
     text-align: left;
 }
+*::-webkit-scrollbar {
+    width: 12px;
+    /* width of the entire scrollbar */
+}
+
+*::-webkit-scrollbar-track {
+    background: #f8cbc1;
+    /* color of the tracking area */
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #833471;
+    /* color of the scroll thumb */
+    border-radius: 20px;
+    /* roundness of the scroll thumb */
+    border: 3px solid #f8cbc1;
+    /* creates padding around scroll thumb */
+}
 /** {
     background: #000 !important;
     color: #0f0 !important;

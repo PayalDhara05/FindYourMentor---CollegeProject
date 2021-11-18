@@ -50,8 +50,11 @@ namespace FindYourMentorProject.Controllers
             {
 
                 studentuser.Role = "Mentee";
+
                 #region //Email is already Exist 
                 var isExist = IsEmailExist(studentuser.EmailID,studentuser.Role);
+
+
                 if (isExist)
                 {
                     //ModelState.AddModelError("EmailExist", "Email already exist");
@@ -226,7 +229,7 @@ namespace FindYourMentorProject.Controllers
         {
             using (FindYourMentorProjectEntities dc = new FindYourMentorProjectEntities())
             {
-                if(Role=="Student")
+                if(Role=="Mentee")
                 {
                     var v = dc.RegisterStudents.Where(a => a.EmailID == emailID).FirstOrDefault();
                     return v != null;

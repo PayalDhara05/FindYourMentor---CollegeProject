@@ -482,5 +482,13 @@ input[type="file"] {
 {
     text-decoration:underline;
 }
+.text-danger, .loginmsg {
+    color: red;
+    text-align: center;
+    background-color: white;
+    font-weight: bold;
+    font-size: 1.2rem;
+    font-family: "Open Sans", sans-serif;
+}
 
 /*# sourceMappingURL=registerMentor.css.map */
