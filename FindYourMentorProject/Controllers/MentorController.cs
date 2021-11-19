@@ -488,5 +488,45 @@ namespace FindYourMentorProject.Controllers
                 smtp.Send(message);
         }
 
+
+        public ActionResult viewMenteeAppointment()
+        {
+            return View();
+        }
+        public ActionResult viewMenteeAppointmentData()
+        {
+            int userid = Convert.ToInt32(Session["UserID"]);
+            FindYourMentorProjectEntities db = new FindYourMentorProjectEntities();
+            db.Configuration.ProxyCreationEnabled = false;
+            List<Appointment> List = db.Appointments.Where(a => a.MentorID == userid && a.AppointmentRemoveStatus == "Unremoved").ToList();
+            return Json(List, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult viewOnlineFeeApplication()
+        {
+            return View();
+        }
+        public ActionResult viewOnlineFeeApplicationData()
+        {
+            int userid = Convert.ToInt32(Session["UserID"]);
+            FindYourMentorProjectEntities db = new FindYourMentorProjectEntities();
+            db.Configuration.ProxyCreationEnabled = false;
+            List<Fee> List = db.Fees.Where(a => a.MentorID == userid && a.PaymentMode == "Online").ToList();
+            return Json(List, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult viewOfflineFeeApplication()
+        {
+            return View();
+        }
+        public ActionResult viewOfflineFeeApplicationData()
+        {
+            int userid = Convert.ToInt32(Session["UserID"]);
+            FindYourMentorProjectEntities db = new FindYourMentorProjectEntities();
+            db.Configuration.ProxyCreationEnabled = false;
+            List<Fee> List = db.Fees.Where(a => a.MentorID == userid && a.PaymentMode == "Offline").ToList();
+            return Json(List, JsonRequestBehavior.AllowGet);
+        }
+
     }
 }

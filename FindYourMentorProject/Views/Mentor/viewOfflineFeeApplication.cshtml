@@ -1,0 +1,255 @@
+﻿@model IEnumerable<FindYourMentorProject.Models.Fee>
+
+@{
+    ViewBag.Title = "Online-Fee Payment";
+    Layout = "~/Views/Shared/_MentorLayout.cshtml";
+}
+<link href="~/Custom/css/Loader.css" rel="stylesheet" />
+<link href="~/Custom/css/ViewMenteeFee.css" rel="stylesheet" />
+
+<div id="loader" style="display:none;">
+    <img src="~/uiImages/Loader.gif" />
+    <p>Processing ...</p>
+</div>
+
+<h1 id="Appln_header">Offline Mentee Fee Application</h1>
+<div class="main-table-container">
+    <table id="Fee" style="width:100%;height:auto">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>State</th>
+                <th>Payment Mode</th>
+                <th>Payment Status</th>
+                <th>Appointment</th>
+                <th>Course Advertisement</th>
+                <th>Update Status</th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+        </tbody>
+    </table>
+</div>
+
+
+<link href="//cdn.datatables.net/1.11.1/css/jquery.dataTables.min.css" rel="stylesheet" />
+
+
+
+@section ScriptsNew{
+    <script src="//cdn.datatables.net/1.11.1/js/jquery.dataTables.min.js"></script>
+    @*<script src="ttps://unpkg.com/@Html.Raw("@")popperjs/core@2"></script>
+        <script src="'"></script>*@
+
+
+    <script type="text/javascript">
+            var Popup, dataTable;
+            var screenWidth, screenHeight, dialogWidth, dialogHeight, isDesktop;
+
+            screenWidth = window.screen.width;
+            screenHeight = window.screen.height;
+
+            if (screenWidth < 705) {
+                /* alert("love");*/
+                dialogWidth = screenWidth * .75;
+                dialogHeight = screenHeight * .90;
+            }
+            else if (screenWidth < 553) {
+                alert("cute");
+                dialogWidth = screenWidth * .73;
+                dialogHeight = screenHeight * .90;
+            }
+            else {
+                dialogWidth = 700;
+                dialogHeight = 500;
+                isDesktop = true;
+            }
+
+             $(document).ready(function () {
+
+                 dataTable = $("#Fee").DataTable({
+                "ajax": {
+                         "url": "/Mentor/viewOnlineFeeApplicationData",
+                         "type": "GET",
+                         "datatype": "json",
+                         "dataSrc": ""
+                },
+                "responsive": "true",
+                "scrollX": true,
+                "columns": [
+                    { "mData": "MenteeName" },
+                    { "mData": "MenteeAge" },
+                    { "mData": "MenteeState" },
+                    { "mData": "PaymentMode" },
+                    { "mData": "PaymentStatus" },
+                    {
+                        "mData":"FeesID" , "render" : function (data) {
+                            return "<i class='far fa-eye' title='Mentee Fee Application' class='View-btn' id='view-appln' onclick=PopupForm('" + data + "')></i>";
+                    },
+                        "orderable": false,
+                        "searchable":false,
+                    },
+                    {
+                        "mData":"AdvertisementID" , "render" : function (data) {
+                            return "<i class='far fa-eye' title='Course Advertisement' class='View-btn' id='view-adv' onclick=PopupForm2('" + data + "')></i>";
+                    },
+                        "orderable": false,
+                        "searchable":false,
+                    },
+                    {
+                        "mData":"FeesID" , "render" : function (data) {
+                            return "<i class='fas fa-check-square' id='approve' title='Confirm Admission' onclick=Approve('" + data + "')></i><i class='fas fa-window-close' title='Confirm Admission' id='approve' id='reject' onclick=Reject('" + data + "')>";
+                    },
+                        "orderable": false,
+                        "searchable":false,
+                    },
+                    {
+                        "mData": "FeesID", "render": function (data) {
+                            return "<i class='fa fa-trash' title='Delete Appointment' onclick=Remove('" + data + "')></i>";
+                        },
+                        "orderable": false,
+                        "searchable": false,
+                    }
+                   ],
+                   "language": {
+                    "emptyTable": "<p class='empty-row'>Sorry !!! No Payment Applications ... Visit soon</p>"
+                }
+                 });
+             });
+
+
+    function Approve(id) {
+        var url = '@Url.Action("ApproveStatus", "Mentor")/' + id;
+
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: {
+                id: id
+            },
+            beforeSend: function () {
+                $("#loader").show();
+            },
+            complete: function () {
+                $("#loader").hide();
+            },
+            success: function (data) {
+                if (data.success) {
+                    dataTable.ajax.reload();
+                    $.notify(data.message, {
+                        globalPosition: "top center",
+                        class: "success"
+                    })
+                }
+            }
+        });
+    };
+
+    function Reject(id) {
+        var url = '@Url.Action("RejectStatus", "Mentor")/' + id;
+
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: {
+                id: id
+            },
+            beforeSend: function () {
+                $("#loader").show();
+            },
+            complete: function () {
+                $("#loader").hide();
+            },
+            success: function (data) {
+                if (data.success) {
+                    dataTable.ajax.reload();
+
+                    $.notify(data.message, {
+                        globalPosition: "top center",
+                        className: "success"
+                    })
+                }
+            }
+        });
+        };
+
+        function Remove(id) {
+        var url = '@Url.Action("UpdateRemoveStatus", "Mentor")/' + id;
+
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: {
+                id: id
+            },
+            success: function (data) {
+                if (data.success) {
+                    dataTable.ajax.reload();
+
+                    $.notify(data.message, {
+                        globalPosition: "top center",
+                        className: "success"
+                    })
+                }
+            }
+        });
+    };
+
+    function PopupForm(id)
+    {
+        url = '@Url.Action("ViewFullMenteeApplication", "Mentor")/' + id;
+        var formDiv =
+            $('<div />');
+            $.get(url).done(function (response) {
+            formDiv.html(response);
+
+            Popup = formDiv.dialog({
+            autoOpen: true,
+            resizable: true,
+            title: 'Mentee Application',
+            height: dialogHeight,
+            width: dialogWidth,
+            show: { effect: 'drop', direction: "up" },
+            modal: true,
+            draggable: true,
+            close: function () {
+            Popup.dialog('destroy').remove();
+            }
+
+            });
+        });
+    }
+
+    function PopupForm2(id)
+    {
+        url = '@Url.Action("ViewCourseApplication", "Mentor")/' + id;
+        var formDiv =
+            $('<div />');
+            $.get(url).done(function (response) {
+            formDiv.html(response);
+
+            Popup = formDiv.dialog({
+            autoOpen: true,
+            resizable: true,
+            title: 'Apply',
+            height: 500,
+            width: 700,
+            close: function () {
+            Popup.dialog('destroy').remove();
+            }
+
+            });
+        });
+    }
+
+        //tippy('#approve', {
+        //    content: "I'm a Tippy tooltip!",
+        //});
+    </script>
+}
+
+
+
