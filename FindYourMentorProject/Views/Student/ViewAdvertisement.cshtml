@@ -5,95 +5,142 @@
     Layout = "~/Views/Shared/_StudentLayout.cshtml";
 }
 
-<style>
-    /*    .ui-dialog {
-        z-index: 1000000000;
-        top: 0;
-        left: 0;
-        margin: auto;
-        max-width: 100%;
-        height: auto;
-        display: flex;
-        justify-content:center;
-        align-items:center;
-        flex-direction: column;
-        position:center;
+@*<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <h2>ViewAdvertisement</h2>
+    @Html.ActionLink("Save List", "ViewSavedList", "student");
+    @Html.ActionLink("AppliedFor", "ViewApppliedCourse", "student");
+    @Html.ActionLink("View Approved Application", "ViewApprovedApplication", "student");
 
-    }
-
-        .ui-dialog .ui-dialog-content {
-            flex: 1;
-        }*/
-</style>
-
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-<h2>ViewAdvertisement</h2>
-@Html.ActionLink("Save List", "ViewSavedList", "student");
-@Html.ActionLink("AppliedFor", "ViewApppliedCourse", "student");
-@Html.ActionLink("View Approved Application", "ViewApprovedApplication", "student");
-
-<div>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ClassName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CourseName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MentorName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-
-            <th>
-                @Html.DisplayNameFor(model => model.BatchesAvailable)
-            </th>
-
-            <th>
-
-            </th>
-        </tr>
-        @foreach (var item in Model)
-        {
+    <div>
+        <table class="table">
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ClassName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CourseName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.MentorName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.BatchesAvailable)
-                </td>
-                <td>
-                    @Html.ActionLink("ViewFullAdvertisement", "ViewFullAdvertisement", new { id = item.AdvertisementID })
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.ClassName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CourseName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MentorName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
 
-                <td>
-                    <button onclick="PopupForm(@item.AdvertisementID)" id="Apply">Apply</button>
-                </td>
-                <td>
-                    <button onclick="PopupForm2(@item.AdvertisementID)" id="Apply">Appointment</button>
-                </td>
-                <td>
-                    <button class="btn-link glyphicon glyphicon-heart-empty" id="onsave" onclick="Fav(@item.AdvertisementID)"></button>
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.BatchesAvailable)
+                </th>
+
+                <th>
+
+                </th>
             </tr>
-        }
-    </table>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ClassName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CourseName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MentorName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BatchesAvailable)
+                    </td>
+                    <td>
+                        @Html.ActionLink("ViewFullAdvertisement", "ViewFullAdvertisement", new { id = item.AdvertisementID })
+                    </td>
 
-</div>
+                    <td>
+                        <button onclick="PopupForm(@item.AdvertisementID)" id="Apply">Apply</button>
+                    </td>
+                    <td>
+                        <button onclick="PopupForm2(@item.AdvertisementID)" id="Apply">Appointment</button>
+                    </td>
+                    <td>
+                        <button class="btn-link glyphicon glyphicon-heart-empty" id="onsave" onclick="Fav(@item.AdvertisementID)"></button>
+                    </td>
+                </tr>
+            }
+        </table>
+
+    </div>*@
+<link href="~/Custom/css/StudentIndex.css" rel="stylesheet" />
+<body>
+    <div class="whole-container">
+        <div class="all-filters">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem esse unde maxime commodi ut voluptatum labore odio, ea, earum ex velit porro consequatur nulla nostrum obcaecati magnam deserunt vero veritatis possimus debitis tempora? Deleniti distinctio quo commodi quas! Reiciendis, incidunt. Eius nam quos sed totam ea debitis inventore in autem.</p>
+        </div>
+        <div class="all-adv">
+            <div class="all-cards">
+
+                @foreach (var item in Model)
+                {
+                    <div class="indiv-card">
+                        <div class="course-info">
+                            <p>@item.CourseName</p>
+                            <i id="onsave" onclick="Fav(@item.AdvertisementID)" class="fas fa-heart" title="Add to save list"></i>
+                        </div>
+                        <div class="All-info">
+                            <p class="Description">@item.Description !!!</p>
+                            <p class="Class-name">Will get conducted at @item.ClassName</p>
+                            <p class="mentor-name">By Mentor:&nbsp;&nbsp;&nbsp;<span>@item.MentorName</span></p>
+
+                            <div class="seats-info">
+                                <p>20 seats left !!!</p>
+                                <p>Total Seats are <span>@item.TotalStudents</span></p>
+                            </div>
+
+                            <div class="add-info">
+                                <p class="Address"><span class="Address-title">Address: </span>@item.Address</p>
+                                <p class="State"><span class="state-title">State: </span>@item.State</p>
+                            </div>
+                        </div>
+                        <div class="operation-btn">
+                            <button onclick="PopupForm2(@item.AdvertisementID)" id="Apply">Appointment</button>
+                            <button onclick="PopupForm(@item.AdvertisementID)" id="Apply">Apply</button>
+                        </div>
+                        <div class="card-btn">
+                            <button>FeedBack & More</button>
+                        </div>
+                    </div>
+                 }
+
+
+                </div>
+        </div>
+    </div>
+</body>
 
 <script type="text/javascript">
+    var Popup, dataTable;
+    var screenWidth, screenHeight, dialogWidth, dialogHeight, isDesktop;
+
+    screenWidth = window.screen.width;
+    screenHeight = window.screen.height;
+
+    if (screenWidth < 705) {
+        /* alert("love");*/
+        dialogWidth = screenWidth * .75;
+        dialogHeight = screenHeight * .90;
+    }
+    else if (screenWidth < 553) {
+        alert("cute");
+        dialogWidth = screenWidth * .73;
+        dialogHeight = screenHeight * .90;
+    }
+    else {
+        dialogWidth = 700;
+        dialogHeight = 500;
+        isDesktop = true;
+    }
+
 
     var Popup1, Popup2;
     function Fav(id) {
@@ -126,10 +173,10 @@
                 Popup1 = formDiv.dialog({
                     autoOpen: true,
                     resizable: true,
-                    title: 'Apply',
-                    height: 500,
-                    width: 700,
-                    show: { effect: 'drop', direction: "up" },
+                    title: 'Course Application',
+                    height: dialogHeight,
+                    width: dialogWidth,
+                    show: { effect: 'drop'},
                     modal: true,
                     draggable: true,
                     success: function (data) {
@@ -162,9 +209,9 @@
                 Popup2 = formDiv.dialog({
                     autoOpen: true,
                     resizable: true,
-                    title: 'Apply',
-                    height: 500,
-                    width: 700,
+                    title: 'Schedule Appointment',
+                    height: dialogHeight,
+                    width: dialogWidth,
                     show: { effect: 'drop', direction: "up" },
                     modal: true,
                     draggable: true,
