@@ -1,125 +1,203 @@
 ﻿@model FindYourMentorProject.Models.Fee
 
-<h2>ViewPayFees</h2>
+<link href="~/Custom/css/StudentIndex.css" rel="stylesheet" />
 
-@using (Html.BeginForm()) 
+@if (ViewBag.status == "Paid")
 {
-    @Html.AntiForgeryToken()
-    
-<div class="form-horizontal">
-    <h4>Fee</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.MenteeEmailID, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.MenteeEmailID, new { htmlAttributes = new { @Value = ViewBag.EmailID, @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
-            @Html.ValidationMessageFor(model => model.MenteeName, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-
-    <div class="form-group">
+<div class="submitted-appln">
+    <h3>You have already applied for the course. Below is your submitted application</h3>
+    <div class="Indiv-form-elem">
         @Html.LabelFor(model => model.MenteeName, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
+        <div class="Indiv-form-text">
             @Html.EditorFor(model => model.MenteeName, new { htmlAttributes = new { @Value = ViewBag.Mentee, @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
             @Html.ValidationMessageFor(model => model.MenteeName, "", new { @class = "text-danger" })
         </div>
     </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.MenteeState, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.MenteeState, new { htmlAttributes = new { @Value = ViewBag.State, @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
-            @Html.ValidationMessageFor(model => model.MenteeState, "", new { @class = "text-danger" })
+    <div class="Indiv-form-elem">
+        @Html.LabelFor(model => model.MenteeEmailID, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="Indiv-form-text">
+            @Html.EditorFor(model => model.MenteeEmailID, new { htmlAttributes = new { @Value = ViewBag.EmailID, @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
+            @Html.ValidationMessageFor(model => model.MenteeEmailID, "", new { @class = "text-danger" })
         </div>
     </div>
 
-    <div class="form-group">
+    <div class="Indiv-form-elem">
         @Html.LabelFor(model => model.MenteeContactNo, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
+        <div class="Indiv-form-text">
             @Html.EditorFor(model => model.MenteeContactNo, new { htmlAttributes = new { @Value = ViewBag.Contact, @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
             @Html.ValidationMessageFor(model => model.MenteeContactNo, "", new { @class = "text-danger" })
         </div>
     </div>
 
-    <div class="form-group">
+    <div class="Indiv-form-elem">
         @Html.LabelFor(model => model.MenteeAge, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
+        <div class="Indiv-form-text">
             @Html.EditorFor(model => model.MenteeAge, new { htmlAttributes = new { @Value = ViewBag.Age, @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
             @Html.ValidationMessageFor(model => model.MenteeAge, "", new { @class = "text-danger" })
         </div>
     </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.MenteeLinkedIn, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.MenteeLinkedIn, new { htmlAttributes = new { @Value = ViewBag.Linkedin, @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
-            @Html.ValidationMessageFor(model => model.MenteeLinkedIn, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
+    <div class="Indiv-form-elem">
         @Html.LabelFor(model => model.MenteeGitHub, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.MenteeGitHub, new { htmlAttributes = new { @Value = ViewBag.GitHub, @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
+        <div class="Indiv-form-text">
+            @Html.EditorFor(model => model.MenteeGitHub, new { htmlAttributes = new { @Value = ViewBag.Address, @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
             @Html.ValidationMessageFor(model => model.MenteeGitHub, "", new { @class = "text-danger" })
         </div>
     </div>
 
-    <h3>Total fees of this course : @ViewBag.Fees</h3>
-    <div class="form-group">
+    <div class="Indiv-form-elem">
+        @Html.LabelFor(model => model.MenteeLinkedIn, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="Indiv-form-text">
+            @Html.EditorFor(model => model.MenteeLinkedIn, new { htmlAttributes = new { @Value = ViewBag.AppointmentDate, disabled = "disabled", @readonly = "readonly" } })
+        </div>
+    </div>
+
+    <div class="Indiv-form-elem">
+        @Html.LabelFor(model => model.MenteeState, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="Indiv-form-text">
+            @Html.EditorFor(model => model.MenteeState, new { htmlAttributes = new { @Value = ViewBag.State, @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
+            @Html.ValidationMessageFor(model => model.MenteeState, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="Indiv-form-elem">
+        <h3>Total fees of this course : @ViewBag.Fees</h3>
+    </div>
+
+    <div class="Indiv-form-elem">
+        @Html.LabelFor(model => model.PaymentMode, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="Indiv-form-text">
+            @Html.EditorFor(model => model.PaymentMode, new { htmlAttributes = new { @Value = ViewBag.AppointmentTime, disabled = "disabled", @readonly = "readonly", @class = "form-control" } })
+        </div>
+    </div>
+
+    <div class="Indiv-form-elem">
+        @Html.LabelFor(model => model.PaymentTime, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="Indiv-form-text">
+            @Html.EditorFor(model => model.PaymentTime, new { htmlAttributes = new { @Value = ViewBag.Time, @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
+            @Html.ValidationMessageFor(model => model.PaymentTime, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+</div>
+}
+else
+{
+    using (Html.BeginForm("ViewPayFees", "Student", FormMethod.Post, new { onSubmit = "return SubmitFormAppointment(this)" }))
+    {
+        @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+
+    @Html.TextBoxFor(m => m.AdvertisementID, new { @Value = @ViewBag.Message, @type = "hidden" })
+    <div class="Indiv-form-elem">
+        @Html.LabelFor(model => model.MenteeName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="Indiv-form-text">
+            @Html.EditorFor(model => model.MenteeName, new { htmlAttributes = new { @Value = ViewBag.Mentee, @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
+            @Html.ValidationMessageFor(model => model.MenteeName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="Indiv-form-elem">
+        @Html.LabelFor(model => model.MentorEmailID, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="Indiv-form-text">
+            @Html.EditorFor(model => model.MentorEmailID, new { htmlAttributes = new { @Value = ViewBag.EmailID, @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
+            @Html.ValidationMessageFor(model => model.MentorEmailID, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="Indiv-form-elem">
+        @Html.LabelFor(model => model.MenteeContactNo, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="Indiv-form-text">
+            @Html.EditorFor(model => model.MenteeContactNo, new { htmlAttributes = new { @Value = ViewBag.Contact, @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
+            @Html.ValidationMessageFor(model => model.MenteeContactNo, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="Indiv-form-elem">
+        @Html.LabelFor(model => model.MenteeAge, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="Indiv-form-text">
+            @Html.EditorFor(model => model.MenteeAge, new { htmlAttributes = new { @Value = ViewBag.Age, @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
+            @Html.ValidationMessageFor(model => model.MenteeAge, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="Indiv-form-elem">
+        @Html.LabelFor(model => model.MenteeState, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="Indiv-form-text">
+            @Html.EditorFor(model => model.MenteeState, new { htmlAttributes = new { @Value = ViewBag.State, @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
+            @Html.ValidationMessageFor(model => model.MenteeState, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="Indiv-form-elem">
+        @Html.LabelFor(model => model.MenteeGitHub, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="Indiv-form-text">
+            @Html.EditorFor(model => model.MenteeGitHub, new { htmlAttributes = new { @Value = ViewBag.Address, @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
+            @Html.ValidationMessageFor(model => model.MenteeGitHub, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="Indiv-form-elem">
+        @Html.LabelFor(model => model.MenteeLinkedIn, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="Indiv-form-text">
+            @Html.EditorFor(model => model.MenteeLinkedIn, new { htmlAttributes = new { @Value = ViewBag.AppointmentDate, disabled = "disabled", @readonly = "readonly" } })
+        </div>
+    </div>
+
+
+    <div class="Indiv-form-elem">
+        <h3>Total fees of this course : @ViewBag.Fees </h3>
+    </div>
+
+    <div class="Indiv-form-elem">
         @Html.LabelFor(model => model.PaymentMode, htmlAttributes: new { @class = "control-label col-md-2" })
         @Html.ValidationMessageFor(model => model.PaymentMode, "", new { @class = "text-danger" })
-        <div class="col-md-10">
-            <input type="radio" name="PaymentMode" id="Offline" value="Offline" onclick = "javascript:yesnoCheck();"/>
+        <div class="Indiv-form-radio">
+            <input type="radio" name="PaymentMode" id="Offline" value="Offline" onclick="javascript:yesnoCheck();" />
             @* @Html.RadioButtonFor(model => model.PaymentMode, "Offline", new { htmlAttributes = new { onclick = "javascript:yesnoCheck();", id = "Offline" } }) *@
-            Offline
+            <span>Offline</span><br />
             @* @Html.RadioButtonFor(model => model.PaymentMode, "Online", new { htmlAttributes = new { onclick = "javascript:yesnoCheck();", id = "Online" } }) *@
-                    <input type="radio" name="PaymentMode" id="Online" value="Online" onclick = "javascript:yesnoCheck();" />
-                    Online
-                </div>
-            </div>
+            <input type="radio" name="PaymentMode" id="Online" value="Online" onclick="javascript:yesnoCheck();" />
+            <span>Online</span><br />
+        </div>
+    </div>
 
-            <div id="ifOnline" style="display:none">
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Fees, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.Fees, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Fees, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.CardDetails, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.CardDetails, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.CardDetails, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-            </div>
-
-
-
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Done" class="btn btn-default" />
-                </div>
+    <div id="ifOnline" style="display:none" class="Indiv-form-elem">
+        <div class="Indiv-form-elem">
+            @Html.LabelFor(model => model.Fees, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="Indiv-form-radio">
+                @Html.EditorFor(model => model.Fees, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Fees, "", new { @class = "text-danger" })
             </div>
         </div>
+
+        <div class="Indiv-form-elem">
+            @Html.LabelFor(model => model.CardDetails, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="Indiv-form-radio">
+                @Html.EditorFor(model => model.CardDetails, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CardDetails, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="Indiv-form-elem">
+            <input type="submit" value="CONFIRM FEE PAYMENT" class="supply-appln" />
+        </div>
+    </div>
+
+</div>
+    }
+}
+
+    <script type="text/javascript">
+
+        function yesnoCheck() {
+            if (document.getElementById('Online').checked) {
+                document.getElementById('ifOnline').style.display = 'block';
+            } else {
+                document.getElementById('ifOnline').style.display = 'none';
+            }
         }
 
-        <script type="text/javascript">
-
-            function yesnoCheck() {
-                if (document.getElementById('Online').checked) {
-                    document.getElementById('ifOnline').style.display = 'block';
-                } else {
-                    document.getElementById('ifOnline').style.display = 'none';
-                }
-            }
-
-        </script>
+    </script>

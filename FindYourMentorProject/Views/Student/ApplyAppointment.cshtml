@@ -58,7 +58,6 @@
         @Html.LabelFor(model => model.AppointmentDate, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="Indiv-form-text">
             @Html.EditorFor(model => model.AppointmentDate, new { htmlAttributes = new { @Value = ViewBag.AppointmentDate, disabled = "disabled", @readonly = "readonly" } })
-            @Html.ValidationMessageFor(model => model.AppointmentDate, "", new { @class = "text-danger" })
         </div>
     </div>
 
@@ -83,6 +82,14 @@
         <div class="Indiv-form-text">
             @Html.EditorFor(model => model.MenteeWorkingStatus, new { htmlAttributes = new { @Value = ViewBag.MenteeWorkingStatus, @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
             @Html.ValidationMessageFor(model => model.MenteeWorkingStatus, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="Indiv-form-elem">
+        @Html.LabelFor(model => model.AppointmentMode, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="Indiv-form-text">
+            @Html.EditorFor(model => model.AppointmentMode, new { htmlAttributes = new { @Value = ViewBag.AppointmentMode, @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
+            @Html.ValidationMessageFor(model => model.AppointmentMode, "", new { @class = "text-danger" })
         </div>
     </div>
 </div>
@@ -147,7 +154,7 @@
     <div class="Indiv-form-elem">
         @Html.LabelFor(model => model.AppointmentDate, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="Indiv-form-text">
-            @Html.EditorFor(model => model.AppointmentDate, new { htmlAttributes = new { type="date" } })
+            @Html.EditorFor(model => model.AppointmentDate, new { htmlAttributes = new { @class = "form-control", @type = "date", min = DateTime.Now.ToString("yyyy-MM-dd") } })
             @Html.ValidationMessageFor(model => model.AppointmentDate, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -179,7 +186,17 @@
             @Html.RadioButtonFor(model => model.MenteeWorkingStatus, "Unemployed")<span>Unemployed</span><br />
         </div>
     </div>
-    
+
+    <div class="radio-elem">
+        @Html.LabelFor(model => model.AppointmentMode, htmlAttributes: new { @class = "radio-label" })
+        @Html.ValidationMessageFor(model => model.AppointmentMode, "", new { @class = "text-danger" })
+        <div class="Indiv-form-radio">
+            @Html.RadioButtonFor(model => model.AppointmentMode, "Online")<span>Online</span><br />
+
+            @Html.RadioButtonFor(model => model.AppointmentMode, "Offline")<span>Offline</span><br />
+        </div>
+    </div>
+
 
     <div class="Indiv-form-elem">
         <input type="submit" value="CONFIRM APPOINTMENT" class="supply-appln" />
@@ -188,3 +205,10 @@
         }
         }
     
+<script>
+$(document).ready(function () {
+    $(".datepicker").datepicker({
+        minDate: 0,
+      });
+   });
+</script>

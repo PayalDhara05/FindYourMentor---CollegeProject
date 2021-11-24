@@ -188,6 +188,7 @@
     <Content Include="Custom\css\AddorEditAdvertisements.css" />
     <Content Include="Custom\css\AddorEditNotes.css" />
     <Content Include="Custom\css\Advertisement.css" />
+    <Content Include="Custom\css\ApplicationCard.css" />
     <Content Include="Custom\css\commonSignup.css" />
     <Content Include="Custom\css\Footer.css" />
     <Content Include="Custom\css\Loader.css" />
@@ -399,6 +400,7 @@
     <Content Include="Views\Mentor\viewMenteeAppointment.cshtml" />
     <Content Include="Views\Mentor\viewOnlineFeeApplication.cshtml" />
     <Content Include="Views\Mentor\viewOfflineFeeApplication.cshtml" />
+    <Content Include="Views\Mentor\ViewFullMenteeAppointment.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

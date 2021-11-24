@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.WebPages;
@@ -376,11 +377,13 @@ namespace FindYourMentorProject.Controllers
                     app.StatusUpdateTime = System.DateTime.Now;
                     db.Configuration.ValidateOnSaveEnabled = false;
                     db.SaveChanges();
+                    Thread.Sleep(1500);
                     //ApprovalNotificationMentee(app.MenteeName, app.MenteeEmailID, advid.MentorName, advid.CourseName, advid.Address, advid.State);
                     return Json(new { success = true, message = "Approve status updated Successfully" }, JsonRequestBehavior.AllowGet);
                 }
                 else
                 {
+                    Thread.Sleep(2000);
                     return Json(new { success = true, message = "You cannot update status more than 3 times !!!" }, JsonRequestBehavior.AllowGet);
                 }
                 
@@ -400,12 +403,14 @@ namespace FindYourMentorProject.Controllers
                     app.StatusUpdateTime = System.DateTime.Now;
                     db.Configuration.ValidateOnSaveEnabled = false;
                     db.SaveChanges();
+                    Thread.Sleep(1500);
                     //RejectNotificationMentee(app.MenteeName, app.MenteeEmailID, advid.MentorName, advid.CourseName, advid.Address, advid.State);
                     return Json(new { success = true, message = "Reject status updated Successfully" }, JsonRequestBehavior.AllowGet);
                 }
                 else
                 {
-                    return Json(new { success = true, message = "You cannot update status more than 5 times !!!" }, JsonRequestBehavior.AllowGet);
+                    Thread.Sleep(2000);
+                    return Json(new { success = true, message = "You cannot update status more than 3 times !!!" }, JsonRequestBehavior.AllowGet);
                 }
             }
         }
@@ -501,6 +506,144 @@ namespace FindYourMentorProject.Controllers
             List<Appointment> List = db.Appointments.Where(a => a.MentorID == userid && a.AppointmentRemoveStatus == "Unremoved").ToList();
             return Json(List, JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult ViewFullMenteeAppointment(int id = 0)
+        {
+            using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
+            {
+                return View(db.Appointments.Where(a => a.AppointmentID == id).FirstOrDefault<Appointment>());
+            }
+        }
+
+        public ActionResult ConfirmStatus(int id)
+        {
+            using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
+            {
+                var app = db.Appointments.Where(a => a.AppointmentID == id).FirstOrDefault();
+                var advid = db.CourseAdvertisements.Where(a => a.MentorID == app.MentorID).FirstOrDefault();
+                if (app.StatusCounter < 3)
+                {
+                    app.AppointmentStatus = "Confirmed";
+                    app.StatusCounter++;
+                    app.AppointmentUpdateStatusTime = System.DateTime.Now;
+                    db.Configuration.ValidateOnSaveEnabled = false;
+                    db.SaveChanges();
+                    Thread.Sleep(1500);
+                    //ConfirmNotificationMentee(app.MenteeName, app.MenteeEmailID, advid.MentorName, advid.CourseName, advid.Address, advid.State);
+                    return Json(new { success = true, message = "Confirm status updated Successfully" }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    Thread.Sleep(2000);
+                    return Json(new { success = true, message = "You cannot update status more than 3 times !!!" }, JsonRequestBehavior.AllowGet);
+                }
+
+            }
+        }
+
+        public ActionResult CancelStatus(int id)
+        {
+            using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
+            {
+                var app = db.Appointments.Where(a => a.AppointmentID == id).FirstOrDefault();
+                var advid = db.CourseAdvertisements.Where(a => a.MentorID == app.MentorID).FirstOrDefault();
+                if (app.StatusCounter < 3)
+                {
+                    app.AppointmentStatus = "Cancelled";
+                    app.StatusCounter++;
+                    app.AppointmentUpdateStatusTime = System.DateTime.Now;
+                    db.Configuration.ValidateOnSaveEnabled = false;
+                    db.SaveChanges();
+                    Thread.Sleep(1500);
+                    //CancelNotificationMentee(app.MenteeName, app.MenteeEmailID, advid.MentorName, advid.CourseName, advid.Address, advid.State);
+                    return Json(new { success = true, message = "Cancel status updated Successfully" }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    Thread.Sleep(2000);
+                    return Json(new { success = true, message = "You cannot update status more than 3 times !!!" }, JsonRequestBehavior.AllowGet);
+                }
+            }
+        }
+
+        public ActionResult UpdateRemoveAppointmentStatus(int id)
+        {
+            using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
+            {
+                var app = db.Appointments.Where(a => a.AppointmentID == id).FirstOrDefault();
+                var advid = db.CourseAdvertisements.Where(a => a.MentorID == app.MentorID).FirstOrDefault();
+                app.AppointmentRemoveStatus = "Removed";
+                db.Configuration.ValidateOnSaveEnabled = false;
+                db.SaveChanges();
+                return Json(new { success = true, message = "Removed" }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        [NonAction]
+        public void ConfirmNotificationMentee(string menteeName, string menteeEmailID, string MentorName, string CourseName, string Address, string State)
+        {
+            string subject = "";
+            string body = "";
+
+            var fromEmail = new MailAddress("payaldhara05@gmail.com", "Find Your Mentor");
+            var toEmail = new MailAddress(menteeEmailID);
+            var fromEmailPassword = "priyapayu";
+
+            subject = "Mentor Response to your Application Request";
+            body = " Dear " + menteeName + ",<br><br>" + "Your Appointment request for the courses " + CourseName + " under mentors" + MentorName + " have been confirmed.<br> Kindly do rest of the procdures. If want pay online fees, you can do our website 'Find Your Mentor'. <br>For more information, please do visit our website.<br>All the best for your future !!!<br><br><br><br>Thanks & Regards<br>Find Your Mentor";
+
+            var smtp = new SmtpClient
+            {
+                Host = "smtp.gmail.com",
+                Port = 587,
+                EnableSsl = true,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential(fromEmail.Address, fromEmailPassword)
+            };
+
+            using (var message = new MailMessage(fromEmail, toEmail)
+            {
+                Subject = subject,
+                Body = body,
+                IsBodyHtml = true
+            })
+                smtp.Send(message);
+        }
+
+
+        [NonAction]
+        public void CancelNotificationMentee(string menteeName, string menteeEmailID, string MentorName, string CourseName, string Address, string State)
+        {
+            string subject = "";
+            string body = "";
+
+            var fromEmail = new MailAddress("payaldhara05@gmail.com", "Find Your Mentor");
+            var toEmail = new MailAddress(menteeEmailID);
+            var fromEmailPassword = "priyapayu";
+
+            subject = "Mentor Response to your Application Request";
+            body = " Dear " + menteeName + ",<br><br>" + "Your Appointment request for the courses " + CourseName + " under mentors" + MentorName + " have been cancelled due to some reasons.<br> Kindly do rest of the procdures. If want pay online fees, you can do our website 'Find Your Mentor'. <br>For more information, please do visit our website.<br>All the best for your future !!!<br><br><br><br>Thanks & Regards<br>Find Your Mentor";
+
+            var smtp = new SmtpClient
+            {
+                Host = "smtp.gmail.com",
+                Port = 587,
+                EnableSsl = true,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential(fromEmail.Address, fromEmailPassword)
+            };
+
+            using (var message = new MailMessage(fromEmail, toEmail)
+            {
+                Subject = subject,
+                Body = body,
+                IsBodyHtml = true
+            })
+                smtp.Send(message);
+        }
+
 
         public ActionResult viewOnlineFeeApplication()
         {

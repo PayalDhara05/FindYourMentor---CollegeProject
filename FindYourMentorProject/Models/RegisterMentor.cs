@@ -18,7 +18,6 @@ namespace FindYourMentorProject.Models
         public RegisterMentor()
         {
             this.CourseAdvertisements = new HashSet<CourseAdvertisement>();
-            ProfilePicture = "/Image/defaultProfile1.jpg";
         }
     
         public int UserID { get; set; }

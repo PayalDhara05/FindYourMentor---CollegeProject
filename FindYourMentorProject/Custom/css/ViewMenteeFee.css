@@ -304,13 +304,17 @@ form {
     color: green;
     cursor: pointer;
 }
+.View-btn {
+    color: blue;
+    cursor: pointer;
+}
 
 .fa-window-close {
     color: red;
     cursor: pointer;
 }
 
-.fa-eye {
+.fa-eye, .fa-file-invoice-dollar {
     color: blue;
     cursor: pointer;
 }

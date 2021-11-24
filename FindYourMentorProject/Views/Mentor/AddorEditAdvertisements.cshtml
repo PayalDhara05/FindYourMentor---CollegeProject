@@ -72,12 +72,16 @@
 
             <tr>
                 <td><p>Total Students enrolled till now:</p></td>
-                <td><input type="number" name="" id="" min="0" placeholder="Enrolled Mentees Number"></td>
+                <td>
+                    <input type="number" name="SeatsOccupied" id="" min="0" placeholder="Enrolled Mentees Number" value="@Model.SeatsOccupied">
+                    <br />
+                    @Html.ValidationMessageFor(model => model.SeatsOccupied, "", new { @class = "text-danger" })
+                </td>
                 <td><p>Total Number of seats:</p></td>
                 <td>
-                    <input type="number" name="TotalStudents" id="" min="0" placeholder="Total Number of seats" value="@Model.TotalStudents">
+                    <input type="number" name="TotalSeats" id="" min="0" placeholder="Total Number of seats" value="@Model.TotalSeats">
                     <br />
-                    @Html.ValidationMessageFor(model => model.TotalStudents, "", new { @class = "text-danger" })
+                    @Html.ValidationMessageFor(model => model.TotalSeats, "", new { @class = "text-danger" })
                 </td>
 
             <tr>
@@ -94,12 +98,12 @@
             </tr>
 
             <tr>
-                <td><p>GitHub ID:</p></td>
+                <td><p>Fees:</p></td>
                 <td>
                     <input type="number" name="Fees" id="" min="0" placeholder="Course Fees" value="@Model.Fees"><br />
                     @Html.ValidationMessageFor(model => model.Fees, "", new { @class = "text-danger" })
                 </td>
-                <td><p>LinkedIn ID:</p></td>
+                <td><p>Field:</p></td>
                 <td>
                     <input type="text" name="Field" id="" maxlength="100" minlength="3" placeholder="Field .." value="@Model.Field"><br />
                     @Html.ValidationMessageFor(model => model.Field, "", new { @class = "text-danger" })
@@ -633,14 +637,14 @@
                     <div class="indiv-field-name">
                         <span>Total Students enrolled till now:</span>
                     </div>
-                    <input type="number" name="" id="" min="0" placeholder="Enrolled Mentees Number">
+                    <input type="number" name="SeatsOccupied" id="" min="0" placeholder="Enrolled Mentees Number" value="@Model.SeatsOccupied">
                 </div>
 
                 <div class="indiv-field">
                     <div class="indiv-field-name">
                         <span>Total Number of seats:</span>
                     </div>
-                    <input type="number" name="@Model.TotalStudents" id="" min="0" placeholder="Total Number of seats">
+                    <input type="number" name="@Model.SeatsOccupied" id="" min="0" placeholder="Total Number of seats">
                 </div>
 
                 <div class="indiv-field">

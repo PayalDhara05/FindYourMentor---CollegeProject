@@ -168,7 +168,7 @@ table.dataTable.display tbody tr.even > .sorting_1, table.dataTable.order-column
 }
 
 .ui-widget input, .ui-widget textarea {
-    font-size: 2rem !important;
+    font-size: 1.5rem !important;
     outline: none;
     padding-left: 1rem;
     width: 100%;
@@ -312,7 +312,7 @@ form {
     display:flex;
 }
     .Application-Mentee-indiv td {
-        font-size: 2rem;
+        font-size: 1.6rem;
         font-family: 'Montserrat', sans-serif;
         margin-top:1rem;
     }

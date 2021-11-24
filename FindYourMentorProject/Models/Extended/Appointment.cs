@@ -33,7 +33,6 @@ namespace FindYourMentorProject.Models
 
         [Display(Name = "Working Status")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "Please select one !!")]
-        [MinLength(3, ErrorMessage = "Atleast 3 characters are expected")]
         public string MenteeWorkingStatus { get; set; }
 
         [Display(Name = "Mentee GitHub")]

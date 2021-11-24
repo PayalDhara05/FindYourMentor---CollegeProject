@@ -21,6 +21,7 @@
                 <th>Working Status</th>
                 <th>State</th>
                 <th>Age</th>
+                <th>Appointment Mode</th>
                 <th>Appointment Status</th>
                 <th>Appointment</th>
                 <th>Course Advertisement</th>
@@ -84,9 +85,10 @@
                     { "mData": "MenteeWorkingStatus" },
                     { "mData": "MenteeState" },
                     { "mData": "MenteeAge" },
+                    { "mData": "AppointmentMode" },
                     { "mData": "AppointmentStatus" },
                     {
-                        "mData":"ApplicationID" , "render" : function (data) {
+                        "mData":"AppointmentID" , "render" : function (data) {
                             return "<i class='far fa-eye' title='Mentee Appointment' class='View-btn' id='view-appln' onclick=PopupForm('" + data + "')></i>";
                     },
                         "orderable": false,
@@ -100,14 +102,14 @@
                         "searchable":false,
                     },
                     {
-                        "mData":"ApplicationID" , "render" : function (data) {
-                            return "<i class='fas fa-check-square' id='approve' title='Confirm Appointment' onclick=Approve('" + data + "')></i><i class='fas fa-window-close' title='Cancel Appointment' id='approve' id='reject' onclick=Reject('" + data + "')>";
+                        "mData":"AppointmentID" , "render" : function (data) {
+                            return "<i class='fas fa-check-square' id='approve' title='Confirm Appointment' onclick=Confirm('" + data + "')></i><i class='fas fa-window-close' title='Cancel Appointment' id='approve' id='reject' onclick=Cancel('" + data + "')>";
                     },
                         "orderable": false,
                         "searchable":false,
                     },
                     {
-                        "mData": "ApplicationID", "render": function (data) {
+                        "mData": "AppointmentID", "render": function (data) {
                             return "<i class='fa fa-trash' title='Delete Appointment' onclick=Remove('" + data + "')></i>";
                         },
                         "orderable": false,
@@ -125,8 +127,8 @@
             })
 
 
-    function Approve(id) {
-        var url = '@Url.Action("ApproveStatus", "Mentor")/' + id;
+    function Confirm(id) {
+        var url = '@Url.Action("ConfirmStatus", "Mentor")/' + id;
 
         $.ajax({
             url: url,
@@ -152,8 +154,8 @@
         });
     };
 
-    function Reject(id) {
-        var url = '@Url.Action("RejectStatus", "Mentor")/' + id;
+    function Cancel(id) {
+        var url = '@Url.Action("CancelStatus", "Mentor")/' + id;
 
         $.ajax({
             url: url,
@@ -181,7 +183,7 @@
         };
 
         function Remove(id) {
-        var url = '@Url.Action("UpdateRemoveStatus", "Mentor")/' + id;
+        var url = '@Url.Action("UpdateRemoveAppointmentStatus", "Mentor")/' + id;
 
         $.ajax({
             url: url,

@@ -1,0 +1,256 @@
+﻿@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;600;700&family=PT+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    font-size: 10px;
+}
+
+.whole-appln-container {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
+.appln-card-filter {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+}
+
+    .appln-card-filter label {
+        margin-top: 5rem;
+        font-size: 3rem;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: bold;
+        color: #833471;
+        text-align: center;
+    }
+
+    .appln-card-filter input[type="radio"] {
+        margin-top: 4rem;
+        accent-color: #833471;
+        height: 2rem;
+        width: 2rem;
+        margin-right: 1rem;
+    }
+
+    .appln-card-filter span {
+        margin-right: 2rem;
+        font-size: 2.7rem;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: bold;
+    }
+
+.indiv-appln-card {
+    background-color: #78e08f;
+    padding: 3rem;
+    margin: 1.5rem;
+    width: auto;
+    height: auto;
+    border-top-right-radius: 40px;
+    border-bottom-left-radius: 40px;
+}
+
+    .indiv-appln-card span {
+        color: #1a1818;
+        font-family: 'Open Sans', sans-serif;
+        font-weight: bold;
+    }
+
+    .indiv-appln-card p {
+        font-size: 1.7rem;
+        margin-top: 1rem;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: bold;
+    }
+
+    .indiv-appln-card .indiv-appln-btns {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        margin-top: 2rem;
+    }
+
+        .indiv-appln-card .indiv-appln-btns button {
+            text-align: center;
+            font-size: 1.5rem;
+            font-family: 'Montserrat', sans-serif;
+            border: none;
+            outline: none;
+            padding: 1rem 2rem;
+            width: 17rem;
+            background-color: #023020;
+            border: 2px solid #023020;
+            border-radius: 15px;
+            color: white;
+            -webkit-transition: all .3s linear;
+            transition: all .3s linear;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+            .indiv-appln-card .indiv-appln-btns button:hover {
+                background-color: white;
+                color: #023020;
+            }
+
+    .indiv-appln-card:nth-child(3n+0) {
+        background-color: #7ed6df;
+    }
+
+        .indiv-appln-card:nth-child(3n+0) button {
+            border: 2px solid #0652DD;
+            background-color: #0652DD;
+        }
+
+            .indiv-appln-card:nth-child(3n+0) button:hover {
+                color: #0652DD;
+            }
+
+    .indiv-appln-card:nth-child(2n+0) {
+        background-color: pink;
+    }
+
+        .indiv-appln-card:nth-child(2n+0) button {
+            border: 2px solid #c44569;
+            background-color: #c44569;
+        }
+
+            .indiv-appln-card:nth-child(2n+0) button:hover {
+                color: #c44569;
+            }
+
+    .indiv-appln-card:nth-child(4n+0) {
+        background-color: #D6A2E8;
+    }
+
+        .indiv-appln-card:nth-child(4n+0) button {
+            border: 2px solid #6D214F;
+            background-color: #6D214F;
+        }
+
+            .indiv-appln-card:nth-child(4n+0) button:hover {
+                color: #6D214F;
+            }
+
+    .indiv-appln-card:nth-child(5n+0) {
+        background-color: #CAD3C8;
+    }
+
+        .indiv-appln-card:nth-child(5n+0) button {
+            border: 2px solid #2C3A47;
+            background-color: #2C3A47;
+        }
+
+            .indiv-appln-card:nth-child(5n+0) button:hover {
+                color: #2C3A47;
+            }
+
+    .indiv-appln-card:hover {
+        -webkit-box-shadow: 2px 2px 5px #666;
+        box-shadow: 2px 2px 5px #666;
+    }
+
+    .indiv-appln-card:hover {
+        -webkit-box-shadow: 2px 2px 5p #666;
+        box-shadow: 2px 2px 5p #666;
+    }
+
+@media screen and (max-width: 404px) {
+    .indiv-appln-btns {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+    }
+
+        .indiv-appln-btns button {
+            margin-top: 1rem;
+        }
+}
+
+@media screen and (max-width: 366px) {
+    .grp-radios {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+    }
+
+    .appln-card-filter label {
+        font-size: 2rem;
+    }
+
+    .appln-card-filter input[type="radio"] {
+        height: 1.5rem;
+        width: 1.5rem;
+        margin: 0rem;
+        margin-top: 2rem;
+    }
+
+    .appln-card-filter span {
+        font-size: 2rem;
+        margin: 0;
+    }
+}
+/*# sourceMappingURL=ApplicationCard.css.map */

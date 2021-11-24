@@ -379,7 +379,8 @@ namespace FindYourMentorProject.Controllers
                     save.MentorID = cAdv.MentorID;
                     save.BatchesFull = cAdv.BatchesFull;
                     save.BatchesAvailable = cAdv.BatchesAvailable;
-                    save.TotalStudents = cAdv.TotalStudents;
+                    save.TotalSeats = cAdv.TotalSeats;
+                    save.SeatsOccupied = cAdv.SeatsOccupied;
                     save.Fees = cAdv.Fees;
                     save.YearsOfExperience = cAdv.YearsOfExperience;
                     //save.DemoLec1 = cAdv.DemoLec1;
@@ -527,12 +528,15 @@ namespace FindYourMentorProject.Controllers
                     app_form.WorkingStatus = app.WorkingStatus;
                     app_form.ApplicationStatus = "Pending";
                     app_form.MentorEmailID = advdetails.EmailID;
+                    app_form.ClassName = advdetails.ClassName;
+                    app_form.CourseName = advdetails.CourseName;
+                    app_form.MentorName = advdetails.MentorName;
                     app_form.AppliedTime = System.DateTime.Now;
                     app_form.MentorRemoveStatus = "Unremoved";
                     db.Applications.Add(app_form);
                     db.Configuration.ValidateOnSaveEnabled = false;
                     db.SaveChanges();
-                    applicationnotificationmentor(user.FirstName, user.State, advdetails.EmailID, advdetails.CourseName, advdetails.MentorName, advdetails.CreationDate);
+                    //applicationnotificationmentor(user.FirstName, user.State, advdetails.EmailID, advdetails.CourseName, advdetails.MentorName, advdetails.CreationDate);
                     return Json(new { success = true, message = "Applied !!!" }, JsonRequestBehavior.AllowGet);
                 }   
             }
@@ -590,6 +594,7 @@ namespace FindYourMentorProject.Controllers
                     ViewBag.AppointmentDate = appln.AppointmentDate;
                     ViewBag.AppointmentTime = appln.AppointmentTime;
                     ViewBag.MenteeWorkingStatus = appln.MenteeWorkingStatus;
+                    ViewBag.AppointmentMode = appln.AppointmentMode;
                     ViewBag.Time = appln.AppointmentApplied;
                     return View();
                 }
@@ -610,6 +615,8 @@ namespace FindYourMentorProject.Controllers
                 }
             }
         }
+
+
 
 
         public ActionResult SubmitAppointment(Appointment appoint)
@@ -642,7 +649,11 @@ namespace FindYourMentorProject.Controllers
                     app_form.AppointmentRemoveStatus = "Unremoved";
                     app_form.StartTime = appoint.StartTime;
                     app_form.EndTime = appoint.EndTime;
+                    app_form.ClassName = advdetails.ClassName;
+                    app_form.CourseName = advdetails.CourseName;
+                    app_form.MentorName = advdetails.MentorName;
                     app_form.MenteeWorkingStatus = appoint.MenteeWorkingStatus;
+                    app_form.AppointmentMode = appoint.AppointmentMode;
                     string startTime, endTime;
                     if(appoint.StartTime < 12)
                     {
@@ -679,14 +690,16 @@ namespace FindYourMentorProject.Controllers
 
         public ActionResult ViewApprovedApplication()
         {
-            int userid = Convert.ToInt32(Session["UserID"]);
-            List<Application> applnList = new List<Application>();
-            using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
-            {
+            return View();
+        }
 
-                applnList = db.Applications.Where(a => a.MenteeID == userid && a.ApplicationStatus == "Approve" ).ToList();
-                return View(applnList);
-            }
+        public ActionResult ViewApprovedApplicationData()
+        {
+            int userid = Convert.ToInt32(Session["UserID"]);
+            FindYourMentorProjectEntities db = new FindYourMentorProjectEntities();
+            db.Configuration.ProxyCreationEnabled = false;
+            List<Application> applnList = db.Applications.Where(a => a.MenteeID == userid && a.ApplicationStatus == "Approve").ToList();
+            return Json(applnList, JsonRequestBehavior.AllowGet);
         }
 
 

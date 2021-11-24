@@ -11,9 +11,7 @@ namespace FindYourMentorProject.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Web;
-
+    
     public partial class CourseAdvertisement
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,10 +21,6 @@ namespace FindYourMentorProject.Models
             this.Appointments = new HashSet<Appointment>();
             this.Fees1 = new HashSet<Fee>();
             this.SavedLists = new HashSet<SavedList>();
-            DemoLec1 = "~/VideoFile/Demo.mp4";
-            DemoLec2 = "~/VideoFile/Demo.mp4";
-            DemoLec3 = "~/VideoFile/Demo.mp4";
-            DemoLec4 = "~/VideoFile/Demo.mp4";
         }
     
         public int AdvertisementID { get; set; }
@@ -38,7 +32,7 @@ namespace FindYourMentorProject.Models
         public string EmailID { get; set; }
         public Nullable<int> BatchesFull { get; set; }
         public Nullable<int> BatchesAvailable { get; set; }
-        public int TotalStudents { get; set; }
+        public int TotalSeats { get; set; }
         public int Fees { get; set; }
         public string Address { get; set; }
         public string SpokenLanguage1 { get; set; }
@@ -58,19 +52,8 @@ namespace FindYourMentorProject.Models
         public string SpokenLanguage4 { get; set; }
         public string DemoLec3 { get; set; }
         public string DemoLec4 { get; set; }
-
-        [NotMapped]
-        public HttpPostedFileBase VideoUpload1 { get; set; }
-
-        [NotMapped]
-        public HttpPostedFileBase VideoUpload2 { get; set; }
-
-        [NotMapped]
-        public HttpPostedFileBase VideoUpload3 { get; set; }
-
-        [NotMapped]
-        public HttpPostedFileBase VideoUpload4 { get; set; }
-
+        public int SeatsOccupied { get; set; }
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Application> Applications { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

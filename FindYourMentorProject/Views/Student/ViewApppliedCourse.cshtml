@@ -5,31 +5,68 @@
     Layout = "~/Views/Shared/_StudentLayout.cshtml";
 }
 
-<h2>ViewApppliedCourse</h2>
-<div>
-    @foreach (var item in Model)
-    {
-        @Html.DisplayNameFor(model => model.MenteeName)<br />
-        @Html.DisplayFor(modelItem => item.MenteeName)<br />
+@*<h2>ViewApppliedCourse</h2>
+    <div>
+        @foreach (var item in Model)
+        {
+            @Html.DisplayNameFor(model => model.MenteeName)<br />
+            @Html.DisplayFor(modelItem => item.MenteeName)<br />
 
-        @Html.DisplayNameFor(model => model.MenteeEmailID)<br />
-        @Html.DisplayFor(modelItem => item.MenteeEmailID)<br />
+            @Html.DisplayNameFor(model => model.MenteeEmailID)<br />
+            @Html.DisplayFor(modelItem => item.MenteeEmailID)<br />
 
-        @Html.DisplayNameFor(model => model.MenteeContactNo)<br />
-        @Html.DisplayFor(modelItem => item.MenteeContactNo)<br />
+            @Html.DisplayNameFor(model => model.MenteeContactNo)<br />
+            @Html.DisplayFor(modelItem => item.MenteeContactNo)<br />
 
-        @Html.DisplayNameFor(model => model.MenteeAddress)<br />
-        @Html.DisplayFor(modelItem => item.MenteeAddress)<br />
+            @Html.DisplayNameFor(model => model.MenteeAddress)<br />
+            @Html.DisplayFor(modelItem => item.MenteeAddress)<br />
 
-        <button onclick="PopupForm(@item.ApplicationID)">View Your Application</button>
-        <button onclick="PopupForm2(@item.AdvertisementID)">View Course Advertisement you have applied for</button>
+            <button onclick="PopupForm(@item.ApplicationID)">View Your Application</button>
+            <button onclick="PopupForm2(@item.AdvertisementID)">View Course Advertisement you have applied for</button>
 
-        <p>Application status - </p>
-        @Html.DisplayFor(modelItem => item.ApplicationStatus)<br />
-    }
-</div>
-<br />
-<br />
+            <p>Application status - </p>
+            @Html.DisplayFor(modelItem => item.ApplicationStatus)<br />
+        }
+    </div>
+    <br />
+    <br />*@
+<link href="~/Custom/css/ApplicationCard.css" rel="stylesheet" />
+<body>
+    <div class="appln-card-filter">
+        <label for="filters">Sort Application by status:- </label>
+        <form>
+            <div class="grp-radios">
+                <input type="radio" name="filters" id="" value="Approved"><span>Approved</span>
+                <input type="radio" name="filters" id="" value="Rejected"><span>Rejected</span>
+            </div>
+        </form>
+    </div>
+
+    <div class="whole-appln-container">
+        @if (@Model.Count() == 0)
+        {
+            <p>You haven't applied for any courses !!</p>
+        }
+        else
+        {
+            foreach (var item in Model)
+            {
+                <div class="indiv-appln-card">
+                    <p><span>Your Name: </span>@item.MenteeName</p>
+                    <p><span>Course Name: </span>@item.CourseName</p>
+                    <p><span>Mentor Name: </span>@item.MentorName</p>
+                    <p><span>Application Status: </span>@item.ApplicationStatus</p>
+                    <div class="indiv-appln-btns">
+                        <button onclick="PopupForm(@item.ApplicationID)">View Application</button>
+                        <button>View Course</button>
+                    </div>
+                </div>
+            }
+        }
+
+    </div>
+</body>
+
 
 <script type="text/javascript">
 

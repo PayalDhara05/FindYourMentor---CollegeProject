@@ -375,3 +375,15 @@ table::-webkit-scrollbar-thumb {
         font-size: 1.7rem !important;
     }
 }
+.ui-datepicker {
+    font-size: 5%;
+}
+
+.ui-widget-header {
+    background: #77CC6D;
+}
+
+.ui-widget-content .ui-state-default:hover {
+    background: #77CC6D;
+    border-radius: 2px;
+}

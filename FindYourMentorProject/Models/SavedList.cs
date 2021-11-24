@@ -21,7 +21,6 @@ namespace FindYourMentorProject.Models
         public string Description { get; set; }
         public Nullable<int> BatchesFull { get; set; }
         public Nullable<int> BatchesAvailable { get; set; }
-        public int TotalStudents { get; set; }
         public int Fees { get; set; }
         public string Address { get; set; }
         public string SpokenLanguage1 { get; set; }
@@ -40,6 +39,8 @@ namespace FindYourMentorProject.Models
         public string SpokenLanguage4 { get; set; }
         public string DemoLec3 { get; set; }
         public string DemoLec4 { get; set; }
+        public int TotalSeats { get; set; }
+        public int SeatsOccupied { get; set; }
     
         public virtual CourseAdvertisement CourseAdvertisement { get; set; }
         public virtual RegisterStudent RegisterStudent { get; set; }

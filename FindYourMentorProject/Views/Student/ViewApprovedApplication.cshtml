@@ -5,52 +5,208 @@
     Layout = "~/Views/Shared/_StudentLayout.cshtml";
 }
 
-<h2>ViewApprovedApplication</h2>
+<link href="~/Custom/css/Loader.css" rel="stylesheet" />
+<link href="~/Custom/css/ViewMenteeFee.css" rel="stylesheet" />
 
-@foreach (var item in Model)
-{
-    <h2>Name: </h2>@Html.DisplayFor(modelItem => item.MenteeName, "", new { id = "advid" })
-    <h3>State: </h3> @Html.DisplayFor(modelItem => item.MenteeState, "", new { id = "advid" })
-    <h3>Application you applied on: </h3> @Html.DisplayFor(modelItem => item.AppliedTime, "", new { id = "advid" })
-    <h3>Your EmailID: </h3> @Html.DisplayFor(modelItem => item.MenteeEmailID, "", new { id = "advid" })
-    <h3>Mentor EmailID: </h3> @Html.DisplayFor(modelItem => item.MentorEmailID, "", new { id = "advid" })<br />
-    <button onclick="PopupForm(@item.AdvertisementID)">Pay Fees</button>
-    <br /><br /><br /><br />
-}
+<div id="loader" style="display:none;">
+    <img src="~/uiImages/Loader.gif" />
+    <p>Processing ...</p>
+</div>
+
+<h1 id="Appln_header">Approved Applications</h1>
+<div class="main-table-container">
+    <table id="Fee" style="width:100%;height:auto">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Class Name</th>
+                <th>Mentor Name</th>
+                <th>Course Name</th>
+                <th>Application</th>
+                <th>Course Advertisement</th>
+                <th>Pay Fees</th>
+            </tr>
+        </thead>
+
+        <tbody>
+        </tbody>
+    </table>
+</div>
+
+
+<link href="//cdn.datatables.net/1.11.1/css/jquery.dataTables.min.css" rel="stylesheet" />
+
+
+
+@section ScriptsNew{
+    <script src="//cdn.datatables.net/1.11.1/js/jquery.dataTables.min.js"></script>
+    @*<script src="ttps://unpkg.com/@Html.Raw("@")popperjs/core@2"></script>
+        <script src="'"></script>*@
 
 
 <script type="text/javascript">
+            var Popup, dataTable;
+            var screenWidth, screenHeight, dialogWidth, dialogHeight, isDesktop;
 
-    var Popup1;
+            screenWidth = window.screen.width;
+            screenHeight = window.screen.height;
 
-    function PopupForm(id) {
-        url = '@Url.Action("ViewPayFees", "Student")/' + id;
-        var formDiv = $('<div />');
-        $.get(url)
-            .done(function (response) {
+            if (screenWidth < 705) {
+                /* alert("love");*/
+                dialogWidth = screenWidth * .75;
+                dialogHeight = screenHeight * .90;
+            }
+            else if (screenWidth < 553) {
+                alert("cute");
+                dialogWidth = screenWidth * .73;
+                dialogHeight = screenHeight * .90;
+            }
+            else {
+                dialogWidth = 700;
+                dialogHeight = 500;
+                isDesktop = true;
+            }
+
+             $(document).ready(function () {
+
+                 dataTable = $("#Fee").DataTable({
+                "ajax": {
+                         "url": "/Student/ViewApprovedApplicationData",
+                         "type": "GET",
+                         "datatype": "json",
+                         "dataSrc": ""
+                },
+                "responsive": "true",
+                "scrollX": true,
+                "columns": [
+                    { "mData": "MenteeName" },
+                    { "mData": "ClassName" },
+                    { "mData": "MentorName" },
+                    { "mData": "CourseName" },
+                    {
+                        "mData":"ApplicationID" , "render" : function (data) {
+                            return "<i class='far fa-eye' title='Mentee Application' class='View-btn' id='view-appln'  onclick=PopupForm('" + data + "')></i>";
+                    },
+                        "orderable": false,
+                        "searchable":false,
+                    },
+                    {
+                        "mData":"AdvertisementID" , "render" : function (data) {
+                            return "<i class='far fa-eye' title='Course Advertisement' class='View-btn' id='view-adv' onclick=PopupForm2('" + data + "')></i>";
+                    },
+                        "orderable": false,
+                        "searchable":false,
+                    },
+                    {
+                        "mData":"AdvertisementID" , "render" : function (data) {
+                            return "<i class='fas fa-file-invoice-dollar' id='approve' class='View-btn' id='view-adv' title='Pay fee for the Course' onclick=fillForm('" + data + "')></i>";
+                    },
+                        "orderable": false,
+                        "searchable":false,
+                    }
+                   ],
+                   "language": {
+                    "emptyTable": "<p class='empty-row'>No Approved Applications yet</p>"
+                }
+                 });
+             });
+
+        function Remove(id) {
+        var url = '@Url.Action("UpdateRemoveStatus", "Mentor")/' + id;
+
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: {
+                id: id
+            },
+            success: function (data) {
+                if (data.success) {
+                    dataTable.ajax.reload();
+
+                    $.notify(data.message, {
+                        globalPosition: "top center",
+                        className: "success"
+                    })
+                }
+            }
+        });
+    };
+
+    function PopupForm(id)
+    {
+        url = '@Url.Action("ViewFullMenteeApplication", "Mentor")/' + id;
+        var formDiv =
+            $('<div />');
+            $.get(url).done(function (response) {
+            formDiv.html(response);
+
+            Popup = formDiv.dialog({
+            autoOpen: true,
+            resizable: true,
+            title: 'Mentee Application',
+            height: dialogHeight,
+            width: dialogWidth,
+            show: { effect: 'drop', direction: "up" },
+            modal: true,
+            draggable: true,
+            close: function () {
+            Popup.dialog('destroy').remove();
+            }
+
+            });
+        });
+    }
+
+    function PopupForm2(id)
+    {
+        url = '@Url.Action("ViewCourseApplication", "Mentor")/' + id;
+        var formDiv =
+            $('<div />');
+            $.get(url).done(function (response) {
+            formDiv.html(response);
+
+            Popup = formDiv.dialog({
+            autoOpen: true,
+            resizable: true,
+            title: 'Apply',
+            height: 500,
+            width: 700,
+            close: function () {
+            Popup.dialog('destroy').remove();
+            }
+
+            });
+        });
+        }
+
+    function fillForm(id)
+        {
+            url = '@Url.Action("ViewPayFees", "Student")/' + id;
+            var formDiv =
+                $('<div />');
+                $.get(url).done(function (response) {
                 formDiv.html(response);
 
-                Popup1 = formDiv.dialog({
-                    autoOpen: true,
-                    resizable: true,
-                    title: 'Apply',
-                    height: 500,
-                    width: 700,
-                    show: { effect: 'drop', direction: "up" },
-                    modal: true,
-                    draggable: true,
-                    success: function (data) {
-                        if (data.success) {
+                Popup = formDiv.dialog({
+                autoOpen: true,
+                resizable: true,
+                title: 'Apply',
+                height: 500,
+                width: 700,
+                close: function () {
+                Popup.dialog('destroy').remove();
+                }
 
-                            $.notify(data.message, {
-                                globalPosition: "top center",
-                                className: "success"
-                            })
-                        }
-                    },
-                })
-            })
+                });
+            });
         }
 
 </script>
+}
+
+
+
+
+
 

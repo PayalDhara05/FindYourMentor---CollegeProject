@@ -36,6 +36,9 @@ namespace FindYourMentorProject.Models
         public Nullable<System.DateTime> StatusUpdateTime { get; set; }
         public Nullable<System.DateTime> AppliedTime { get; set; }
         public string MentorRemoveStatus { get; set; }
+        public string ClassName { get; set; }
+        public string CourseName { get; set; }
+        public string MentorName { get; set; }
     
         public virtual CourseAdvertisement CourseAdvertisement { get; set; }
         public virtual RegisterStudent RegisterStudent { get; set; }

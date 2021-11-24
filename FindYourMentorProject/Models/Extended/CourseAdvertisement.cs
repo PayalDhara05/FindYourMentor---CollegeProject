@@ -55,7 +55,11 @@ namespace FindYourMentorProject.Models
 
         [Display(Name = "Total number of Students")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "Field is required")]
-        public int TotalStudents { get; set; }
+        public int TotalSeats { get; set; }
+
+        [Display(Name = "Number of Seats Occupied")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Field is required")]
+        public int SeatsOccupied { get; set; }
 
         [Display(Name = "Total Fees of this course")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "Fee field is required")]

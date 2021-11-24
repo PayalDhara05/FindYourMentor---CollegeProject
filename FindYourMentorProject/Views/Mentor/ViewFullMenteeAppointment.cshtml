@@ -1,4 +1,4 @@
-﻿@model FindYourMentorProject.Models.Application
+﻿@model FindYourMentorProject.Models.Appointment
 <link href="~/Custom/css/ViewMenteeApplication.css" rel="stylesheet" />
 
 <div class="Application-Mentee">
@@ -26,12 +26,12 @@
 
         <tr class="Application-Mentee-indiv">
             <td>GitHub-ID: </td>
-            <td>@Model.MenteeGithub</td>
+            <td>@Model.MenteeGithubID</td>
         </tr>
 
         <tr class="Application-Mentee-indiv">
             <td>LinkedIn-ID: </td>
-            <td>@Model.MenteeLinkedin</td>
+            <td>@Model.MenteeLinkedinID</td>
         </tr>
 
         <tr class="Application-Mentee-indiv">
@@ -45,23 +45,18 @@
         </tr>
 
         <tr class="Application-Mentee-indiv">
-            <td>Background: </td>
-            <td>@Model.MenteeBackground</td>
+            <td>Appointment Date: </td>
+            <td>@Model.AppointmentDate</td>
         </tr>
 
         <tr class="Application-Mentee-indiv">
-            <td>Message: </td>
-            <td>@Model.MenteeMessage</td>
+            <td>Appointment Time: </td>
+            <td>@Model.AppointmentTime</td>
         </tr>
 
         <tr class="Application-Mentee-indiv">
             <td>Expectations: </td>
-            <td>@Model.MenteeExpectations</td>
-        </tr>
-
-        <tr class="Application-Mentee-indiv">
-            <td>Working Status: </td>
-            <td>@Model.WorkingStatus</td>
+            <td>@Model.MenteeWorkingStatus</td>
         </tr>
     </table>
 </div>
