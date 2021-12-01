@@ -129,7 +129,12 @@ html, body {
             transition: all .3s linear;
             font-weight: bold;
             cursor: pointer;
+           
         }
+            .indiv-appln-card .indiv-appln-btns button:nth-child(1)
+            {
+                margin-right:2rem;
+            }
 
             .indiv-appln-card .indiv-appln-btns button:hover {
                 background-color: white;
@@ -194,8 +199,8 @@ html, body {
     }
 
     .indiv-appln-card:hover {
-        -webkit-box-shadow: 2px 2px 5p #666;
-        box-shadow: 2px 2px 5p #666;
+        -webkit-box-shadow: 4px 4px 5px #666;
+        box-shadow: 4px 4px 5px #666;
     }
 
 @media screen and (max-width: 404px) {
@@ -252,5 +257,13 @@ html, body {
         font-size: 2rem;
         margin: 0;
     }
+}
+#no-data {
+    font-size: 2rem;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    color: #833471;
+    text-align: center;
+    margin-top:2rem;
 }
 /*# sourceMappingURL=ApplicationCard.css.map */

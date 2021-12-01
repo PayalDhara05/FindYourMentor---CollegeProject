@@ -1,4 +1,4 @@
-﻿@model IEnumerable<FindYourMentorProject.Models.Application>
+﻿@model IEnumerable<FindYourMentorProject.Models.Fee>
 
 @{
     ViewBag.Title = "ViewApprovedApplication";
@@ -19,7 +19,7 @@
 </div>
 
 
-<h1 id="Appln_header">Approved Applications</h1>
+<h1 id="Appln_header">Admission Status</h1>
 <div class="main-table-container">
     <table id="Fee" style="width:100%;height:auto">
         <thead>
@@ -28,9 +28,9 @@
                 <th>Class Name</th>
                 <th>Mentor Name</th>
                 <th>Course Name</th>
-                <th>Application</th>
                 <th>Course Advertisement</th>
-                <th>Pay Fees</th>
+                <th>Payment Status</th>
+                <th>Admission Status</th>
             </tr>
         </thead>
 
@@ -77,7 +77,7 @@
 
                  dataTable = $("#Fee").DataTable({
                 "ajax": {
-                         "url": "/Student/ViewApprovedApplicationData",
+                         "url": "/Student/AdmissionStatusData",
                          "type": "GET",
                          "datatype": "json",
                          "dataSrc": ""
@@ -90,29 +90,17 @@
                     { "mData": "MentorName" },
                     { "mData": "CourseName" },
                     {
-                        "mData":"ApplicationID" , "render" : function (data) {
-                            return "<i class='far fa-eye' title='Mentee Application' class='View-btn' id='view-appln'  onclick=PopupForm('" + data + "')></i>";
-                    },
-                        "orderable": false,
-                        "searchable":false,
-                    },
-                    {
                         "mData":"AdvertisementID" , "render" : function (data) {
                             return "<i class='far fa-eye' title='Course Advertisement' class='View-btn' id='view-adv' onclick=PopupForm2('" + data + "')></i>";
                     },
                         "orderable": false,
                         "searchable":false,
                     },
-                    {
-                        "mData":"AdvertisementID" , "render" : function (data) {
-                            return "<i class='fas fa-file-invoice-dollar' id='approve' class='View-btn' id='view-adv' title='Pay fee for the Course' onclick=fillForm('" + data + "')></i>";
-                    },
-                        "orderable": false,
-                        "searchable":false,
-                    }
+                    { "mData": "PaymentStatus" },
+                    { "mData": "AdmissionStatus" }
                    ],
                    "language": {
-                    "emptyTable": "<p class='empty-row'>No Approved Applications yet</p>"
+                    "emptyTable": "<p class='empty-row'>No Data to Show</p>"
                 }
                  });
              });
@@ -291,9 +279,3 @@
 
     </script>
 }
-
-
-
-
-
-

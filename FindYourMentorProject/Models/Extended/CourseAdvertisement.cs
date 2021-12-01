@@ -99,18 +99,6 @@ namespace FindYourMentorProject.Models
         [Required(AllowEmptyStrings = false, ErrorMessage = "This field is required")]
         public int YearsOfExperience { get; set; }
 
-        [NotMapped]
-        public HttpPostedFileBase VideoUpload1 { get; set; }
-
-        [NotMapped]
-        public HttpPostedFileBase VideoUpload2 { get; set; }
-
-        [NotMapped]
-        public HttpPostedFileBase VideoUpload3 { get; set; }
-
-        [NotMapped]
-        public HttpPostedFileBase VideoUpload4 { get; set; }
-
         [Display(Name = "Demo Lecture 1")]
         public string DemoLec1 { get; set; }
 

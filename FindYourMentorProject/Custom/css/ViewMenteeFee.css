@@ -178,7 +178,7 @@ table.dataTable.display tbody tr.even > .sorting_1, table.dataTable.order-column
 }
 
 .ui-widget input, .ui-widget textarea {
-    font-size: 2rem !important;
+    font-size: 1.4rem !important;
     outline: none;
     padding-left: 1rem;
     width: 100%;
@@ -379,3 +379,51 @@ table::-webkit-scrollbar-thumb {
         font-size: 1.7rem !important;
     }
 }
+.Indiv-form-elem span 
+{
+    color:green;
+    font-weight:bold;
+}
+.Indiv-form-elem-1 label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.6rem;
+    color: #130f40;
+    font-weight: 600;
+    margin-top: -1.2rem;
+    /*//margin-top: 1.6rem !important;*/
+}
+
+.Indiv-form-elem-1 {
+    display: flex;
+    align-items: center;
+}
+.card-type-select input[type="radio"] {
+    accent-color: #833471;
+/*    margin-bottom:-5rem;*/
+}
+.card-type-select
+{
+    margin-left:3rem;
+    display:flex;
+}
+.card-img {
+    display: flex;
+}
+
+    .card-img img {
+        height:5rem;
+        width: 12rem;
+        margin-left: 0.7rem;
+    }
+        .card-img img:nth-child(3) {
+            width: 16rem;
+            height: 8rem;
+            margin-top: -1rem;
+        }
+    .card-img img:nth-child(2)
+    {
+        margin-top:1rem;
+    }
+        .card-img img:nth-child(1) {
+            margin-top: 1rem;
+        }

@@ -103,7 +103,6 @@
                 <li>
                     <a><i class="fas fa-user-circle"></i>Profile&nbsp;<i class="fas fa-sort-down" id="arrowdown"></i></a>
                     <ul>
-                        S
                         <li><a href="/Student/PersonalInfo">Personal Information</a></li>
                         <li><a href="/Student/ViewSavedList">Saved List</a></li>
                         <li><a href="/Student/ChangePassword">Change Password</a></li>
@@ -113,8 +112,14 @@
                     <a href="#catalogue"><i class="fas fa-book-reader"></i>Course&nbsp;<i class="fas fa-sort-down" id="arrowdown"></i></a>
                     <ul>
                         <li><a href="/Student/ViewApppliedCourse">Application</a></li>
-                        <li><a href="">Appointment</a></li>
-                        <li><a href="/Student/ViewApprovedApplication">Fees</a></li>
+                        <li><a href="/Student/ViewApppliedAppointment">Appointment</a></li>
+                        <li>
+                            <a href="">Fees&nbsp;<i class="fas fa-caret-right" id="arrowright"></i></a>
+                            <ul>
+                                <li><a href="/Student/ViewApprovedApplication">Approved Applications</a></li>
+                                <li><a href="/Student/AdmissionStatus">Admission status</a></li>
+                            </ul>
+                        </li>
                     </ul>
                 </li>
                 <li>
@@ -193,6 +198,7 @@
 
 
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
     <script>
         $('.sub-btn').click(function () {
             $(this).next('.sub-menu').slideToggle();
@@ -243,6 +249,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js" integrity="sha512-o6XqxgrUsKmchwy9G5VRNWSSxTS4Urr4loO6/0hYdpWmFUfHqGzawGxeQGMDqYzxjY9sbktPbNlkIQJWagVZQg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
     <script src="~/Scripts/notify.min.js"></script>
+
     <script>
 
         function SubmitForm(form) {

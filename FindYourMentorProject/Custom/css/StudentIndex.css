@@ -529,3 +529,33 @@ input[type="radio"] {
 .radio-elem {
     margin-top: 1.6rem !important;
 }
+.ui-widget input, .ui-widget textarea
+{
+    font-size:1.4rem!important;
+}
+.Indiv-form-elem-1 label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.6rem;
+    color: #130f40;
+    font-weight: 600;
+    margin-top: 1.6rem !important;
+}
+.Indiv-form-elem-1 
+{
+    display:flex;
+    justify-content:space-evenly;
+    align-items:center;
+}
+.card-type-select input[type="radio"] {
+    accent-color: #833471;
+}
+.card-img 
+{
+    display:flex;
+}
+.card-img img 
+{
+    height:1rem;
+    width:3rem;
+    margin-left:0.7rem;
+}

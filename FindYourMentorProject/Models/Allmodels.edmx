@@ -143,11 +143,16 @@
           <Property Name="MenteeAge" Type="int" />
           <Property Name="MenteeLinkedIn" Type="varchar" MaxLength="50" />
           <Property Name="MenteeGitHub" Type="varchar" MaxLength="50" />
-          <Property Name="PaymentTime" Type="datetime" />
+          <Property Name="PaymentTime" Type="datetime" Nullable="false" />
           <Property Name="StatusUpdateTime" Type="datetime" />
           <Property Name="ClassName" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="CourseName" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="MentorName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CardName" Type="varchar" MaxLength="50" />
+          <Property Name="CardNumber" Type="nchar" MaxLength="20" />
+          <Property Name="CVV" Type="int" />
+          <Property Name="ExpiryDate" Type="int" />
+          <Property Name="AdmissionStatus" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="RegisterMentor">
           <Key>
@@ -603,13 +608,18 @@
           <Property Name="MenteeAge" Type="Int32" />
           <Property Name="MenteeLinkedIn" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="MenteeGitHub" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="PaymentTime" Type="DateTime" Precision="3" />
+          <Property Name="PaymentTime" Type="DateTime" Precision="3" Nullable="false" />
           <Property Name="StatusUpdateTime" Type="DateTime" Precision="3" />
           <Property Name="ClassName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="CourseName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="MentorName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="CourseAdvertisement" Relationship="FindYourMentorProjectModel.FK__Fees__Advertisem__0880433F" FromRole="Fee" ToRole="CourseAdvertisement" />
           <NavigationProperty Name="RegisterStudent" Relationship="FindYourMentorProjectModel.FK__Fees__MenteeID__09746778" FromRole="Fee" ToRole="RegisterStudent" />
+          <Property Name="CardName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CardNumber" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="CVV" Type="Int32" />
+          <Property Name="ExpiryDate" Type="Int32" />
+          <Property Name="AdmissionStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="RegisterMentor">
           <Key>
@@ -950,6 +960,11 @@
           <EntitySetMapping Name="Fees">
             <EntityTypeMapping TypeName="FindYourMentorProjectModel.Fee">
               <MappingFragment StoreEntitySet="Fees">
+                <ScalarProperty Name="AdmissionStatus" ColumnName="AdmissionStatus" />
+                <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
+                <ScalarProperty Name="CVV" ColumnName="CVV" />
+                <ScalarProperty Name="CardNumber" ColumnName="CardNumber" />
+                <ScalarProperty Name="CardName" ColumnName="CardName" />
                 <ScalarProperty Name="MentorName" ColumnName="MentorName" />
                 <ScalarProperty Name="CourseName" ColumnName="CourseName" />
                 <ScalarProperty Name="ClassName" ColumnName="ClassName" />

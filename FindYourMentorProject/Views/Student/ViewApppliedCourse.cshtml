@@ -33,11 +33,12 @@
 <link href="~/Custom/css/ApplicationCard.css" rel="stylesheet" />
 <body>
     <div class="appln-card-filter">
-        <label for="filters">Sort Application by status:- </label>
+        <label for="filters">View Application Status</label>
         <form>
             <div class="grp-radios">
-                <input type="radio" name="filters" id="" value="Approved"><span>Approved</span>
-                <input type="radio" name="filters" id="" value="Rejected"><span>Rejected</span>
+                <input type="radio" name="filters" id="" value="Approve" onchange='this.form.submit();'><span>Approved</span>
+                <input type="radio" name="filters" id="" value="Reject" onchange='this.form.submit();'><span>Rejected</span>
+                <input type="radio" name="filters" id="" value="Pending" onchange='this.form.submit();'><span>All</span>
             </div>
         </form>
     </div>
@@ -45,7 +46,7 @@
     <div class="whole-appln-container">
         @if (@Model.Count() == 0)
         {
-            <p>You haven't applied for any courses !!</p>
+            <p id="no-data">No Applications</p>
         }
         else
         {
@@ -69,7 +70,26 @@
 
 
 <script type="text/javascript">
+    var screenWidth, screenHeight, dialogWidth, dialogHeight, isDesktop;
 
+    screenWidth = window.screen.width;
+    screenHeight = window.screen.height;
+
+    if (screenWidth < 705) {
+        /* alert("love");*/
+        dialogWidth = screenWidth * .75;
+        dialogHeight = screenHeight * .90;
+    }
+    else if (screenWidth < 553) {
+        alert("cute");
+        dialogWidth = screenWidth * .73;
+        dialogHeight = screenHeight * .90;
+    }
+    else {
+        dialogWidth = 700;
+        dialogHeight = 470;
+        isDesktop = true;
+    }
     function PopupForm(id)
     {
         url = '@Url.Action("ViewAppliedApplication", "Student")/' + id;
@@ -81,9 +101,12 @@
             Popup = formDiv.dialog({
             autoOpen: true,
             resizable: true,
-            title: 'Apply',
-            height: 500,
-            width: 700,
+            title: 'Your Application',
+                height: dialogHeight,
+                width: dialogWidth,
+                show: { effect: 'drop', direction: "up" },
+                modal: true,
+                draggable: true,
             close: function () {
             Popup.dialog('destroy').remove();
             }

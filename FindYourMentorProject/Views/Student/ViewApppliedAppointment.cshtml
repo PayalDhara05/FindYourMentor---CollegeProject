@@ -1,0 +1,117 @@
+﻿@model IEnumerable<FindYourMentorProject.Models.Appointment>
+
+@{
+    ViewBag.Title = "ViewApppliedAppointment";
+    Layout = "~/Views/Shared/_StudentLayout.cshtml";
+}
+<link href="~/Custom/css/ApplicationCard.css" rel="stylesheet" />
+<body>
+    <div class="appln-card-filter">
+        <label for="filters">View Appointment Status</label>
+        <form action="/Student/ViewApppliedAppointment" method="post">
+            <div class="grp-radios">
+                <input type="radio" name="filters" id="" value="Confirmed" onchange='this.form.submit();'><span>Confirmed</span>
+                <input type="radio" name="filters" id="" value="Cancelled" onchange='this.form.submit();'><span>Cancelled</span>
+                <input type="radio" name="filters" id="" value="Pending" onchange='this.form.submit();'><span>All</span>
+            </div>
+        </form>
+    </div>
+
+    <div class="whole-appln-container">
+        @if (@Model.Count() == 0)
+        {
+            <p>No Appointments</p>
+        }
+        else
+        {
+            foreach (var item in Model)
+            {
+    <div class="indiv-appln-card">
+        <p><span>Your Name: </span>@item.MenteeName</p>
+        <p><span>Course Name: </span>@item.CourseName</p>
+        <p><span>Mentor Name: </span>@item.MentorName</p>
+        <p><span>Appointment Date: </span>@item.AppointmentDate</p>
+        <p><span>Appointment Time: </span>@item.AppointmentTime</p>
+        <p><span>Appointment Status: </span>@item.AppointmentStatus</p>
+        <div class="indiv-appln-btns">
+            <button onclick="PopupForm(@item.AppointmentID)">Appointment</button>
+            <button>View Course</button>
+        </div>
+    </div>
+            }
+        }
+
+    </div>
+</body>
+
+
+<script type="text/javascript">
+
+    var screenWidth, screenHeight, dialogWidth, dialogHeight, isDesktop;
+
+    screenWidth = window.screen.width;
+    screenHeight = window.screen.height;
+
+    if (screenWidth < 705) {
+        /* alert("love");*/
+        dialogWidth = screenWidth * .75;
+        dialogHeight = screenHeight * .90;
+    }
+    else if (screenWidth < 553) {
+        alert("cute");
+        dialogWidth = screenWidth * .73;
+        dialogHeight = screenHeight * .90;
+    }
+    else {
+        dialogWidth = 700;
+        dialogHeight = 450;
+        isDesktop = true;
+    }
+
+    function PopupForm(id)
+    {
+        url = '@Url.Action("ViewAppliedAppointmentData", "Student")/' + id;
+        var formDiv =
+            $('<div />');
+            $.get(url).done(function (response) {
+            formDiv.html(response);
+
+            Popup = formDiv.dialog({
+            autoOpen: true,
+            resizable: true,
+            title: 'Your Appointment',
+            height: dialogHeight,
+                width: dialogWidth,
+                show: { effect: 'drop', direction: "up" },
+                modal: true,
+                draggable: true,
+            close: function () {
+            Popup.dialog('destroy').remove();
+            }
+
+            });
+            });
+    }
+
+    function PopupForm2(id)
+    {
+        url = '@Url.Action("ViewCourseApplication", "Student")/' + id;
+        var formDiv =
+            $('<div />');
+            $.get(url).done(function (response) {
+            formDiv.html(response);
+
+            Popup = formDiv.dialog({
+            autoOpen: true,
+            resizable: true,
+            title: 'Apply',
+            height: 500,
+            width: 700,
+            close: function () {
+            Popup.dialog('destroy').remove();
+            }
+
+            });
+        });
+    }
+</script>

@@ -9,6 +9,7 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Mail;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.WebPages;
@@ -342,7 +343,7 @@ namespace FindYourMentorProject.Controllers
         {
             using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
             {
-                return View(db.CourseAdvertisements.ToList());
+                return View(db.CourseAdvertisements.OrderByDescending(r => r.AdvertisementID).ToList());
             }
         }
 
@@ -546,13 +547,27 @@ namespace FindYourMentorProject.Controllers
             }
         }
 
-        public ActionResult ViewApppliedCourse()
+        public ActionResult ViewApppliedCourse(string filters)
         {
+            //int userid = Convert.ToInt32(Session["UserID"]);
+            //using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
+            //{
+            //    var appliedcourse = db.Applications.Where(a => a.MenteeID == userid).ToList();
+            //    return View(appliedcourse);
+            //}
             int userid = Convert.ToInt32(Session["UserID"]);
-            using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
+            FindYourMentorProjectEntities db = new FindYourMentorProjectEntities();
+            if (filters == "Approve")
             {
-                var appliedcourse = db.Applications.Where(a => a.MenteeID == userid).ToList();
-                return View(appliedcourse);
+                return View(db.Applications.Where(a => a.MenteeID == userid && a.ApplicationStatus == "Approve").OrderByDescending(r => r.ApplicationID).ToList());
+            }
+            else if (filters == "Reject")
+            {
+                return View(db.Applications.Where(a => a.MenteeID == userid && a.ApplicationStatus == "Reject").OrderByDescending(r => r.ApplicationID).ToList());
+            }
+            else
+            {
+                return View(db.Applications.Where(a => a.MenteeID == userid).OrderByDescending(r => r.ApplicationID).ToList());
             }
         }
 
@@ -687,6 +702,32 @@ namespace FindYourMentorProject.Controllers
             }
         }
 
+        public ActionResult ViewApppliedAppointment(string filters)
+        {
+            int userid = Convert.ToInt32(Session["UserID"]);
+            FindYourMentorProjectEntities db = new FindYourMentorProjectEntities();
+            if (filters == "Confirmed")
+            {
+                return View(db.Appointments.Where(a => a.MenteeID == userid && a.AppointmentStatus == "Confirmed").OrderByDescending(r => r.AppointmentID).ToList());
+            }
+            else if (filters == "Cancelled")
+            {
+                return View(db.Appointments.Where(a => a.MenteeID == userid && a.AppointmentStatus == "Cancelled").OrderByDescending(r => r.AppointmentID).ToList());
+            }
+            else
+            {
+                return View(db.Appointments.Where(a => a.MenteeID == userid).OrderByDescending(r => r.AppointmentID).ToList());
+            }
+        }
+
+        public ActionResult ViewAppliedAppointmentData(int id = 0)
+        {
+            using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
+            {
+                return View(db.Appointments.Where(a => a.AppointmentID == id).FirstOrDefault<Appointment>());
+            }
+        }
+
 
         public ActionResult ViewApprovedApplication()
         {
@@ -746,6 +787,80 @@ namespace FindYourMentorProject.Controllers
                     return View();
                 }
             }
+        }
+
+        public ActionResult SubmitFeeApplication(Fee feeApln)
+        {
+            if (ModelState.IsValid)
+            {
+                int userid = Convert.ToInt32(Session["UserID"]);
+                using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
+                {
+                    var user = db.RegisterStudents.Where(a => a.UserID == userid).FirstOrDefault();
+                    feeApln.MenteeID = userid;
+                    feeApln.MenteeName = user.FirstName;
+                    feeApln.MenteeState = user.State;
+                    feeApln.MenteeEmailID = user.EmailID;
+                    feeApln.MenteeGitHub = user.GitHubID;
+                    feeApln.MenteeLinkedIn = user.LinkedInID;
+                    feeApln.MenteeContactNo = user.ContactNo;
+
+                    int advid = feeApln.AdvertisementID;
+                    var advDetails = db.CourseAdvertisements.Where(a => a.AdvertisementID == advid).FirstOrDefault();
+
+                    feeApln.MentorID = advDetails.MentorID;
+                    feeApln.MentorEmailID = advDetails.EmailID;
+                    feeApln.MentorName = advDetails.MentorName;
+                    feeApln.CourseName = advDetails.CourseName;
+                    feeApln.ClassName = advDetails.ClassName;
+
+                    feeApln.PaymentTime = System.DateTime.Now;
+                    feeApln.Fees = advDetails.Fees;
+                    feeApln.PaymentStatus = "Pending";
+                    feeApln.AdmissionStatus = "Pending";
+                    feeApln.AmountEntered = advDetails.Fees;
+                   
+                    if(feeApln.PaymentMode == "Online")
+                    {
+                        db.Fees.Add(feeApln);
+                        db.Configuration.ValidateOnSaveEnabled = false;
+                        db.SaveChanges();
+                        Thread.Sleep(4000);
+                        return Json(new { success = "yes", message = "Done !!!" }, JsonRequestBehavior.AllowGet);
+                    }
+                    else
+                    {
+                        db.Fees.Add(feeApln);
+                        db.Configuration.ValidateOnSaveEnabled = false;
+                        db.SaveChanges();
+                        Thread.Sleep(3000);
+                        return Json(new { success = "yes", message = "Done !!!" }, JsonRequestBehavior.AllowGet);
+                    }   
+                }
+            }
+            else
+            {
+                return Json(new { success = "not", message = "Error while Applied !!!" }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public ActionResult AdmissionStatus()
+        {
+            return View();
+        }
+
+        public ActionResult AdmissionStatusData()
+        {
+            int userid = Convert.ToInt32(Session["UserID"]);
+            FindYourMentorProjectEntities db = new FindYourMentorProjectEntities();
+            db.Configuration.ProxyCreationEnabled = false;
+            List<Fee> FeeList = db.Fees.Where(a => a.MenteeID == userid && a.PaymentMode == "Online").ToList();
+            return Json(FeeList, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult FeeProcessed()
+        {
+            return View();
         }
 
         [NonAction]

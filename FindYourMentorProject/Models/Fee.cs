@@ -31,11 +31,16 @@ namespace FindYourMentorProject.Models
         public Nullable<int> MenteeAge { get; set; }
         public string MenteeLinkedIn { get; set; }
         public string MenteeGitHub { get; set; }
-        public Nullable<System.DateTime> PaymentTime { get; set; }
+        public System.DateTime PaymentTime { get; set; }
         public Nullable<System.DateTime> StatusUpdateTime { get; set; }
         public string ClassName { get; set; }
         public string CourseName { get; set; }
         public string MentorName { get; set; }
+        public string CardName { get; set; }
+        public string CardNumber { get; set; }
+        public Nullable<int> CVV { get; set; }
+        public Nullable<int> ExpiryDate { get; set; }
+        public string AdmissionStatus { get; set; }
     
         public virtual CourseAdvertisement CourseAdvertisement { get; set; }
         public virtual RegisterStudent RegisterStudent { get; set; }

@@ -203,6 +203,7 @@
     <Content Include="Custom\css\SavedList.css" />
     <Content Include="Custom\css\StudentIndex.css" />
     <Content Include="Custom\css\StudentLayout.css" />
+    <Content Include="Custom\css\Transaction.css" />
     <Content Include="Custom\css\VerifyAccount.css" />
     <Content Include="Custom\css\ViewMenteeApplication.css" />
     <Content Include="Custom\css\ViewMenteeAppointment.css" />
@@ -249,6 +250,10 @@
     <Content Include="Scripts\jquery-ui-1.12.1.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
     <Content Include="Scripts\notify.min.js" />
+    <Content Include="uiImages\Fees\Mastercard.png" />
+    <Content Include="uiImages\Fees\PaymentDone.png" />
+    <Content Include="uiImages\Fees\Rupay.png" />
+    <Content Include="uiImages\Fees\Visa.png" />
     <Content Include="uiImages\Loader.gif" />
     <Content Include="uiImages\mainlayout\bg.mp4" />
     <Content Include="uiImages\mainlayout\Contact1.gif" />
@@ -311,6 +316,7 @@
     <Compile Include="Models\Extended\Appointment.cs" />
     <Compile Include="Models\Extended\ContactU.cs" />
     <Compile Include="Models\Extended\CourseAdvertisement.cs" />
+    <Compile Include="Models\Extended\Fee.cs" />
     <Compile Include="Models\Extended\RegisterMentor.cs" />
     <Compile Include="Models\Extended\RegisterStudent.cs" />
     <Compile Include="Models\Fee.cs">
@@ -401,6 +407,10 @@
     <Content Include="Views\Mentor\viewOnlineFeeApplication.cshtml" />
     <Content Include="Views\Mentor\viewOfflineFeeApplication.cshtml" />
     <Content Include="Views\Mentor\ViewFullMenteeAppointment.cshtml" />
+    <Content Include="Views\Student\ViewApppliedAppointment.cshtml" />
+    <Content Include="Views\Student\ViewAppliedAppointmentData.cshtml" />
+    <Content Include="Views\Student\FeeProcessed.cshtml" />
+    <Content Include="Views\Student\AdmissionStatus.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
