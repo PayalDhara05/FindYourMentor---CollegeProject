@@ -19,8 +19,8 @@ namespace FindYourMentorProject.Models
         {
             this.Applications = new HashSet<Application>();
             this.Appointments = new HashSet<Appointment>();
-            this.Fees1 = new HashSet<Fee>();
             this.SavedLists = new HashSet<SavedList>();
+            this.Fees1 = new HashSet<Fee>();
         }
     
         public int AdvertisementID { get; set; }
@@ -60,8 +60,8 @@ namespace FindYourMentorProject.Models
         public virtual ICollection<Appointment> Appointments { get; set; }
         public virtual RegisterMentor RegisterMentor { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Fee> Fees1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SavedList> SavedLists { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Fee> Fees1 { get; set; }
     }
 }

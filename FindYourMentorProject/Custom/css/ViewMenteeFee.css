@@ -406,24 +406,32 @@ table::-webkit-scrollbar-thumb {
     margin-left:3rem;
     display:flex;
 }
-.card-img {
+.credit-card-img {
     display: flex;
 }
 
-    .card-img img {
+    .credit-card-img img {
         height:5rem;
         width: 12rem;
         margin-left: 0.7rem;
     }
-        .card-img img:nth-child(3) {
+        .credit-card-img img:nth-child(3) {
             width: 16rem;
             height: 8rem;
             margin-top: -1rem;
         }
-    .card-img img:nth-child(2)
+    .credit-card-img img:nth-child(2)
     {
         margin-top:1rem;
     }
-        .card-img img:nth-child(1) {
+        .credit-card-img img:nth-child(1) {
             margin-top: 1rem;
         }
+.ExpiryDate {
+    width: 100% !important;
+}
+.Expiry-Field 
+{
+    display:flex;
+    justify-content:space-evenly;
+}

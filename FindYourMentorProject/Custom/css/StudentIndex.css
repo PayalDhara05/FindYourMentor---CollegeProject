@@ -559,3 +559,16 @@ input[type="radio"] {
     width:3rem;
     margin-left:0.7rem;
 }
+#PaymentMode-error 
+{
+    color:red !important;
+}
+.Expiry-Field 
+{
+    display:flex;
+    justify-content:space-evenly;
+}
+input[type="list"]
+{
+    width:30%!important;
+}

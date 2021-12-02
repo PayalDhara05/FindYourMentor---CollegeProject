@@ -30,9 +30,9 @@ namespace FindYourMentorProject.Models
         public virtual DbSet<Appointment> Appointments { get; set; }
         public virtual DbSet<ContactU> ContactUs { get; set; }
         public virtual DbSet<CourseAdvertisement> CourseAdvertisements { get; set; }
-        public virtual DbSet<Fee> Fees { get; set; }
         public virtual DbSet<RegisterMentor> RegisterMentors { get; set; }
         public virtual DbSet<RegisterStudent> RegisterStudents { get; set; }
         public virtual DbSet<SavedList> SavedLists { get; set; }
+        public virtual DbSet<Fee> Fees { get; set; }
     }
 }

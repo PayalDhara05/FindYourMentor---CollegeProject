@@ -22,9 +22,10 @@
                 <th>State</th>
                 <th>Payment Mode</th>
                 <th>Payment Status</th>
-                <th>Appointment</th>
+                <th>Admission Status</th>
+                <th>Fee Application</th>
                 <th>Course Advertisement</th>
-                <th>Update Status</th>
+                <th>Update Payment Status</th>
                 <th></th>
             </tr>
         </thead>
@@ -72,7 +73,7 @@
 
                  dataTable = $("#Fee").DataTable({
                 "ajax": {
-                         "url": "/Mentor/viewOnlineFeeApplicationData",
+                         "url": "/Mentor/viewOfflineFeeApplicationData",
                          "type": "GET",
                          "datatype": "json",
                          "dataSrc": ""
@@ -85,6 +86,7 @@
                     { "mData": "MenteeState" },
                     { "mData": "PaymentMode" },
                     { "mData": "PaymentStatus" },
+                    { "mData": "AdmissionStatus" },
                     {
                         "mData":"FeesID" , "render" : function (data) {
                             return "<i class='far fa-eye' title='Mentee Fee Application' class='View-btn' id='view-appln' onclick=PopupForm('" + data + "')></i>";
@@ -101,7 +103,7 @@
                     },
                     {
                         "mData":"FeesID" , "render" : function (data) {
-                            return "<i class='fas fa-check-square' id='approve' title='Confirm Admission' onclick=Approve('" + data + "')></i><i class='fas fa-window-close' title='Confirm Admission' id='approve' id='reject' onclick=Reject('" + data + "')>";
+                            return "<i class='fas fa-check-square' id='approve' title='Confirm Admission' onclick=Approve('" + data + "')></i>";
                     },
                         "orderable": false,
                         "searchable":false,
@@ -122,7 +124,7 @@
 
 
     function Approve(id) {
-        var url = '@Url.Action("ApproveStatus", "Mentor")/' + id;
+        var url = '@Url.Action("ConfirmAdmission", "Mentor")/' + id;
 
         $.ajax({
             url: url,
@@ -147,34 +149,6 @@
             }
         });
     };
-
-    function Reject(id) {
-        var url = '@Url.Action("RejectStatus", "Mentor")/' + id;
-
-        $.ajax({
-            url: url,
-            type: 'POST',
-            data: {
-                id: id
-            },
-            beforeSend: function () {
-                $("#loader").show();
-            },
-            complete: function () {
-                $("#loader").hide();
-            },
-            success: function (data) {
-                if (data.success) {
-                    dataTable.ajax.reload();
-
-                    $.notify(data.message, {
-                        globalPosition: "top center",
-                        className: "success"
-                    })
-                }
-            }
-        });
-        };
 
         function Remove(id) {
         var url = '@Url.Action("UpdateRemoveStatus", "Mentor")/' + id;

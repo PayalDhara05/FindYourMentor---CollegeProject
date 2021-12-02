@@ -791,6 +791,7 @@ namespace FindYourMentorProject.Controllers
 
         public ActionResult SubmitFeeApplication(Fee feeApln)
         {
+            String validation = "";
             if (ModelState.IsValid)
             {
                 int userid = Convert.ToInt32(Session["UserID"]);
@@ -804,6 +805,7 @@ namespace FindYourMentorProject.Controllers
                     feeApln.MenteeGitHub = user.GitHubID;
                     feeApln.MenteeLinkedIn = user.LinkedInID;
                     feeApln.MenteeContactNo = user.ContactNo;
+                    feeApln.MenteeAge = user.Age;
 
                     int advid = feeApln.AdvertisementID;
                     var advDetails = db.CourseAdvertisements.Where(a => a.AdvertisementID == advid).FirstOrDefault();
@@ -822,11 +824,11 @@ namespace FindYourMentorProject.Controllers
                    
                     if(feeApln.PaymentMode == "Online")
                     {
-                        db.Fees.Add(feeApln);
-                        db.Configuration.ValidateOnSaveEnabled = false;
-                        db.SaveChanges();
-                        Thread.Sleep(4000);
-                        return Json(new { success = "yes", message = "Done !!!" }, JsonRequestBehavior.AllowGet);
+                            db.Fees.Add(feeApln);
+                            db.Configuration.ValidateOnSaveEnabled = false;
+                            db.SaveChanges();
+                            Thread.Sleep(4000);
+                            return Json(new { success = "yes", message = "Done !!!" }, JsonRequestBehavior.AllowGet);
                     }
                     else
                     {

@@ -38,9 +38,11 @@ namespace FindYourMentorProject.Models
         public string MentorName { get; set; }
         public string CardName { get; set; }
         public string CardNumber { get; set; }
-        public Nullable<int> CVV { get; set; }
         public Nullable<int> ExpiryDate { get; set; }
         public string AdmissionStatus { get; set; }
+        public Nullable<int> StatusCounterFee { get; set; }
+        public Nullable<int> ExpiryYear { get; set; }
+        public string cvv_new { get; set; }
     
         public virtual CourseAdvertisement CourseAdvertisement { get; set; }
         public virtual RegisterStudent RegisterStudent { get; set; }

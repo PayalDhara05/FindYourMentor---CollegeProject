@@ -239,7 +239,7 @@
             if ($(form).valid()) {
                 $.ajax({
                     type: "POST",
-                    url: form.action,
+                    url: '/Student/SubmitFeeApplication',
                     data: $(form).serialize(),
                     beforeSend: function () {
                         Popup.dialog('close');
@@ -259,7 +259,6 @@
         }
         else {
             $.validator.unobtrusive.parse(form);
-
             if ($(form).valid()) {
                 $.ajax({
                     type: "POST",

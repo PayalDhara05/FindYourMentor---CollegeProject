@@ -150,9 +150,11 @@
           <Property Name="MentorName" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="CardName" Type="varchar" MaxLength="50" />
           <Property Name="CardNumber" Type="nchar" MaxLength="20" />
-          <Property Name="CVV" Type="int" />
           <Property Name="ExpiryDate" Type="int" />
           <Property Name="AdmissionStatus" Type="varchar" MaxLength="50" />
+          <Property Name="StatusCounterFee" Type="int" />
+          <Property Name="ExpiryYear" Type="int" />
+          <Property Name="cvv_new" Type="varchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="RegisterMentor">
           <Key>
@@ -415,7 +417,6 @@
           <EntitySet Name="Appointments" EntityType="FindYourMentorProjectModel.Appointment" />
           <EntitySet Name="ContactUs" EntityType="FindYourMentorProjectModel.ContactU" />
           <EntitySet Name="CourseAdvertisements" EntityType="FindYourMentorProjectModel.CourseAdvertisement" />
-          <EntitySet Name="Fees" EntityType="FindYourMentorProjectModel.Fee" />
           <EntitySet Name="RegisterMentors" EntityType="FindYourMentorProjectModel.RegisterMentor" />
           <EntitySet Name="RegisterStudents" EntityType="FindYourMentorProjectModel.RegisterStudent" />
           <EntitySet Name="SavedLists" EntityType="FindYourMentorProjectModel.SavedList" />
@@ -443,21 +444,22 @@
             <End Role="RegisterMentor" EntitySet="RegisterMentors" />
             <End Role="CourseAdvertisement" EntitySet="CourseAdvertisements" />
           </AssociationSet>
-          <AssociationSet Name="FK__Fees__Advertisem__0880433F" Association="FindYourMentorProjectModel.FK__Fees__Advertisem__0880433F">
-            <End Role="CourseAdvertisement" EntitySet="CourseAdvertisements" />
-            <End Role="Fee" EntitySet="Fees" />
-          </AssociationSet>
           <AssociationSet Name="FK__SavedList__Adver__18EBB532" Association="FindYourMentorProjectModel.FK__SavedList__Adver__18EBB532">
             <End Role="CourseAdvertisement" EntitySet="CourseAdvertisements" />
             <End Role="SavedList" EntitySet="SavedLists" />
           </AssociationSet>
-          <AssociationSet Name="FK__Fees__MenteeID__09746778" Association="FindYourMentorProjectModel.FK__Fees__MenteeID__09746778">
-            <End Role="RegisterStudent" EntitySet="RegisterStudents" />
-            <End Role="Fee" EntitySet="Fees" />
-          </AssociationSet>
           <AssociationSet Name="FK__SavedList__Mente__17F790F9" Association="FindYourMentorProjectModel.FK__SavedList__Mente__17F790F9">
             <End Role="RegisterStudent" EntitySet="RegisterStudents" />
             <End Role="SavedList" EntitySet="SavedLists" />
+          </AssociationSet>
+          <EntitySet Name="Fees" EntityType="FindYourMentorProjectModel.Fee" />
+          <AssociationSet Name="FK__Fees__Advertisem__0880433F" Association="FindYourMentorProjectModel.FK__Fees__Advertisem__0880433F">
+            <End Role="CourseAdvertisement" EntitySet="CourseAdvertisements" />
+            <End Role="Fee" EntitySet="Fees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Fees__MenteeID__09746778" Association="FindYourMentorProjectModel.FK__Fees__MenteeID__09746778">
+            <End Role="RegisterStudent" EntitySet="RegisterStudents" />
+            <End Role="Fee" EntitySet="Fees" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="AddNotesMentee">
@@ -584,42 +586,8 @@
           <NavigationProperty Name="Applications" Relationship="FindYourMentorProjectModel.FK__Applicati__Adver__1F98B2C1" FromRole="CourseAdvertisement" ToRole="Application" />
           <NavigationProperty Name="Appointments" Relationship="FindYourMentorProjectModel.FK__Appointme__Adver__4B7734FF" FromRole="CourseAdvertisement" ToRole="Appointment" />
           <NavigationProperty Name="RegisterMentor" Relationship="FindYourMentorProjectModel.FK__CourseAdv__Mento__73BA3083" FromRole="CourseAdvertisement" ToRole="RegisterMentor" />
-          <NavigationProperty Name="Fees1" Relationship="FindYourMentorProjectModel.FK__Fees__Advertisem__0880433F" FromRole="CourseAdvertisement" ToRole="Fee" />
           <NavigationProperty Name="SavedLists" Relationship="FindYourMentorProjectModel.FK__SavedList__Adver__18EBB532" FromRole="CourseAdvertisement" ToRole="SavedList" />
-        </EntityType>
-        <EntityType Name="Fee">
-          <Key>
-            <PropertyRef Name="FeesID" />
-          </Key>
-          <Property Name="FeesID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="AdvertisementID" Type="Int32" Nullable="false" />
-          <Property Name="MentorID" Type="Int32" Nullable="false" />
-          <Property Name="MenteeID" Type="Int32" Nullable="false" />
-          <Property Name="Fees" Type="Int32" />
-          <Property Name="PaymentMode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CardDetails" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="AmountEntered" Type="Int32" />
-          <Property Name="PaymentStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="MenteeEmailID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="MentorEmailID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="MenteeName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="MenteeState" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="MenteeContactNo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="MenteeAge" Type="Int32" />
-          <Property Name="MenteeLinkedIn" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="MenteeGitHub" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="PaymentTime" Type="DateTime" Precision="3" Nullable="false" />
-          <Property Name="StatusUpdateTime" Type="DateTime" Precision="3" />
-          <Property Name="ClassName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="CourseName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="MentorName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="CourseAdvertisement" Relationship="FindYourMentorProjectModel.FK__Fees__Advertisem__0880433F" FromRole="Fee" ToRole="CourseAdvertisement" />
-          <NavigationProperty Name="RegisterStudent" Relationship="FindYourMentorProjectModel.FK__Fees__MenteeID__09746778" FromRole="Fee" ToRole="RegisterStudent" />
-          <Property Name="CardName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CardNumber" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
-          <Property Name="CVV" Type="Int32" />
-          <Property Name="ExpiryDate" Type="Int32" />
-          <Property Name="AdmissionStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Fees1" Relationship="FindYourMentorProjectModel.FK__Fees__Advertisem__0880433F" FromRole="CourseAdvertisement" ToRole="Fee" />
         </EntityType>
         <EntityType Name="RegisterMentor">
           <Key>
@@ -672,8 +640,8 @@
           <NavigationProperty Name="AddNotesMentees" Relationship="FindYourMentorProjectModel.FK__AddNotesM__UserI__571DF1D5" FromRole="RegisterStudent" ToRole="AddNotesMentee" />
           <NavigationProperty Name="Applications" Relationship="FindYourMentorProjectModel.FK__Applicati__Mente__208CD6FA" FromRole="RegisterStudent" ToRole="Application" />
           <NavigationProperty Name="Appointments" Relationship="FindYourMentorProjectModel.FK__Appointme__Mente__4A8310C6" FromRole="RegisterStudent" ToRole="Appointment" />
-          <NavigationProperty Name="Fees" Relationship="FindYourMentorProjectModel.FK__Fees__MenteeID__09746778" FromRole="RegisterStudent" ToRole="Fee" />
           <NavigationProperty Name="SavedLists" Relationship="FindYourMentorProjectModel.FK__SavedList__Mente__17F790F9" FromRole="RegisterStudent" ToRole="SavedList" />
+          <NavigationProperty Name="Fees" Relationship="FindYourMentorProjectModel.FK__Fees__MenteeID__09746778" FromRole="RegisterStudent" ToRole="Fee" />
         </EntityType>
         <EntityType Name="SavedList">
           <Key>
@@ -781,18 +749,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Fees__Advertisem__0880433F">
-          <End Type="FindYourMentorProjectModel.CourseAdvertisement" Role="CourseAdvertisement" Multiplicity="1" />
-          <End Type="FindYourMentorProjectModel.Fee" Role="Fee" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CourseAdvertisement">
-              <PropertyRef Name="AdvertisementID" />
-            </Principal>
-            <Dependent Role="Fee">
-              <PropertyRef Name="AdvertisementID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__SavedList__Adver__18EBB532">
           <End Type="FindYourMentorProjectModel.CourseAdvertisement" Role="CourseAdvertisement" Multiplicity="1" />
           <End Type="FindYourMentorProjectModel.SavedList" Role="SavedList" Multiplicity="*" />
@@ -805,18 +761,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Fees__MenteeID__09746778">
-          <End Type="FindYourMentorProjectModel.RegisterStudent" Role="RegisterStudent" Multiplicity="1" />
-          <End Type="FindYourMentorProjectModel.Fee" Role="Fee" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="RegisterStudent">
-              <PropertyRef Name="UserID" />
-            </Principal>
-            <Dependent Role="Fee">
-              <PropertyRef Name="MenteeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__SavedList__Mente__17F790F9">
           <End Type="FindYourMentorProjectModel.RegisterStudent" Role="RegisterStudent" Multiplicity="1" />
           <End Type="FindYourMentorProjectModel.SavedList" Role="SavedList" Multiplicity="*" />
@@ -825,6 +769,66 @@
               <PropertyRef Name="UserID" />
             </Principal>
             <Dependent Role="SavedList">
+              <PropertyRef Name="MenteeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Fee">
+          <Key>
+            <PropertyRef Name="FeesID" />
+          </Key>
+          <Property Name="FeesID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AdvertisementID" Type="Int32" Nullable="false" />
+          <Property Name="MentorID" Type="Int32" Nullable="false" />
+          <Property Name="MenteeID" Type="Int32" Nullable="false" />
+          <Property Name="Fees" Type="Int32" />
+          <Property Name="PaymentMode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CardDetails" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="AmountEntered" Type="Int32" />
+          <Property Name="PaymentStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="MenteeEmailID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MentorEmailID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MenteeName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MenteeState" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MenteeContactNo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="MenteeAge" Type="Int32" />
+          <Property Name="MenteeLinkedIn" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MenteeGitHub" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PaymentTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="StatusUpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="ClassName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CourseName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="MentorName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CardName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CardNumber" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="ExpiryDate" Type="Int32" />
+          <Property Name="AdmissionStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="StatusCounterFee" Type="Int32" />
+          <NavigationProperty Name="CourseAdvertisement" Relationship="FindYourMentorProjectModel.FK__Fees__Advertisem__0880433F" FromRole="Fee" ToRole="CourseAdvertisement" />
+          <NavigationProperty Name="RegisterStudent" Relationship="FindYourMentorProjectModel.FK__Fees__MenteeID__09746778" FromRole="Fee" ToRole="RegisterStudent" />
+          <Property Name="ExpiryYear" Type="Int32" />
+          <Property Name="cvv_new" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK__Fees__Advertisem__0880433F">
+          <End Type="FindYourMentorProjectModel.CourseAdvertisement" Role="CourseAdvertisement" Multiplicity="1" />
+          <End Type="FindYourMentorProjectModel.Fee" Role="Fee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CourseAdvertisement">
+              <PropertyRef Name="AdvertisementID" />
+            </Principal>
+            <Dependent Role="Fee">
+              <PropertyRef Name="AdvertisementID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Fees__MenteeID__09746778">
+          <End Type="FindYourMentorProjectModel.RegisterStudent" Role="RegisterStudent" Multiplicity="1" />
+          <End Type="FindYourMentorProjectModel.Fee" Role="Fee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RegisterStudent">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Fee">
               <PropertyRef Name="MenteeID" />
             </Dependent>
           </ReferentialConstraint>
@@ -957,39 +961,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Fees">
-            <EntityTypeMapping TypeName="FindYourMentorProjectModel.Fee">
-              <MappingFragment StoreEntitySet="Fees">
-                <ScalarProperty Name="AdmissionStatus" ColumnName="AdmissionStatus" />
-                <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
-                <ScalarProperty Name="CVV" ColumnName="CVV" />
-                <ScalarProperty Name="CardNumber" ColumnName="CardNumber" />
-                <ScalarProperty Name="CardName" ColumnName="CardName" />
-                <ScalarProperty Name="MentorName" ColumnName="MentorName" />
-                <ScalarProperty Name="CourseName" ColumnName="CourseName" />
-                <ScalarProperty Name="ClassName" ColumnName="ClassName" />
-                <ScalarProperty Name="StatusUpdateTime" ColumnName="StatusUpdateTime" />
-                <ScalarProperty Name="PaymentTime" ColumnName="PaymentTime" />
-                <ScalarProperty Name="MenteeGitHub" ColumnName="MenteeGitHub" />
-                <ScalarProperty Name="MenteeLinkedIn" ColumnName="MenteeLinkedIn" />
-                <ScalarProperty Name="MenteeAge" ColumnName="MenteeAge" />
-                <ScalarProperty Name="MenteeContactNo" ColumnName="MenteeContactNo" />
-                <ScalarProperty Name="MenteeState" ColumnName="MenteeState" />
-                <ScalarProperty Name="MenteeName" ColumnName="MenteeName" />
-                <ScalarProperty Name="MentorEmailID" ColumnName="MentorEmailID" />
-                <ScalarProperty Name="MenteeEmailID" ColumnName="MenteeEmailID" />
-                <ScalarProperty Name="PaymentStatus" ColumnName="PaymentStatus" />
-                <ScalarProperty Name="AmountEntered" ColumnName="AmountEntered" />
-                <ScalarProperty Name="CardDetails" ColumnName="CardDetails" />
-                <ScalarProperty Name="PaymentMode" ColumnName="PaymentMode" />
-                <ScalarProperty Name="Fees" ColumnName="Fees" />
-                <ScalarProperty Name="MenteeID" ColumnName="MenteeID" />
-                <ScalarProperty Name="MentorID" ColumnName="MentorID" />
-                <ScalarProperty Name="AdvertisementID" ColumnName="AdvertisementID" />
-                <ScalarProperty Name="FeesID" ColumnName="FeesID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="RegisterMentors">
             <EntityTypeMapping TypeName="FindYourMentorProjectModel.RegisterMentor">
               <MappingFragment StoreEntitySet="RegisterMentor">
@@ -1070,6 +1041,41 @@
                 <ScalarProperty Name="CourseName" ColumnName="CourseName" />
                 <ScalarProperty Name="ClassName" ColumnName="ClassName" />
                 <ScalarProperty Name="SavedPostID" ColumnName="SavedPostID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Fees">
+            <EntityTypeMapping TypeName="FindYourMentorProjectModel.Fee">
+              <MappingFragment StoreEntitySet="Fees">
+                <ScalarProperty Name="cvv_new" ColumnName="cvv_new" />
+                <ScalarProperty Name="ExpiryYear" ColumnName="ExpiryYear" />
+                <ScalarProperty Name="StatusCounterFee" ColumnName="StatusCounterFee" />
+                <ScalarProperty Name="AdmissionStatus" ColumnName="AdmissionStatus" />
+                <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
+                <ScalarProperty Name="CardNumber" ColumnName="CardNumber" />
+                <ScalarProperty Name="CardName" ColumnName="CardName" />
+                <ScalarProperty Name="MentorName" ColumnName="MentorName" />
+                <ScalarProperty Name="CourseName" ColumnName="CourseName" />
+                <ScalarProperty Name="ClassName" ColumnName="ClassName" />
+                <ScalarProperty Name="StatusUpdateTime" ColumnName="StatusUpdateTime" />
+                <ScalarProperty Name="PaymentTime" ColumnName="PaymentTime" />
+                <ScalarProperty Name="MenteeGitHub" ColumnName="MenteeGitHub" />
+                <ScalarProperty Name="MenteeLinkedIn" ColumnName="MenteeLinkedIn" />
+                <ScalarProperty Name="MenteeAge" ColumnName="MenteeAge" />
+                <ScalarProperty Name="MenteeContactNo" ColumnName="MenteeContactNo" />
+                <ScalarProperty Name="MenteeState" ColumnName="MenteeState" />
+                <ScalarProperty Name="MenteeName" ColumnName="MenteeName" />
+                <ScalarProperty Name="MentorEmailID" ColumnName="MentorEmailID" />
+                <ScalarProperty Name="MenteeEmailID" ColumnName="MenteeEmailID" />
+                <ScalarProperty Name="PaymentStatus" ColumnName="PaymentStatus" />
+                <ScalarProperty Name="AmountEntered" ColumnName="AmountEntered" />
+                <ScalarProperty Name="CardDetails" ColumnName="CardDetails" />
+                <ScalarProperty Name="PaymentMode" ColumnName="PaymentMode" />
+                <ScalarProperty Name="Fees" ColumnName="Fees" />
+                <ScalarProperty Name="MenteeID" ColumnName="MenteeID" />
+                <ScalarProperty Name="MentorID" ColumnName="MentorID" />
+                <ScalarProperty Name="AdvertisementID" ColumnName="AdvertisementID" />
+                <ScalarProperty Name="FeesID" ColumnName="FeesID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

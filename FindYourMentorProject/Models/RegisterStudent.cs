@@ -20,8 +20,8 @@ namespace FindYourMentorProject.Models
             this.AddNotesMentees = new HashSet<AddNotesMentee>();
             this.Applications = new HashSet<Application>();
             this.Appointments = new HashSet<Appointment>();
-            this.Fees = new HashSet<Fee>();
             this.SavedLists = new HashSet<SavedList>();
+            this.Fees = new HashSet<Fee>();
         }
     
         public int UserID { get; set; }
@@ -51,8 +51,8 @@ namespace FindYourMentorProject.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Appointment> Appointments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Fee> Fees { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SavedList> SavedLists { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Fee> Fees { get; set; }
     }
 }

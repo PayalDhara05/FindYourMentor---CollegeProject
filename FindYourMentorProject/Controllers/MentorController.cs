@@ -554,13 +554,13 @@ namespace FindYourMentorProject.Controllers
                     app.AppointmentUpdateStatusTime = System.DateTime.Now;
                     db.Configuration.ValidateOnSaveEnabled = false;
                     db.SaveChanges();
-                    Thread.Sleep(1500);
+                    Thread.Sleep(2000);
                     //CancelNotificationMentee(app.MenteeName, app.MenteeEmailID, advid.MentorName, advid.CourseName, advid.Address, advid.State);
                     return Json(new { success = true, message = "Cancel status updated Successfully" }, JsonRequestBehavior.AllowGet);
                 }
                 else
                 {
-                    Thread.Sleep(2000);
+                    Thread.Sleep(1500);
                     return Json(new { success = true, message = "You cannot update status more than 3 times !!!" }, JsonRequestBehavior.AllowGet);
                 }
             }
@@ -669,6 +669,32 @@ namespace FindYourMentorProject.Controllers
             db.Configuration.ProxyCreationEnabled = false;
             List<Fee> List = db.Fees.Where(a => a.MentorID == userid && a.PaymentMode == "Offline").ToList();
             return Json(List, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult ConfirmAdmission(int id)
+        {
+            using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
+            {
+                var fee = db.Fees.Where(a => a.FeesID == id).FirstOrDefault();
+                var advid = db.CourseAdvertisements.Where(a => a.MentorID == fee.MentorID).FirstOrDefault();
+                if (fee.StatusCounterFee < 2)
+                {
+                    fee.PaymentStatus = "Recieved";
+                    fee.AdmissionStatus = "Confirmed";
+                    fee.StatusCounterFee ++;
+                    fee.StatusUpdateTime = System.DateTime.Now;
+                    db.Configuration.ValidateOnSaveEnabled = false;
+                    db.SaveChanges();
+                    Thread.Sleep(2000);
+                    //CancelNotificationMentee(app.MenteeName, app.MenteeEmailID, advid.MentorName, advid.CourseName, advid.Address, advid.State);
+                    return Json(new { success = true, message = "Admission Confirmed Successfully" }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    Thread.Sleep(1500);
+                    return Json(new { success = true, message = "You cannot change Admission Status more than one time !!!" }, JsonRequestBehavior.AllowGet);
+                }
+            }
         }
 
     }

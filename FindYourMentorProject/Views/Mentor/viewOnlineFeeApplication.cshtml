@@ -101,7 +101,7 @@
                     },
                     {
                         "mData":"FeesID" , "render" : function (data) {
-                            return "<i class='fas fa-check-square' id='approve' title='Confirm Admission' onclick=Approve('" + data + "')></i><i class='fas fa-window-close' title='Confirm Admission' id='approve' id='reject' onclick=Reject('" + data + "')>";
+                            return "<i class='fas fa-check-square' id='approve' title='Confirm Admission' onclick=Approve('" + data + "')></i>";
                     },
                         "orderable": false,
                         "searchable":false,
@@ -122,7 +122,7 @@
 
 
     function Approve(id) {
-        var url = '@Url.Action("ApproveStatus", "Mentor")/' + id;
+        var url = '@Url.Action("ConfirmAdmission", "Mentor")/' + id;
 
         $.ajax({
             url: url,
