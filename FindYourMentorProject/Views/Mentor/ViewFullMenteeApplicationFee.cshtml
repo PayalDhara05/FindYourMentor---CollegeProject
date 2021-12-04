@@ -1,4 +1,4 @@
-﻿@model FindYourMentorProject.Models.Appointment
+﻿@model FindYourMentorProject.Models.Fee
 <link href="~/Custom/css/ViewMenteeApplication.css" rel="stylesheet" />
 
 <div class="Application-Mentee">
@@ -6,7 +6,7 @@
     <table>
         <tr class="Application-Mentee-indiv">
             <td>Name: </td>
-            <td>@Model.MenteeName</td>
+            <td>@Model.MenteeName/td>
         </tr>
 
         <tr class="Application-Mentee-indiv">
@@ -26,12 +26,12 @@
 
         <tr class="Application-Mentee-indiv">
             <td>GitHub-ID: </td>
-            <td>@Model.MenteeGithubID</td>
+            <td>@Model.MenteeGitHub</td>
         </tr>
 
         <tr class="Application-Mentee-indiv">
             <td>LinkedIn-ID: </td>
-            <td>@Model.MenteeLinkedinID</td>
+            <td>@Model.MenteeLinkedIn</td>
         </tr>
 
         <tr class="Application-Mentee-indiv">
@@ -40,23 +40,28 @@
         </tr>
 
         <tr class="Application-Mentee-indiv">
-            <td>Address: </td>
-            <td>@Model.MenteeAddress</td>
+            <td>Class name: </td>
+            <td>@Model.ClassName</td>
         </tr>
 
         <tr class="Application-Mentee-indiv">
-            <td>Appointment Date: </td>
-            <td>@Model.AppointmentDate</td>
+            <td>Course name: </td>
+            <td>@Model.CourseName</td>
         </tr>
 
         <tr class="Application-Mentee-indiv">
-            <td>Appointment Time: </td>
-            <td>@Model.AppointmentTime</td>
+            <td>Mentor name: </td>
+            <td>@Model.MentorName</td>
         </tr>
 
         <tr class="Application-Mentee-indiv">
-            <td>Expectations: </td>
-            <td>@Model.MenteeWorkingStatus</td>
+            <td>Payment mode: </td>
+            <td>@Model.PaymentMode</td>
+        </tr>
+
+        <tr class="Application-Mentee-indiv">
+            <td>Admission Status: </td>
+            <td>@Model.AdmissionStatus</td>
         </tr>
     </table>
 </div>

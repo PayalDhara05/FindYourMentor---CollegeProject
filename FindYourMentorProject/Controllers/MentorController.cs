@@ -677,7 +677,7 @@ namespace FindYourMentorProject.Controllers
             {
                 var fee = db.Fees.Where(a => a.FeesID == id).FirstOrDefault();
                 var advid = db.CourseAdvertisements.Where(a => a.MentorID == fee.MentorID).FirstOrDefault();
-                if (fee.StatusCounterFee < 2)
+                if (fee.StatusCounterFee < 1)
                 {
                     fee.PaymentStatus = "Recieved";
                     fee.AdmissionStatus = "Confirmed";
@@ -697,5 +697,12 @@ namespace FindYourMentorProject.Controllers
             }
         }
 
+        public ActionResult ViewFullMenteeApplicationFee(int id = 0)
+        {
+            using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
+            {
+                return View(db.Fees.Where(a => a.FeesID == id).FirstOrDefault<Fee>());
+            }
+        }
     }
 }

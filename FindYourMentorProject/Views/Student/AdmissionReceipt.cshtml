@@ -1,0 +1,92 @@
+﻿@model FindYourMentorProject.Models.Fee
+
+@{
+    ViewBag.Title = "AdmissionReceipt";
+}
+<link href="~/Custom/css/AdmissionReceipt.css" rel="stylesheet" />
+<div class="outer-container">
+    <div class="inner-container" id="printable-area">
+
+        <div class="desc">
+            <div class="logo-section">
+                <a href="#"><img src="~/uiImages/search.png" " alt="Fym-Logo" id="logo-img"></a>
+                <a href="#">Find Your Mentor</a>
+            </div>
+            <H2>DATE : 04-12-2021</H2>
+        </div>
+
+        <div class="printable-area-content">
+            <table>
+                <tr><td id="mentee-details">Course Details</td></tr>
+
+                <tr>
+                    <td>Course Name</td>
+                    <td>@Model.CourseName</td>
+                </tr>
+                <tr>
+                    <td>Mentor Name</td>
+                    <td>@Model.MentorName</td>
+                </tr>
+                <tr>
+                    <td>Class Name</td>
+                    <td>@Model.ClassName</td>
+                </tr>
+
+
+                <tr>
+                    <td>Total Fees of this course</td>
+                    <td>@Model.Fees</td>
+                </tr>
+
+
+                <tr><td id="mentee-details">Mentee Details</td></tr>
+
+                <tr>
+                    <td>Name</td>
+                    <td>@Model.MentorName</td>
+                </tr>
+                <tr>
+                    <td>Age</td>
+                    <td>@Model.MenteeAge</td>
+                </tr>
+                <tr>
+                    <td>State</td>
+                    <td>@Model.MenteeState</td>
+                </tr>
+
+
+                <tr>
+                    <td>Payment Mode</td>
+                    <td>@Model.PaymentMode</td>
+                </tr>
+                <tr>
+                    <td>Payment Date</td>
+                    <td>@Model.PaymentTime</td>
+                </tr>
+
+
+                <tr>
+                    <td>Admission Status</td>
+                    <td>@Model.AdmissionStatus</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="Button-container">
+        <button onclick="printDiv('printable-area')">Print Form</button>
+    </div>
+</div>
+
+<script>
+    function printDiv(divName) {
+        var printContents = document.getElementById(divName).innerHTML;
+        var originalContents = document.body.innerHTML;
+
+        document.body.innerHTML = printContents;
+
+        window.print();
+
+        document.body.innerHTML = originalContents;
+    }
+</script>

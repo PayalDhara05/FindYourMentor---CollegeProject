@@ -821,6 +821,7 @@ namespace FindYourMentorProject.Controllers
                     feeApln.PaymentStatus = "Pending";
                     feeApln.AdmissionStatus = "Pending";
                     feeApln.AmountEntered = advDetails.Fees;
+                    feeApln.StatusCounterFee = 0;
                    
                     if(feeApln.PaymentMode == "Online")
                     {
@@ -856,7 +857,7 @@ namespace FindYourMentorProject.Controllers
             int userid = Convert.ToInt32(Session["UserID"]);
             FindYourMentorProjectEntities db = new FindYourMentorProjectEntities();
             db.Configuration.ProxyCreationEnabled = false;
-            List<Fee> FeeList = db.Fees.Where(a => a.MenteeID == userid && a.PaymentMode == "Online").ToList();
+            List<Fee> FeeList = db.Fees.Where(a => a.MenteeID == userid).ToList();
             return Json(FeeList, JsonRequestBehavior.AllowGet);
         }
 
@@ -895,6 +896,14 @@ namespace FindYourMentorProject.Controllers
                 IsBodyHtml = true
             })
                 smtp.Send(message);
+        }
+
+        public ActionResult AdmissionReceipt(int id=0)
+        {
+            using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
+            {
+                return View(db.Fees.Where(a => a.FeesID == id).FirstOrDefault<Fee>());
+            }
         }
     }
 }
