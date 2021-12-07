@@ -1,0 +1,165 @@
+﻿
+@{
+    ViewBag.Title = "Notes";
+    Layout = "~/Views/Shared/_MentorLayout.cshtml";
+}
+
+<link href="~/Custom/css/Notes.css" rel="stylesheet" />
+<div class="main-table-container">
+    <a class="create-btn" onclick="PopupForm('@Url.Action("AddorEditNotes","Mentor")')"><i class="fa fa-plus"></i>&nbsp;Create</a>
+    <table id="Notes" style="width:100%;height:auto">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>CreationDate</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+        </tbody>
+    </table>
+</div>
+
+
+<link href="//cdn.datatables.net/1.11.1/css/jquery.dataTables.min.css" rel="stylesheet" />
+
+@section Scripts{
+    <script src="//cdn.datatables.net/1.11.1/js/jquery.dataTables.min.js"></script>
+
+    <script>
+        var Popup, dataTable;
+        var screenWidth, screenHeight, dialogWidth, dialogHeight, isDesktop;
+
+        screenWidth = window.screen.width;
+        screenHeight = window.screen.height;
+
+        if (screenWidth < 705) {
+           /* alert("love");*/
+            dialogWidth = screenWidth * .75;
+            dialogHeight = screenHeight * .90;
+        }
+        else if (screenWidth < 553) {
+            alert("cute");
+            dialogWidth = screenWidth * .73;
+            dialogHeight = screenHeight * .80;
+        }
+        else{
+            dialogWidth = 700;
+            dialogHeight = 500;
+            isDesktop = true;
+        }
+
+        $(document).ready(function () {
+            dataTable = $("#Notes").DataTable({
+                "ajax": {
+                    "url": "/Mentor/NotesData",
+                    "type": "GET",
+                    "datatype": "json",
+                    "dataSrc": ""
+                },
+                "responsive": true,
+                "columns": [
+                    { "mData": "Title" },
+                    { "mData": "Description" },
+                    {
+                        "mData": "CreationDate",
+                        'render': function (jsonDate) {
+                            if (jsonDate != null) {
+                                var date = new Date(parseInt(jsonDate.substr(6)));
+                                var time = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+                                var seconds = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
+                                var hours = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
+                                var period = hours < 12 ? "AM" : "PM";
+                                return date.toLocaleDateString() + " " + hours + ":" + time + ":" + seconds + " " + period;
+                            }
+                            return "-";
+                        }
+
+                    },
+
+                   {"mData":"NotesID" , "render" : function (data) {
+                       return "<a onclick=PopupForm('@Url.Action("AddorEditNotes", "Mentor")/" + data + "')><i class='fa fa-pencil'></i>&nbsp;</a><a style='margin-left:5px' onclick=Delete(" + data + ")><i class='fa fa-trash'></i>&nbsp;</a><a style='margin-left:5px' href='/Mentor/ViewNotes/" + data + "')><i class='fa fa-eye'></i>&nbsp;</a>";
+                    },
+                        "orderable": false,
+                        "searchable":false,
+                    }
+                   ],
+
+                "language": {
+                    "emptyTable": "No data found, Please click on <b style='color: #833471;'>Create</b> Button"
+                }
+            });
+        });
+
+        function PopupForm(url) {
+            var formDiv = $('<div />');
+            $.get(url)
+                .done(function (response) {
+                    formDiv.html(response);
+
+                    Popup = formDiv.dialog({
+                        autoOpen: true,
+                        resizable: true,
+                        title: 'Add Notes',
+                        height: dialogHeight,
+                        width: dialogWidth,
+                        show: { effect: 'drop', direction: "up" },
+                        modal: true,
+                        draggable: true,
+                        close: function () {
+                            Popup.dialog('destroy').remove();
+                        }
+
+                    });
+                });
+        }
+
+
+        function SubmitForm(form) {
+            $.validator.unobtrusive.parse(form);
+            if ($(form).valid()) {
+                $.ajax({
+                    type: "POST",
+                    url: form.action,
+                    data: $(form).serialize(),
+                    success: function (data) {
+                        if (data.success) {
+                            /*alert("close");*/
+                            Popup.dialog('close');
+                            dataTable.ajax.reload();
+
+                            $.notify(data.message, {
+                                globalPosition: "top center",
+                                className: "success"
+                            })
+                        }
+                    }
+                });
+            }
+            return false;
+        }
+
+        function Delete(id) {
+            if (confirm('Are You Sure to Delete this Note ?')) {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("DeleteNotes", "Mentor")/' + id,
+                    success: function (data) {
+                        if (data.success) {
+                            dataTable.ajax.reload();
+
+                            $.notify(data.message, {
+                                globalPosition: "top center",
+                                className: "success"
+                            })
+
+                        }
+                    }
+
+                });
+            }
+        }
+    </script>
+}

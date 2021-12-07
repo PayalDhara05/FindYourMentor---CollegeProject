@@ -1,8 +1,6 @@
 ﻿@model FindYourMentorProject.Models.Fee
 
-@{
-    ViewBag.Title = "AdmissionReceipt";
-}
+<title>(@Model.MenteeName)_Fee _Receipt_@Model.FeesID</title>
 <link href="~/Custom/css/AdmissionReceipt.css" rel="stylesheet" />
 <div class="outer-container">
     <div class="inner-container" id="printable-area">
@@ -12,7 +10,7 @@
                 <a href="#"><img src="~/uiImages/search.png" " alt="Fym-Logo" id="logo-img"></a>
                 <a href="#">Find Your Mentor</a>
             </div>
-            <H2>DATE : 04-12-2021</H2>
+            <H2>DATE : @DateTime.Now</H2>
         </div>
 
         <div class="printable-area-content">

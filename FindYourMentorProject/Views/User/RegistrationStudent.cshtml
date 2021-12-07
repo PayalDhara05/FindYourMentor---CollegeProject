@@ -117,10 +117,11 @@
 
                 <div class="field Address">
                     <div class="input-area">
-                        <textarea class="text-box multi-line" rows="5" cols="46" data-val="true" data-val-minlength="Atleast 3 characters are expected" data-val-minlength-min="3" data-val-required="Address is required" id="Address" name="Address" placeholder="Enter your Address" type="multiline" aria-describedby="Address-error" aria-invalid="true"></textarea>
+                        <textarea class="text-box multi-line" rows="5" cols="45" data-val="true" data-val-minlength="Atleast 3 characters are expected" data-val-minlength-min="3" data-val-required="Address is required" id="Address" name="Address" placeholder="Enter your Address" type="multiline" aria-describedby="Address-error" aria-invalid="true"></textarea>
                         @*@Html.EditorFor(model => model.Address, new { htmlAttributes = new { @id = "Address", @placeholder = "Enter your Address", @type = "multiline" } })*@
                         @*<textarea id="Address" placeholder="Enter your address" rows="5" cols="46" name="Address"></textarea>*@
                         @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                        <i class="icon fas fa-user"></i>
                     </div>
                 </div>
 
@@ -229,8 +230,9 @@
 
                 <div class="field Description">
                     <div class="input-area">
-                        <textarea id="Address" placeholder="Description ..." rows="5" cols="46" name="Description"></textarea>
+                        <textarea id="Address" placeholder="Description ..." rows="5" cols="45" name="Description"></textarea>
                         @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                        <i class="icon fas fa-user"></i>
                     </div>
                 </div>
 

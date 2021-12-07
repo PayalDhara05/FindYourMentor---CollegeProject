@@ -221,6 +221,7 @@
     <Content Include="Custom\css\viewNotes.css" />
     <Content Include="Custom\css\ViewVideos.css" />
     <Content Include="Custom\js\Advertisement.js" />
+    <Content Include="Custom\js\ChangePassword.js" />
     <Content Include="Custom\js\common.js" />
     <Content Include="Custom\js\header.js" />
     <Content Include="Custom\js\lightbox-plus-jquery.min.js" />
@@ -293,6 +294,9 @@
     <Compile Include="Models\AddNotesMentee.cs">
       <DependentUpon>AllModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\AddNotesMentor.cs">
+      <DependentUpon>AllModels.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\AllModels.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -322,6 +326,7 @@
       <DependentUpon>AllModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Extended\AddNotesMentee.cs" />
+    <Compile Include="Models\Extended\AddNotesMentor.cs" />
     <Compile Include="Models\Extended\Application.cs" />
     <Compile Include="Models\Extended\Appointment.cs" />
     <Compile Include="Models\Extended\ContactU.cs" />
@@ -423,6 +428,9 @@
     <Content Include="Views\Student\AdmissionStatus.cshtml" />
     <Content Include="Views\Mentor\ViewFullMenteeApplicationFee.cshtml" />
     <Content Include="Views\Student\AdmissionReceipt.cshtml" />
+    <Content Include="Views\Mentor\Notes.cshtml" />
+    <Content Include="Views\Mentor\AddorEditNotes.cshtml" />
+    <Content Include="Views\Mentor\ViewNotes.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -142,6 +142,7 @@ namespace FindYourMentorProject.Controllers
         public ActionResult ChangePassword(ChangePasswordModel pass)
         {
             string message = "";
+            string message1 = "";
             if (ModelState.IsValid)
             {
 
@@ -160,7 +161,7 @@ namespace FindYourMentorProject.Controllers
                         }
                         else
                         {
-                            message = "Invalid Password";
+                            message1 = "Invalid Password";
                         }
                     }
                 }
@@ -169,8 +170,155 @@ namespace FindYourMentorProject.Controllers
                     return RedirectToAction("Login", "User");
                 }
             }
-            ViewBag.message = message;
+            ViewBag.Message = message;
+            ViewBag.Message1 = message1;
             return View();
+        }
+
+
+        [HttpGet]
+        [Authorize]
+        public ActionResult Notes()
+        {
+            return View();
+        }
+
+
+        //public ActionResult NotesData()
+        //{
+        //    int userid = Convert.ToInt32(Session["UserID"]);
+        //    using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
+        //    {
+        //        var existinguser = db.AddNotesMentees.ToList<AddNotesMentee>();
+        //        return Json(new { data = existinguser }, JsonRequestBehavior.AllowGet);
+        //    }
+        //}
+
+        [Authorize]
+        public JsonResult NotesData()
+        {
+            int userid = Convert.ToInt32(Session["UserID"]);
+            FindYourMentorProjectEntities db = new FindYourMentorProjectEntities();
+            db.Configuration.ProxyCreationEnabled = false;
+            List<AddNotesMentor> List = db.AddNotesMentors.Where(a => a.MentorID == userid).ToList();
+
+            //List<AddNotesMentee> List = new List<AddNotesMentee>();
+            //int userid = Convert.ToInt32(Session["UserID"]);
+
+
+            //// Here "MyDatabaseEntities " is dbContext, which is created at time of model creation.
+
+            //using (FindYourMentorProjectEntities dc = new FindYourMentorProjectEntities())
+            //{
+            //    List = dc.AddNotesMentees.Where(a => a.UserID == userid).ToList();
+            //}
+
+            return Json(List, JsonRequestBehavior.AllowGet);
+
+        }
+
+
+        [HttpGet]
+        [Authorize]
+        public ActionResult AddorEditNotes(int id = 0)
+        {
+            if (id == 0)
+            {
+                return View(new AddNotesMentor());
+            }
+            else
+            {
+                using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
+                {
+                    return View(db.AddNotesMentors.Where(x => x.NotesID == id).FirstOrDefault<AddNotesMentor>());
+                }
+            }
+        }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult AddorEditNotes(AddNotesMentor mentor)
+        {
+            if (ModelState.IsValid)
+            {
+                int userid = Convert.ToInt32(Session["UserID"]);
+
+                using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
+                {
+                    if (mentor.NotesID == 0)
+                    {
+                        mentor.MentorID = userid;
+                        mentor.CreationDate = System.DateTime.Now;
+                        db.AddNotesMentors.Add(mentor);
+                        db.Configuration.ValidateOnSaveEnabled = false;
+                        db.SaveChanges();
+                        return Json(new { success = true, message = "Saved Successfully !!!" }, JsonRequestBehavior.AllowGet);
+                    }
+                    else
+                    {
+                        mentor.MentorID = userid;
+                        mentor.CreationDate = System.DateTime.Now;
+                        db.Entry(mentor).State = EntityState.Modified;
+                        //var existinguser = db.AddNotesMentees.Find(userid);
+                        //existinguser.Title = mentee.Title;
+                        //existinguser.Description = mentee.Description;
+                        //db.Configuration.ValidateOnSaveEnabled = false;
+                        db.SaveChanges();
+                        return Json(new { success = true, message = "Updated Successfully" }, JsonRequestBehavior.AllowGet);
+                    }
+
+                }
+
+            }
+            else
+            {
+                return Json(new { success = false, message = "Error !!!" }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult AddorEditNotesExternal(AddNotesMentor mentor)
+        {
+            if (ModelState.IsValid)
+            {
+                int userid = Convert.ToInt32(Session["UserID"]);
+
+                using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
+                {
+                    mentor.CreationDate = System.DateTime.Now;
+                    db.Entry(mentor).State = EntityState.Modified;
+                    //var existinguser = db.AddNotesMentees.Find(userid);
+                    //existinguser.Title = mentee.Title;
+                    //existinguser.Description = mentee.Description;
+                    //db.Configuration.ValidateOnSaveEnabled = false;
+                    db.SaveChanges();
+                }
+            }
+            return RedirectToAction("Notes", "Mentor");
+        }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult DeleteNotes(int id)
+        {
+            using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
+            {
+                AddNotesMentor note = db.AddNotesMentors.Where(x => x.NotesID == id).FirstOrDefault<AddNotesMentor>();
+                db.AddNotesMentors.Remove(note);
+                db.SaveChanges();
+                return Json(new { success = true, message = "Deleted Successfully" }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        [HttpGet]
+        [Authorize]
+        public ActionResult ViewNotes(int id = 0)
+        {
+            using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
+            {
+                return View(db.AddNotesMentors.Where(x => x.NotesID == id).FirstOrDefault<AddNotesMentor>());
+            }
         }
 
         [HttpGet]

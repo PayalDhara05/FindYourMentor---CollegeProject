@@ -14,11 +14,13 @@ namespace FindYourMentorProject.Models
 
         [Display(Name = "Old Password")]
         [Required(ErrorMessage = "Old password required", AllowEmptyStrings = false)]
+        [MinLength(6, ErrorMessage = "Minimum 6 characters required")]
         [DataType(DataType.Password)]
         public string OldPassword { get; set; }
 
         [Display(Name ="New Password")]
         [Required(ErrorMessage = "New password required", AllowEmptyStrings = false)]
+        [MinLength(6, ErrorMessage = "Minimum 6 characters required")]
         [DataType(DataType.Password)]
         public string NewPassword { get; set; }
 

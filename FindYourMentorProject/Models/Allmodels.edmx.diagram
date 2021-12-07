@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="8bc3c0276daa43df9fa110d10af2725b" Name="Diagram1" ZoomLevel="111">
+      <Diagram DiagramId="8bc3c0276daa43df9fa110d10af2725b" Name="Diagram1" ZoomLevel="72">
         <EntityTypeShape EntityType="FindYourMentorProjectModel.AddNotesMentee" Width="1.5" PointX="3" PointY="43.75" />
         <EntityTypeShape EntityType="FindYourMentorProjectModel.Application" Width="1.5" PointX="6" PointY="7.125" />
         <EntityTypeShape EntityType="FindYourMentorProjectModel.Appointment" Width="1.5" PointX="3" PointY="14" />
@@ -24,6 +24,8 @@
         <EntityTypeShape EntityType="FindYourMentorProjectModel.Fee" Width="1.5" PointX="9" PointY="6.25" />
         <AssociationConnector Association="FindYourMentorProjectModel.FK__Fees__Advertisem__0880433F" />
         <AssociationConnector Association="FindYourMentorProjectModel.FK__Fees__MenteeID__09746778" />
+        <EntityTypeShape EntityType="FindYourMentorProjectModel.AddNotesMentor" Width="1.5" PointX="3.375" PointY="0.75" />
+        <AssociationConnector Association="FindYourMentorProjectModel.FK__AddNotesM__Mento__7FB5F314" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

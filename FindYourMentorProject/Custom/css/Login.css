@@ -23,7 +23,7 @@ body {
     align-items: center;
 }
 .wrapper {
-    margin-top:15rem;
+    margin-top:12rem;
     width: 380px;
     padding: 40px 30px 50px 30px;
     background-color: #f8cbc1;
@@ -333,6 +333,7 @@ form input[type="button"] {
 }*/
 .text-danger, .loginmsg {
     color: red;
+    margin-bottom:3rem!important;
     text-align:center;
     background-color: white;
     font-weight: bold;

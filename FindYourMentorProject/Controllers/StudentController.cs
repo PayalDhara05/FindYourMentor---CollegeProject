@@ -55,9 +55,9 @@ namespace FindYourMentorProject.Controllers
         public ActionResult ChangePassword(ChangePasswordModel pass)
         {
             string message = "";
+            string message1 = "";
             if (ModelState.IsValid)
             {
-
                 if (Session["UserID"] != null)
                 {
                     int userid = Convert.ToInt32(Session["UserID"]);
@@ -73,7 +73,7 @@ namespace FindYourMentorProject.Controllers
                         }
                         else
                         {
-                            message = "Invalid Password";
+                            message1 = "Old Password is not correct";
                         }
                     }
                 }
@@ -82,7 +82,8 @@ namespace FindYourMentorProject.Controllers
                     return RedirectToAction("Login", "User");
                 }
             }
-            ViewBag.message = message;
+            ViewBag.Message = message;
+            ViewBag.Message1 = message;
             return View();
         }
 

@@ -1,0 +1,55 @@
+﻿@model FindYourMentorProject.Models.AddNotesMentor
+
+@*<link href="~/Custom/css/AddorEditNotes.css" rel="stylesheet" />
+    @using (Html.BeginForm("AddorEditNotes","Student",FormMethod.Post, new { onSubmit = "return SubmitForm(this)" }))
+    {
+        @Html.AntiForgeryToken()
+
+    <div class="notes-container">
+        <table>
+            @Html.HiddenFor(model => model.NoteID)
+            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+
+
+            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", rows="5" } })
+            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+
+            <input type="submit" value="Done" class="btn-success" />
+            <input type="reset" value="Reset" class="btn-reset" />
+        </table>
+    </div>
+
+    }*@
+
+@*<link href="~/Custom/css/AddorEditNotes.css" rel="stylesheet" />*@
+<div class="notes-container">
+    @using (Html.BeginForm("AddorEditNotes", "Mentor", FormMethod.Post, new { onSubmit = "return SubmitForm(this)", @id = "notes-form" }))
+    {
+        <input data-val="true" data-val-number="The field NotesID must be a number." data-val-required="The NotesID field is required." id="NoteID" name="NotesID" type="hidden" value="@Model.NotesID">
+
+        <div class="notes-caption">
+            <label class="form-label" for="Title">Title</label>
+        </div>
+        <div class="notes-data">
+            <input placeholder="Give a title" data-val="true" data-val-minlength="Atleast 3 characters are expected" data-val-minlength-min="3" data-val-required="Title required" id="Title" name="Title" type="text" value="@Model.Title">
+            <span class="field-validation-valid text-danger" data-valmsg-for="Title" data-valmsg-replace="true" id="title-error"></span>
+        </div>
+
+        <div class="notes-caption">
+            <label class="form-label" for="Description" id="Desc">Description</label>
+        </div>
+        <div class="notes-data">
+            <textarea placeholder="Description .." data-val="true" data-val-minlength="Atleast 3 characters are expected" data-val-minlength-min="3" data-val-required="Description required" id="Description" name="Description" rows="5" type="text">@Model.Description</textarea>
+            <span class="field-validation-valid text-danger" data-valmsg-for="Description" data-valmsg-replace="true"></span>
+        </div>
+
+        <div class="form-btns">
+            <input type="submit" value="Done" class="btn-success">
+            <input type="reset" value="Reset" class="btn-reset">
+        </div>
+    }
+</div>
+

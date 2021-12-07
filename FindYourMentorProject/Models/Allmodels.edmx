@@ -15,6 +15,16 @@
           <Property Name="CreationDate" Type="datetime" />
           <Property Name="UserID" Type="int" />
         </EntityType>
+        <EntityType Name="AddNotesMentor">
+          <Key>
+            <PropertyRef Name="NotesID" />
+          </Key>
+          <Property Name="NotesID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="MentorID" Type="int" Nullable="false" />
+          <Property Name="CreationDate" Type="datetime" />
+        </EntityType>
         <EntityType Name="Application">
           <Key>
             <PropertyRef Name="ApplicationID" />
@@ -236,6 +246,18 @@
           <Property Name="DemoLec4" Type="varchar(max)" />
           <Property Name="SeatsOccupied" Type="int" Nullable="false" />
         </EntityType>
+        <Association Name="FK__AddNotesM__Mento__7FB5F314">
+          <End Role="RegisterMentor" Type="Self.RegisterMentor" Multiplicity="1" />
+          <End Role="AddNotesMentor" Type="Self.AddNotesMentor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RegisterMentor">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="AddNotesMentor">
+              <PropertyRef Name="MentorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__AddNotesM__UserI__571DF1D5">
           <End Role="RegisterStudent" Type="Self.RegisterStudent" Multiplicity="0..1" />
           <End Role="AddNotesMentee" Type="Self.AddNotesMentee" Multiplicity="*" />
@@ -358,6 +380,7 @@
         </Association>
         <EntityContainer Name="FindYourMentorProjectModelStoreContainer">
           <EntitySet Name="AddNotesMentee" EntityType="Self.AddNotesMentee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AddNotesMentor" EntityType="Self.AddNotesMentor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Application" EntityType="Self.Application" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Appointment" EntityType="Self.Appointment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ContactUs" EntityType="Self.ContactUs" Schema="dbo" store:Type="Tables" />
@@ -366,6 +389,10 @@
           <EntitySet Name="RegisterMentor" EntityType="Self.RegisterMentor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RegisterStudent" EntityType="Self.RegisterStudent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SavedList" EntityType="Self.SavedList" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__AddNotesM__Mento__7FB5F314" Association="Self.FK__AddNotesM__Mento__7FB5F314">
+            <End Role="RegisterMentor" EntitySet="RegisterMentor" />
+            <End Role="AddNotesMentor" EntitySet="AddNotesMentor" />
+          </AssociationSet>
           <AssociationSet Name="FK__AddNotesM__UserI__571DF1D5" Association="Self.FK__AddNotesM__UserI__571DF1D5">
             <End Role="RegisterStudent" EntitySet="RegisterStudent" />
             <End Role="AddNotesMentee" EntitySet="AddNotesMentee" />
@@ -460,6 +487,11 @@
           <AssociationSet Name="FK__Fees__MenteeID__09746778" Association="FindYourMentorProjectModel.FK__Fees__MenteeID__09746778">
             <End Role="RegisterStudent" EntitySet="RegisterStudents" />
             <End Role="Fee" EntitySet="Fees" />
+          </AssociationSet>
+          <EntitySet Name="AddNotesMentors" EntityType="FindYourMentorProjectModel.AddNotesMentor" />
+          <AssociationSet Name="FK__AddNotesM__Mento__7FB5F314" Association="FindYourMentorProjectModel.FK__AddNotesM__Mento__7FB5F314">
+            <End Role="RegisterMentor" EntitySet="RegisterMentors" />
+            <End Role="AddNotesMentor" EntitySet="AddNotesMentors" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="AddNotesMentee">
@@ -613,6 +645,7 @@
           <Property Name="LinkedinID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="CourseAdvertisements" Relationship="FindYourMentorProjectModel.FK__CourseAdv__Mento__73BA3083" FromRole="RegisterMentor" ToRole="CourseAdvertisement" />
+          <NavigationProperty Name="AddNotesMentors" Relationship="FindYourMentorProjectModel.FK__AddNotesM__Mento__7FB5F314" FromRole="RegisterMentor" ToRole="AddNotesMentor" />
         </EntityType>
         <EntityType Name="RegisterStudent">
           <Key>
@@ -830,6 +863,29 @@
             </Principal>
             <Dependent Role="Fee">
               <PropertyRef Name="MenteeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="AddNotesMentor">
+          <Key>
+            <PropertyRef Name="NotesID" />
+          </Key>
+          <Property Name="NotesID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="MentorID" Type="Int32" Nullable="false" />
+          <Property Name="CreationDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="RegisterMentor" Relationship="FindYourMentorProjectModel.FK__AddNotesM__Mento__7FB5F314" FromRole="AddNotesMentor" ToRole="RegisterMentor" />
+        </EntityType>
+        <Association Name="FK__AddNotesM__Mento__7FB5F314">
+          <End Type="FindYourMentorProjectModel.RegisterMentor" Role="RegisterMentor" Multiplicity="1" />
+          <End Type="FindYourMentorProjectModel.AddNotesMentor" Role="AddNotesMentor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RegisterMentor">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="AddNotesMentor">
+              <PropertyRef Name="MentorID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1076,6 +1132,17 @@
                 <ScalarProperty Name="MentorID" ColumnName="MentorID" />
                 <ScalarProperty Name="AdvertisementID" ColumnName="AdvertisementID" />
                 <ScalarProperty Name="FeesID" ColumnName="FeesID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AddNotesMentors">
+            <EntityTypeMapping TypeName="FindYourMentorProjectModel.AddNotesMentor">
+              <MappingFragment StoreEntitySet="AddNotesMentor">
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="MentorID" ColumnName="MentorID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="NotesID" ColumnName="NotesID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

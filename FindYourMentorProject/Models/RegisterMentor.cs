@@ -18,6 +18,7 @@ namespace FindYourMentorProject.Models
         public RegisterMentor()
         {
             this.CourseAdvertisements = new HashSet<CourseAdvertisement>();
+            this.AddNotesMentors = new HashSet<AddNotesMentor>();
         }
     
         public int UserID { get; set; }
@@ -42,5 +43,7 @@ namespace FindYourMentorProject.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CourseAdvertisement> CourseAdvertisements { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AddNotesMentor> AddNotesMentors { get; set; }
     }
 }
