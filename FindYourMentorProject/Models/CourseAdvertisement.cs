@@ -21,6 +21,10 @@ namespace FindYourMentorProject.Models
             this.Appointments = new HashSet<Appointment>();
             this.SavedLists = new HashSet<SavedList>();
             this.Fees1 = new HashSet<Fee>();
+            DemoLec1 = "/VideoFile/Demo.mp4";
+            DemoLec2 = "/VideoFile/Demo.mp4";
+            DemoLec3 = "/VideoFile/Demo.mp4";
+            DemoLec4 = "/VideoFile/Demo.mp4";
         }
     
         public int AdvertisementID { get; set; }

@@ -9,13 +9,13 @@
     <div class="add-container" id="add-container">
          @using (Html.BeginForm("AddorEditAdvertisements", "Mentor", FormMethod.Post, new { enctype = "multipart/form-data" }))
          {
-        <fieldset class="desk-fieldset">
+            <fieldset class="desk-fieldset">
             <legend>Course Advertisement</legend>
 
             @Html.AntiForgeryToken()
             @Html.HiddenFor(model => model.AdvertisementID)
 
-        <table id="course-adv">
+            <table id="course-adv">
             <tr>
                 <td><p>Course Name:</p></td>
                 <td>
@@ -561,6 +561,7 @@
             </div>
 
         </fieldset>
+
          }
     </div>
 

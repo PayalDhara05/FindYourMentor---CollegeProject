@@ -286,6 +286,7 @@ namespace FindYourMentorProject.Controllers
 
                 using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
                 {
+                    mentor.MentorID = userid;
                     mentor.CreationDate = System.DateTime.Now;
                     db.Entry(mentor).State = EntityState.Modified;
                     //var existinguser = db.AddNotesMentees.Find(userid);
@@ -334,7 +335,6 @@ namespace FindYourMentorProject.Controllers
             db.Configuration.ProxyCreationEnabled = false;
             List<CourseAdvertisement> List = db.CourseAdvertisements.Where(a => a.MentorID == userid && a.RemovalStatus == "No").ToList();
             return Json(List, JsonRequestBehavior.AllowGet);
-
         }
 
         [HttpGet]
@@ -354,57 +354,57 @@ namespace FindYourMentorProject.Controllers
         [HttpPost]
         public ActionResult AddorEditAdvertisements(CourseAdvertisement adv, HttpPostedFileBase file1, HttpPostedFileBase file2, HttpPostedFileBase file3, HttpPostedFileBase file4)
         {
-          int userid = Convert.ToInt32(Session["UserID"]);
+            int userid = Convert.ToInt32(Session["UserID"]);
             CourseAdvertisement cAdv = new CourseAdvertisement();
             if (ModelState.IsValid)
                 {
-                    if (file1 != null)
-                    {
-                        string fileName = Path.GetFileName(file1.FileName);
-                        String filepath = Path.Combine(Server.MapPath("~/VideoFile/"), fileName);
-                        if (file1.ContentLength < 104857600)
-                        {
-                            file1.SaveAs(filepath);
-                        }
-                        adv.DemoLec1 = "/VideoFile/" + fileName;
-                    }
-
-                    if (file2 != null)
-                    {
-                        string fileName = Path.GetFileName(file2.FileName);
-                        String filepath = Path.Combine(Server.MapPath("~/VideoFile/"), fileName);
-                        if (file2.ContentLength < 104857600)
-                        {
-                            file2.SaveAs(filepath);
-                        }
-                        adv.DemoLec2 = "/VideoFile/" + fileName;
-                    }
-
-                    if (file3 != null)
-                    {
-                        string fileName = Path.GetFileName(file3.FileName);
-                        String filepath = Path.Combine(Server.MapPath("~/VideoFile/"), fileName);
-                        if (file3.ContentLength < 104857600)
-                        {
-                            file3.SaveAs(filepath);
-                        }
-                        adv.DemoLec3 = "/VideoFile/" + fileName;
-                    }
-
-                    if (file4 != null)
-                    {
-                        string fileName = Path.GetFileName(file4.FileName);
-                        String filepath = Path.Combine(Server.MapPath("~/VideoFile/"), fileName);
-                        if (file4.ContentLength < 104857600)
-                        {
-                            file4.SaveAs(filepath);
-                        }
-                        adv.DemoLec4 = "/VideoFile/" + fileName;
-                    }
                     using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
                     {
                         if (adv.AdvertisementID == 0)
                         {
+                            if (file1 != null)
+                            {
+                                string fileName = Path.GetFileName(file1.FileName);
+                                String filepath = Path.Combine(Server.MapPath("~/VideoFile/"), fileName);
+                                if (file1.ContentLength < 104857600)
+                                {
+                                    file1.SaveAs(filepath);
+                                }
+                                adv.DemoLec1 = "/VideoFile/" + fileName;
+                            }
+
+                            if (file2 != null)
+                            {
+                                string fileName = Path.GetFileName(file2.FileName);
+                                String filepath = Path.Combine(Server.MapPath("~/VideoFile/"), fileName);
+                                if (file2.ContentLength < 104857600)
+                                {
+                                    file2.SaveAs(filepath);
+                                }
+                                adv.DemoLec2 = "/VideoFile/" + fileName;
+                            }
+
+                            if (file3 != null)
+                            {
+                                string fileName = Path.GetFileName(file3.FileName);
+                                String filepath = Path.Combine(Server.MapPath("~/VideoFile/"), fileName);
+                                if (file3.ContentLength < 104857600)
+                                {
+                                    file3.SaveAs(filepath);
+                                }
+                                adv.DemoLec3 = "/VideoFile/" + fileName;
+                            }
+
+                            if (file4 != null)
+                            {
+                                string fileName = Path.GetFileName(file4.FileName);
+                                String filepath = Path.Combine(Server.MapPath("~/VideoFile/"), fileName);
+                                if (file4.ContentLength < 104857600)
+                                {
+                                    file4.SaveAs(filepath);
+                                }
+                                adv.DemoLec4 = "/VideoFile/" + fileName;
+                            }
                             db.CourseAdvertisements.Add(adv);
                             adv.MentorID = userid;
                             adv.CreationDate = System.DateTime.Now;
@@ -415,10 +415,71 @@ namespace FindYourMentorProject.Controllers
                         }
                         else
                         {
+                            CourseAdvertisement commonLec = db.CourseAdvertisements.Where(a => a.AdvertisementID == adv.AdvertisementID).FirstOrDefault();
+                            if (file1 !=null)
+                            {
+                                string fileName = Path.GetFileName(file1.FileName);
+                                String filepath = Path.Combine(Server.MapPath("~/VideoFile/"), fileName);
+                                if (file1.ContentLength < 104857600)
+                                {
+                                    file1.SaveAs(filepath);
+                                }
+                                adv.DemoLec1 = "/VideoFile/" + fileName;
+                            }
+                            else
+                            {
+                                adv.DemoLec1 = commonLec.DemoLec1;
+                            }
+
+                            if(file2 != null)
+                            {
+                                string fileName = Path.GetFileName(file2.FileName);
+                                String filepath = Path.Combine(Server.MapPath("~/VideoFile/"), fileName);
+                                if (file2.ContentLength < 104857600)
+                                {
+                                    file2.SaveAs(filepath);
+                                }
+                                adv.DemoLec2 = "/VideoFile/" + fileName;
+                            }
+                            else
+                            {
+                                adv.DemoLec2 = commonLec.DemoLec2;
+                            }
+
+                            if(file3 !=  null)
+                            {
+                                string fileName = Path.GetFileName(file3.FileName);
+                                String filepath = Path.Combine(Server.MapPath("~/VideoFile/"), fileName);
+                                if (file3.ContentLength < 104857600)
+                                {
+                                    file3.SaveAs(filepath);
+                                }
+                                adv.DemoLec3 = "/VideoFile/" + fileName;
+                            }
+                            else
+                            {
+                                adv.DemoLec3 = commonLec.DemoLec3;
+                            }
+                           
+                            if(file4 != null)
+                            {
+                                string fileName = Path.GetFileName(file4.FileName);
+                                String filepath = Path.Combine(Server.MapPath("~/VideoFile/"), fileName);
+                                if (file4.ContentLength < 104857600)
+                                {
+                                    file4.SaveAs(filepath);
+                                }
+                                adv.DemoLec4 = "/VideoFile/" + fileName;
+                            }
+                            else
+                            {
+                                adv.DemoLec4 = commonLec.DemoLec4;
+                            }
+                            var existingEntity = db.CourseAdvertisements.Find(adv.AdvertisementID);
                             adv.MentorID = userid;
                             adv.CreationDate = System.DateTime.Now;
                             adv.RemovalStatus = "No";
-                            db.Entry(adv).State = EntityState.Modified;
+                            db.Entry(existingEntity).CurrentValues.SetValues(adv);
                             db.SaveChanges();
                             return RedirectToAction("Advertisement", "Mentor"); 
                         }
@@ -430,22 +491,6 @@ namespace FindYourMentorProject.Controllers
                 }       
             }
 
-
-        [NonAction]
-        public string saveToPhysicalLocation(HttpPostedFileBase file)
-        {
-            if (file != null)
-            {
-                string fileName = Path.GetFileName(file.FileName);
-                String filepath = Path.Combine(Server.MapPath("~/VideoFile/"), fileName);
-                if (file.ContentLength < 104857600)
-                {
-                    file.SaveAs(filepath);
-                    return filepath;
-                }   
-            }
-            return String.Empty;
-        }
 
         [HttpPost]
         public ActionResult DeleteAdvertisement(int id)
@@ -475,6 +520,8 @@ namespace FindYourMentorProject.Controllers
                 }
             }
         }
+
+
         public ActionResult ViewAdvertisement(int id = 0)
         {
             using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
@@ -483,10 +530,13 @@ namespace FindYourMentorProject.Controllers
             }
         }
 
+
         public ActionResult viewMenteeApplication()
         {
             return View();
         }
+
+
         public ActionResult viewMenteeApplicationData()
         {
             int userid = Convert.ToInt32(Session["UserID"]);
@@ -496,6 +546,7 @@ namespace FindYourMentorProject.Controllers
             return Json(List, JsonRequestBehavior.AllowGet);
         }
 
+
         public ActionResult ViewFullMenteeApplication(int id = 0)
         {
             using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
@@ -504,6 +555,7 @@ namespace FindYourMentorProject.Controllers
             }
         }
 
+
         public ActionResult ViewCourseApplication(int id = 0)
         {
             using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
@@ -511,6 +563,7 @@ namespace FindYourMentorProject.Controllers
                 return View(db.CourseAdvertisements.Where(a => a.AdvertisementID == id).FirstOrDefault<CourseAdvertisement>());
             }
         }
+
 
         public ActionResult ApproveStatus(int id)
         {
@@ -538,6 +591,7 @@ namespace FindYourMentorProject.Controllers
             }
         }
 
+
         public ActionResult RejectStatus(int id)
         {
             using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
@@ -563,6 +617,7 @@ namespace FindYourMentorProject.Controllers
             }
         }
 
+
         public ActionResult UpdateRemoveStatus(int id)
         {
             using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
@@ -575,6 +630,7 @@ namespace FindYourMentorProject.Controllers
                 return Json(new { success = true, message = "Removed" }, JsonRequestBehavior.AllowGet);
             }
         }
+
 
         [NonAction]
         public void ApprovalNotificationMentee(string menteeName, string menteeEmailID, string MentorName, string CourseName, string Address, string State)
@@ -646,6 +702,8 @@ namespace FindYourMentorProject.Controllers
         {
             return View();
         }
+
+
         public ActionResult viewMenteeAppointmentData()
         {
             int userid = Convert.ToInt32(Session["UserID"]);
@@ -655,6 +713,7 @@ namespace FindYourMentorProject.Controllers
             return Json(List, JsonRequestBehavior.AllowGet);
         }
 
+
         public ActionResult ViewFullMenteeAppointment(int id = 0)
         {
             using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
@@ -662,6 +721,7 @@ namespace FindYourMentorProject.Controllers
                 return View(db.Appointments.Where(a => a.AppointmentID == id).FirstOrDefault<Appointment>());
             }
         }
+
 
         public ActionResult ConfirmStatus(int id)
         {
@@ -689,6 +749,7 @@ namespace FindYourMentorProject.Controllers
             }
         }
 
+
         public ActionResult CancelStatus(int id)
         {
             using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
@@ -713,6 +774,7 @@ namespace FindYourMentorProject.Controllers
                 }
             }
         }
+
 
         public ActionResult UpdateRemoveAppointmentStatus(int id)
         {
@@ -797,6 +859,8 @@ namespace FindYourMentorProject.Controllers
         {
             return View();
         }
+
+
         public ActionResult viewOnlineFeeApplicationData()
         {
             int userid = Convert.ToInt32(Session["UserID"]);
