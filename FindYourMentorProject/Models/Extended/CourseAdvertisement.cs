@@ -104,5 +104,10 @@ namespace FindYourMentorProject.Models
 
         [Display(Name = "Demo Lecture 2")]
         public string DemoLec2 { get; set; }
+
+        [Display(Name = "Mode")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Field is required")]
+        [MinLength(3, ErrorMessage = "Atleast 3 characters are expected")]
+        public string Mode { get; set; }
     }
 }

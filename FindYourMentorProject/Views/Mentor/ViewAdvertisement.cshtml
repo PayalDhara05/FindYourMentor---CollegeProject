@@ -1,173 +1,181 @@
-﻿@model FindYourMentorProject.Models.CourseAdvertisement
+﻿@model FindYourMentorProject.Models.BigModel
 
 @{
     ViewBag.Title = "ViewAdvertisement";
     Layout = "~/Views/Shared/_MentorLayout.cshtml";
 }
+<link href="~/Custom/css/ViewAdvertisement.css" rel="stylesheet" />
+<body>
+    <div class="main-course-advert">
+        <div class="indiv-course-advert">
+            <div class="advert-heading">
+                <h1>Teaching @Model.CourseAdvertisement.CourseName Courses in @Model.CourseAdvertisement.City</h1>
+                <i class="fas fa-heart" title="Add to saved list"></i>
+            </div>
 
-<h2>ViewAdvertisement</h2>
+            <div class="mode-info">
+                <div class="Course-name">
+                    <i class="fas fa-user"> Mentor/ Mentor's</i>
+                    <p>@Model.CourseAdvertisement.MentorName</p>
+                </div>
+                @if (!string.IsNullOrEmpty(Model.CourseAdvertisement.logo))
+                {
+                    <img src="@Url.Content(Model.CourseAdvertisement.logo)" alt="logo" />
+                }
+            </div>
 
-<div>
-    <h4>CourseAdvertisement</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.ClassName)
-        </dt>
+            <div class="Course-main-info">
+                <div class="Course-name">
+                    <i class="fas fa-home"> Mode</i>
+                    <p>@Model.CourseAdvertisement.Mode</p>
+                </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.ClassName)
-        </dd>
+                <div class="Course-name">
+                    <i class="fas fa-book-reader"> Courses</i>
+                    <p>@Model.CourseAdvertisement.CourseName</p>
+                </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CourseName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CourseName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.MentorName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MentorName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.BatchesFull)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.BatchesFull)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.BatchesAvailable)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.BatchesAvailable)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TotalStudents)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TotalStudents)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Fees)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Fees)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Address)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Address)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.SpokenLanguage)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.SpokenLanguage)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.GitHubAccount)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.GitHubAccount)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Field)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Field)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.State)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.State)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.City)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.City)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Location)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Location)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CreationDate)
-        </dt>
+                <div class="Course-name">
+                    <i class="fas fa-school"> Class Name</i>
+                    <p>@Model.CourseAdvertisement.ClassName</p>
+                </div>
+            </div>
 
 
 
-        <dd>
-            @Html.DisplayFor(model => model.CreationDate)
-        </dd>
+            <div class="student-info">
+                <div class="seats">
+                    <i class="far fa-play-circle"> Start Date</i>
+                    <p>@Model.CourseAdvertisement.StartDate</p>
+                </div>
 
-    </dl>
-</div>
+                <div class="seats">
+                    <i class="far fa-calendar"> Duration</i>
+                    <p>@Model.CourseAdvertisement.Duration Months</p>
+                </div>
 
-@if (!string.IsNullOrEmpty(Model.DemoLec1))
-{
-    <video style="width:700px;height:500px;" controls>
-        <source src="@Url.Content(Model.DemoLec1)" type="video/mp4" />
-    </video>
-}
-else
-{
-    <p>Video Lecture not added</p>
-}
+                <div class="seats">
+                    <i class="far fa-money-bill-alt"> Fees</i>
+                    <p>&#x20B9; @Model.CourseAdvertisement.Fees</p>
+                </div>
 
+                <div class="seats">
+                    <i class="fas fa-chalkboard-teacher"> Experience</i>
+                    <p>@Model.CourseAdvertisement.YearsOfExperience</p>
+                </div>
+            </div>
 
-@if (!string.IsNullOrEmpty(Model.DemoLec2))
-{
-    <video style="width:700px;height:500px;" controls>
-        <source src="@Url.Content(Model.DemoLec2)" type="video/mp4" />
-    </video>
-}
-else
-{
-    <p>Video Lecture not added</p>
-}
+            <div class="student-info">
+                <div class="seats">
+                    <i class="fas fa-user-graduate"> Total Seats</i>
+                    <p>@Model.CourseAdvertisement.TotalSeats</p>
+                </div>
 
-<p>
-    @Html.ActionLink("Back to Adverisement List", "Advertisement", "Mentor")
-</p>
+                <div class="seats">
+                    <i class="fas fa-user-graduate"> Available Seats</i>
+                    <p>@Model.CourseAdvertisement.SeatsOccupied</p>
+                </div>
 
+                <div class="seats">
+                    <i class="fas fa-user-graduate"> Available Batches</i>
+                    <p>@Model.CourseAdvertisement.BatchesAvailable</p>
+                </div>
+
+                <div class="seats">
+                    <i class="fas fa-user-graduate"> Filled Batches</i>
+                    <p>@Model.CourseAdvertisement.BatchesFull</p>
+                </div>
+            </div>
+
+            <div class="class-info">
+                <div class="github">
+                    <i class="fab fa-github"> GitHub</i>
+                    <p>@Model.CourseAdvertisement.GitHubAccount</p>
+                </div>
+
+                <div class="github">
+                    <i class="fab fa-linkedin"> LinkedIn</i>
+                    <p>@Model.CourseAdvertisement.LinkedIn</p>
+                </div>
+            </div>
+
+            <div class="description">
+                <h2>About @Model.CourseAdvertisement.ClassName</h2>
+                <p>@Model.CourseAdvertisement.Description</p>
+            </div>
+
+            <div class="address-info">
+                <div class="seats" id="address">
+                    <i class="fas fa-map-marker-alt"> Address</i>
+                    <p>@Model.CourseAdvertisement.Address</p>
+                </div>
+
+                <div class="seats">
+                    <i class="fas fa-location-arrow"> State</i>
+                    <p>@Model.CourseAdvertisement.State</p>
+                </div>
+
+                <div class="seats">
+                    <i class="fas fa-building"> City</i>
+                    <p>@Model.CourseAdvertisement.City</p>
+                </div>
+            </div>
+
+            <div class="communication">
+                <i class="fas fa-language"> Communication Languages</i>
+                <p>@Model.CourseAdvertisement.SpokenLanguage1  @Model.CourseAdvertisement.SpokenLanguage2  @Model.CourseAdvertisement.SpokenLanguage3  @Model.CourseAdvertisement.SpokenLanguage4</p>
+            </div>
+
+            <div class="demo-videos">
+                <i class="fas fa-video"> Demo Lectures</i>
+                <div class="indiv-vid">
+                    <video controls>
+                        <source src="@Url.Content(Model.CourseAdvertisement.DemoLec1)" type="video/mp4" id="videoPreview2" class="all-videos" />
+                    </video>
+                    <video controls>
+                        <source src="@Url.Content(Model.CourseAdvertisement.DemoLec2)" type="video/mp4" id="videoPreview2" class="all-videos" />
+                    </video>
+                    <video controls>
+                        <source src="@Url.Content(Model.CourseAdvertisement.DemoLec3)" type="video/mp4" id="videoPreview2" class="all-videos" />
+                    </video>
+                    <video controls>
+                        <source src="@Url.Content(Model.CourseAdvertisement.DemoLec4)" type="video/mp4" id="videoPreview2" class="all-videos" />
+                    </video>
+                </div>
+            </div>
+
+            <div class="Feedback-box">
+                <p>Feedback</p>
+                <div class="all-feedbacks">
+                    @if (@Model.Feedback.Count() == 0)
+                    {
+                        <div class="empty-feedback">
+                            <p>No Feedbacks posted</p>
+                        </div>
+                    }
+                    else
+                    {
+                        foreach (var item in Model.Feedback)
+                        {
+                            <div class="indiv-feedback">
+                                <p>@item.commentedOn.ToString() By <span>@item.Username</span></p>
+                                <p>@item.feedbackDescription</p>
+                                <div class="all-stars">
+                                    @for (int i = 0; i < @item.Rating; i++)
+                                    {
+                                        <i class="fas fa-star"></i>
+                                    }
+                                    @for (int i = 5; i > @item.Rating; i--)
+                                    {
+                                        <i class="far fa-star"></i>
+                                    }
+                                </div>
+                            </div>
+                        }
+                    }
+
+                </div>
+            </div>
+            </div>
+        </div>
+</body>

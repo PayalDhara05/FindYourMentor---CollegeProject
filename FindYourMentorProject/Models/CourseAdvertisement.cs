@@ -21,10 +21,7 @@ namespace FindYourMentorProject.Models
             this.Appointments = new HashSet<Appointment>();
             this.SavedLists = new HashSet<SavedList>();
             this.Fees1 = new HashSet<Fee>();
-            DemoLec1 = "/VideoFile/Demo.mp4";
-            DemoLec2 = "/VideoFile/Demo.mp4";
-            DemoLec3 = "/VideoFile/Demo.mp4";
-            DemoLec4 = "/VideoFile/Demo.mp4";
+            this.Feedbacks = new HashSet<Feedback>();
         }
     
         public int AdvertisementID { get; set; }
@@ -57,6 +54,10 @@ namespace FindYourMentorProject.Models
         public string DemoLec3 { get; set; }
         public string DemoLec4 { get; set; }
         public int SeatsOccupied { get; set; }
+        public string logo { get; set; }
+        public System.DateTime StartDate { get; set; }
+        public string Duration { get; set; }
+        public string Mode { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Application> Applications { get; set; }
@@ -67,5 +68,8 @@ namespace FindYourMentorProject.Models
         public virtual ICollection<SavedList> SavedLists { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Fee> Fees1 { get; set; }
+        public virtual Feedback Feedback { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Feedback> Feedbacks { get; set; }
     }
 }

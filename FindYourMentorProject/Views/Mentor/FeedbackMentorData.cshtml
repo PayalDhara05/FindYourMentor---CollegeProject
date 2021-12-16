@@ -1,0 +1,25 @@
+﻿@model IEnumerable<FindYourMentorProject.Models.Feedback>
+
+@if (@Model.Count() == 0)
+{
+    <div class="no-records-msg">
+        <p>No feedbacks posted</p>
+    </div>
+}
+else
+{
+    <div class="all-cards">
+        @foreach (var item in Model)
+        {
+                <div class="course-info">
+                    <p>@item.feedbackDescription</p>
+                </div>
+                <div class="All-info">
+                    <p class="Description">@item.commentedOn</p>
+                    <p class="Class-name">@item.Username</p>
+                    <p class="mentor-name">By Mentor:&nbsp;&nbsp;&nbsp;<span>@item.Rating</span></p>
+                 </div>
+
+        }
+    </div>
+}

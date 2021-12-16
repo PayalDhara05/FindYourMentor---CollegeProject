@@ -44,6 +44,10 @@
                 <th>Field</th>
                 <th>State</th>
                 <th>City</th>
+                <th>Start Date</th>
+                <th>Duration</th>
+                <th>Mode</th>
+                <th>Logo</th>
                 <th>Video1</th>
                 <th>Video2</th>
                 <th>Video3</th>
@@ -102,6 +106,18 @@
                     { "mData": "Field" },
                     { "mData": "State" },
                     { "mData": "City" },
+                    {
+                        "mData": "StartDate",
+                        'render': function (data) {
+                            if (data != null) {
+                                var d = new Date(parseInt(data.substr(6)));
+                                return d.toLocaleDateString();
+                            }
+                        }
+                    },
+                    { "mData": "Duration" },
+                    { "mData": "Mode" },
+                    { "mData": "logo" },
                     { "mData": "DemoLec1" },
                     { "mData": "DemoLec2" },
                     { "mData": "DemoLec3" },

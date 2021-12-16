@@ -131,6 +131,22 @@
           <Property Name="DemoLec3" Type="varchar(max)" />
           <Property Name="DemoLec4" Type="varchar(max)" />
           <Property Name="SeatsOccupied" Type="int" Nullable="false" />
+          <Property Name="logo" Type="varchar(max)" />
+          <Property Name="StartDate" Type="date" Nullable="false" />
+          <Property Name="Duration" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Mode" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Feedback">
+          <Key>
+            <PropertyRef Name="FeedbackID" />
+          </Key>
+          <Property Name="FeedbackID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AdvertisementID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="feedbackDescription" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Rating" Type="int" />
+          <Property Name="commentedOn" Type="date" />
         </EntityType>
         <EntityType Name="Fees">
           <Key>
@@ -245,6 +261,10 @@
           <Property Name="DemoLec3" Type="varchar(max)" />
           <Property Name="DemoLec4" Type="varchar(max)" />
           <Property Name="SeatsOccupied" Type="int" Nullable="false" />
+          <Property Name="logo" Type="varchar(max)" />
+          <Property Name="Mode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="StartDate" Type="date" Nullable="false" />
+          <Property Name="Duration" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <Association Name="FK__AddNotesM__Mento__7FB5F314">
           <End Role="RegisterMentor" Type="Self.RegisterMentor" Multiplicity="1" />
@@ -330,6 +350,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Feedback__Advert__14B10FFA">
+          <End Role="CourseAdvertisement" Type="Self.CourseAdvertisement" Multiplicity="1" />
+          <End Role="Feedback" Type="Self.Feedback" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CourseAdvertisement">
+              <PropertyRef Name="AdvertisementID" />
+            </Principal>
+            <Dependent Role="Feedback">
+              <PropertyRef Name="AdvertisementID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Feedback__UserID__15A53433">
+          <End Role="RegisterStudent" Type="Self.RegisterStudent" Multiplicity="1" />
+          <End Role="Feedback" Type="Self.Feedback" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RegisterStudent">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Feedback">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Fees__Advertisem__0880433F">
           <End Role="CourseAdvertisement" Type="Self.CourseAdvertisement" Multiplicity="1" />
           <End Role="Fees" Type="Self.Fees" Multiplicity="*" />
@@ -385,6 +429,7 @@
           <EntitySet Name="Appointment" EntityType="Self.Appointment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ContactUs" EntityType="Self.ContactUs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CourseAdvertisement" EntityType="Self.CourseAdvertisement" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Feedback" EntityType="Self.Feedback" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Fees" EntityType="Self.Fees" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RegisterMentor" EntityType="Self.RegisterMentor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RegisterStudent" EntityType="Self.RegisterStudent" Schema="dbo" store:Type="Tables" />
@@ -416,6 +461,14 @@
           <AssociationSet Name="FK__CourseAdv__Mento__73BA3083" Association="Self.FK__CourseAdv__Mento__73BA3083">
             <End Role="RegisterMentor" EntitySet="RegisterMentor" />
             <End Role="CourseAdvertisement" EntitySet="CourseAdvertisement" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Feedback__Advert__14B10FFA" Association="Self.FK__Feedback__Advert__14B10FFA">
+            <End Role="CourseAdvertisement" EntitySet="CourseAdvertisement" />
+            <End Role="Feedback" EntitySet="Feedback" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Feedback__UserID__15A53433" Association="Self.FK__Feedback__UserID__15A53433">
+            <End Role="RegisterStudent" EntitySet="RegisterStudent" />
+            <End Role="Feedback" EntitySet="Feedback" />
           </AssociationSet>
           <AssociationSet Name="FK__Fees__Advertisem__0880433F" Association="Self.FK__Fees__Advertisem__0880433F">
             <End Role="CourseAdvertisement" EntitySet="CourseAdvertisement" />
@@ -492,6 +545,19 @@
           <AssociationSet Name="FK__AddNotesM__Mento__7FB5F314" Association="FindYourMentorProjectModel.FK__AddNotesM__Mento__7FB5F314">
             <End Role="RegisterMentor" EntitySet="RegisterMentors" />
             <End Role="AddNotesMentor" EntitySet="AddNotesMentors" />
+          </AssociationSet>
+          <EntitySet Name="Feedbacks" EntityType="FindYourMentorProjectModel.Feedback" />
+          <AssociationSet Name="FK__Feedback__Feedba__11D4A34F" Association="FindYourMentorProjectModel.FK__Feedback__Feedba__11D4A34F">
+            <End Role="CourseAdvertisement" EntitySet="CourseAdvertisements" />
+            <End Role="Feedback" EntitySet="Feedbacks" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Feedback__Advert__14B10FFA" Association="FindYourMentorProjectModel.FK__Feedback__Advert__14B10FFA">
+            <End Role="CourseAdvertisement" EntitySet="CourseAdvertisements" />
+            <End Role="Feedback" EntitySet="Feedbacks" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Feedback__UserID__15A53433" Association="FindYourMentorProjectModel.FK__Feedback__UserID__15A53433">
+            <End Role="RegisterStudent" EntitySet="RegisterStudents" />
+            <End Role="Feedback" EntitySet="Feedbacks" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="AddNotesMentee">
@@ -620,6 +686,12 @@
           <NavigationProperty Name="RegisterMentor" Relationship="FindYourMentorProjectModel.FK__CourseAdv__Mento__73BA3083" FromRole="CourseAdvertisement" ToRole="RegisterMentor" />
           <NavigationProperty Name="SavedLists" Relationship="FindYourMentorProjectModel.FK__SavedList__Adver__18EBB532" FromRole="CourseAdvertisement" ToRole="SavedList" />
           <NavigationProperty Name="Fees1" Relationship="FindYourMentorProjectModel.FK__Fees__Advertisem__0880433F" FromRole="CourseAdvertisement" ToRole="Fee" />
+          <Property Name="logo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Duration" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Mode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Feedback" Relationship="FindYourMentorProjectModel.FK__Feedback__Feedba__11D4A34F" FromRole="CourseAdvertisement" ToRole="Feedback" />
+          <NavigationProperty Name="Feedbacks" Relationship="FindYourMentorProjectModel.FK__Feedback__Advert__14B10FFA" FromRole="CourseAdvertisement" ToRole="Feedback" />
         </EntityType>
         <EntityType Name="RegisterMentor">
           <Key>
@@ -675,6 +747,7 @@
           <NavigationProperty Name="Appointments" Relationship="FindYourMentorProjectModel.FK__Appointme__Mente__4A8310C6" FromRole="RegisterStudent" ToRole="Appointment" />
           <NavigationProperty Name="SavedLists" Relationship="FindYourMentorProjectModel.FK__SavedList__Mente__17F790F9" FromRole="RegisterStudent" ToRole="SavedList" />
           <NavigationProperty Name="Fees" Relationship="FindYourMentorProjectModel.FK__Fees__MenteeID__09746778" FromRole="RegisterStudent" ToRole="Fee" />
+          <NavigationProperty Name="Feedbacks" Relationship="FindYourMentorProjectModel.FK__Feedback__UserID__15A53433" FromRole="RegisterStudent" ToRole="Feedback" />
         </EntityType>
         <EntityType Name="SavedList">
           <Key>
@@ -709,6 +782,10 @@
           <NavigationProperty Name="RegisterStudent" Relationship="FindYourMentorProjectModel.FK__SavedList__Mente__17F790F9" FromRole="SavedList" ToRole="RegisterStudent" />
           <Property Name="TotalSeats" Type="Int32" Nullable="false" />
           <Property Name="SeatsOccupied" Type="Int32" Nullable="false" />
+          <Property Name="logo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Mode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Duration" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK__AddNotesM__UserI__571DF1D5">
           <End Type="FindYourMentorProjectModel.RegisterStudent" Role="RegisterStudent" Multiplicity="0..1" />
@@ -889,6 +966,57 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Feedback">
+          <Key>
+            <PropertyRef Name="FeedbackID" />
+          </Key>
+          <Property Name="FeedbackID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AdvertisementID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Rating" Type="Int32" />
+          <NavigationProperty Name="CourseAdvertisement" Relationship="FindYourMentorProjectModel.FK__Feedback__Feedba__11D4A34F" FromRole="Feedback" ToRole="CourseAdvertisement" />
+          <Property Name="feedbackDescription" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="commentedOn" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="CourseAdvertisement1" Relationship="FindYourMentorProjectModel.FK__Feedback__Advert__14B10FFA" FromRole="Feedback" ToRole="CourseAdvertisement" />
+          <NavigationProperty Name="RegisterStudent" Relationship="FindYourMentorProjectModel.FK__Feedback__UserID__15A53433" FromRole="Feedback" ToRole="RegisterStudent" />
+        </EntityType>
+        <Association Name="FK__Feedback__Feedba__11D4A34F">
+          <End Type="FindYourMentorProjectModel.CourseAdvertisement" Role="CourseAdvertisement" Multiplicity="1" />
+          <End Type="FindYourMentorProjectModel.Feedback" Role="Feedback" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="CourseAdvertisement">
+              <PropertyRef Name="AdvertisementID" />
+            </Principal>
+            <Dependent Role="Feedback">
+              <PropertyRef Name="FeedbackID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Feedback__Advert__14B10FFA">
+          <End Type="FindYourMentorProjectModel.CourseAdvertisement" Role="CourseAdvertisement" Multiplicity="1" />
+          <End Type="FindYourMentorProjectModel.Feedback" Role="Feedback" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CourseAdvertisement">
+              <PropertyRef Name="AdvertisementID" />
+            </Principal>
+            <Dependent Role="Feedback">
+              <PropertyRef Name="AdvertisementID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Feedback__UserID__15A53433">
+          <End Type="FindYourMentorProjectModel.RegisterStudent" Role="RegisterStudent" Multiplicity="1" />
+          <End Type="FindYourMentorProjectModel.Feedback" Role="Feedback" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RegisterStudent">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Feedback">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -984,6 +1112,10 @@
           <EntitySetMapping Name="CourseAdvertisements">
             <EntityTypeMapping TypeName="FindYourMentorProjectModel.CourseAdvertisement">
               <MappingFragment StoreEntitySet="CourseAdvertisement">
+                <ScalarProperty Name="Mode" ColumnName="Mode" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="logo" ColumnName="logo" />
                 <ScalarProperty Name="SeatsOccupied" ColumnName="SeatsOccupied" />
                 <ScalarProperty Name="DemoLec4" ColumnName="DemoLec4" />
                 <ScalarProperty Name="DemoLec3" ColumnName="DemoLec3" />
@@ -1070,6 +1202,10 @@
           <EntitySetMapping Name="SavedLists">
             <EntityTypeMapping TypeName="FindYourMentorProjectModel.SavedList">
               <MappingFragment StoreEntitySet="SavedList">
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="Mode" ColumnName="Mode" />
+                <ScalarProperty Name="logo" ColumnName="logo" />
                 <ScalarProperty Name="SeatsOccupied" ColumnName="SeatsOccupied" />
                 <ScalarProperty Name="TotalSeats" ColumnName="TotalSeats" />
                 <ScalarProperty Name="DemoLec4" ColumnName="DemoLec4" />
@@ -1143,6 +1279,19 @@
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="NotesID" ColumnName="NotesID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Feedbacks">
+            <EntityTypeMapping TypeName="FindYourMentorProjectModel.Feedback">
+              <MappingFragment StoreEntitySet="Feedback">
+                <ScalarProperty Name="commentedOn" ColumnName="commentedOn" />
+                <ScalarProperty Name="feedbackDescription" ColumnName="feedbackDescription" />
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="AdvertisementID" ColumnName="AdvertisementID" />
+                <ScalarProperty Name="FeedbackID" ColumnName="FeedbackID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

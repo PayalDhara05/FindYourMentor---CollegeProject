@@ -35,5 +35,6 @@ namespace FindYourMentorProject.Models
         public virtual DbSet<SavedList> SavedLists { get; set; }
         public virtual DbSet<Fee> Fees { get; set; }
         public virtual DbSet<AddNotesMentor> AddNotesMentors { get; set; }
+        public virtual DbSet<Feedback> Feedbacks { get; set; }
     }
 }

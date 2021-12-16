@@ -215,6 +215,7 @@
     <Content Include="Custom\css\StudentLayout.css" />
     <Content Include="Custom\css\Transaction.css" />
     <Content Include="Custom\css\VerifyAccount.css" />
+    <Content Include="Custom\css\ViewAdvertisement.css" />
     <Content Include="Custom\css\ViewMenteeApplication.css" />
     <Content Include="Custom\css\ViewMenteeAppointment.css" />
     <Content Include="Custom\css\ViewMenteeFee.css" />
@@ -318,6 +319,7 @@
     <Compile Include="Models\Appointment.cs">
       <DependentUpon>AllModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\BigModel.cs" />
     <Compile Include="Models\ChangePasswordModel.cs" />
     <Compile Include="Models\ContactU.cs">
       <DependentUpon>AllModels.tt</DependentUpon>
@@ -335,6 +337,9 @@
     <Compile Include="Models\Extended\RegisterMentor.cs" />
     <Compile Include="Models\Extended\RegisterStudent.cs" />
     <Compile Include="Models\Fee.cs">
+      <DependentUpon>AllModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Feedback.cs">
       <DependentUpon>AllModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ForgotPassword.cs" />
@@ -431,6 +436,8 @@
     <Content Include="Views\Mentor\Notes.cshtml" />
     <Content Include="Views\Mentor\AddorEditNotes.cshtml" />
     <Content Include="Views\Mentor\ViewNotes.cshtml" />
+    <Content Include="Views\Mentor\FeedbackMentorData.cshtml" />
+    <Content Include="Views\Mentor\FeedbackMentor.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -440,6 +447,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Logo\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

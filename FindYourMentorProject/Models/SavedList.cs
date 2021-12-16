@@ -41,6 +41,10 @@ namespace FindYourMentorProject.Models
         public string DemoLec4 { get; set; }
         public int TotalSeats { get; set; }
         public int SeatsOccupied { get; set; }
+        public string logo { get; set; }
+        public string Mode { get; set; }
+        public System.DateTime StartDate { get; set; }
+        public string Duration { get; set; }
     
         public virtual CourseAdvertisement CourseAdvertisement { get; set; }
         public virtual RegisterStudent RegisterStudent { get; set; }

@@ -1,6 +1,7 @@
 ﻿using FindYourMentorProject.Models;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
 using System.IO;
@@ -352,7 +353,7 @@ namespace FindYourMentorProject.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddorEditAdvertisements(CourseAdvertisement adv, HttpPostedFileBase file1, HttpPostedFileBase file2, HttpPostedFileBase file3, HttpPostedFileBase file4)
+        public ActionResult AddorEditAdvertisements(CourseAdvertisement adv, HttpPostedFileBase file, HttpPostedFileBase file1, HttpPostedFileBase file2, HttpPostedFileBase file3, HttpPostedFileBase file4)
         {
             int userid = Convert.ToInt32(Session["UserID"]);
             CourseAdvertisement cAdv = new CourseAdvertisement();
@@ -362,6 +363,14 @@ namespace FindYourMentorProject.Controllers
                     {
                         if (adv.AdvertisementID == 0)
                         {
+                            if (file != null)
+                            {
+                                string fileName = Path.GetFileName(file.FileName);
+                                String filepath = Path.Combine(Server.MapPath("~/Logo/"), fileName);
+                                file.SaveAs(filepath);
+                                adv.logo = "/Logo/" + fileName;
+                            }
+
                             if (file1 != null)
                             {
                                 string fileName = Path.GetFileName(file1.FileName);
@@ -416,6 +425,13 @@ namespace FindYourMentorProject.Controllers
                         else
                         {
                             CourseAdvertisement commonLec = db.CourseAdvertisements.Where(a => a.AdvertisementID == adv.AdvertisementID).FirstOrDefault();
+                            if (file != null)
+                            {
+                                string fileName = Path.GetFileName(file.FileName);
+                                String filepath = Path.Combine(Server.MapPath("~/Logo/"), fileName);
+                                file.SaveAs(filepath);
+                                adv.logo = "/Logo/" + fileName;
+                            }
                             if (file1 !=null)
                             {
                                 string fileName = Path.GetFileName(file1.FileName);
@@ -526,10 +542,13 @@ namespace FindYourMentorProject.Controllers
         {
             using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
             {
-                return View(db.CourseAdvertisements.Where(x => x.AdvertisementID == id).FirstOrDefault<CourseAdvertisement>());
+                BigModel bigmodel = new BigModel();
+                bigmodel.CourseAdvertisement = db.CourseAdvertisements.Where(x => x.AdvertisementID == id).FirstOrDefault<CourseAdvertisement>();
+                bigmodel.Feedback = db.Feedbacks.Where(a => a.AdvertisementID == id).OrderByDescending(r => r.FeedbackID).ToList();
+
+                return View(bigmodel);
             }
         }
-
 
         public ActionResult viewMenteeApplication()
         {
@@ -916,5 +935,22 @@ namespace FindYourMentorProject.Controllers
                 return View(db.Fees.Where(a => a.FeesID == id).FirstOrDefault<Fee>());
             }
         }
+
+
+        //public ActionResult FeedbackMentor()
+        //{
+        //        int data = setAdvertisementidUnique();
+        //        FeedbackMentorData(data);
+        //        return View();
+        //}
+
+        //public ActionResult FeedbackMentorData(int id = 0)
+        //{
+        //    using(FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
+        //    {
+        //        db.Configuration.ProxyCreationEnabled = false;
+        //        return View(db.Feedbacks.Where(a => a.AdvertisementID == id).OrderByDescending(r => r.FeedbackID).ToList());
+        //    }    
+        //}
     }
 }
