@@ -26,8 +26,7 @@
         <AssociationConnector Association="FindYourMentorProjectModel.FK__Fees__MenteeID__09746778" />
         <EntityTypeShape EntityType="FindYourMentorProjectModel.AddNotesMentor" Width="1.5" PointX="3.375" PointY="0.75" />
         <AssociationConnector Association="FindYourMentorProjectModel.FK__AddNotesM__Mento__7FB5F314" />
-        <EntityTypeShape EntityType="FindYourMentorProjectModel.Feedback" Width="1.5" PointX="6" PointY="3.5" />
-        <AssociationConnector Association="FindYourMentorProjectModel.FK__Feedback__Feedba__11D4A34F" />
+        <EntityTypeShape EntityType="FindYourMentorProjectModel.Feedback" Width="1.5" PointX="6" PointY="14.375" />
         <AssociationConnector Association="FindYourMentorProjectModel.FK__Feedback__Advert__14B10FFA" />
         <AssociationConnector Association="FindYourMentorProjectModel.FK__Feedback__UserID__15A53433" />
       </Diagram>

@@ -513,7 +513,7 @@
                 <tr>
                     <td><p>Start Date: </p></td>
                     <td>
-                        @Html.EditorFor(model => model.StartDate.ToShortDateString(), new { htmlAttributes = new { @class = "form-control", @type = "date", min = DateTime.Now.ToString("yyyy-MM-dd") } })
+                        @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control", @type = "date", min = DateTime.Now.ToString(format: "yyyy-MM-dd") } })
                         @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
                     </td>
 

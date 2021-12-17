@@ -107,7 +107,7 @@
                             <button onclick="PopupForm(@item.AdvertisementID)" id="Apply">Apply</button>
                         </div>
                         <div class="card-btn">
-                            <button>FeedBack & More</button>
+                            <button><a href='/Student/ShowFullAdvertisement/@item.AdvertisementID'>FeedBack & More</a></button>
                         </div>
                     </div>
                  }
@@ -233,9 +233,6 @@
                 });
             });
     }
-
-
-
 
     function SubmitForm(form) {
         $.validator.unobtrusive.parse(form);

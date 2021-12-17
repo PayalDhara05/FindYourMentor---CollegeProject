@@ -438,6 +438,7 @@
     <Content Include="Views\Mentor\ViewNotes.cshtml" />
     <Content Include="Views\Mentor\FeedbackMentorData.cshtml" />
     <Content Include="Views\Mentor\FeedbackMentor.cshtml" />
+    <Content Include="Views\Student\ShowFullAdvertisement.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

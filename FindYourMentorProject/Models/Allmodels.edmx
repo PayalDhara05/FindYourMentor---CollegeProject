@@ -146,7 +146,7 @@
           <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="feedbackDescription" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="Rating" Type="int" />
-          <Property Name="commentedOn" Type="date" />
+          <Property Name="commentedOn" Type="datetime" />
         </EntityType>
         <EntityType Name="Fees">
           <Key>
@@ -547,10 +547,6 @@
             <End Role="AddNotesMentor" EntitySet="AddNotesMentors" />
           </AssociationSet>
           <EntitySet Name="Feedbacks" EntityType="FindYourMentorProjectModel.Feedback" />
-          <AssociationSet Name="FK__Feedback__Feedba__11D4A34F" Association="FindYourMentorProjectModel.FK__Feedback__Feedba__11D4A34F">
-            <End Role="CourseAdvertisement" EntitySet="CourseAdvertisements" />
-            <End Role="Feedback" EntitySet="Feedbacks" />
-          </AssociationSet>
           <AssociationSet Name="FK__Feedback__Advert__14B10FFA" Association="FindYourMentorProjectModel.FK__Feedback__Advert__14B10FFA">
             <End Role="CourseAdvertisement" EntitySet="CourseAdvertisements" />
             <End Role="Feedback" EntitySet="Feedbacks" />
@@ -559,7 +555,7 @@
             <End Role="RegisterStudent" EntitySet="RegisterStudents" />
             <End Role="Feedback" EntitySet="Feedbacks" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <EntityType Name="AddNotesMentee">
           <Key>
             <PropertyRef Name="NoteID" />
@@ -690,9 +686,8 @@
           <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Duration" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Mode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Feedback" Relationship="FindYourMentorProjectModel.FK__Feedback__Feedba__11D4A34F" FromRole="CourseAdvertisement" ToRole="Feedback" />
           <NavigationProperty Name="Feedbacks" Relationship="FindYourMentorProjectModel.FK__Feedback__Advert__14B10FFA" FromRole="CourseAdvertisement" ToRole="Feedback" />
-        </EntityType>
+          </EntityType>
         <EntityType Name="RegisterMentor">
           <Key>
             <PropertyRef Name="UserID" />
@@ -974,25 +969,12 @@
           <Property Name="AdvertisementID" Type="Int32" Nullable="false" />
           <Property Name="UserID" Type="Int32" Nullable="false" />
           <Property Name="Username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Rating" Type="Int32" />
-          <NavigationProperty Name="CourseAdvertisement" Relationship="FindYourMentorProjectModel.FK__Feedback__Feedba__11D4A34F" FromRole="Feedback" ToRole="CourseAdvertisement" />
           <Property Name="feedbackDescription" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="commentedOn" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="CourseAdvertisement1" Relationship="FindYourMentorProjectModel.FK__Feedback__Advert__14B10FFA" FromRole="Feedback" ToRole="CourseAdvertisement" />
+          <Property Name="Rating" Type="Int32" />
+          <Property Name="commentedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CourseAdvertisement" Relationship="FindYourMentorProjectModel.FK__Feedback__Advert__14B10FFA" FromRole="Feedback" ToRole="CourseAdvertisement" />
           <NavigationProperty Name="RegisterStudent" Relationship="FindYourMentorProjectModel.FK__Feedback__UserID__15A53433" FromRole="Feedback" ToRole="RegisterStudent" />
         </EntityType>
-        <Association Name="FK__Feedback__Feedba__11D4A34F">
-          <End Type="FindYourMentorProjectModel.CourseAdvertisement" Role="CourseAdvertisement" Multiplicity="1" />
-          <End Type="FindYourMentorProjectModel.Feedback" Role="Feedback" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="CourseAdvertisement">
-              <PropertyRef Name="AdvertisementID" />
-            </Principal>
-            <Dependent Role="Feedback">
-              <PropertyRef Name="FeedbackID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__Feedback__Advert__14B10FFA">
           <End Type="FindYourMentorProjectModel.CourseAdvertisement" Role="CourseAdvertisement" Multiplicity="1" />
           <End Type="FindYourMentorProjectModel.Feedback" Role="Feedback" Multiplicity="*" />
@@ -1017,7 +999,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -1286,8 +1268,8 @@
             <EntityTypeMapping TypeName="FindYourMentorProjectModel.Feedback">
               <MappingFragment StoreEntitySet="Feedback">
                 <ScalarProperty Name="commentedOn" ColumnName="commentedOn" />
-                <ScalarProperty Name="feedbackDescription" ColumnName="feedbackDescription" />
                 <ScalarProperty Name="Rating" ColumnName="Rating" />
+                <ScalarProperty Name="feedbackDescription" ColumnName="feedbackDescription" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="AdvertisementID" ColumnName="AdvertisementID" />

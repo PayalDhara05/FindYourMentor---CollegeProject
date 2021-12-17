@@ -906,5 +906,35 @@ namespace FindYourMentorProject.Controllers
                 return View(db.Fees.Where(a => a.FeesID == id).FirstOrDefault<Fee>());
             }
         }
+
+        public ActionResult ShowFullAdvertisement(int id = 0)
+        {
+            using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
+            {
+                BigModel bigmodel = new BigModel();
+                bigmodel.CourseAdvertisement = db.CourseAdvertisements.Where(x => x.AdvertisementID == id).FirstOrDefault<CourseAdvertisement>();
+                bigmodel.Feedback = db.Feedbacks.Where(a => a.AdvertisementID == id).OrderByDescending(r => r.FeedbackID).ToList();
+
+                ViewBag.ID = id;
+
+                return View(bigmodel);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult ShowFullAdvertisement(Feedback data)
+        {
+            int userid = Convert.ToInt32(Session["UserID"]);
+            using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
+            {
+                RegisterStudent stud = db.RegisterStudents.Where(a => a.UserID == userid).FirstOrDefault();
+                data.Username = stud.FirstName + " " + stud.LastName;
+                data.UserID = userid;
+                data.commentedOn = System.DateTime.Now;
+                db.Feedbacks.Add(data);
+                db.SaveChanges();
+                return RedirectToAction("ShowFullAdvertisement", new { id = data.AdvertisementID });
+            }
+        }
     }
 }

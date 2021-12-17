@@ -18,12 +18,11 @@ namespace FindYourMentorProject.Models
         public int AdvertisementID { get; set; }
         public int UserID { get; set; }
         public string Username { get; set; }
-        public Nullable<int> Rating { get; set; }
         public string feedbackDescription { get; set; }
+        public Nullable<int> Rating { get; set; }
         public Nullable<System.DateTime> commentedOn { get; set; }
     
         public virtual CourseAdvertisement CourseAdvertisement { get; set; }
-        public virtual CourseAdvertisement CourseAdvertisement1 { get; set; }
         public virtual RegisterStudent RegisterStudent { get; set; }
     }
 }
