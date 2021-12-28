@@ -38,8 +38,8 @@ body {
 }
 
 .wrapper {
-    margin-top: 12rem;
     width: 50rem;
+    margin-top:10rem;
     padding: 40px 30px 50px 30px;
     background-color: #f8cbc1;
     border-radius: 5px;
@@ -60,7 +60,7 @@ body {
 
 form .field {
     width: 100%;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
     form .field.shake {
@@ -102,31 +102,33 @@ form .field .input-area {
     position: relative;
 }
 
-#Address {
+.text-area-field {
     outline: none;
     font-size: 18px;
     background: none;
+    caret-color: #833471;
     border-radius: 5px;
     border: 1px solid #833471;
     border-bottom-width: 2px;
-    padding:0.5rem;
-    margin-bottom:1.5rem!important;
+    position: absolute;
+    right: 0px;
+    padding-left: 10px;
 }
 
-    #Address::-webkit-input-placeholder {
-        padding: 3px 60px;
+    .text-area-field::-webkit-input-placeholder {
+        padding: 3px 10px;
     }
 
-    #Address:-ms-input-placeholder {
-        padding: 3px 35px;
+    .text-area-field:-ms-input-placeholder {
+        padding: 3px 10px;
     }
 
-    #Address::-ms-input-placeholder {
-        padding: 3px 35px;
+    .text-area-field::-ms-input-placeholder {
+        padding: 3px 10px;
     }
 
-    #Address::placeholder {
-        padding: 3px 35px;
+    .text-area-field::placeholder {
+        padding: 3px 10px;
     }
 
 form {
@@ -174,6 +176,11 @@ form .field.valid input {
     border-color: black;
 }
 
+form .text-area-field:focus,
+form .field.valid input {
+    border-color: black;
+}
+
 form .field.shake input,
 form .field.error input {
     border-color: #dc3545;
@@ -212,6 +219,7 @@ select {
     margin-bottom: 2rem;
     -webkit-transition: all 0.2s ease;
     transition: all 0.2s ease;
+    top: 1rem;
 }
 
     select option {
@@ -219,10 +227,15 @@ select {
         background-color: #f8cbc1;
     }
 
-.State-section span {
-    color: #833471;
-    font-size: 1.8rem;
+.State-section {
+    margin-bottom: 2rem;
+    margin-top: 14.7rem;
 }
+
+    .State-section P {
+        color: #833471;
+        font-size: 1.8rem;
+    }
 
 .hide-btn {
     display: none;
@@ -420,10 +433,20 @@ input[type="file"] {
     font-size: 1.7rem;
     margin-top: 3rem;
 }
+    .end-txt1 a {
+        color: #833471;
+        text-decoration:none;
+        font-weight:bolder;
+    }
 
-.end-txt2 {
-    margin-top: 1.5rem;
-}
+        .end-txt1 a:hover 
+        {
+            text-decoration:underline;
+        }
+
+        .end-txt2 {
+            margin-top: 1.5rem;
+        }
 
 .Description {
     margin-bottom: 12rem !important;
@@ -432,10 +455,10 @@ input[type="file"] {
 @media screen and (max-width: 518px) {
     .wrapper {
         width: 100%;
-        margin: 2rem 7rem;
+        margin: 10rem 7rem;
     }
 
-    #Address, select, form {
+    .text-area-field, select, form {
         width: 100%;
     }
 }
@@ -466,29 +489,51 @@ input[type="file"] {
     }
 }
 
-#form-contact 
-{
-    height:45rem;
-}
-#contact-message {
-    height: 24rem !important;
-}
-.end-txt1 a {
-    color: #833471;
-    font-weight:bold;
-    text-decoration:none;
-}
-.end-txt1 a:hover 
-{
-    text-decoration:underline;
-}
-.text-danger, .loginmsg {
-    color: red;
-    text-align: center;
-    background-color: white;
-    font-weight: bold;
-    font-size: 1.2rem;
-    font-family: "Open Sans", sans-serif;
+.Address {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    position: relative;
+    bottom: 1rem;
+    top: 0.4rem;
 }
 
+    .Address i {
+        font-size: 2rem;
+        color: #833471;
+        position: absolute;
+        left: 10px;
+    }
+
+    .Address .textarea-valid {
+        position: absolute;
+        top: 8.4rem!important;
+    }
+
+    .Address .textarea-valid-2 {
+        position: absolute;
+        top: 6.1rem;
+    }
+
+@media screen and (max-width: 521px) {
+    .Address i {
+        display: none;
+    }
+}
+.Address-error 
+{
+    margin-bottom:-20px;
+}
+/*.textarea-valid 
+{
+    position:absolute;
+    bottom:10px;
+}*/
 /*# sourceMappingURL=registerMentor.css.map */
+

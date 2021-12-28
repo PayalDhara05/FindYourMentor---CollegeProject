@@ -13,22 +13,21 @@ using System.Web.Security;
 
 namespace FindYourMentorProject.Controllers
 {
+    [HandleError]
     public class UserController : Controller
     {
-        // GET: User
+        [HttpGet]                              // Default method
         public ActionResult Index()
         {
             return View();
         }
 
-        [HttpGet]
         public ActionResult RegistrationStudent()
         {
             return View();
         }
 
-        [HttpGet]
-        public ActionResult Registration()
+        public ActionResult Registration()            //Common Registration Page
         {
             return View();
         }
@@ -39,8 +38,8 @@ namespace FindYourMentorProject.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult RegistrationStudent([Bind(Exclude = "IsEmailVerified,ActivationCode,Role")] RegisterStudent studentuser, HttpPostedFileBase file)
+        [ValidateAntiForgeryToken]     // we add in View i.e. @Html.AntiForgeryToken() generates __RequestVerificationToken on load time and [ValidateAntiForgeryToken] available on Controller method. Match this token on post time. If token is the same, then it means this is a valid request.
+        public ActionResult RegistrationStudent([Bind(Exclude = "IsEmailVerified,ActivationCode,Role")] RegisterStudent studentuser, HttpPostedFileBase file)   // this bind attribute will exclude an "IsEmailVerified,ActivationCode,Role" property from being posted to server.
         {
             bool Status = false;
             string message = "";
@@ -48,46 +47,37 @@ namespace FindYourMentorProject.Controllers
             // Model Validation 
             if (ModelState.IsValid)
             {
-
                 studentuser.Role = "Mentee";
 
-                #region //Email is already Exist 
+                #region Email is already Exist 
                 var isExist = IsEmailExist(studentuser.EmailID,studentuser.Role);
-
-
                 if (isExist)
                 {
-                    //ModelState.AddModelError("EmailExist", "Email already exist");
                     ViewBag.Message1 = "Email already exist";
                     return View(studentuser);
                 }
                 #endregion
+
+                #region SaveProfilePicture
                 if (file != null)
                 {
-                    //string fileName = Path.GetFileNameWithoutExtension(studentuser.ImageFile.FileName);
-                    //string extension = Path.GetExtension(studentuser.ImageFile.FileName);
-                    //fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-                    //studentuser.ProfilePicture = "/Image/" + fileName;
-                    //fileName = Path.Combine(Server.MapPath("~/Image/"), fileName);
-                    //studentuser.ImageFile.SaveAs(fileName);
-
                     string fileName = Path.GetFileName(file.FileName);
                     String filepath = Path.Combine(Server.MapPath("~/Image/"), fileName);
                     file.SaveAs(filepath);
                     studentuser.ProfilePicture = "/Image/" + fileName;
                 }
-
-
-                #region Generate Activation Code 
-                studentuser.ActivationCode = Guid.NewGuid();
                 #endregion
 
-                
+                //The #region directive partitions your code. With #region, we can organize code into blocks that can be expanded or collapsed visually.
+                #region Generate Activation Code     
+                studentuser.ActivationCode = Guid.NewGuid();    //GUID stands for Global Unique Identifier. A GUID is a 128-bit integer (16 bytes) that you can use across all computers and networks wherever a unique identifier is required.              
+                #endregion
 
                 #region  Password Hashing 
                 studentuser.Password = Crypto.Hash(studentuser.Password);
-                studentuser.ConfirmPassword= Crypto.Hash(studentuser.ConfirmPassword); //
+                studentuser.ConfirmPassword = Crypto.Hash(studentuser.ConfirmPassword);
                 #endregion
+
                 studentuser.IsEmailVerified = false;
 
                 try
@@ -97,10 +87,10 @@ namespace FindYourMentorProject.Controllers
                     {
                         dc.RegisterStudents.Add(studentuser);
                         dc.SaveChanges();
+                        ModelState.Clear();
 
                         //Send Email to User
                         SendVerificationLinkEmail(studentuser.EmailID, studentuser.ActivationCode.ToString(), studentuser.Role);
-                        ModelState.Clear();
                         message = "Registration successfully done. Account activation link " +
                             " has been sent to your email id:" + studentuser.EmailID;
                         Status = true;
@@ -112,7 +102,6 @@ namespace FindYourMentorProject.Controllers
                 {
                     Response.Write(e);
                 }
-                //ModelState.Clear();
             }
             else
             {
@@ -121,11 +110,10 @@ namespace FindYourMentorProject.Controllers
 
             ViewBag.Message = message;
             ViewBag.Status = Status;
-            ModelState.Clear();
-            return View(studentuser);
+            return View();
         }
 
-        public JsonResult ValidateMenteeEmailID(string EmailID)
+        public JsonResult ValidateMenteeEmailID(string EmailID)     // Remote validation of EmailID
         {
             using (FindYourMentorProjectEntities dc = new FindYourMentorProjectEntities())
             {
@@ -136,7 +124,7 @@ namespace FindYourMentorProject.Controllers
 
         }
 
-        public JsonResult ValidateMentorEmailID(string EmailID)
+        public JsonResult ValidateMentorEmailID(string EmailID)      // Remote validation of EmailID
         {
             using (FindYourMentorProjectEntities dc = new FindYourMentorProjectEntities())
             {
@@ -148,20 +136,18 @@ namespace FindYourMentorProject.Controllers
         }
 
 
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult RegistrationMentor([Bind(Exclude = "IsEmailVerified,ActivationCode,Role")] RegisterMentor mentoruser, HttpPostedFileBase file)
         {
             bool Status = false;
             string message = "";
-            //
-            // Model Validation 
+            
             if (ModelState.IsValid)
             {
-
                 mentoruser.Role = "Mentor";
-                #region //Email is already Exist 
+
+                #region Email is already Exist 
                 var isExist = IsEmailExist(mentoruser.EmailID,mentoruser.Role);
                 if (isExist)
                 {
@@ -170,32 +156,24 @@ namespace FindYourMentorProject.Controllers
                     return View(mentoruser);
                 }
                 #endregion
+
                 if (file != null)
                 {
-                    //string fileName = Path.GetFileNameWithoutExtension(studentuser.ImageFile.FileName);
-                    //string extension = Path.GetExtension(studentuser.ImageFile.FileName);
-                    //fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-                    //studentuser.ProfilePicture = "/Image/" + fileName;
-                    //fileName = Path.Combine(Server.MapPath("~/Image/"), fileName);
-                    //studentuser.ImageFile.SaveAs(fileName);
-
                     string fileName = Path.GetFileName(file.FileName);
                     String filepath = Path.Combine(Server.MapPath("~/Image/"), fileName);
                     file.SaveAs(filepath);
                     mentoruser.ProfilePicture = "/Image/" + fileName;
                 }
 
-
                 #region Generate Activation Code 
                 mentoruser.ActivationCode = Guid.NewGuid();
                 #endregion
-
-               
 
                 #region  Password Hashing 
                 mentoruser.Password = Crypto.Hash(mentoruser.Password);
                 mentoruser.ConfirmPassword = Crypto.Hash(mentoruser.ConfirmPassword); //
                 #endregion
+
                 mentoruser.IsEmailVerified = false;
 
                 #region Save to Database
@@ -203,6 +181,7 @@ namespace FindYourMentorProject.Controllers
                 {
                     dc.RegisterMentors.Add(mentoruser);
                     dc.SaveChanges();
+                    ModelState.Clear();
 
                     //Send Email to User
                     SendVerificationLinkEmail(mentoruser.EmailID, mentoruser.ActivationCode.ToString(),mentoruser.Role);
@@ -219,10 +198,8 @@ namespace FindYourMentorProject.Controllers
 
             ViewBag.Message = message;
             ViewBag.Status = Status;
-            return View(mentoruser);
+            return View();
         }
-
-
 
         [NonAction]
         public bool IsEmailExist(string emailID,string Role)
@@ -242,7 +219,7 @@ namespace FindYourMentorProject.Controllers
             }
         }
 
-        [NonAction]
+        [NonAction]  //public method in a controller but do not want to treat it as an action method. An action method is a public method in a controller that can be invoked using a URL
         public void SendVerificationLinkEmail(string emailID, string activationCode, string Role, string emailFor = "VerifyAccount")
         {
             var verifyUrl = "/User/" + emailFor + "/" + activationCode;
@@ -301,11 +278,13 @@ namespace FindYourMentorProject.Controllers
                 var m = dc.RegisterMentors.Where(a => a.ActivationCode == new Guid(id)).FirstOrDefault();
                 if (v == null)
                 {
-                    if (m.Role == "Mentor")
+                    if (m != null && m.Role == "Mentor")
                     {
                         if (m != null)
                         {
                             m.IsEmailVerified = true;
+                            var bytes = new Byte[16];
+                            m.ActivationCode = new Guid(bytes);     // Deactivating code. Since verification can be done only one time
                             dc.SaveChanges();
                             Status = true;
                         }
@@ -313,15 +292,21 @@ namespace FindYourMentorProject.Controllers
                         {
                             ViewBag.Message = "Invalid Request";
                         }
+                    }
+                    else
+                    {
+                        return RedirectToAction("NotFound", "Error");
                     }
                 }
                 else
                 {
-                    if (v.Role == "Mentee")
+                    if (v != null && v.Role == "Mentee")
                     {
                         if (v != null)
                         {
                             v.IsEmailVerified = true;
+                            var bytes = new Byte[16];
+                            v.ActivationCode = new Guid(bytes);
                             dc.SaveChanges();
                             Status = true;
                         }
@@ -330,15 +315,14 @@ namespace FindYourMentorProject.Controllers
                             ViewBag.Message = "Invalid Request";
                         }
                     }
+                    else
+                    {
+                        return RedirectToAction("NotFound", "Error");
+                    }
                 }
+                ViewBag.Status = Status;
+                return View();
             }
-            ViewBag.Status = Status;
-            return View();
-        }
-        public enum role
-        {
-            Student,
-            Mentor
         }
 
         [HttpGet]
@@ -361,7 +345,6 @@ namespace FindYourMentorProject.Controllers
                     var v = dc.RegisterStudents.Where(a => a.EmailID == login.EmailID).FirstOrDefault();
                     if (v == null)
                     {
-                        //ModelState.AddModelError("EmailExist", "Account with given EmailID does not exist");
                         ViewBag.message1 = "Account with given EmailID does not exist";
                     }
                     else
@@ -461,11 +444,9 @@ namespace FindYourMentorProject.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult ForgotPassword(string EmailID,string Role)
         {
-            //Verify Email ID
-            //Generate Reset password link 
-            //Send Email 
             string message = "";
             bool status = false;
 
@@ -476,12 +457,11 @@ namespace FindYourMentorProject.Controllers
                     var account = dc.RegisterStudents.Where(a => a.EmailID == EmailID).FirstOrDefault();
                     if (account != null)
                     {
-                        //Send email for reset password
                         string resetCode = Guid.NewGuid().ToString();
                         SendVerificationLinkEmail(account.EmailID, resetCode,Role, "ResetPassword");
                         account.ResetPasswordCode = resetCode;
                         //This line I have added here to avoid confirm password not match issue , as we had added a confirm password property 
-                        //in our model class in part 1
+                        //in our model class 
                         dc.Configuration.ValidateOnSaveEnabled = false;
                         dc.SaveChanges();
                         message = "Reset password link has been sent to your email id.";
@@ -501,7 +481,7 @@ namespace FindYourMentorProject.Controllers
                         SendVerificationLinkEmail(account.EmailID, resetCode,Role, "ResetPassword");
                         account.ResetPasswordCode = resetCode;
                         //This line I have added here to avoid confirm password not match issue , as we had added a confirm password property 
-                        //in our model class in part 1
+                        //in our model class
                         dc.Configuration.ValidateOnSaveEnabled = false;
                         dc.SaveChanges();
                         message = "Reset password link has been sent to your email id.";
@@ -514,14 +494,12 @@ namespace FindYourMentorProject.Controllers
                 
             }
             ViewBag.Message = message;
+            ModelState.Clear();
             return View();
         }
 
         public ActionResult ResetPassword(string id)
         {
-            //Verify the reset password link
-            //Find account associated with this link
-            //redirect to reset password page
             if (string.IsNullOrWhiteSpace(id))
             {
                 return HttpNotFound();
@@ -543,7 +521,7 @@ namespace FindYourMentorProject.Controllers
                         }
                         else
                         {
-                            return HttpNotFound();
+                            return RedirectToAction("NotFound", "Error");
                         }
                     }
                     else
@@ -556,7 +534,7 @@ namespace FindYourMentorProject.Controllers
                         }
                         else
                         {
-                            return HttpNotFound();
+                            return RedirectToAction("NotFound", "Error");
                         }
                     }
                 }
@@ -588,6 +566,8 @@ namespace FindYourMentorProject.Controllers
                                 dc.Configuration.ValidateOnSaveEnabled = false;
                                 dc.SaveChanges();
                                 message = "New password updated successfully";
+                                ViewBag.Message = message;
+                                return View();
                             }
                             else
                             {
@@ -602,7 +582,7 @@ namespace FindYourMentorProject.Controllers
                                 mentee.ResetPasswordCode = "";
                                 dc.Configuration.ValidateOnSaveEnabled = false;
                                 dc.SaveChanges();
-                                message = "New password updated successfully - mentee";
+                                message = "New password updated successfully";
                             }
                             else
                             {
@@ -618,9 +598,8 @@ namespace FindYourMentorProject.Controllers
                 Response.Write(e);
             }
             ViewBag.Message = message;
-            return View(model);
+            return View();
         }
-
 
         public ActionResult Contact(ContactU con)
         {

@@ -216,10 +216,11 @@
             else {
                 for (var i = 5; i >= rating; i--) {
                     $("#span" + i).attr('class', 'far fa-star');
+                    ratingData = +$('#lblRating').val() - 1
                 }
-                ratingData = +$('#lblRating').val() - 1;
             }
             console.log(ratingData);
+            document.getElementById("lblRating").value = ratingData;
         }
     </script>
 </body >

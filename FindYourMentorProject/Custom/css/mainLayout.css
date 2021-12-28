@@ -27,13 +27,14 @@ nav {
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
-    -webkit-box-pack: space-evenly;
-    -ms-flex-pack: space-evenly;
-    justify-content: space-evenly;
+    -webkit-box-pack: space-between;
+    -ms-flex-pack: space-between;
+    justify-content: space-between;
     height: 7rem;
     width: 100%;
     background-color: white;
     z-index: 500;
+    position:fixed;
 }
 
 #logo-img {
@@ -55,6 +56,7 @@ nav {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
+    margin-left:3rem;
 }
 
     .logo-section a:nth-child(2) {
@@ -174,20 +176,25 @@ body {
     width: 100%;
 }
 
-.sidenav {
-    width: 32rem;
-    position: fixed;
-    right: 0;
-    top: 0;
-    -webkit-transform: translateX(150%);
-    transform: translateX(150%);
-    -webkit-transition: -webkit-transform .3s linear;
-    transition: -webkit-transform .3s linear;
-    transition: transform .3s linear;
-    transition: transform .3s linear, -webkit-transform .3s linear;
-    height: 100vh;
-    z-index: 999;
-}
+    .sticky + .common-signup 
+    {
+        padding-top:60px;
+    }
+
+    .sidenav {
+        width: 32rem;
+        position: fixed;
+        right: 0;
+        top: 0;
+        -webkit-transform: translateX(150%);
+        transform: translateX(150%);
+        -webkit-transition: -webkit-transform .3s linear;
+        transition: -webkit-transform .3s linear;
+        transition: transform .3s linear;
+        transition: transform .3s linear, -webkit-transform .3s linear;
+        height: 100vh;
+        z-index: 999;
+    }
 
     .sidenav ul {
         height: 100vh;
@@ -723,13 +730,17 @@ footer p {
             width: 100%;
         }
 }
-.text-danger, .loginmsg {
+.text-danger, .loginmsg, .forgotpassword-text-success {
     color: red;
     background-color: white;
     font-weight: bold;
     font-size: 1.3rem;
     font-family: "Open Sans", sans-serif;
-    text-align: left;
+    text-align: center;
+    margin-top:3rem;
+}
+.forgotpassword-text-success {
+    color: green!important;
 }
 *::-webkit-scrollbar {
     width: 12px;
@@ -755,3 +766,14 @@ footer p {
     outline: solid #f00 1px !important;
 }*/
 /*# sourceMappingURL=mainlayout.css.map */
+@media screen and (max-width:520px)
+{
+    .logo-section {
+        margin-left: 0.5rem;
+    }
+    #logo-img  
+    {
+        height:4rem;
+        width:4rem;
+    }
+}

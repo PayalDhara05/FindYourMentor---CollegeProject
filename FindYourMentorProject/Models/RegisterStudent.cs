@@ -23,6 +23,7 @@ namespace FindYourMentorProject.Models
             this.SavedLists = new HashSet<SavedList>();
             this.Fees = new HashSet<Fee>();
             this.Feedbacks = new HashSet<Feedback>();
+            ProfilePicture = "Image/defaultProfile1.jpg";
         }
     
         public int UserID { get; set; }
