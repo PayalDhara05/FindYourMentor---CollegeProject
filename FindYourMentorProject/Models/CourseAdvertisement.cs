@@ -22,6 +22,8 @@ namespace FindYourMentorProject.Models
             this.SavedLists = new HashSet<SavedList>();
             this.Fees1 = new HashSet<Fee>();
             this.Feedbacks = new HashSet<Feedback>();
+            this.Comments = new HashSet<Comment>();
+            this.ReplyToComments = new HashSet<ReplyToComment>();
         }
     
         public int AdvertisementID { get; set; }
@@ -70,5 +72,9 @@ namespace FindYourMentorProject.Models
         public virtual ICollection<Fee> Fees1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Feedback> Feedbacks { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Comment> Comments { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ReplyToComment> ReplyToComments { get; set; }
     }
 }

@@ -42,10 +42,6 @@
 
 @section ScriptsNew{
     <script src="//cdn.datatables.net/1.11.1/js/jquery.dataTables.min.js"></script>
-    @*<script src="ttps://unpkg.com/@Html.Raw("@")popperjs/core@2"></script>
-        <script src="'"></script>*@
-
-
     <script type="text/javascript">
             var Popup, dataTable;
             var screenWidth, screenHeight, dialogWidth, dialogHeight, isDesktop;
@@ -54,7 +50,6 @@
             screenHeight = window.screen.height;
 
             if (screenWidth < 705) {
-                /* alert("love");*/
                 dialogWidth = screenWidth * .75;
                 dialogHeight = screenHeight * .90;
             }
@@ -123,54 +118,56 @@
              });
 
 
-    function Approve(id) {
-        var url = '@Url.Action("ConfirmAdmission", "Mentor")/' + id;
+        function Approve(id)
+        {
+            var url = '@Url.Action("ConfirmAdmission", "Mentor")/' + id;
 
-        $.ajax({
-            url: url,
-            type: 'POST',
-            data: {
-                id: id
-            },
-            beforeSend: function () {
-                $("#loader").show();
-            },
-            complete: function () {
-                $("#loader").hide();
-            },
-            success: function (data) {
-                if (data.success) {
-                    dataTable.ajax.reload();
-                    $.notify(data.message, {
-                        globalPosition: "top center",
-                        class: "success"
-                    })
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: {
+                    id: id
+                },
+                beforeSend: function () {
+                    $("#loader").show();
+                },
+                complete: function () {
+                    $("#loader").hide();
+                },
+                success: function (data) {
+                    if (data.success) {
+                        dataTable.ajax.reload();
+                        $.notify(data.message, {
+                            globalPosition: "top center",
+                            class: "success"
+                        })
+                    }
                 }
-            }
-        });
-    };
+            });
+        };
 
-        function Remove(id) {
-        var url = '@Url.Action("UpdateRemoveStatus", "Mentor")/' + id;
+        function Remove(id)
+        {
+            var url = '@Url.Action("UpdateRemoveStatus", "Mentor")/' + id;
 
-        $.ajax({
-            url: url,
-            type: 'POST',
-            data: {
-                id: id
-            },
-            success: function (data) {
-                if (data.success) {
-                    dataTable.ajax.reload();
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: {
+                    id: id
+                },
+                success: function (data) {
+                    if (data.success) {
+                        dataTable.ajax.reload();
 
-                    $.notify(data.message, {
-                        globalPosition: "top center",
-                        className: "success"
-                    })
+                        $.notify(data.message, {
+                            globalPosition: "top center",
+                            className: "success"
+                        })
+                    }
                 }
-            }
-        });
-    };
+            });
+         };
 
     function PopupForm(id)
     {
@@ -218,10 +215,6 @@
             });
         });
     }
-
-        //tippy('#approve', {
-        //    content: "I'm a Tippy tooltip!",
-        //});
     </script>
 }
 

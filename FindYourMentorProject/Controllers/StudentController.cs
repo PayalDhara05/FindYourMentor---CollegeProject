@@ -16,42 +16,27 @@ using System.Web.WebPages;
 
 namespace FindYourMentorProject.Controllers
 {
+    [Authorize]            // don’t want to allow anonymous access to any of our action methods
     public class StudentController : Controller
     {
-        [Authorize]
-        // GET: Student
         public ActionResult Index()
         {
             return View();
         }
 
-        public ActionResult Avatar()
-        {
-            int userid = Convert.ToInt32(Session["UserID"]);
-            using (FindYourMentorProjectEntities dc = new FindYourMentorProjectEntities())
-            {
-                var user = dc.RegisterStudents.Find(userid);
-                ViewData["Image"] = user.ProfilePicture;
-            }
-            return View();
-        }
-
         [HttpGet]
-        [Authorize]
         public new ActionResult Profile()
         {
             return View();
         }
 
         [HttpGet]
-        [Authorize]
         public ActionResult ChangePassword()
         {
             return View();
         }
 
         [HttpPost]
-        [Authorize]
         public ActionResult ChangePassword(ChangePasswordModel pass)
         {
             string message = "";
@@ -88,7 +73,6 @@ namespace FindYourMentorProject.Controllers
         }
 
         [HttpPost]
-        [Authorize]
         public ActionResult ProfilePicture(HttpPostedFileBase file, string submitButton)
         {
             if (Session["UserID"] != null)
@@ -148,7 +132,6 @@ namespace FindYourMentorProject.Controllers
         }
 
         [HttpGet]
-        [Authorize]
         public ActionResult PersonalInfo()
         {
             int userid = Convert.ToInt32(Session["UserID"]);
@@ -160,7 +143,6 @@ namespace FindYourMentorProject.Controllers
         }
 
         [HttpPost]
-        [Authorize]
         public ActionResult UpdatePersonalInfo(RegisterStudent obj)
         {
                 int userid = Convert.ToInt32(Session["UserID"]);
@@ -187,22 +169,11 @@ namespace FindYourMentorProject.Controllers
 
         
         [HttpGet]
-        [Authorize]
         public ActionResult Notes()
         {
             return View();
         }
 
-
-        //public ActionResult NotesData()
-        //{
-        //    int userid = Convert.ToInt32(Session["UserID"]);
-        //    using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
-        //    {
-        //        var existinguser = db.AddNotesMentees.ToList<AddNotesMentee>();
-        //        return Json(new { data = existinguser }, JsonRequestBehavior.AllowGet);
-        //    }
-        //}
 
         [Authorize]
         public JsonResult NotesData()
@@ -211,25 +182,11 @@ namespace FindYourMentorProject.Controllers
             FindYourMentorProjectEntities db = new FindYourMentorProjectEntities();
             db.Configuration.ProxyCreationEnabled = false;
             List<AddNotesMentee> List = db.AddNotesMentees.Where(a => a.UserID == userid).ToList();
-
-            //List<AddNotesMentee> List = new List<AddNotesMentee>();
-            //int userid = Convert.ToInt32(Session["UserID"]);
-
-
-            //// Here "MyDatabaseEntities " is dbContext, which is created at time of model creation.
-
-            //using (FindYourMentorProjectEntities dc = new FindYourMentorProjectEntities())
-            //{
-            //    List = dc.AddNotesMentees.Where(a => a.UserID == userid).ToList();
-            //}
-
             return Json(List, JsonRequestBehavior.AllowGet);
-
         }
 
 
         [HttpGet]
-        [Authorize]
         public ActionResult AddorEditNotes(int id=0)
         {
             if(id==0)
@@ -246,7 +203,6 @@ namespace FindYourMentorProject.Controllers
         }
 
         [HttpPost]
-        [Authorize]
         public ActionResult AddorEditNotes(AddNotesMentee mentee)
        {
             if (ModelState.IsValid)
@@ -269,10 +225,6 @@ namespace FindYourMentorProject.Controllers
                         mentee.UserID = userid;
                         mentee.CreationDate = System.DateTime.Now;
                         db.Entry(mentee).State = EntityState.Modified;
-                        //var existinguser = db.AddNotesMentees.Find(userid);
-                        //existinguser.Title = mentee.Title;
-                        //existinguser.Description = mentee.Description;
-                        //db.Configuration.ValidateOnSaveEnabled = false;
                         db.SaveChanges();
                         return Json(new { success = true, message = "Updated Successfully" }, JsonRequestBehavior.AllowGet);
                     }
@@ -287,7 +239,6 @@ namespace FindYourMentorProject.Controllers
         }
 
         [HttpPost]
-        [Authorize]
         public ActionResult AddorEditNotesExternal(AddNotesMentee mentee)
         {
             if (ModelState.IsValid)
@@ -299,10 +250,6 @@ namespace FindYourMentorProject.Controllers
                         mentee.UserID = userid;
                         mentee.CreationDate = System.DateTime.Now;
                         db.Entry(mentee).State = EntityState.Modified;
-                        //var existinguser = db.AddNotesMentees.Find(userid);
-                        //existinguser.Title = mentee.Title;
-                        //existinguser.Description = mentee.Description;
-                        //db.Configuration.ValidateOnSaveEnabled = false;
                         db.SaveChanges();
                 }
             }
@@ -310,7 +257,6 @@ namespace FindYourMentorProject.Controllers
         }
 
         [HttpPost]
-        [Authorize]
         public ActionResult DeleteNotes(int id)
         {
             using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
@@ -323,7 +269,6 @@ namespace FindYourMentorProject.Controllers
         }
 
         [HttpGet]
-        [Authorize]
         public ActionResult ViewNotes(int id=0)
         {
             using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
@@ -333,7 +278,6 @@ namespace FindYourMentorProject.Controllers
         }
 
         [HttpGet]
-        [Authorize]
         public ActionResult ViewVideos()
         {
             return View();
@@ -385,8 +329,6 @@ namespace FindYourMentorProject.Controllers
                     save.SeatsOccupied = cAdv.SeatsOccupied;
                     save.Fees = cAdv.Fees;
                     save.YearsOfExperience = cAdv.YearsOfExperience;
-                    //save.DemoLec1 = cAdv.DemoLec1;
-                    //save.DemoLec2 = cAdv.DemoLec2;
                     save.Field = cAdv.Field;
                     save.SpokenLanguage1 = cAdv.SpokenLanguage1;
                     save.Address = cAdv.Address;
@@ -405,15 +347,8 @@ namespace FindYourMentorProject.Controllers
         public ActionResult ViewSavedList(string searchby, string search)
         {
             int userid = Convert.ToInt32(Session["UserID"]);
-            //List<SavedList> saveList = new List<SavedList>();
             using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
             {
-
-                //saveList = db.SavedLists.Where(a=>a.MenteeID == userid).OrderByDescending(r => r.SavedPostID).ToList();
-                //return View(saveList);
-                //HttpResponseMessage response;
-                //response = Request.CreateResponse(HttpStatusCode.OK, saveList);
-                //return response;
                 if(searchby == "CourseName")
                 {
                     return View(db.SavedLists.Where(a => a.MenteeID == userid && a.CourseName.StartsWith(search) || search == null).OrderByDescending(r => r.SavedPostID).ToList());
@@ -538,7 +473,6 @@ namespace FindYourMentorProject.Controllers
                     db.Applications.Add(app_form);
                     db.Configuration.ValidateOnSaveEnabled = false;
                     db.SaveChanges();
-                    //applicationnotificationmentor(user.FirstName, user.State, advdetails.EmailID, advdetails.CourseName, advdetails.MentorName, advdetails.CreationDate);
                     return Json(new { success = true, message = "Applied !!!" }, JsonRequestBehavior.AllowGet);
                 }   
             }
@@ -550,12 +484,6 @@ namespace FindYourMentorProject.Controllers
 
         public ActionResult ViewApppliedCourse(string filters)
         {
-            //int userid = Convert.ToInt32(Session["UserID"]);
-            //using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
-            //{
-            //    var appliedcourse = db.Applications.Where(a => a.MenteeID == userid).ToList();
-            //    return View(appliedcourse);
-            //}
             int userid = Convert.ToInt32(Session["UserID"]);
             FindYourMentorProjectEntities db = new FindYourMentorProjectEntities();
             if (filters == "Approve")
@@ -632,9 +560,6 @@ namespace FindYourMentorProject.Controllers
             }
         }
 
-
-
-
         public ActionResult SubmitAppointment(Appointment appoint)
         {
             if (ModelState.IsValid)
@@ -693,7 +618,6 @@ namespace FindYourMentorProject.Controllers
                     db.Appointments.Add(app_form);
                     db.Configuration.ValidateOnSaveEnabled = false;
                     db.SaveChanges();
-                    //appointmentnotificationmentor(user.Username, user.State, advdetails.EmailID, advdetails.CourseName, advdetails.MentorName, advdetails.CreationDate);
                     return Json(new { success = true, message = "Appointment request sent !!!" }, JsonRequestBehavior.AllowGet);
                 }
             }
@@ -914,6 +838,8 @@ namespace FindYourMentorProject.Controllers
                 BigModel bigmodel = new BigModel();
                 bigmodel.CourseAdvertisement = db.CourseAdvertisements.Where(x => x.AdvertisementID == id).FirstOrDefault<CourseAdvertisement>();
                 bigmodel.Feedback = db.Feedbacks.Where(a => a.AdvertisementID == id).OrderByDescending(r => r.FeedbackID).ToList();
+                bigmodel.Comment = db.Comments.Where(a => a.AdvertisementID == id).OrderByDescending(r => r.CommentID).ToList();
+                bigmodel.ReplyToComment = db.ReplyToComments.Where(a => a.AdvertisementID == id).OrderByDescending(r => r.ReplyID).ToList();
 
                 ViewBag.ID = id;
 
@@ -922,7 +848,7 @@ namespace FindYourMentorProject.Controllers
         }
 
         [HttpPost]
-        public ActionResult ShowFullAdvertisement(Feedback data)
+        public ActionResult postFeedback(Feedback data)
         {
             int userid = Convert.ToInt32(Session["UserID"]);
             using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
@@ -932,6 +858,38 @@ namespace FindYourMentorProject.Controllers
                 data.UserID = userid;
                 data.commentedOn = System.DateTime.Now;
                 db.Feedbacks.Add(data);
+                db.SaveChanges();
+                return RedirectToAction("ShowFullAdvertisement", new { id = data.AdvertisementID });
+            }
+        }
+
+        [HttpPost]
+        public ActionResult postComment(Comment data)
+        {
+            int userid = Convert.ToInt32(Session["UserID"]);
+            using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
+            {
+                RegisterStudent stud = db.RegisterStudents.Where(a => a.UserID == userid).FirstOrDefault();
+                data.mentorName = stud.FirstName + " " + stud.LastName;
+                data.MenteeID = userid;
+                data.commentedDate = System.DateTime.Now;
+                db.Comments.Add(data);
+                db.SaveChanges();
+                return RedirectToAction("ShowFullAdvertisement", new { id = data.AdvertisementID });
+            }
+        }
+
+        [HttpPost]
+        public ActionResult postReply(ReplyToComment data, String val)
+        {
+            int userid = Convert.ToInt32(Session["UserID"]);
+            using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
+            {
+                RegisterStudent stud = db.RegisterStudents.Where(a => a.UserID == userid).FirstOrDefault();
+                data.MentorName = stud.FirstName + " " + stud.LastName;
+                data.MenteeID = userid;
+                data.Message = val;
+                db.ReplyToComments.Add(data);
                 db.SaveChanges();
                 return RedirectToAction("ShowFullAdvertisement", new { id = data.AdvertisementID });
             }

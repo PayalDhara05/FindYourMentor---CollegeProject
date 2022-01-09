@@ -87,6 +87,17 @@
           <Property Name="MentorName" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="AppointmentMode" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="Comment">
+          <Key>
+            <PropertyRef Name="CommentID" />
+          </Key>
+          <Property Name="CommentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AdvertisementID" Type="int" Nullable="false" />
+          <Property Name="MenteeID" Type="int" Nullable="false" />
+          <Property Name="Message" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="mentorName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="commentedDate" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="ContactUs">
           <Key>
             <PropertyRef Name="ContactID" />
@@ -230,6 +241,17 @@
           <Property Name="LinkedInID" Type="varchar" MaxLength="50" />
           <Property Name="City" Type="varchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="ReplyToComment">
+          <Key>
+            <PropertyRef Name="ReplyID" />
+          </Key>
+          <Property Name="ReplyID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CommentID" Type="int" Nullable="false" />
+          <Property Name="Message" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="AdvertisementID" Type="int" Nullable="false" />
+          <Property Name="MenteeID" Type="int" Nullable="false" />
+          <Property Name="MentorName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="SavedList">
           <Key>
             <PropertyRef Name="SavedPostID" />
@@ -338,6 +360,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Comment__Adverti__25DB9BFC">
+          <End Role="CourseAdvertisement" Type="Self.CourseAdvertisement" Multiplicity="1" />
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CourseAdvertisement">
+              <PropertyRef Name="AdvertisementID" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="AdvertisementID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Comment__MenteeI__26CFC035">
+          <End Role="RegisterStudent" Type="Self.RegisterStudent" Multiplicity="1" />
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RegisterStudent">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="MenteeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__CourseAdv__Mento__73BA3083">
           <End Role="RegisterMentor" Type="Self.RegisterMentor" Multiplicity="1" />
           <End Role="CourseAdvertisement" Type="Self.CourseAdvertisement" Multiplicity="*" />
@@ -398,6 +444,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__ReplyToCo__Adver__2B947552">
+          <End Role="CourseAdvertisement" Type="Self.CourseAdvertisement" Multiplicity="1" />
+          <End Role="ReplyToComment" Type="Self.ReplyToComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CourseAdvertisement">
+              <PropertyRef Name="AdvertisementID" />
+            </Principal>
+            <Dependent Role="ReplyToComment">
+              <PropertyRef Name="AdvertisementID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ReplyToCo__Comme__2AA05119">
+          <End Role="Comment" Type="Self.Comment" Multiplicity="1" />
+          <End Role="ReplyToComment" Type="Self.ReplyToComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comment">
+              <PropertyRef Name="CommentID" />
+            </Principal>
+            <Dependent Role="ReplyToComment">
+              <PropertyRef Name="CommentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ReplyToCo__Mente__2C88998B">
+          <End Role="RegisterStudent" Type="Self.RegisterStudent" Multiplicity="1" />
+          <End Role="ReplyToComment" Type="Self.ReplyToComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RegisterStudent">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="ReplyToComment">
+              <PropertyRef Name="MenteeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__SavedList__Adver__18EBB532">
           <End Role="CourseAdvertisement" Type="Self.CourseAdvertisement" Multiplicity="1" />
           <End Role="SavedList" Type="Self.SavedList" Multiplicity="*" />
@@ -427,12 +509,14 @@
           <EntitySet Name="AddNotesMentor" EntityType="Self.AddNotesMentor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Application" EntityType="Self.Application" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Appointment" EntityType="Self.Appointment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ContactUs" EntityType="Self.ContactUs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CourseAdvertisement" EntityType="Self.CourseAdvertisement" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Feedback" EntityType="Self.Feedback" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Fees" EntityType="Self.Fees" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RegisterMentor" EntityType="Self.RegisterMentor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RegisterStudent" EntityType="Self.RegisterStudent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReplyToComment" EntityType="Self.ReplyToComment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SavedList" EntityType="Self.SavedList" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__AddNotesM__Mento__7FB5F314" Association="Self.FK__AddNotesM__Mento__7FB5F314">
             <End Role="RegisterMentor" EntitySet="RegisterMentor" />
@@ -458,6 +542,14 @@
             <End Role="RegisterStudent" EntitySet="RegisterStudent" />
             <End Role="Appointment" EntitySet="Appointment" />
           </AssociationSet>
+          <AssociationSet Name="FK__Comment__Adverti__25DB9BFC" Association="Self.FK__Comment__Adverti__25DB9BFC">
+            <End Role="CourseAdvertisement" EntitySet="CourseAdvertisement" />
+            <End Role="Comment" EntitySet="Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Comment__MenteeI__26CFC035" Association="Self.FK__Comment__MenteeI__26CFC035">
+            <End Role="RegisterStudent" EntitySet="RegisterStudent" />
+            <End Role="Comment" EntitySet="Comment" />
+          </AssociationSet>
           <AssociationSet Name="FK__CourseAdv__Mento__73BA3083" Association="Self.FK__CourseAdv__Mento__73BA3083">
             <End Role="RegisterMentor" EntitySet="RegisterMentor" />
             <End Role="CourseAdvertisement" EntitySet="CourseAdvertisement" />
@@ -477,6 +569,18 @@
           <AssociationSet Name="FK__Fees__MenteeID__09746778" Association="Self.FK__Fees__MenteeID__09746778">
             <End Role="RegisterStudent" EntitySet="RegisterStudent" />
             <End Role="Fees" EntitySet="Fees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ReplyToCo__Adver__2B947552" Association="Self.FK__ReplyToCo__Adver__2B947552">
+            <End Role="CourseAdvertisement" EntitySet="CourseAdvertisement" />
+            <End Role="ReplyToComment" EntitySet="ReplyToComment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ReplyToCo__Comme__2AA05119" Association="Self.FK__ReplyToCo__Comme__2AA05119">
+            <End Role="Comment" EntitySet="Comment" />
+            <End Role="ReplyToComment" EntitySet="ReplyToComment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ReplyToCo__Mente__2C88998B" Association="Self.FK__ReplyToCo__Mente__2C88998B">
+            <End Role="RegisterStudent" EntitySet="RegisterStudent" />
+            <End Role="ReplyToComment" EntitySet="ReplyToComment" />
           </AssociationSet>
           <AssociationSet Name="FK__SavedList__Adver__18EBB532" Association="Self.FK__SavedList__Adver__18EBB532">
             <End Role="CourseAdvertisement" EntitySet="CourseAdvertisement" />
@@ -554,6 +658,28 @@
           <AssociationSet Name="FK__Feedback__UserID__15A53433" Association="FindYourMentorProjectModel.FK__Feedback__UserID__15A53433">
             <End Role="RegisterStudent" EntitySet="RegisterStudents" />
             <End Role="Feedback" EntitySet="Feedbacks" />
+          </AssociationSet>
+          <EntitySet Name="Comments" EntityType="FindYourMentorProjectModel.Comment" />
+          <AssociationSet Name="FK__Comment__Adverti__25DB9BFC" Association="FindYourMentorProjectModel.FK__Comment__Adverti__25DB9BFC">
+            <End Role="CourseAdvertisement" EntitySet="CourseAdvertisements" />
+            <End Role="Comment" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Comment__MenteeI__26CFC035" Association="FindYourMentorProjectModel.FK__Comment__MenteeI__26CFC035">
+            <End Role="RegisterStudent" EntitySet="RegisterStudents" />
+            <End Role="Comment" EntitySet="Comments" />
+          </AssociationSet>
+          <EntitySet Name="ReplyToComments" EntityType="FindYourMentorProjectModel.ReplyToComment" />
+          <AssociationSet Name="FK__ReplyToCo__Comme__2AA05119" Association="FindYourMentorProjectModel.FK__ReplyToCo__Comme__2AA05119">
+            <End Role="Comment" EntitySet="Comments" />
+            <End Role="ReplyToComment" EntitySet="ReplyToComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ReplyToCo__Adver__2B947552" Association="FindYourMentorProjectModel.FK__ReplyToCo__Adver__2B947552">
+            <End Role="CourseAdvertisement" EntitySet="CourseAdvertisements" />
+            <End Role="ReplyToComment" EntitySet="ReplyToComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ReplyToCo__Mente__2C88998B" Association="FindYourMentorProjectModel.FK__ReplyToCo__Mente__2C88998B">
+            <End Role="RegisterStudent" EntitySet="RegisterStudents" />
+            <End Role="ReplyToComment" EntitySet="ReplyToComments" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="AddNotesMentee">
@@ -687,6 +813,8 @@
           <Property Name="Duration" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Mode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Feedbacks" Relationship="FindYourMentorProjectModel.FK__Feedback__Advert__14B10FFA" FromRole="CourseAdvertisement" ToRole="Feedback" />
+          <NavigationProperty Name="Comments" Relationship="FindYourMentorProjectModel.FK__Comment__Adverti__25DB9BFC" FromRole="CourseAdvertisement" ToRole="Comment" />
+          <NavigationProperty Name="ReplyToComments" Relationship="FindYourMentorProjectModel.FK__ReplyToCo__Adver__2B947552" FromRole="CourseAdvertisement" ToRole="ReplyToComment" />
           </EntityType>
         <EntityType Name="RegisterMentor">
           <Key>
@@ -743,6 +871,8 @@
           <NavigationProperty Name="SavedLists" Relationship="FindYourMentorProjectModel.FK__SavedList__Mente__17F790F9" FromRole="RegisterStudent" ToRole="SavedList" />
           <NavigationProperty Name="Fees" Relationship="FindYourMentorProjectModel.FK__Fees__MenteeID__09746778" FromRole="RegisterStudent" ToRole="Fee" />
           <NavigationProperty Name="Feedbacks" Relationship="FindYourMentorProjectModel.FK__Feedback__UserID__15A53433" FromRole="RegisterStudent" ToRole="Feedback" />
+          <NavigationProperty Name="Comments" Relationship="FindYourMentorProjectModel.FK__Comment__MenteeI__26CFC035" FromRole="RegisterStudent" ToRole="Comment" />
+          <NavigationProperty Name="ReplyToComments" Relationship="FindYourMentorProjectModel.FK__ReplyToCo__Mente__2C88998B" FromRole="RegisterStudent" ToRole="ReplyToComment" />
         </EntityType>
         <EntityType Name="SavedList">
           <Key>
@@ -996,6 +1126,94 @@
             </Principal>
             <Dependent Role="Feedback">
               <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Comment">
+          <Key>
+            <PropertyRef Name="CommentID" />
+          </Key>
+          <Property Name="CommentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AdvertisementID" Type="Int32" Nullable="false" />
+          <Property Name="MenteeID" Type="Int32" Nullable="false" />
+          <Property Name="Message" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="mentorName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="commentedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="CourseAdvertisement" Relationship="FindYourMentorProjectModel.FK__Comment__Adverti__25DB9BFC" FromRole="Comment" ToRole="CourseAdvertisement" />
+          <NavigationProperty Name="RegisterStudent" Relationship="FindYourMentorProjectModel.FK__Comment__MenteeI__26CFC035" FromRole="Comment" ToRole="RegisterStudent" />
+          <NavigationProperty Name="ReplyToComments" Relationship="FindYourMentorProjectModel.FK__ReplyToCo__Comme__2AA05119" FromRole="Comment" ToRole="ReplyToComment" />
+        </EntityType>
+        <Association Name="FK__Comment__Adverti__25DB9BFC">
+          <End Type="FindYourMentorProjectModel.CourseAdvertisement" Role="CourseAdvertisement" Multiplicity="1" />
+          <End Type="FindYourMentorProjectModel.Comment" Role="Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CourseAdvertisement">
+              <PropertyRef Name="AdvertisementID" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="AdvertisementID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Comment__MenteeI__26CFC035">
+          <End Type="FindYourMentorProjectModel.RegisterStudent" Role="RegisterStudent" Multiplicity="1" />
+          <End Type="FindYourMentorProjectModel.Comment" Role="Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RegisterStudent">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="MenteeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ReplyToComment">
+          <Key>
+            <PropertyRef Name="ReplyID" />
+          </Key>
+          <Property Name="ReplyID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CommentID" Type="Int32" Nullable="false" />
+          <Property Name="Message" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="AdvertisementID" Type="Int32" Nullable="false" />
+          <Property Name="MenteeID" Type="Int32" Nullable="false" />
+          <Property Name="MentorName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Comment" Relationship="FindYourMentorProjectModel.FK__ReplyToCo__Comme__2AA05119" FromRole="ReplyToComment" ToRole="Comment" />
+          <NavigationProperty Name="CourseAdvertisement" Relationship="FindYourMentorProjectModel.FK__ReplyToCo__Adver__2B947552" FromRole="ReplyToComment" ToRole="CourseAdvertisement" />
+          <NavigationProperty Name="RegisterStudent" Relationship="FindYourMentorProjectModel.FK__ReplyToCo__Mente__2C88998B" FromRole="ReplyToComment" ToRole="RegisterStudent" />
+        </EntityType>
+        <Association Name="FK__ReplyToCo__Comme__2AA05119">
+          <End Type="FindYourMentorProjectModel.Comment" Role="Comment" Multiplicity="1" />
+          <End Type="FindYourMentorProjectModel.ReplyToComment" Role="ReplyToComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comment">
+              <PropertyRef Name="CommentID" />
+            </Principal>
+            <Dependent Role="ReplyToComment">
+              <PropertyRef Name="CommentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ReplyToCo__Adver__2B947552">
+          <End Type="FindYourMentorProjectModel.CourseAdvertisement" Role="CourseAdvertisement" Multiplicity="1" />
+          <End Type="FindYourMentorProjectModel.ReplyToComment" Role="ReplyToComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CourseAdvertisement">
+              <PropertyRef Name="AdvertisementID" />
+            </Principal>
+            <Dependent Role="ReplyToComment">
+              <PropertyRef Name="AdvertisementID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ReplyToCo__Mente__2C88998B">
+          <End Type="FindYourMentorProjectModel.RegisterStudent" Role="RegisterStudent" Multiplicity="1" />
+          <End Type="FindYourMentorProjectModel.ReplyToComment" Role="ReplyToComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RegisterStudent">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="ReplyToComment">
+              <PropertyRef Name="MenteeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1274,6 +1492,30 @@
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="AdvertisementID" ColumnName="AdvertisementID" />
                 <ScalarProperty Name="FeedbackID" ColumnName="FeedbackID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Comments">
+            <EntityTypeMapping TypeName="FindYourMentorProjectModel.Comment">
+              <MappingFragment StoreEntitySet="Comment">
+                <ScalarProperty Name="commentedDate" ColumnName="commentedDate" />
+                <ScalarProperty Name="mentorName" ColumnName="mentorName" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="MenteeID" ColumnName="MenteeID" />
+                <ScalarProperty Name="AdvertisementID" ColumnName="AdvertisementID" />
+                <ScalarProperty Name="CommentID" ColumnName="CommentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReplyToComments">
+            <EntityTypeMapping TypeName="FindYourMentorProjectModel.ReplyToComment">
+              <MappingFragment StoreEntitySet="ReplyToComment">
+                <ScalarProperty Name="MentorName" ColumnName="MentorName" />
+                <ScalarProperty Name="MenteeID" ColumnName="MenteeID" />
+                <ScalarProperty Name="AdvertisementID" ColumnName="AdvertisementID" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="CommentID" ColumnName="CommentID" />
+                <ScalarProperty Name="ReplyID" ColumnName="ReplyID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

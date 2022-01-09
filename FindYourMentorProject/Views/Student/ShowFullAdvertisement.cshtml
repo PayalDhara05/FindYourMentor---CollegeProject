@@ -180,7 +180,7 @@
 
             <div class="post-feedback">
                 <p> Please write down your feedback</p>
-                <form action="/Student/ShowFullAdvertisement" method="post">
+                <form action="/Student/postFeedback" method="post">
                     <textarea rows="4" cols="36" id="feedbackDescription" name="feedbackDescription" placeholder="Write your review :)"></textarea>
                     <div class="all-rating">
                         <i class="far fa-star" id="span1" onclick="CRateClick(1)"></i>
@@ -197,6 +197,63 @@
                     </div>
                     <input type="submit" name="saveButton" value="Post Your Feedback" />
                 </form>
+            </div>
+
+            <div class="comment-section" id="comment-section">
+                <p>Comments</p>
+                <div class="comment-box">
+                    <div class="indiv-comment">
+                        @if (@Model.Comment.Count() == 0)
+                        {
+                            <div class="empty-feedback">
+                                <p>No Comments posted</p>
+                            </div>
+                        }
+                        else
+                        {
+                            foreach (var item in Model.Comment)
+                            {
+                                <div class="indiv-feedback">
+                                    <p>@item.commentedDate By <span>@item.mentorName</span></p>
+                                    <p>@item.Message</p>
+                                </div>
+
+                                <div class="comment-btn">
+                                    <button onclick="showReplybox(@item.CommentID)">Reply to this comment</button>
+                                </div>
+                                <div class="reply-comment-form" id="@item.CommentID">
+                                    <form onsubmit="postReply(this,@item.CommentID)" id="@item.CommentID-comment-form">
+                                        <textarea name="Message" cols="30" rows="10" placeholder="Type your comment ..." id="@item.CommentID-textarea"></textarea>
+                                        <input type="hidden" name="AdvertisementID" value="@ViewBag.ID" id="@item.AdvertisementID-Advertisement" />
+                                        <input type="hidden" name="CommentID" value="@item.CommentID" id="@item.CommentID-Comment" />
+                                        <input type="submit" value="Submit Reply">
+                                    </form>
+                                </div>
+                                <div class="reply-comment-section">
+                                    @foreach (var inneritem in Model.ReplyToComment)
+                                    {
+                                        if (inneritem.CommentID == item.CommentID)
+                                        {
+                                            <div class="indiv-reply">
+                                                <p>Replied to @item.mentorName:By @inneritem.MentorName</p>
+                                                <p>@inneritem.Message</p>
+                                            </div>
+                                        }
+
+                                    }
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+
+                <div class="post-comment">
+                    <form action="/Student/postComment" method="post">
+                        <textarea name="Message" id="textarea" cols="30" rows="10" placeholder="Type your comment ..."></textarea>
+                        <input type="hidden" name="AdvertisementID" value="@ViewBag.ID" />
+                        <input type="submit" value="Post your comment">
+                    </form>
+                </div>
             </div>
         </div>
     </div>
@@ -222,5 +279,23 @@
             console.log(ratingData);
             document.getElementById("lblRating").value = ratingData;
         }
+
+        function showReplybox(id) {
+            $("#" + id).css('display', 'block');
+            $(".post-comment").css('visibility', 'hidden');
+        }
+
+        function postReply(form, id) {
+            $(".reply-comment-form").css('display', 'none');
+            $(".post-comment").css('visibility', 'visible');
+            var val = document.getElementById(id + "-textarea").value;
+            var formdata = $("#"+id+"-comment-form").serialize();
+            alert(formdata);
+            $.ajax({
+                url: '/Student/postReply' + '?val=' + val,
+                method: 'post',
+                data: formdata
+            })
+        }
     </script>
-</body >
+</body>

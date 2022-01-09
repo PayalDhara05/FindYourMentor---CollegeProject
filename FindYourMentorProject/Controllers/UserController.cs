@@ -364,8 +364,10 @@ namespace FindYourMentorProject.Controllers
                             cookie.Expires = DateTime.Now.AddMinutes(timeout);
                             cookie.HttpOnly = true;
                             Response.Cookies.Add(cookie);
-                            Session["EmailID"] = login.EmailID.ToString();
-                            Session["UserID"] = v.UserID.ToString();
+                            string emailID = ticket.Name;
+                            Session["EmailID"] = ticket.Name;
+                            var w = dc.RegisterStudents.Where(a => a.EmailID == emailID).FirstOrDefault();
+                            Session["UserID"] = w.UserID.ToString();
 
                             if (Url.IsLocalUrl(ReturnUrl))
                             {
@@ -405,8 +407,10 @@ namespace FindYourMentorProject.Controllers
                             cookie.Expires = DateTime.Now.AddMinutes(timeout);
                             cookie.HttpOnly = true;
                             Response.Cookies.Add(cookie);
-                            Session["EmailID"] = login.EmailID.ToString();
-                            Session["UserID"] = m.UserID.ToString();
+                            string emailID = ticket.Name;
+                            Session["EmailID"] = ticket.Name;
+                            var n = dc.RegisterMentors.Where(a => a.EmailID == emailID).FirstOrDefault();
+                            Session["UserID"] = n.UserID.ToString();
 
                             if (Url.IsLocalUrl(ReturnUrl))
                             {
@@ -550,7 +554,6 @@ namespace FindYourMentorProject.Controllers
             var message = "";
             try
             {
-
                 if (ModelState.IsValid)
                 {
                     using (FindYourMentorProjectEntities dc = new FindYourMentorProjectEntities())

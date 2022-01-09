@@ -17,17 +17,15 @@ using System.Web.WebPages;
 
 namespace FindYourMentorProject.Controllers
 {
+    [Authorize]   // don’t want to allow anonymous access to any of our action methods
     public class MentorController : Controller
     {
-        // GET: Mentor
-        [Authorize]
         public ActionResult Index()
         {
             return View();
         }
 
         [HttpPost]
-        [Authorize]
         public ActionResult ProfilePicture(HttpPostedFileBase file, string submitButton)
         {
             if (Session["UserID"] != null)
@@ -87,14 +85,12 @@ namespace FindYourMentorProject.Controllers
         }
 
         [HttpGet]
-        [Authorize]
         public new ActionResult Profile()
         {
             return View();
         }
 
         [HttpGet]
-        [Authorize]
         public ActionResult PersonalInfo()
         {
             int userid = Convert.ToInt32(Session["UserID"]);
@@ -106,7 +102,6 @@ namespace FindYourMentorProject.Controllers
         }
 
         [HttpPost]
-        [Authorize]
         public ActionResult UpdatePersonalInfo(RegisterMentor obj)
         {
             int userid = Convert.ToInt32(Session["UserID"]);
@@ -132,21 +127,19 @@ namespace FindYourMentorProject.Controllers
         }
 
         [HttpGet]
-        [Authorize]
         public ActionResult ChangePassword()
         {
             return View();
         }
 
         [HttpPost]
-        [Authorize]
+        [ValidateAntiForgeryToken]
         public ActionResult ChangePassword(ChangePasswordModel pass)
         {
             string message = "";
             string message1 = "";
             if (ModelState.IsValid)
             {
-
                 if (Session["UserID"] != null)
                 {
                     int userid = Convert.ToInt32(Session["UserID"]);
@@ -155,10 +148,19 @@ namespace FindYourMentorProject.Controllers
                         var user = dc.RegisterMentors.Single(c => c.UserID == userid);
                         if (string.Compare(Crypto.Hash(pass.OldPassword), user.Password) == 0)
                         {
-                            user.Password = Crypto.Hash(pass.NewPassword);
-                            dc.Configuration.ValidateOnSaveEnabled = false;
-                            dc.SaveChanges();
-                            message = "Password changed successfully";
+                            if(string.Compare(pass.OldPassword,pass.NewPassword)==0)
+                            {
+                                message1 = "Old password and new password cannot be same !";
+                                ViewBag.Message1 = message1;
+                                return View();
+                            }
+                            else
+                            {
+                                user.Password = Crypto.Hash(pass.NewPassword);
+                                dc.Configuration.ValidateOnSaveEnabled = false;
+                                dc.SaveChanges();
+                                message = "Password changed successfully";
+                            }
                         }
                         else
                         {
@@ -178,22 +180,10 @@ namespace FindYourMentorProject.Controllers
 
 
         [HttpGet]
-        [Authorize]
         public ActionResult Notes()
         {
             return View();
         }
-
-
-        //public ActionResult NotesData()
-        //{
-        //    int userid = Convert.ToInt32(Session["UserID"]);
-        //    using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
-        //    {
-        //        var existinguser = db.AddNotesMentees.ToList<AddNotesMentee>();
-        //        return Json(new { data = existinguser }, JsonRequestBehavior.AllowGet);
-        //    }
-        //}
 
         [Authorize]
         public JsonResult NotesData()
@@ -202,25 +192,11 @@ namespace FindYourMentorProject.Controllers
             FindYourMentorProjectEntities db = new FindYourMentorProjectEntities();
             db.Configuration.ProxyCreationEnabled = false;
             List<AddNotesMentor> List = db.AddNotesMentors.Where(a => a.MentorID == userid).ToList();
-
-            //List<AddNotesMentee> List = new List<AddNotesMentee>();
-            //int userid = Convert.ToInt32(Session["UserID"]);
-
-
-            //// Here "MyDatabaseEntities " is dbContext, which is created at time of model creation.
-
-            //using (FindYourMentorProjectEntities dc = new FindYourMentorProjectEntities())
-            //{
-            //    List = dc.AddNotesMentees.Where(a => a.UserID == userid).ToList();
-            //}
-
             return Json(List, JsonRequestBehavior.AllowGet);
-
         }
 
 
         [HttpGet]
-        [Authorize]
         public ActionResult AddorEditNotes(int id = 0)
         {
             if (id == 0)
@@ -237,7 +213,6 @@ namespace FindYourMentorProject.Controllers
         }
 
         [HttpPost]
-        [Authorize]
         public ActionResult AddorEditNotes(AddNotesMentor mentor)
         {
             if (ModelState.IsValid)
@@ -260,10 +235,6 @@ namespace FindYourMentorProject.Controllers
                         mentor.MentorID = userid;
                         mentor.CreationDate = System.DateTime.Now;
                         db.Entry(mentor).State = EntityState.Modified;
-                        //var existinguser = db.AddNotesMentees.Find(userid);
-                        //existinguser.Title = mentee.Title;
-                        //existinguser.Description = mentee.Description;
-                        //db.Configuration.ValidateOnSaveEnabled = false;
                         db.SaveChanges();
                         return Json(new { success = true, message = "Updated Successfully" }, JsonRequestBehavior.AllowGet);
                     }
@@ -278,7 +249,6 @@ namespace FindYourMentorProject.Controllers
         }
 
         [HttpPost]
-        [Authorize]
         public ActionResult AddorEditNotesExternal(AddNotesMentor mentor)
         {
             if (ModelState.IsValid)
@@ -290,10 +260,6 @@ namespace FindYourMentorProject.Controllers
                     mentor.MentorID = userid;
                     mentor.CreationDate = System.DateTime.Now;
                     db.Entry(mentor).State = EntityState.Modified;
-                    //var existinguser = db.AddNotesMentees.Find(userid);
-                    //existinguser.Title = mentee.Title;
-                    //existinguser.Description = mentee.Description;
-                    //db.Configuration.ValidateOnSaveEnabled = false;
                     db.SaveChanges();
                 }
             }
@@ -301,7 +267,6 @@ namespace FindYourMentorProject.Controllers
         }
 
         [HttpPost]
-        [Authorize]
         public ActionResult DeleteNotes(int id)
         {
             using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
@@ -314,7 +279,6 @@ namespace FindYourMentorProject.Controllers
         }
 
         [HttpGet]
-        [Authorize]
         public ActionResult ViewNotes(int id = 0)
         {
             using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())

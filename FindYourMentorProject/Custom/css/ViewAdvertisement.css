@@ -405,6 +405,113 @@ html, body {
             background-color: white;
         }
 
+.comment-section {
+    font-family: 'Inter vars', sans-serif;
+    color: #833471;
+    font-size: 1.8rem;
+    margin-top: 7rem;
+    margin-left: 7rem;
+    font-weight: bold;
+    height: 20rem;
+    width: 100%;
+    margin-bottom:40rem;
+}
+    .comment-section .comment-box {
+        margin-top: 4rem;
+        font-size: 1.5rem;
+        color: gray;
+    }
+
+        .comment-section .comment-box p:nth-child(even) {
+            color: black;
+            width: 100%;
+            margin-top: 2rem;
+        }
+
+        .comment-section .comment-box .comment-btn {
+            float: right;
+        }
+    .comment-section input[type="submit"] {
+        margin-bottom: 40rem;
+    }
+
+            .comment-section .comment-box .comment-btn button, .comment-section .comment-box .comment-btn input[type="submit"] {
+                font-family: 'Inter vars', sans-serif;
+                font-size: 1.5rem;
+                padding: 1rem 3rem;
+                margin-top: 1.5rem;
+                border: none;
+                outline: none;
+                background-color: #833471;
+                color: white;
+                border-radius: 10px;
+                border: 2px solid #833471;
+                -webkit-transition: .3s all linear;
+                transition: .3s all linear;
+                cursor: pointer;
+            }
+
+                .comment-section .comment-box .comment-btn button:hover, .comment-section .comment-box .comment-btn input[type="submit"]:hover {
+                    background-color: white;
+                    color: #833471;
+                }
+
+    .comment-section .post-comment, .comment-section .reply-comment-form {
+        margin-top: 8rem;
+        margin-bottom: 7rem;
+    }
+
+        .comment-section .post-comment textarea, .comment-section .reply-comment-form textarea {
+            width: 100%;
+            font-size: 1.5rem;
+            padding: 1rem;
+            outline: none;
+            border: 2px solid #833471;
+        }
+
+        .comment-section .post-comment input[type="submit"], .comment-section .reply-comment-form input[type="submit"] {
+            font-family: 'Inter vars', sans-serif;
+            font-size: 1.5rem;
+            padding: 1rem 3rem;
+            margin-top: 1.5rem;
+            border: none;
+            outline: none;
+            background-color: #833471;
+            color: white;
+            border-radius: 10px;
+            margin-bottom: 10rem;
+            border: 2px solid #833471;
+            -webkit-transition: .3s all linear;
+            transition: .3s all linear;
+            cursor: pointer;
+        }
+
+            .comment-section .post-comment input[type="submit"]:hover, .comment-section .reply-comment-form input[type="submit"]:hover {
+                background-color: white;
+                color: #833471;
+            }
+
+    .comment-section .reply-comment-form {
+        display: none;
+        margin-bottom: -12rem;
+    }
+
+        .comment-section .reply-comment-form input[type="submit"] {
+            margin-bottom: 0rem;
+        }
+
+    .comment-section .reply-comment-section {
+        margin-top: 8rem !important;
+        margin-left: 20rem;
+        max-height:20rem;
+        overflow-y:scroll;
+        margin-bottom: 5rem;
+    }
+
+        .comment-section .reply-comment-section .indiv-reply {
+            margin-top: 6rem;
+        }
+
 @media screen and (max-width: 1454px) {
     .main-course-advert {
         margin: 0rem;
@@ -488,4 +595,26 @@ html, body {
             margin-top: 2rem;
         }
 }
+}
+
+*::-webkit-scrollbar {
+    width: 12px;
+    /* width of the entire scrollbar */
+}
+
+*::-webkit-scrollbar-track {
+    background: white;
+    /* color of the tracking area */
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #833471;
+    /* color of the scroll thumb */
+    border-radius: 20px;
+    /* roundness of the scroll thumb */
+    border: 3px solid #f8cbc1;
+    /* creates padding around scroll thumb */
+}
+/*# sourceMappingURL=mainNavStud.css.map */
+
 /*# sourceMappingURL=viewCourseAdvertisement.css.map */

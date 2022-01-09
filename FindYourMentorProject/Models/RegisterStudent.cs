@@ -23,7 +23,8 @@ namespace FindYourMentorProject.Models
             this.SavedLists = new HashSet<SavedList>();
             this.Fees = new HashSet<Fee>();
             this.Feedbacks = new HashSet<Feedback>();
-            ProfilePicture = "Image/defaultProfile1.jpg";
+            this.Comments = new HashSet<Comment>();
+            this.ReplyToComments = new HashSet<ReplyToComment>();
         }
     
         public int UserID { get; set; }
@@ -58,5 +59,9 @@ namespace FindYourMentorProject.Models
         public virtual ICollection<Fee> Fees { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Feedback> Feedbacks { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Comment> Comments { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ReplyToComment> ReplyToComments { get; set; }
     }
 }

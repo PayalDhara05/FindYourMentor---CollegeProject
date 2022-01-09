@@ -63,7 +63,6 @@
                 <fieldset class="field_set">
                     <legend>Contact Number</legend>
                     <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)/g, '');" pattern="[6789][0-9]{9}" title="Please enter valid phone number" minlength="10" maxlength="12" name="ContactNo" value="@Model.ContactNo">
-                    @*<input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number" maxlength="12" minlength="10" name="ContactNo" value="@Model.ContactNo">*@
                 </fieldset>
             </div>
 
@@ -120,7 +119,6 @@
                 </fieldset>
                 <input type="submit" value="Save Changes" class="Submit-btn">
             </div>
-
         </form>
     </div>
 </div>

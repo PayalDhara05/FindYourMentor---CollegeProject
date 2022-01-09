@@ -322,6 +322,9 @@
     </Compile>
     <Compile Include="Models\BigModel.cs" />
     <Compile Include="Models\ChangePasswordModel.cs" />
+    <Compile Include="Models\Comment.cs">
+      <DependentUpon>AllModels.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ContactU.cs">
       <DependentUpon>AllModels.tt</DependentUpon>
     </Compile>
@@ -348,6 +351,9 @@
       <DependentUpon>AllModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\RegisterStudent.cs">
+      <DependentUpon>AllModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ReplyToComment.cs">
       <DependentUpon>AllModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ResetPasswordModel.cs" />

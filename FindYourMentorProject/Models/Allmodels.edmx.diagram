@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="8bc3c0276daa43df9fa110d10af2725b" Name="Diagram1" ZoomLevel="85">
+      <Diagram DiagramId="8bc3c0276daa43df9fa110d10af2725b" Name="Diagram1" ZoomLevel="81">
         <EntityTypeShape EntityType="FindYourMentorProjectModel.AddNotesMentee" Width="1.5" PointX="3" PointY="43.75" />
         <EntityTypeShape EntityType="FindYourMentorProjectModel.Application" Width="1.5" PointX="6" PointY="7.125" />
         <EntityTypeShape EntityType="FindYourMentorProjectModel.Appointment" Width="1.5" PointX="3" PointY="14" />
@@ -29,6 +29,13 @@
         <EntityTypeShape EntityType="FindYourMentorProjectModel.Feedback" Width="1.5" PointX="6" PointY="14.375" />
         <AssociationConnector Association="FindYourMentorProjectModel.FK__Feedback__Advert__14B10FFA" />
         <AssociationConnector Association="FindYourMentorProjectModel.FK__Feedback__UserID__15A53433" />
+        <EntityTypeShape EntityType="FindYourMentorProjectModel.Comment" Width="1.5" PointX="12" PointY="11.625" />
+        <AssociationConnector Association="FindYourMentorProjectModel.FK__Comment__Adverti__25DB9BFC" />
+        <AssociationConnector Association="FindYourMentorProjectModel.FK__Comment__MenteeI__26CFC035" />
+        <EntityTypeShape EntityType="FindYourMentorProjectModel.ReplyToComment" Width="1.5" PointX="14.25" PointY="11.625" />
+        <AssociationConnector Association="FindYourMentorProjectModel.FK__ReplyToCo__Comme__2AA05119" />
+        <AssociationConnector Association="FindYourMentorProjectModel.FK__ReplyToCo__Adver__2B947552" />
+        <AssociationConnector Association="FindYourMentorProjectModel.FK__ReplyToCo__Mente__2C88998B" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
