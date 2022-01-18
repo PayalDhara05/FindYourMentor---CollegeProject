@@ -403,10 +403,6 @@ namespace FindYourMentorProject.Controllers
                             cookie.Expires = DateTime.Now.AddMinutes(timeout);
                             cookie.HttpOnly = true;
                             Response.Cookies.Add(cookie);
-                            string emailID = ticket.Name;
-                            Session["EmailID"] = ticket.Name;
-                            var n = dc.RegisterMentors.Where(a => a.EmailID == emailID).FirstOrDefault();
-                            Session["UserID"] = n.UserID.ToString();
 
                             if (Url.IsLocalUrl(ReturnUrl))
                             {
