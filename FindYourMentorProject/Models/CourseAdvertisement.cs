@@ -24,6 +24,10 @@ namespace FindYourMentorProject.Models
             this.Feedbacks = new HashSet<Feedback>();
             this.Comments = new HashSet<Comment>();
             this.ReplyToComments = new HashSet<ReplyToComment>();
+            DemoLec1 = "/VideoFile/Demo.mp4";
+            DemoLec2 = "/VideoFile/Demo.mp4";
+            DemoLec3 = "/VideoFile/Demo.mp4";
+            DemoLec4 = "/VideoFile/Demo.mp4";
         }
     
         public int AdvertisementID { get; set; }

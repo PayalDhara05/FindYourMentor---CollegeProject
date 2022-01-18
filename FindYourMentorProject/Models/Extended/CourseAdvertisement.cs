@@ -11,7 +11,6 @@ namespace FindYourMentorProject.Models
         [MetadataType(typeof(CourseAdvertisementMetadata))]
         public partial class CourseAdvertisement
         {
-            
         }
         public class CourseAdvertisementMetadata
         {

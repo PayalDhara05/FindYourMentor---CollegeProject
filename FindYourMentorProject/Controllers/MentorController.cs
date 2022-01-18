@@ -12,6 +12,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using System.Web.WebPages;
 
 
@@ -20,6 +21,22 @@ namespace FindYourMentorProject.Controllers
     [Authorize]   // don’t want to allow anonymous access to any of our action methods
     public class MentorController : Controller
     {
+
+        HttpCookie authCookie = System.Web.HttpContext.Current.Request.Cookies[FormsAuthentication.FormsCookieName];
+        public String userName;
+        int userid;
+        FindYourMentorProjectEntities db = new FindYourMentorProjectEntities();
+
+        public MentorController()
+        {
+            if (authCookie != null)
+            {
+                FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(authCookie.Value);
+                userName = ticket.Name;
+                userid = db.RegisterMentors.FirstOrDefault(x => x.EmailID == userName).UserID;
+            }
+        }
+
         public ActionResult Index()
         {
             return View();
@@ -28,44 +45,18 @@ namespace FindYourMentorProject.Controllers
         [HttpPost]
         public ActionResult ProfilePicture(HttpPostedFileBase file, string submitButton)
         {
-            if (Session["UserID"] != null)
+            if (submitButton == "Upload")
             {
-                int userid = Convert.ToInt32(Session["UserID"]);
-
-                if (submitButton == "Upload")
+                if (file != null && file.ContentLength > 0)
                 {
-                    if (file != null && file.ContentLength > 0)
-                    {
-                        string fileName = Path.GetFileName(file.FileName);
-                        String filepath = Path.Combine(Server.MapPath("/Image/"), fileName);
-                        file.SaveAs(filepath);
-                        using (FindYourMentorProjectEntities dc = new FindYourMentorProjectEntities())
-                        {
-                            var user = dc.RegisterMentors.Single(c => c.UserID == userid);
-                            string oldFileName = user.ProfilePicture;
-                            user.ProfilePicture = "/Image/" + fileName;
-                            dc.Configuration.ValidateOnSaveEnabled = false;
-                            dc.SaveChanges();
-
-                            string fullPath = Request.MapPath("~" + oldFileName);
-                            if (oldFileName != "/Image/defaultProfile1.jpg")
-                            {
-                                if (System.IO.File.Exists(fullPath))
-                                {
-                                    System.IO.File.Delete(fullPath);
-                                    Response.Write("Deleted");
-                                }
-                            }
-                        }
-                    }
-                }
-                else
-                {
+                    string fileName = Path.GetFileName(file.FileName);
+                    String filepath = Path.Combine(Server.MapPath("/Image/"), fileName);
+                    file.SaveAs(filepath);
                     using (FindYourMentorProjectEntities dc = new FindYourMentorProjectEntities())
                     {
                         var user = dc.RegisterMentors.Single(c => c.UserID == userid);
                         string oldFileName = user.ProfilePicture;
-                        user.ProfilePicture = "/Image/defaultProfile1.jpg";
+                        user.ProfilePicture = "/Image/" + fileName;
                         dc.Configuration.ValidateOnSaveEnabled = false;
                         dc.SaveChanges();
 
@@ -77,6 +68,27 @@ namespace FindYourMentorProject.Controllers
                                 System.IO.File.Delete(fullPath);
                                 Response.Write("Deleted");
                             }
+                        }
+                    }
+                }
+            }
+            else
+            {
+                using (FindYourMentorProjectEntities dc = new FindYourMentorProjectEntities())
+                {
+                    var user = dc.RegisterMentors.Single(c => c.UserID == userid);
+                    string oldFileName = user.ProfilePicture;
+                    user.ProfilePicture = "/Image/defaultProfile1.jpg";
+                    dc.Configuration.ValidateOnSaveEnabled = false;
+                    dc.SaveChanges();
+
+                    string fullPath = Request.MapPath("~" + oldFileName);
+                    if (oldFileName != "/Image/defaultProfile1.jpg")
+                    {
+                        if (System.IO.File.Exists(fullPath))
+                        {
+                            System.IO.File.Delete(fullPath);
+                            Response.Write("Deleted");
                         }
                     }
                 }
@@ -93,7 +105,6 @@ namespace FindYourMentorProject.Controllers
         [HttpGet]
         public ActionResult PersonalInfo()
         {
-            int userid = Convert.ToInt32(Session["UserID"]);
             using (FindYourMentorProjectEntities dc = new FindYourMentorProjectEntities())
             {
                 var user = dc.RegisterMentors.Find(userid);
@@ -104,7 +115,6 @@ namespace FindYourMentorProject.Controllers
         [HttpPost]
         public ActionResult UpdatePersonalInfo(RegisterMentor obj)
         {
-            int userid = Convert.ToInt32(Session["UserID"]);
             using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
             {
                 var existinguser = db.RegisterMentors.Find(userid);
@@ -140,7 +150,7 @@ namespace FindYourMentorProject.Controllers
             string message1 = "";
             if (ModelState.IsValid)
             {
-                if (Session["UserID"] != null)
+                if (userid != 0)
                 {
                     int userid = Convert.ToInt32(Session["UserID"]);
                     using (FindYourMentorProjectEntities dc = new FindYourMentorProjectEntities())
@@ -188,7 +198,6 @@ namespace FindYourMentorProject.Controllers
         [Authorize]
         public JsonResult NotesData()
         {
-            int userid = Convert.ToInt32(Session["UserID"]);
             FindYourMentorProjectEntities db = new FindYourMentorProjectEntities();
             db.Configuration.ProxyCreationEnabled = false;
             List<AddNotesMentor> List = db.AddNotesMentors.Where(a => a.MentorID == userid).ToList();
@@ -217,7 +226,6 @@ namespace FindYourMentorProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                int userid = Convert.ToInt32(Session["UserID"]);
 
                 using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
                 {
@@ -253,7 +261,6 @@ namespace FindYourMentorProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                int userid = Convert.ToInt32(Session["UserID"]);
 
                 using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
                 {
@@ -295,7 +302,6 @@ namespace FindYourMentorProject.Controllers
 
         public JsonResult AdvertisementData()
         {
-            int userid = Convert.ToInt32(Session["UserID"]);
             FindYourMentorProjectEntities db = new FindYourMentorProjectEntities();
             db.Configuration.ProxyCreationEnabled = false;
             List<CourseAdvertisement> List = db.CourseAdvertisements.Where(a => a.MentorID == userid && a.RemovalStatus == "No").ToList();
@@ -319,7 +325,6 @@ namespace FindYourMentorProject.Controllers
         [HttpPost]
         public ActionResult AddorEditAdvertisements(CourseAdvertisement adv, HttpPostedFileBase file, HttpPostedFileBase file1, HttpPostedFileBase file2, HttpPostedFileBase file3, HttpPostedFileBase file4)
         {
-            int userid = Convert.ToInt32(Session["UserID"]);
             CourseAdvertisement cAdv = new CourseAdvertisement();
             if (ModelState.IsValid)
                 {
@@ -329,53 +334,31 @@ namespace FindYourMentorProject.Controllers
                         {
                             if (file != null)
                             {
-                                string fileName = Path.GetFileName(file.FileName);
-                                String filepath = Path.Combine(Server.MapPath("~/Logo/"), fileName);
-                                file.SaveAs(filepath);
+                                string fileName = SaveToDisk(file);
                                 adv.logo = "/Logo/" + fileName;
                             }
 
                             if (file1 != null)
                             {
-                                string fileName = Path.GetFileName(file1.FileName);
-                                String filepath = Path.Combine(Server.MapPath("~/VideoFile/"), fileName);
-                                if (file1.ContentLength < 104857600)
-                                {
-                                    file1.SaveAs(filepath);
-                                }
+                                string fileName = SaveToDisk(file1);
                                 adv.DemoLec1 = "/VideoFile/" + fileName;
                             }
 
                             if (file2 != null)
                             {
-                                string fileName = Path.GetFileName(file2.FileName);
-                                String filepath = Path.Combine(Server.MapPath("~/VideoFile/"), fileName);
-                                if (file2.ContentLength < 104857600)
-                                {
-                                    file2.SaveAs(filepath);
-                                }
+                                string fileName = SaveToDisk(file2);
                                 adv.DemoLec2 = "/VideoFile/" + fileName;
                             }
 
                             if (file3 != null)
                             {
-                                string fileName = Path.GetFileName(file3.FileName);
-                                String filepath = Path.Combine(Server.MapPath("~/VideoFile/"), fileName);
-                                if (file3.ContentLength < 104857600)
-                                {
-                                    file3.SaveAs(filepath);
-                                }
+                                string fileName = SaveToDisk(file3);
                                 adv.DemoLec3 = "/VideoFile/" + fileName;
                             }
 
                             if (file4 != null)
                             {
-                                string fileName = Path.GetFileName(file4.FileName);
-                                String filepath = Path.Combine(Server.MapPath("~/VideoFile/"), fileName);
-                                if (file4.ContentLength < 104857600)
-                                {
-                                    file4.SaveAs(filepath);
-                                }
+                                string fileName = SaveToDisk(file4);
                                 adv.DemoLec4 = "/VideoFile/" + fileName;
                             }
                             db.CourseAdvertisements.Add(adv);
@@ -398,12 +381,7 @@ namespace FindYourMentorProject.Controllers
                             }
                             if (file1 !=null)
                             {
-                                string fileName = Path.GetFileName(file1.FileName);
-                                String filepath = Path.Combine(Server.MapPath("~/VideoFile/"), fileName);
-                                if (file1.ContentLength < 104857600)
-                                {
-                                    file1.SaveAs(filepath);
-                                }
+                                string fileName = SaveToDisk(file1);
                                 adv.DemoLec1 = "/VideoFile/" + fileName;
                             }
                             else
@@ -413,12 +391,7 @@ namespace FindYourMentorProject.Controllers
 
                             if(file2 != null)
                             {
-                                string fileName = Path.GetFileName(file2.FileName);
-                                String filepath = Path.Combine(Server.MapPath("~/VideoFile/"), fileName);
-                                if (file2.ContentLength < 104857600)
-                                {
-                                    file2.SaveAs(filepath);
-                                }
+                                string fileName = SaveToDisk(file2);
                                 adv.DemoLec2 = "/VideoFile/" + fileName;
                             }
                             else
@@ -428,12 +401,7 @@ namespace FindYourMentorProject.Controllers
 
                             if(file3 !=  null)
                             {
-                                string fileName = Path.GetFileName(file3.FileName);
-                                String filepath = Path.Combine(Server.MapPath("~/VideoFile/"), fileName);
-                                if (file3.ContentLength < 104857600)
-                                {
-                                    file3.SaveAs(filepath);
-                                }
+                                string fileName = SaveToDisk(file3);
                                 adv.DemoLec3 = "/VideoFile/" + fileName;
                             }
                             else
@@ -443,12 +411,7 @@ namespace FindYourMentorProject.Controllers
                            
                             if(file4 != null)
                             {
-                                string fileName = Path.GetFileName(file4.FileName);
-                                String filepath = Path.Combine(Server.MapPath("~/VideoFile/"), fileName);
-                                if (file4.ContentLength < 104857600)
-                                {
-                                    file4.SaveAs(filepath);
-                                }
+                                string fileName = SaveToDisk(file4);
                                 adv.DemoLec4 = "/VideoFile/" + fileName;
                             }
                             else
@@ -470,6 +433,17 @@ namespace FindYourMentorProject.Controllers
                             return View(cAdv);
                 }       
             }
+
+        public string SaveToDisk(HttpPostedFileBase file)
+        {
+            string fileName = Path.GetFileName(file.FileName);
+            String filepath = Path.Combine(Server.MapPath("~/VideoFile/"), fileName);
+            if (file.ContentLength < 104857600)
+            {
+                file.SaveAs(filepath);
+            }
+            return fileName;
+        }
 
 
         [HttpPost]
@@ -522,7 +496,6 @@ namespace FindYourMentorProject.Controllers
 
         public ActionResult viewMenteeApplicationData()
         {
-            int userid = Convert.ToInt32(Session["UserID"]);
             FindYourMentorProjectEntities db = new FindYourMentorProjectEntities();
             db.Configuration.ProxyCreationEnabled = false;
             List<Application> List = db.Applications.Where(a => a.MentorID == userid && a.MentorRemoveStatus == "Unremoved").ToList();
@@ -623,7 +596,7 @@ namespace FindYourMentorProject.Controllers
 
             var fromEmail = new MailAddress("payaldhara05@gmail.com", "Find Your Mentor");
             var toEmail = new MailAddress(menteeEmailID);
-            var fromEmailPassword = "priyapayu";
+            var fromEmailPassword = "****";
 
             subject = "Mentor Response to your Application Request";
             body = " Dear " + menteeName + ",<br><br>" + "Congratulations !! Your Apllication request for the courses " + CourseName +" under mentors" + MentorName + ".<br> Kindly do rest of the procdures. If want pay online fees, you can do our website 'Find Your Mentor'. <br>For more information, please do visit our website.<br>All the best for your future !!!<br><br><br><br>Thanks & Regards<br>Find Your Mentor";
@@ -656,7 +629,7 @@ namespace FindYourMentorProject.Controllers
 
             var fromEmail = new MailAddress("payaldhara05@gmail.com", "Find Your Mentor");
             var toEmail = new MailAddress(menteeEmailID);
-            var fromEmailPassword = "priyapayu";
+            var fromEmailPassword = "****";
 
             subject = "Mentor Response to your Application Request";
             body = " Dear " + menteeName + ",<br><br>" + "Sorry !! Your Apllication request for the courses " + CourseName + " under mentors" + MentorName + ".<br> Kindly do rest of the procdures. If want pay online fees, you can do our website 'Find Your Mentor'. <br>For more information, please do visit our website.<br>All the best for your future !!!<br><br><br><br>Thanks & Regards<br>Find Your Mentor";
@@ -689,7 +662,6 @@ namespace FindYourMentorProject.Controllers
 
         public ActionResult viewMenteeAppointmentData()
         {
-            int userid = Convert.ToInt32(Session["UserID"]);
             FindYourMentorProjectEntities db = new FindYourMentorProjectEntities();
             db.Configuration.ProxyCreationEnabled = false;
             List<Appointment> List = db.Appointments.Where(a => a.MentorID == userid && a.AppointmentRemoveStatus == "Unremoved").ToList();
@@ -780,7 +752,7 @@ namespace FindYourMentorProject.Controllers
 
             var fromEmail = new MailAddress("payaldhara05@gmail.com", "Find Your Mentor");
             var toEmail = new MailAddress(menteeEmailID);
-            var fromEmailPassword = "priyapayu";
+            var fromEmailPassword = "****";
 
             subject = "Mentor Response to your Application Request";
             body = " Dear " + menteeName + ",<br><br>" + "Your Appointment request for the courses " + CourseName + " under mentors" + MentorName + " have been confirmed.<br> Kindly do rest of the procdures. If want pay online fees, you can do our website 'Find Your Mentor'. <br>For more information, please do visit our website.<br>All the best for your future !!!<br><br><br><br>Thanks & Regards<br>Find Your Mentor";
@@ -813,7 +785,7 @@ namespace FindYourMentorProject.Controllers
 
             var fromEmail = new MailAddress("payaldhara05@gmail.com", "Find Your Mentor");
             var toEmail = new MailAddress(menteeEmailID);
-            var fromEmailPassword = "priyapayu";
+            var fromEmailPassword = "****";
 
             subject = "Mentor Response to your Application Request";
             body = " Dear " + menteeName + ",<br><br>" + "Your Appointment request for the courses " + CourseName + " under mentors" + MentorName + " have been cancelled due to some reasons.<br> Kindly do rest of the procdures. If want pay online fees, you can do our website 'Find Your Mentor'. <br>For more information, please do visit our website.<br>All the best for your future !!!<br><br><br><br>Thanks & Regards<br>Find Your Mentor";
@@ -846,7 +818,6 @@ namespace FindYourMentorProject.Controllers
 
         public ActionResult viewOnlineFeeApplicationData()
         {
-            int userid = Convert.ToInt32(Session["UserID"]);
             FindYourMentorProjectEntities db = new FindYourMentorProjectEntities();
             db.Configuration.ProxyCreationEnabled = false;
             List<Fee> List = db.Fees.Where(a => a.MentorID == userid && a.PaymentMode == "Online").ToList();
@@ -859,7 +830,6 @@ namespace FindYourMentorProject.Controllers
         }
         public ActionResult viewOfflineFeeApplicationData()
         {
-            int userid = Convert.ToInt32(Session["UserID"]);
             FindYourMentorProjectEntities db = new FindYourMentorProjectEntities();
             db.Configuration.ProxyCreationEnabled = false;
             List<Fee> List = db.Fees.Where(a => a.MentorID == userid && a.PaymentMode == "Offline").ToList();
@@ -899,22 +869,5 @@ namespace FindYourMentorProject.Controllers
                 return View(db.Fees.Where(a => a.FeesID == id).FirstOrDefault<Fee>());
             }
         }
-
-
-        //public ActionResult FeedbackMentor()
-        //{
-        //        int data = setAdvertisementidUnique();
-        //        FeedbackMentorData(data);
-        //        return View();
-        //}
-
-        //public ActionResult FeedbackMentorData(int id = 0)
-        //{
-        //    using(FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
-        //    {
-        //        db.Configuration.ProxyCreationEnabled = false;
-        //        return View(db.Feedbacks.Where(a => a.AdvertisementID == id).OrderByDescending(r => r.FeedbackID).ToList());
-        //    }    
-        //}
     }
 }

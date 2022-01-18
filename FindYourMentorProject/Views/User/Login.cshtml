@@ -45,7 +45,7 @@
                 </div>
 
                 <div class="Role-selection">
-                    @Html.EnumDropDownListFor(m => m.UserRole, "--Select Role--")
+                    @Html.DropDownListFor(m => m.UserRole, new SelectList(Enum.GetValues(typeof(FindYourMentorProject.Models.UserLogin.Role))), "--Select Role--");
                     @Html.ValidationMessageFor(model => model.UserRole, "", new { @class = "text-danger" })
                 </div>
 

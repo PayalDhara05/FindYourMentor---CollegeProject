@@ -12,13 +12,30 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using System.Web.WebPages;
 
 namespace FindYourMentorProject.Controllers
 {
+
     [Authorize]            // don’t want to allow anonymous access to any of our action methods
     public class StudentController : Controller
     {
+        HttpCookie authCookie = System.Web.HttpContext.Current.Request.Cookies[FormsAuthentication.FormsCookieName];
+        public String userName;
+        int userid;
+        FindYourMentorProjectEntities db = new FindYourMentorProjectEntities();
+
+        public StudentController()
+        {
+            if(authCookie!=null)
+            {
+                FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(authCookie.Value);
+                userName = ticket.Name;
+                userid = db.RegisterStudents.FirstOrDefault(x => x.EmailID == userName).UserID;
+            } 
+        }
+
         public ActionResult Index()
         {
             return View();
@@ -30,56 +47,12 @@ namespace FindYourMentorProject.Controllers
             return View();
         }
 
-        [HttpGet]
-        public ActionResult ChangePassword()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult ChangePassword(ChangePasswordModel pass)
-        {
-            string message = "";
-            string message1 = "";
-            if (ModelState.IsValid)
-            {
-                if (Session["UserID"] != null)
-                {
-                    int userid = Convert.ToInt32(Session["UserID"]);
-                    using (FindYourMentorProjectEntities dc = new FindYourMentorProjectEntities())
-                    {
-                        var user = dc.RegisterStudents.Single(c => c.UserID == userid);
-                        if (string.Compare(Crypto.Hash(pass.OldPassword), user.Password) == 0)
-                        {
-                            user.Password = Crypto.Hash(pass.NewPassword);
-                            dc.Configuration.ValidateOnSaveEnabled = false;
-                            dc.SaveChanges();
-                            message = "Password changed successfully";
-                        }
-                        else
-                        {
-                            message1 = "Old Password is not correct";
-                        }
-                    }
-                }
-                else
-                {
-                    return RedirectToAction("Login", "User");
-                }
-            }
-            ViewBag.Message = message;
-            ViewBag.Message1 = message;
-            return View();
-        }
-
         [HttpPost]
         public ActionResult ProfilePicture(HttpPostedFileBase file, string submitButton)
         {
-            if (Session["UserID"] != null)
+            if (userid != 0)
             {
-                int userid = Convert.ToInt32(Session["UserID"]);
-
-                if(submitButton == "Upload")
+                if (submitButton == "Upload")
                 {
                     if (file != null && file.ContentLength > 0)
                     {
@@ -95,14 +68,13 @@ namespace FindYourMentorProject.Controllers
                             dc.SaveChanges();
 
                             string fullPath = Request.MapPath("~" + oldFileName);
-                            if(oldFileName != "/Image/defaultProfile1.jpg")
+                            if (oldFileName != "/Image/defaultProfile1.jpg")
                             {
                                 if (System.IO.File.Exists(fullPath))
                                 {
                                     System.IO.File.Delete(fullPath);
-                                    Response.Write("Deleted");
                                 }
-                            }   
+                            }
                         }
                     }
                 }
@@ -122,11 +94,10 @@ namespace FindYourMentorProject.Controllers
                             if (System.IO.File.Exists(fullPath))
                             {
                                 System.IO.File.Delete(fullPath);
-                                Response.Write("Deleted");
                             }
                         }
                     }
-                }   
+                }
             }
             return RedirectToAction("PersonalInfo", "Student");
         }
@@ -134,40 +105,163 @@ namespace FindYourMentorProject.Controllers
         [HttpGet]
         public ActionResult PersonalInfo()
         {
-            int userid = Convert.ToInt32(Session["UserID"]);
             using (FindYourMentorProjectEntities dc = new FindYourMentorProjectEntities())
             {
                 var user = dc.RegisterStudents.Find(userid);
                 return View(user);
-            } 
+            }
         }
 
         [HttpPost]
         public ActionResult UpdatePersonalInfo(RegisterStudent obj)
         {
-                int userid = Convert.ToInt32(Session["UserID"]);
-                using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
-                {
-                    var existinguser = db.RegisterStudents.Find(userid);
-                    existinguser.FirstName = obj.FirstName;
-                    existinguser.LastName = obj.LastName;
-                    existinguser.City = obj.City;
-                    existinguser.State = obj.State;
-                    existinguser.Pincode = obj.Pincode;
-                    existinguser.ContactNo = obj.ContactNo;
-                    existinguser.GitHubID = obj.GitHubID;
-                    existinguser.LinkedInID = obj.LinkedInID;
-                    existinguser.Description = obj.Description;
-                    existinguser.Age = obj.Age;
-                    existinguser.Address = obj.Address;
-                    db.Configuration.ValidateOnSaveEnabled = false;
-                    db.SaveChanges();
-                    return RedirectToAction("PersonalInfo", "Student");
+            using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
+            {
+                var existinguser = db.RegisterStudents.Find(userid);
+                existinguser.FirstName = obj.FirstName;
+                existinguser.LastName = obj.LastName;
+                existinguser.City = obj.City;
+                existinguser.State = obj.State;
+                existinguser.Pincode = obj.Pincode;
+                existinguser.ContactNo = obj.ContactNo;
+                existinguser.GitHubID = obj.GitHubID;
+                existinguser.LinkedInID = obj.LinkedInID;
+                existinguser.Description = obj.Description;
+                existinguser.Age = obj.Age;
+                existinguser.Address = obj.Address;
+                db.Configuration.ValidateOnSaveEnabled = false;
+                db.SaveChanges();
+                return RedirectToAction("PersonalInfo", "Student");
             }
-            //return RedirectToAction("PersonalInfo", "Student");
         }
 
-        
+
+        [HttpGet]
+        public ActionResult ChangePass()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        public ActionResult ChangePass(ChangePasswordModel pass)
+        {
+            string message = "";
+            string message1 = "";
+            if (ModelState.IsValid)
+            {
+                if (userid != 0)
+                {
+                    using (FindYourMentorProjectEntities dc = new FindYourMentorProjectEntities())
+                    {
+                        var user = dc.RegisterStudents.Single(c => c.UserID == userid);
+                        if (string.Compare(Crypto.Hash(pass.OldPassword), user.Password) == 0)
+                        {
+                            if (string.Compare(pass.OldPassword, pass.NewPassword) == 0)
+                            {
+                                message1 = "Old password and new password cannot be same !";
+                                ViewBag.Message1 = message1;
+                                return View();
+                            }
+                            else
+                            {
+                                user.Password = Crypto.Hash(pass.NewPassword);
+                                dc.Configuration.ValidateOnSaveEnabled = false;
+                                dc.SaveChanges();
+                                message = "Password changed successfully";
+                            }
+                        }
+                        else
+                        {
+                            message1 = "Old Password is not correct";
+                        }
+                    }
+                }
+                else
+                {
+                    return RedirectToAction("Login", "User");
+                }
+            }
+            ViewBag.Message = message;
+            ViewBag.Message1 = message1;
+            return View();
+        }
+
+        public ActionResult AddToSavedList(int id)
+        {
+            using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
+            {
+                SavedList savel = db.SavedLists.Where(x => x.AdvertisementID == id && x.MenteeID == userid).FirstOrDefault();
+                if (savel != null)
+                {
+                    return Json(new { success = true, message = "Already added to saved list !!!" }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    CourseAdvertisement cAdv = db.CourseAdvertisements.Where(x => x.AdvertisementID == id).FirstOrDefault<CourseAdvertisement>();
+
+                    SavedList save = new SavedList();
+
+                    save.ClassName = cAdv.ClassName;
+                    save.CourseName = cAdv.CourseName;
+                    save.MentorName = cAdv.MentorName;
+                    save.Description = cAdv.Description;
+                    save.AdvertisementID = id;
+                    save.MenteeID = userid;
+                    save.MentorID = cAdv.MentorID;
+                    save.BatchesFull = cAdv.BatchesFull;
+                    save.BatchesAvailable = cAdv.BatchesAvailable;
+                    save.TotalSeats = cAdv.TotalSeats;
+                    save.SeatsOccupied = cAdv.SeatsOccupied;
+                    save.Fees = cAdv.Fees;
+                    save.YearsOfExperience = cAdv.YearsOfExperience;
+                    save.Field = cAdv.Field;
+                    save.SpokenLanguage1 = cAdv.SpokenLanguage1;
+                    save.Address = cAdv.Address;
+                    save.State = cAdv.State;
+                    save.GitHub = cAdv.GitHubAccount;
+                    save.City = cAdv.City;
+                    save.SpokenLanguage2 = cAdv.SpokenLanguage2;
+                    save.Mode = cAdv.Mode;
+                    save.Duration = cAdv.Duration;
+                    db.SavedLists.Add(save);
+                    db.Configuration.ValidateOnSaveEnabled = false;
+                    db.SaveChanges();
+                    return Json(new { success = true, message = "Added to saved list successfully !!!" }, JsonRequestBehavior.AllowGet);
+                }
+            }
+        }
+
+        public ActionResult ViewSavedList(string searchby, string search)
+        {
+            using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
+            {
+                if (searchby == "CourseName")
+                {
+                    return View(db.SavedLists.Where(a => a.MenteeID == userid && a.CourseName.StartsWith(search) || search == null).OrderByDescending(r => r.SavedPostID).ToList());
+                }
+                else if (searchby == "MentorName")
+                {
+                    return View(db.SavedLists.Where(a => a.MenteeID == userid && a.MentorName.StartsWith(search) || search == null).OrderByDescending(r => r.SavedPostID).ToList());
+                }
+                else
+                {
+                    return View(db.SavedLists.Where(a => a.MenteeID == userid && a.ClassName.StartsWith(search) || search == null).OrderByDescending(r => r.SavedPostID).ToList());
+                }
+            }
+        }
+
+        public ActionResult RemoveFromSavedList(int id)
+        {
+            using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
+            {
+                SavedList savelist = db.SavedLists.Where(a => a.AdvertisementID == id && a.MenteeID == userid).FirstOrDefault();
+                db.SavedLists.Remove(savelist);
+                db.SaveChanges();
+                return Json(new { success = true, message = "Deleted from Saved list successfully !!!" }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
         [HttpGet]
         public ActionResult Notes()
         {
@@ -178,7 +272,6 @@ namespace FindYourMentorProject.Controllers
         [Authorize]
         public JsonResult NotesData()
         {
-            int userid = Convert.ToInt32(Session["UserID"]);
             FindYourMentorProjectEntities db = new FindYourMentorProjectEntities();
             db.Configuration.ProxyCreationEnabled = false;
             List<AddNotesMentee> List = db.AddNotesMentees.Where(a => a.UserID == userid).ToList();
@@ -207,8 +300,6 @@ namespace FindYourMentorProject.Controllers
        {
             if (ModelState.IsValid)
             { 
-                int userid = Convert.ToInt32(Session["UserID"]);
-                
                 using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
                 {
                     if (mentee.NoteID == 0)
@@ -243,8 +334,6 @@ namespace FindYourMentorProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                int userid = Convert.ToInt32(Session["UserID"]);
-
                 using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
                 { 
                         mentee.UserID = userid;
@@ -300,83 +389,6 @@ namespace FindYourMentorProject.Controllers
             }
         }
 
-        public ActionResult AddToSavedList(int id)
-        {
-            int userid = Convert.ToInt32(Session["UserID"]);
-            using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
-            {
-                SavedList savel = db.SavedLists.Where(x => x.AdvertisementID == id && x.MenteeID == userid).FirstOrDefault();
-                if (savel!=null)
-                {
-                    return Json(new { success = true, message = "Already added to saved list !!!" }, JsonRequestBehavior.AllowGet);
-                }
-                else
-                {
-                    CourseAdvertisement cAdv = db.CourseAdvertisements.Where(x => x.AdvertisementID == id).FirstOrDefault<CourseAdvertisement>();
-
-                    SavedList save = new SavedList();
-
-                    save.ClassName = cAdv.ClassName;
-                    save.CourseName = cAdv.CourseName;
-                    save.MentorName = cAdv.MentorName;
-                    save.Description = cAdv.Description;
-                    save.AdvertisementID = id;
-                    save.MenteeID = userid;
-                    save.MentorID = cAdv.MentorID;
-                    save.BatchesFull = cAdv.BatchesFull;
-                    save.BatchesAvailable = cAdv.BatchesAvailable;
-                    save.TotalSeats = cAdv.TotalSeats;
-                    save.SeatsOccupied = cAdv.SeatsOccupied;
-                    save.Fees = cAdv.Fees;
-                    save.YearsOfExperience = cAdv.YearsOfExperience;
-                    save.Field = cAdv.Field;
-                    save.SpokenLanguage1 = cAdv.SpokenLanguage1;
-                    save.Address = cAdv.Address;
-                    save.State = cAdv.State;
-                    save.GitHub = cAdv.GitHubAccount;
-                    save.City = cAdv.City;
-                    save.SpokenLanguage2 = cAdv.SpokenLanguage2;
-                    db.SavedLists.Add(save);
-                    db.Configuration.ValidateOnSaveEnabled = false;
-                    db.SaveChanges();
-                    return Json(new { success = true, message = "Added to saved list successfully !!!" }, JsonRequestBehavior.AllowGet);
-                }   
-            }
-        }
-
-        public ActionResult ViewSavedList(string searchby, string search)
-        {
-            int userid = Convert.ToInt32(Session["UserID"]);
-            using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
-            {
-                if(searchby == "CourseName")
-                {
-                    return View(db.SavedLists.Where(a => a.MenteeID == userid && a.CourseName.StartsWith(search) || search == null).OrderByDescending(r => r.SavedPostID).ToList());
-                }
-                else if (searchby == "MentorName")
-                {
-                    return View(db.SavedLists.Where(a => a.MenteeID == userid && a.MentorName.StartsWith(search) || search == null).OrderByDescending(r => r.SavedPostID).ToList());
-                }
-                else
-                {
-                    return View(db.SavedLists.Where(a => a.MenteeID == userid && a.ClassName.StartsWith(search) || search == null).OrderByDescending(r => r.SavedPostID).ToList());
-                }
-            }
-        }
-
-        public ActionResult RemoveFromSavedList(int id)
-        {
-            int userid = Convert.ToInt32(Session["UserID"]);
-            using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
-            {
-                SavedList savelist = db.SavedLists.Where(a => a.AdvertisementID == id && a.MenteeID == userid).FirstOrDefault();
-                db.SavedLists.Remove(savelist);
-                db.SaveChanges();
-                CheckAdvertisement(id);
-                return Json(new { success = true, message = "Deleted from Saved list successfully !!!" }, JsonRequestBehavior.AllowGet);
-            }
-        }
-
         [NonAction]
         public void CheckAdvertisement(int id)
         {
@@ -395,7 +407,6 @@ namespace FindYourMentorProject.Controllers
 
         public ActionResult ApplyCourse(int id)
         {
-            int userid = Convert.ToInt32(Session["UserID"]);
             using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
             {
                 var user = db.RegisterStudents.Where(a => a.UserID == userid).FirstOrDefault();
@@ -440,7 +451,6 @@ namespace FindYourMentorProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                int userid = Convert.ToInt32(Session["UserID"]);
                 using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
                 {
                     var user = db.RegisterStudents.Where(a => a.UserID == userid).FirstOrDefault();
@@ -484,7 +494,6 @@ namespace FindYourMentorProject.Controllers
 
         public ActionResult ViewApppliedCourse(string filters)
         {
-            int userid = Convert.ToInt32(Session["UserID"]);
             FindYourMentorProjectEntities db = new FindYourMentorProjectEntities();
             if (filters == "Approve")
             {
@@ -519,7 +528,6 @@ namespace FindYourMentorProject.Controllers
 
         public ActionResult ApplyAppointment(int id)
         {
-            int userid = Convert.ToInt32(Session["UserID"]);
             using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
             {
                 var user = db.RegisterStudents.Where(a => a.UserID == userid).FirstOrDefault();
@@ -564,7 +572,6 @@ namespace FindYourMentorProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                int userid = Convert.ToInt32(Session["UserID"]);
                 using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
                 {
                     var user = db.RegisterStudents.Where(a => a.UserID == userid).FirstOrDefault();
@@ -629,7 +636,6 @@ namespace FindYourMentorProject.Controllers
 
         public ActionResult ViewApppliedAppointment(string filters)
         {
-            int userid = Convert.ToInt32(Session["UserID"]);
             FindYourMentorProjectEntities db = new FindYourMentorProjectEntities();
             if (filters == "Confirmed")
             {
@@ -661,7 +667,6 @@ namespace FindYourMentorProject.Controllers
 
         public ActionResult ViewApprovedApplicationData()
         {
-            int userid = Convert.ToInt32(Session["UserID"]);
             FindYourMentorProjectEntities db = new FindYourMentorProjectEntities();
             db.Configuration.ProxyCreationEnabled = false;
             List<Application> applnList = db.Applications.Where(a => a.MenteeID == userid && a.ApplicationStatus == "Approve").ToList();
@@ -671,7 +676,6 @@ namespace FindYourMentorProject.Controllers
 
         public ActionResult ViewPayFees(int id)
         {
-            int userid = Convert.ToInt32(Session["UserID"]);
             using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
             {
                 var user = db.RegisterStudents.Where(a => a.UserID == userid).FirstOrDefault();
@@ -799,7 +803,7 @@ namespace FindYourMentorProject.Controllers
 
             var fromEmail = new MailAddress("payaldhara05@gmail.com", "Find Your Mentor");
             var toEmail = new MailAddress(mentorEmail);
-            var fromEmailPassword = "priyapayu";
+            var fromEmailPassword = "****";
 
             subject = "Mentee Application Request";
             body = "Name : " + menteeName + "<br>" + "Location : " + State + "<br>" + "Above mentee has requested to apply for the Course Advertisement that you have posted on " + creationDate + " for courses " + CourseName + " under Mentor " + mentorName + ".<br> Please visit our portal for more infomation.<br><br><br><br>Thanks & Regards<br>Find Your Mentor";
@@ -850,7 +854,6 @@ namespace FindYourMentorProject.Controllers
         [HttpPost]
         public ActionResult postFeedback(Feedback data)
         {
-            int userid = Convert.ToInt32(Session["UserID"]);
             using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
             {
                 RegisterStudent stud = db.RegisterStudents.Where(a => a.UserID == userid).FirstOrDefault();
@@ -866,7 +869,6 @@ namespace FindYourMentorProject.Controllers
         [HttpPost]
         public ActionResult postComment(Comment data)
         {
-            int userid = Convert.ToInt32(Session["UserID"]);
             using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
             {
                 RegisterStudent stud = db.RegisterStudents.Where(a => a.UserID == userid).FirstOrDefault();
@@ -882,7 +884,6 @@ namespace FindYourMentorProject.Controllers
         [HttpPost]
         public ActionResult postReply(ReplyToComment data, String val)
         {
-            int userid = Convert.ToInt32(Session["UserID"]);
             using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
             {
                 RegisterStudent stud = db.RegisterStudents.Where(a => a.UserID == userid).FirstOrDefault();

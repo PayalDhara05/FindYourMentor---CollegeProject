@@ -9,12 +9,17 @@
     scroll-behavior: smooth;
 }
 
-html, body {
+html {
     width: 100%;
-    min-height: 100vh;
     margin: 0px;
     padding: 0px;
     font-size: 10px;
+}
+body 
+{
+    display:flex;
+    flex-direction:column;
+    height:100%;
 }
 
 nav {
@@ -34,7 +39,7 @@ nav {
     width: 100%;
     background-color: white;
     z-index: 500;
-    position:fixed;
+    position: fixed;
 }
 
 #logo-img {
@@ -108,7 +113,7 @@ nav {
     border: none;
     outline: none;
     -webkit-transition: all .2s linear;
-    transition: all .2s linear;
+    transition: all .3s linear;
     padding: 0.1rem 0.5rem;
     color: white;
     padding: 1rem 7rem;
@@ -120,9 +125,11 @@ nav {
     font-family: 'Open Sans', sans-serif;
     font-weight: bold;
     padding: 1rem 4rem;
+    transition: all .3s linear;
 }
 .auth-btn:hover {
-    background-color: #00b894;
+    background-color: #df9fd0;
+    color:black;
 }
 
     .auth-btn a {
@@ -282,17 +289,122 @@ body {
     }
 }
 
-.contact #form-contact h2 {
+.copyright {
+    text-align: center;
+}
+
+.loader-wrapper {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: white;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.chat-wrapper {
+    position: fixed;
+    right: 0.5rem;
+    bottom: 1.5rem;
+    z-index: 999;
+}
+
+#whatsapp-img {
+    height: 6rem;
+    width: 6rem;
+    border-radius: 90%;
+    -webkit-filter: drop-shadow(3px 3px 3px gray);
+    filter: drop-shadow(3px 3px 3px gray);
+    -webkit-transition: all .2s linear;
+    transition: all .2s linear;
+    z-index: 999;
+}
+
+    #whatsapp-img:hover {
+        -webkit-transform: scale(1.1);
+        transform: scale(1.1);
+        -webkit-filter: drop-shadow(3px 3px 3px black);
+        filter: drop-shadow(3px 3px 3px black);
+    }
+
+    #whatsapp-img:focus {
+        outline: none !important;
+    }
+.text-danger, .loginmsg, .forgotpassword-text-success {
+    color: red;
+    background-color: white;
+    font-weight: bold;
+    font-size: 1.3rem;
+    font-family: "Open Sans", sans-serif;
+    text-align: center;
+    margin-top:3rem;
+}
+.forgotpassword-text-success {
+    color: green!important;
+}
+*::-webkit-scrollbar {
+    width: 12px;
+    /* width of the entire scrollbar */
+}
+
+*::-webkit-scrollbar-track {
+    background: #f8cbc1;
+    /* color of the tracking area */
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #833471;
+    /* color of the scroll thumb */
+    border-radius: 20px;
+    /* roundness of the scroll thumb */
+    border: 3px solid #f8cbc1;
+    /* creates padding around scroll thumb */
+}
+/** {
+    background: #000 !important;
+    color: #0f0 !important;
+    outline: solid #f00 1px !important;
+}*/
+@media screen and (max-width:520px)
+{
+    .logo-section {
+        margin-left: 0.5rem;
+    }
+    #logo-img  
+    {
+        height:4rem;
+        width:4rem;
+    }
+}
+
+
+/*footer part*/
+
+footer {
+    width: 100%;
+    margin-top: auto;
+}
+
+.contact form h2 {
     color: white;
     font: bold 3.5rem "Open Sans", sans-serif;
 }
 
-footer {
-    width: 100%;
-}
-
 .copyright {
     text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    color: #833471;
 }
 
 .contact h2 {
@@ -305,9 +417,10 @@ footer p {
 
 .footer-up {
     margin-top: 10rem;
-    background-image: -webkit-gradient(linear, left top, right top, from(#833471), to(#e4408a));
-    background-image: linear-gradient(90deg, #833471, #e4408a);
-    height: auto;
+    height: 20rem;
+    color: #ebd5d5;
+    background-image: -webkit-gradient(linear, left top, right top, from(#58364f), to(#3d1024));
+    background-image: linear-gradient(90deg, #58364f, #3d1024);
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -323,113 +436,46 @@ footer p {
     flex-direction: column;
 }
 
-    .footer-up .contact {
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: flex;
-        -webkit-box-pack: center;
-        -ms-flex-pack: center;
-        justify-content: center;
-        -webkit-box-align: center;
-        -ms-flex-align: center;
-        align-items: center;
+    .footer-up .footer-up-one {
+        font-size: 3rem;
+        font-family: 'Montserrat', sans-serif;
     }
 
-        .footer-up .contact #form-contact {
-            display: -webkit-box;
-            display: -ms-flexbox;
-            display: flex;
-            -webkit-box-pack: center;
-            -ms-flex-pack: center;
-            justify-content: center;
-            -webkit-box-align: center;
-            -ms-flex-align: center;
-            align-items: center;
-            -webkit-box-orient: vertical;
-            -webkit-box-direction: normal;
-            -ms-flex-direction: column;
-            flex-direction: column;
-            overflow-y:hidden;
-        }
+    .footer-up .footer-up-two {
+        margin-top: 2rem;
+        font-size: 1.6rem;
+        width: 70%;
+        font-family: 'Montserrat', sans-serif;
+    }
 
-            .footer-up .contact #form-contact .contact-input {
-                padding: 1rem;
-                width: 50rem;
-                margin: .5rem;
-                outline: none;
-            }
-
-            .footer-up .contact #form-contact #contact-message {
-                margin: .5rem!important;
-                padding: 1rem!important;
-                background-color:#fff;
-                height:20rem;
-                width:50rem;
-            }
-
-            .footer-up .contact #form-contact .contact-input[type="submit"] {
-                width: auto;
-                padding: 1rem 3rem;
-                outline: none;
-                border: none;
-                border-radius: 4rem;
-                color: white;
-                font-size: 2rem;
-                background-color: #FC427B;
-            }
-
-                .footer-up .contact #form-contact input[type="submit"] :hover {
-                    background-color: #81092d;
-                }
-
-            .footer-up .contact #form-contact ::-webkit-input-placeholder {
-                color: #833471;
-                font-size: 1.5rem;
-            }
-
-            .footer-up .contact #form-contact :-ms-input-placeholder {
-                color: #833471;
-                font-size: 1.5rem;
-            }
-
-            .footer-up .contact #form-contact ::-ms-input-placeholder {
-                color: #833471;
-                font-size: 1.5rem;
-            }
-
-            .footer-up .contact #form-contact ::placeholder {
-                color: #833471;
-                font-size: 1.5rem;
-            }
-
-        .footer-up .contact #form-contact input:focus {
-            outline: none !important;
-            border-color: pink;
-            -webkit-box-shadow: 0 0 10px pink;
-            box-shadow: 0 0 10px pink;
-        }
-
-            .footer-up .contact #form-contact textarea:focus {
-                outline: none !important;
-                border-color: pink;
-                -webkit-box-shadow: 0 0 10px pink;
-                box-shadow: 0 0 10px pink;
-            }
-
-        .footer-up .contact img {
-            width: 40rem;
-        }
-
-    .footer-up .bottomnav3 {
+    .footer-up .footer-up-three {
+        margin-top: 3rem;
         font-size: 2rem;
-        padding-bottom: 2rem;
     }
 
-        .footer-up .bottomnav3 a {
-            text-decoration: none;
-            color: white;
-            font-family: 'Open Sans', sans-serif;
+        .footer-up .footer-up-three i {
+            margin-left: 0.5rem;
+            cursor: pointer;
+            -webkit-transition: all .3s linear;
+            transition: all .3s linear;
+            -webkit-filter: drop-shadow(16px 16px 20px black);
+            filter: drop-shadow(16px 16px 20px black);
         }
+
+            .footer-up .footer-up-three i:hover {
+                color: white;
+            }
+
+.bottomnav3 {
+    font-size: 2rem;
+    padding-bottom: 2rem;
+}
+
+    .bottomnav3 a {
+        text-decoration: none;
+        color: white;
+        font-family: 'Montserrat', sans-serif;
+    }
 
 .bottomnav {
     display: -webkit-box;
@@ -455,7 +501,7 @@ footer p {
         color: white;
         font-size: 2rem;
         text-decoration: none;
-        font-family: 'Open Sans', sans-serif;
+        font-family: 'Montserrat', sans-serif;
     }
 
     .bottomnav ul li a:hover {
@@ -496,9 +542,6 @@ footer p {
 #footer {
     width: 100%;
     height: 10rem;
-    padding: 0;
-    margin: 0;
-    position: relative;
 }
 
 .footer-down a {
@@ -580,6 +623,155 @@ footer p {
         color: #fff;
         text-decoration: none;
     }
+
+.banner-slider img {
+    width: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    height: 60rem;
+}
+
+.page-content-btns {
+    margin-top: 3rem;
+}
+
+    .page-content-btns .page-content-indiv-btn {
+        font-size: 1.7rem;
+        padding: 1rem;
+        color: white;
+        background-color: #022202;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        border: 2px solid #022202;
+        font-weight: bold;
+        font-family: 'Montserrat', sans-serif;
+        -webkit-transition: all .3s linear;
+        transition: all .3s linear;
+        border-radius: 10px;
+    }
+
+        .page-content-btns .page-content-indiv-btn:hover {
+            background-color: white;
+            color: #022202;
+        }
+
+.contact-main {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    margin-top: 3rem;
+}
+
+    .contact-main p:nth-child(1) {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 4rem;
+        text-align: center;
+        color: #833471;
+        font-weight: bold;
+    }
+
+    .contact-main p:nth-child(2) {
+        font-family: 'Montserrat', sans-serif;
+        margin-top: 1rem;
+        font-size: 2rem;
+        color: #040427;
+    }
+
+    .contact-main .contact-container {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+    }
+
+        .contact-main .contact-container img {
+            height: 50rem;
+            width: 45rem;
+        }
+
+        .contact-main .contact-container .contact-form {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+            flex-direction: column;
+        }
+
+            .contact-main .contact-container .contact-form input, .contact-main .contact-container .contact-form textarea {
+                width: 40rem;
+                padding: 0.7rem 1rem;
+                font-size: 1.7rem;
+                margin: 0.5rem;
+                outline: none;
+            }
+
+                .contact-main .contact-container .contact-form input:focus, .contact-main .contact-container .contact-form textarea:focus {
+                    border: 2px solid #833471;
+                }
+
+                .contact-main .contact-container .contact-form input::-webkit-input-placeholder, .contact-main .contact-container .contact-form textarea::-webkit-input-placeholder {
+                    color: #833471;
+                }
+
+                .contact-main .contact-container .contact-form input:-ms-input-placeholder, .contact-main .contact-container .contact-form textarea:-ms-input-placeholder {
+                    color: #833471;
+                }
+
+                .contact-main .contact-container .contact-form input::-ms-input-placeholder, .contact-main .contact-container .contact-form textarea::-ms-input-placeholder {
+                    color: #833471;
+                }
+
+                .contact-main .contact-container .contact-form input::placeholder, .contact-main .contact-container .contact-form textarea::placeholder {
+                    color: #833471;
+                }
+
+                .contact-main .contact-container .contact-form input[type="submit"] {
+                    width: 15rem;
+                    cursor: pointer;
+                    font-size: 1.7rem;
+                    letter-spacing: 2px;
+                    font-family: 'Montserrat', sans-serif;
+                    background-color: #833471;
+                    color: white;
+                    border: none;
+                    outline: none;
+                    border: 2px solid #833471;
+                    -webkit-transition: all .3s linear;
+                    transition: all .3s linear;
+                }
+
+                    .contact-main .contact-container .contact-form input[type="submit"]:hover {
+                        background-color: white;
+                        color: #833471;
+                    }
 
 @media screen and (max-width: 534px) {
     .bottomnav {
@@ -700,11 +892,11 @@ footer p {
         width: 100%;
     }
 
-        .footer-up .contact #form-contact .contact-input {
+        .footer-up .contact form input {
             width: 30rem;
         }
 
-        .footer-up .contact #form-contact #contact-message {
+        .footer-up .contact form textarea {
             width: 30rem;
         }
 
@@ -718,62 +910,15 @@ footer p {
         width: 100%;
     }
 
-        .footer-up .contact #form-contact .contact-input {
+        .footer-up .contact form input {
             width: 20rem;
         }
 
-        .footer-up .contact #form-contact #contact-message {
+        .footer-up .contact form textarea {
             width: 20rem;
         }
 
         .footer-up .contact img {
             width: 100%;
         }
-}
-.text-danger, .loginmsg, .forgotpassword-text-success {
-    color: red;
-    background-color: white;
-    font-weight: bold;
-    font-size: 1.3rem;
-    font-family: "Open Sans", sans-serif;
-    text-align: center;
-    margin-top:3rem;
-}
-.forgotpassword-text-success {
-    color: green!important;
-}
-*::-webkit-scrollbar {
-    width: 12px;
-    /* width of the entire scrollbar */
-}
-
-*::-webkit-scrollbar-track {
-    background: #f8cbc1;
-    /* color of the tracking area */
-}
-
-*::-webkit-scrollbar-thumb {
-    background-color: #833471;
-    /* color of the scroll thumb */
-    border-radius: 20px;
-    /* roundness of the scroll thumb */
-    border: 3px solid #f8cbc1;
-    /* creates padding around scroll thumb */
-}
-/** {
-    background: #000 !important;
-    color: #0f0 !important;
-    outline: solid #f00 1px !important;
-}*/
-/*# sourceMappingURL=mainlayout.css.map */
-@media screen and (max-width:520px)
-{
-    .logo-section {
-        margin-left: 0.5rem;
-    }
-    #logo-img  
-    {
-        height:4rem;
-        width:4rem;
-    }
 }

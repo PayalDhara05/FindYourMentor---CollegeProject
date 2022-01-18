@@ -8,10 +8,6 @@ namespace FindYourMentorProject.Models
 {
     public class ChangePasswordModel
     {
-        [Display(Name = "Select Your Role")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Role is required")]
-        public Role UserRole { get; set; }
-
         [Display(Name = "Old Password")]
         [Required(ErrorMessage = "Old password required", AllowEmptyStrings = false)]
         [MinLength(6, ErrorMessage = "Minimum 6 characters required")]

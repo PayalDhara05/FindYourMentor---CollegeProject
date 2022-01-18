@@ -4,32 +4,16 @@
     ViewBag.Title = "ViewApppliedCourse";
     Layout = "~/Views/Shared/_StudentLayout.cshtml";
 }
-
-@*<h2>ViewApppliedCourse</h2>
-    <div>
-        @foreach (var item in Model)
-        {
-            @Html.DisplayNameFor(model => model.MenteeName)<br />
-            @Html.DisplayFor(modelItem => item.MenteeName)<br />
-
-            @Html.DisplayNameFor(model => model.MenteeEmailID)<br />
-            @Html.DisplayFor(modelItem => item.MenteeEmailID)<br />
-
-            @Html.DisplayNameFor(model => model.MenteeContactNo)<br />
-            @Html.DisplayFor(modelItem => item.MenteeContactNo)<br />
-
-            @Html.DisplayNameFor(model => model.MenteeAddress)<br />
-            @Html.DisplayFor(modelItem => item.MenteeAddress)<br />
-
-            <button onclick="PopupForm(@item.ApplicationID)">View Your Application</button>
-            <button onclick="PopupForm2(@item.AdvertisementID)">View Course Advertisement you have applied for</button>
-
-            <p>Application status - </p>
-            @Html.DisplayFor(modelItem => item.ApplicationStatus)<br />
-        }
-    </div>
-    <br />
-    <br />*@
+<style>
+    #view_course 
+    {
+        color:white;
+        text-decoration:none;
+    }
+    .indiv-appln-btns #view_course:hover {
+        color: #023020;
+    }
+</style>
 <link href="~/Custom/css/ApplicationCard.css" rel="stylesheet" />
 <body>
     <div class="appln-card-filter">
@@ -59,7 +43,7 @@
                     <p><span>Application Status: </span>@item.ApplicationStatus</p>
                     <div class="indiv-appln-btns">
                         <button onclick="PopupForm(@item.ApplicationID)">View Application</button>
-                        <button>View Course</button>
+                        <button><a href="/Student/ShowFullAdvertisement/@item.AdvertisementID" id="view_course"> View Course</a></button>
                     </div>
                 </div>
             }

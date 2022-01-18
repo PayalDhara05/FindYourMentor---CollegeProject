@@ -4,82 +4,6 @@
     ViewBag.Title = "ViewSavedList";
     Layout = "~/Views/Shared/_StudentLayout.cshtml";
 }
-
-@*<h2>ViewSavedList</h2>
-
-<div>
-    <h4>SavedList</h4>
-    <hr />*@
-
-    @*@using (Html.BeginForm())
-    {
-        <B>Search By</B> <br /> @Html.RadioButton("searchby", "CourseName", true)<text>Course Name</text> <br /> @Html.RadioButton("searchby", "MentorName")<text>Mentor Name</text> <br /> @Html.RadioButton("searchby", "ClassName")<text>Class Name</text>
-        <br /><input type="text" name="search"> <input type="submit" onclick="filterAdvert()"/>
-    }*@
-
-    @*@if(@Model.Count() == 0)
-    {
-        <p>No data found</p>
-    }
-    else 
-    {
-        <div>
-            <table class="table">
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.ClassName)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.CourseName)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.MentorName)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Description)
-                    </th>
-
-                    <th>
-                        @Html.DisplayNameFor(model => model.BatchesAvailable)
-                    </th>
-
-                    <th>
-
-                    </th>
-                </tr>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ClassName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.CourseName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.MentorName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Description)
-                        </td>
-
-                        <td>
-                            @Html.DisplayFor(modelItem => item.BatchesAvailable)
-                        </td>
-                        <td>
-                            @Html.ActionLink("ViewFullAdvertisement", "ViewFullAdvertisement", new { id = item.AdvertisementID })
-                        </td>
-
-                        <td>
-                            <button class="btn-link glyphicon glyphicon-trash" id="onsave" onclick="Del(@item.AdvertisementID)"></button>
-                        </td>
-                    </tr>
-                }
-            </table>
-        </div>
-    }
-    
-    </div>*@
 <link href="~/Custom/css/SavedList.css" rel="stylesheet" />
 <body>
     <form method="get" action="/Student/ViewSavedList">
@@ -108,7 +32,7 @@
     @if (@Model.Count() == 0)
     {
         <div class="no-records-msg">
-            <p>No data found</p>
+            <p>No more Courses saved !! Add More</p>
         </div>   
     }
     else
@@ -120,7 +44,7 @@
             <div class="indiv-card">
                 <div class="course-info">
                     <p>@item.CourseName</p>
-                    <i class="fas fa-heart" onclick="Del(@item.AdvertisementID)"></i>
+                    <i class="far fa-trash-alt" onclick="Del(@item.AdvertisementID)" id="delete_icon" title="Delete this advertisement"></i>
                 </div>
                 <div class="All-info">
                     <p class="Description">@item.Description</p>

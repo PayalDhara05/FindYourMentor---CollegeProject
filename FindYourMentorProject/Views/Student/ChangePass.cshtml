@@ -1,0 +1,67 @@
+﻿@model FindYourMentorProject.Models.ChangePasswordModel
+
+@{
+    ViewBag.Title = "ChangePassword";
+    Layout = "~/Views/Shared/_StudentLayout.cshtml";
+}
+<style>
+    .common-login {
+        margin-top: -9rem !important;
+    }
+</style>
+<link href="~/Custom/css/Login.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
+<body>
+    <div class="common-login">
+        <div class="wrapper">
+
+            <header>Change Password</header>
+
+            @using(Html.BeginForm("ChangePass", "Student", FormMethod.Post))
+            {
+                <div class="forgotpassword-text-success">
+                    @ViewBag.Message
+                </div>
+
+                if(ViewBag.Message1 != null)
+                {
+                    <div class="loginmsg">
+                        @ViewBag.Message1
+                    </div>
+                }
+
+                <div class="field password">
+                    <div class="input-area">
+                        @Html.EditorFor(model => model.OldPassword, new { htmlAttributes = new { @class = "input-area-field", @id = "password1", @placeholder = "Old Password" } })
+                        @Html.ValidationMessageFor(model => model.OldPassword, "", new { @class = "text-danger" })
+                        <i class="icon fas fa-lock"></i>
+                        <i class="show-btn fas fa-eye" id="show-pass"></i>
+                    </div>
+                </div>
+
+                <div class="field password">
+                    <div class="input-area">
+                        @Html.EditorFor(model => model.NewPassword, new { htmlAttributes = new { @class = "input-area-field", @id = "password2", @placeholder = "New Password" } })
+                        @Html.ValidationMessageFor(model => model.NewPassword, "", new { @class = "text-danger" })
+                        <i class="icon fas fa-lock"></i>
+                        <i class="show-btn fas fa-eye" id="show-new-pass"></i>
+                    </div>
+                </div>
+
+                <div class="field password">
+                    <div class="input-area">
+                        @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "input-area-field", @id = "password3", @placeholder = "Retype new Password" } })
+                        @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                        <i class="icon fas fa-lock"></i>
+                        <i class="show-btn fas fa-eye" id="show-confirm-pass"></i>
+                    </div>
+                </div>
+
+                <input type="submit" value="Change Password" class="input-area-field">
+            }
+
+        </div>
+    </div>
+    <script src="~/Custom/js/ChangePassword.js"></script>
+</body>

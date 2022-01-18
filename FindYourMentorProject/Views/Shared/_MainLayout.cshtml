@@ -1,11 +1,10 @@
-﻿
-<!DOCTYPE html>
-
+﻿<!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
     <link href="~/Custom/css/mainLayout.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <script src="~/Custom/js/header.js" defer></script>
 </head>
 <body>
@@ -42,65 +41,40 @@
     </div>
 
     <footer>
-        @*<div class="footer-up">
-            <div class="contact">
-
-                @{
-                    Html.RenderPartial("ContactUs");
-                }
-                
-                <div>
-                    <img src="~/uiImages/mainlayout/Contact2.gif" alt="contact-img-fym">
-                </div>
+        <div class="footer-up">
+            <div class="footer-up-one">
+                <p>Find Your Mentor</p>
             </div>
-                </div>*@
+            <div class="footer-up-two">
+                <p>This website fills the gap of communication between a mentor and a mentee. It plays a significant role in mentee's life by providing them the best mentor across different places. It will fulfill the mentee's dream by taking a big step towards success.</p>
+            </div>
+            <div class="footer-up-three">
+                <i class="fab fa-instagram"></i>
+                <i class="fab fa-facebook"></i>
+                <i class="fab fa-twitter"></i>
+                <i class="fab fa-github"></i>
+                <i class="fab fa-linkedin"></i>
+                <i class="fab fa-youtube"></i>
+            </div>
+        </div>
 
         <div class="footer-down">
             <p class="copyright">Designed by FindYourMentor | © Copyright FindYourMentor All Rights Reserved</p>
 
             <div class="social-media">
-                <div class="all-social-links">
-                    <a href="#" target="_blank"><img src="~/uiImages/mainlayout/facebook.png" alt="facebook" class="footer-logo"></a>
-                    <a href="#" target="_blank"><img src="~/uiImages/mainlayout/instagram.png" alt="instagram" class="footer-logo"></a>
-                    <a href="#" target="_blank"><img src="~/uiImages/mainlayout/youtube.png" alt="youtube" class="footer-logo"></a>
-                </div>
                 <div class="top-scroll">
                     <a href="#home">Back to Top</a>
                 </div>
             </div>
         </div>
     </footer>
+
+
     <script src="~/Scripts/jquery-1.12.4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js" integrity="sha512-o6XqxgrUsKmchwy9G5VRNWSSxTS4Urr4loO6/0hYdpWmFUfHqGzawGxeQGMDqYzxjY9sbktPbNlkIQJWagVZQg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
     <script src="~/Scripts/notify.min.js"></script>
-    <script>
-
-        function SubmitForm(form) {
-            $.validator.unobtrusive.parse(form);
-            if ($(form).valid()) {
-                $.ajax({
-                    type: "POST",
-                    url: form.action,
-                    data: $(form).serialize(),
-                    success: function (data) {
-                        if (data.success) {
-                            $.notify(data.message, {
-                                globalPosition: "top center",
-                                className: "success"
-                            })
-
-                            form.reset();
-                        }
-                    }
-                });
-            }
-            
-            return false;   // Prevent page refresh
-        }
-
-    </script>
     @RenderSection("Mentee", required: false) ;
 </body>
 </html>

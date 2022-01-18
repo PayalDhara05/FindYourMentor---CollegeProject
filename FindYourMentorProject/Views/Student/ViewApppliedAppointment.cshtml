@@ -5,6 +5,16 @@
     Layout = "~/Views/Shared/_StudentLayout.cshtml";
 }
 <link href="~/Custom/css/ApplicationCard.css" rel="stylesheet" />
+<style>
+    #view_course {
+        color: white;
+        text-decoration: none;
+    }
+
+    .indiv-appln-btns #view_course:hover {
+        color: #023020;
+    }
+</style>
 <body>
     <div class="appln-card-filter">
         <label for="filters">View Appointment Status</label>
@@ -20,7 +30,7 @@
     <div class="whole-appln-container">
         @if (@Model.Count() == 0)
         {
-            <p>No Appointments</p>
+            <p id="no-data">No Appointments</p>
         }
         else
         {
@@ -35,7 +45,7 @@
         <p><span>Appointment Status: </span>@item.AppointmentStatus</p>
         <div class="indiv-appln-btns">
             <button onclick="PopupForm(@item.AppointmentID)">Appointment</button>
-            <button>View Course</button>
+            <button><a href="/Student/ShowFullAdvertisement/@item.AdvertisementID" id="view_course"> View Course</a></button>
         </div>
     </div>
             }

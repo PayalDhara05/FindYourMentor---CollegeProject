@@ -227,7 +227,7 @@ namespace FindYourMentorProject.Controllers
 
             var fromEmail = new MailAddress("payaldhara05@gmail.com", "Find Your Mentor");
             var toEmail = new MailAddress(emailID);
-            var fromEmailPassword = "priyapayu"; 
+            var fromEmailPassword = "****"; 
 
             string subject = "";
             string body = "";
@@ -364,10 +364,6 @@ namespace FindYourMentorProject.Controllers
                             cookie.Expires = DateTime.Now.AddMinutes(timeout);
                             cookie.HttpOnly = true;
                             Response.Cookies.Add(cookie);
-                            string emailID = ticket.Name;
-                            Session["EmailID"] = ticket.Name;
-                            var w = dc.RegisterStudents.Where(a => a.EmailID == emailID).FirstOrDefault();
-                            Session["UserID"] = w.UserID.ToString();
 
                             if (Url.IsLocalUrl(ReturnUrl))
                             {

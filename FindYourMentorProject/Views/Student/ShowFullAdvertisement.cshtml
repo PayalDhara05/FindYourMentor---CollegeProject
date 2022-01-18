@@ -282,15 +282,14 @@
 
         function showReplybox(id) {
             $("#" + id).css('display', 'block');
-            $(".post-comment").css('visibility', 'hidden');
+            $(".post-comment").css('display', 'none');
         }
 
         function postReply(form, id) {
             $(".reply-comment-form").css('display', 'none');
-            $(".post-comment").css('visibility', 'visible');
+            $(".post-comment").css('display', 'block');
             var val = document.getElementById(id + "-textarea").value;
             var formdata = $("#"+id+"-comment-form").serialize();
-            alert(formdata);
             $.ajax({
                 url: '/Student/postReply' + '?val=' + val,
                 method: 'post',

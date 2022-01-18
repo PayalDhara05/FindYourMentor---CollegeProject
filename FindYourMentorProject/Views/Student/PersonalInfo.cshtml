@@ -4,6 +4,7 @@
     ViewBag.Title = "PersonalInfo";
     Layout = "~/Views/Shared/_StudentLayout.cshtml";
 }
+
 <link href="~/Custom/css/Profile.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 <div class="main-container">
@@ -20,7 +21,6 @@
                 {
                     <img src="~/Image/defaultProfile1.jpg" alt="user-profile-picture" id="imagePreview" />
                 }
-
                 <div class="user-profile-info">
                     <h1>@Model.FirstName&nbsp;@Model.LastName</h1>
                     <h3 id="stateText">@Model.State</h3>
@@ -33,7 +33,6 @@
                         <p>Choose Profile Picture</p>
                         <div class="profile-flex">
                             <i class="icon fas fa-user-circle" id="profile-pic"></i>
-
                             <input type="file" id="file" name="file" accept="image/jpeg, image/png" onchange="ShowImagePreview(this,document.getElementById('imagePreview'))">
                             <span id="remove-img" onclick="document.getElementById('file').value = ''"><i class="fas fa-times"></i></span>
                         </div>
@@ -61,7 +60,7 @@
                 </fieldset>
                 <fieldset class="field_set">
                     <legend>Contact Number</legend>
-                    <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)/g, '');" pattern="[6789][0-9]{9}" title="Please enter valid phone number" minlength="10" maxlength="12" name="ContactNo" value="@Model.ContactNo">
+                    <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)/g, '');" pattern="[6789][0-9]{9}" title="Please enter valid phone number. Must be 10 digits" minlength="10" maxlength="12" name="ContactNo" value="@Model.ContactNo">
                     @*<input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number" maxlength="12" minlength="10" name="ContactNo" value="@Model.ContactNo">*@
                 </fieldset>
             </div>
@@ -77,8 +76,7 @@
                 </fieldset>
                 <fieldset class="field_set">
                     <legend>Age</legend>
-                    <input type="number" min="5" max="85" title="Please enter your correct age"  name="Age" value="@Model.Age">
-                    @*<input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number" maxlength="3" name="Age" value="@Model.Age">*@
+                    <input type="number" min="5" max="85" title="Please enter your correct age"  name="Age" value="@Model.Age" />
                 </fieldset>
             </div>
 
@@ -134,5 +132,4 @@
             reader.readAsDataURL(imageUploader.files[0]);
         }
     }
-
 </script>

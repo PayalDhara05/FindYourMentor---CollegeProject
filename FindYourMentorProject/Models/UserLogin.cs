@@ -8,6 +8,12 @@ namespace FindYourMentorProject.Models
 {
     public class UserLogin
     {
+            public enum Role
+            {
+                Student,
+                Mentor
+            }
+
             [Display(Name = "EmailID")]
             [Required(AllowEmptyStrings = false, ErrorMessage = "EmailID required")]
             [DataType(DataType.EmailAddress)]
@@ -22,15 +28,9 @@ namespace FindYourMentorProject.Models
 
             [Display(Name = "Select Your Role")]
             [Required(AllowEmptyStrings = false, ErrorMessage = "Role is required")]
-            public Role UserRole { get; set; }
+            public string UserRole { get; set; }
 
             [Display(Name = "Remember me")]
             public Boolean RememberMe { get; set; }
-    }
-
-    public enum Role
-    {
-        Student,
-        Mentor
     }
 }

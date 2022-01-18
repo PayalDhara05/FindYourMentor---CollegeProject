@@ -1,81 +1,4 @@
-﻿<!--<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title></title>
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/Content/site.css" rel="stylesheet" />-->
-@*<link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />*@
-<!--<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
-
-    <style>
-        .ui-dialog {
-            z-index: 1000000000;
-            top: 0;
-            left: 0;
-            margin: auto;
-            position: fixed;
-            max-width: 100%;
-            max-height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: stretch;
-        }
-
-            .ui-dialog .ui-dialog-content {
-                flex: 1;
-            }
-        .field-validation-error {
-            color: #ff0000;
-        }
-
-        .validation-summary-errors {
-            color: #ff0000;
-            font-weight: bold;
-        }
-
-        .input-validation-error {
-            color: #ff0000;
-            background-color: white;
-        }
-    </style>
-</head>
-<body>
-    <navbar>
-
-        @@if (Request.IsAuthenticated)
-        {
-            using (Html.BeginForm("Logout", "User", FormMethod.Post, new { id = "logoutForm" }))
-            {
-                <a href="javascript:document.getElementById('logoutForm').submit()">Logout</a>
-            }
-        }
-
-        @@Html.ActionLink("My Profile", "Profile", "Student")>
-        @@Html.ActionLink("Home", "Index", "Student")>
-        @@Html.ActionLink("Notes", "Notes", "Student")>
-    </navbar>
-    <div class="container body-content">
-        @@RenderBody()
-    </div>
-
-    <script src="~/Scripts/bootstrap.min.js"></script>
-    <script src="~/Scripts/jquery-1.12.4.min.js"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js" integrity="sha512-o6XqxgrUsKmchwy9G5VRNWSSxTS4Urr4loO6/0hYdpWmFUfHqGzawGxeQGMDqYzxjY9sbktPbNlkIQJWagVZQg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
-    <script src="~/Scripts/notify.min.js"></script>
-
-
-    @@RenderSection("Scripts", required: false) ;
-
-</body>
-</html>-->
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -83,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title</title>
     <link href="~/Custom/css/StudentLayout.css" rel="stylesheet" />
-    <link href="~/Custom/css/Footer.css" rel="stylesheet" />
     <!-- font-awesome cdn -->
     <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" /><link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
@@ -105,7 +27,7 @@
                     <ul>
                         <li><a href="/Student/PersonalInfo">Personal Information</a></li>
                         <li><a href="/Student/ViewSavedList">Saved List</a></li>
-                        <li><a href="/Student/ChangePassword">Change Password</a></li>
+                        <li><a href="/Student/ChangePass">Change Password</a></li>
                     </ul>
                 </li>
                 <li>
@@ -133,20 +55,12 @@
                 {
                     using (Html.BeginForm("Logout", "User", FormMethod.Post, new { @id = "logoutForm" }))
                     {
-                        <button class="auth-btn">LOGOUT</button>
+                        <button class="logout-btn">LOGOUT</button>
                     }
                 }
             </ul>
         </div>
     </nav>
-
-    @*@if (Request.IsAuthenticated)
-        {
-            using (Html.BeginForm("Logout", "User", FormMethod.Post, new { id = "logoutForm" }))
-            {
-                <button type="submit" class="auth-btn">Logout</button>
-            }
-        }*@
     <p id="home"></p>
 
     <div class="sidenav" id="mynav">
@@ -187,6 +101,39 @@
         </ul>
     </div>
 
+    <div>
+        @RenderBody()
+    </div>
+
+    <footer>
+        <div class="footer-up">
+            <div class="footer-up-one">
+                <p>Find Your Mentor</p>
+            </div>
+            <div class="footer-up-two">
+                <p>This website fills the gap of communication between a mentor and a mentee. It plays a significant role in mentee's life by providing them the best mentor across different places. It will fulfill the mentee's dream by taking a big step towards success.</p>
+            </div>
+            <div class="footer-up-three">
+                <i class="fab fa-instagram"></i>
+                <i class="fab fa-facebook"></i>
+                <i class="fab fa-twitter"></i>
+                <i class="fab fa-github"></i>
+                <i class="fab fa-linkedin"></i>
+                <i class="fab fa-youtube"></i>
+            </div>
+        </div>
+
+        <div class="footer-down">
+            <p class="copyright">Designed by FindYourMentor | © Copyright FindYourMentor All Rights Reserved</p>
+
+            <div class="social-media">
+                <div class="top-scroll">
+                    <a href="#home">Back to Top</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
     <script>
         function openNav() {
             document.getElementById("mynav").style.transform = "translateX(0)";
@@ -211,45 +158,11 @@
         })
     </script>
 
-    <div>
-        @RenderBody()
-    </div>
-
-    <footer>
-
-    </footer>
     <script src="~/Scripts/jquery-1.12.4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js" integrity="sha512-o6XqxgrUsKmchwy9G5VRNWSSxTS4Urr4loO6/0hYdpWmFUfHqGzawGxeQGMDqYzxjY9sbktPbNlkIQJWagVZQg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
     <script src="~/Scripts/notify.min.js"></script>
-
-    <script>
-
-        function SubmitForm(form) {
-            $.validator.unobtrusive.parse(form);
-            if ($(form).valid()) {
-                $.ajax({
-                    type: "POST",
-                    url: form.action,
-                    data: $(form).serialize(),
-                    success: function (data) {
-                        if (data.success) {
-                            $.notify(data.message, {
-                                globalPosition: "top center",
-                                className: "success"
-                            })
-
-                            form.reset();
-                        }
-                    }
-                });
-            }
-
-            return false;   // Prevent page refresh
-        }
-
-    </script>
     @RenderSection("Scripts", required: false) ;
     @RenderSection("ScriptsNew", required: false) ;
 </body>

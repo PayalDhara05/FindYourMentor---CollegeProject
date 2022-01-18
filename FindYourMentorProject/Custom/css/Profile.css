@@ -367,7 +367,7 @@ input[type="file"] {
     -ms-flex-pack: space-evenly;
     justify-content: space-evenly;
     overflow:hidden;
-    width:100vw;
+    width:100%;
 }
 
 .profile-container {

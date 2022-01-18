@@ -1,61 +1,4 @@
-﻿<!--<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title></title>
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/Content/site.css" rel="stylesheet" />-->
-@*<link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />*@
-<!--<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
-    <style>
-        .field-validation-error {
-            color: #ff0000;
-        }
-
-        .validation-summary-errors {
-            color: #ff0000;
-            font-weight: bold;
-        }
-
-        .input-validation-error {
-            color: #ff0000;
-            background-color: white;
-        }
-    </style>
-</head>
-<body>
-    <navbar>
-        @@if (Request.IsAuthenticated)
-        {
-            using (Html.BeginForm("Logout", "User", FormMethod.Post, new { id = "logoutForm" }))
-            {
-                <a href="javascript:document.getElementById('logoutForm').submit()">Logout</a>
-            }
-        }
-
-        @@Html.ActionLink("My Profile", "Profile", "Mentor")>
-        @@Html.ActionLink("Home", "Index", "Mentor")>
-        @@Html.ActionLink("Advertisement", "Advertisement", "Mentor")>
-    </navbar>
-    <div>
-        @@RenderBody()
-    </div>
-    <script src="~/Scripts/bootstrap.min.js"></script>
-    <script src="~/Scripts/jquery-1.12.4.min.js"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js" integrity="sha512-o6XqxgrUsKmchwy9G5VRNWSSxTS4Urr4loO6/0hYdpWmFUfHqGzawGxeQGMDqYzxjY9sbktPbNlkIQJWagVZQg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
-    <script src="~/Scripts/notify.min.js"></script>
-
-
-    @@RenderSection("Scripts", required: false) ;
-    @@RenderSection("ScriptsNew", required: false) ;
-</body>
-</html>-->
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -64,7 +7,6 @@
     <title>Document</title>
     <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
     <link href="~/Custom/css/StudentLayout.css" rel="stylesheet" />
-    <link href="~/Custom/css/Footer.css" rel="stylesheet" />
     <!-- font-awesome cdn -->
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 
@@ -161,6 +103,8 @@
         </ul>
     </div>
 
+
+
     <script>
         function openNav() {
             document.getElementById("mynav").style.transform = "translateX(0)";
@@ -175,16 +119,27 @@
     </div>
 
     <footer>
+        <div class="footer-up">
+            <div class="footer-up-one">
+                <p>Find Your Mentor</p>
+            </div>
+            <div class="footer-up-two">
+                <p>This website fills the gap of communication between a mentor and a mentee. It plays a significant role in mentee's life by providing them the best mentor across different places. It will fulfill the mentee's dream by taking a big step towards success.</p>
+            </div>
+            <div class="footer-up-three">
+                <i class="fab fa-instagram"></i>
+                <i class="fab fa-facebook"></i>
+                <i class="fab fa-twitter"></i>
+                <i class="fab fa-github"></i>
+                <i class="fab fa-linkedin"></i>
+                <i class="fab fa-youtube"></i>
+            </div>
+        </div>
 
         <div class="footer-down">
             <p class="copyright">Designed by FindYourMentor | © Copyright FindYourMentor All Rights Reserved</p>
 
             <div class="social-media">
-                <div class="all-social-links">
-                    <a href="#" target="_blank"><img src="~/uiImages/mainlayout/facebook.png" alt="facebook" class="footer-logo"></a>
-                    <a href="#" target="_blank"><img src="~/uiImages/mainlayout/instagram.png" alt="instagram" class="footer-logo"></a>
-                    <a href="#" target="_blank"><img src="~/uiImages/mainlayout/youtube.png" alt="youtube" class="footer-logo"></a>
-                </div>
                 <div class="top-scroll">
                     <a href="#home">Back to Top</a>
                 </div>
@@ -203,29 +158,6 @@
             $(this).next('.sub-sub-menu').slideToggle();
             $(this).find('.dropdown').toggleClass('rotate');
         })
-
-        function SubmitForm(form) {
-            $.validator.unobtrusive.parse(form);
-            if ($(form).valid()) {
-                $.ajax({
-                    type: "POST",
-                    url: form.action,
-                    data: $(form).serialize(),
-                    success: function (data) {
-                        if (data.success) {
-                            $.notify(data.message, {
-                                globalPosition: "top center",
-                                className: "success"
-                            })
-
-                            form.reset();
-                        }
-                    }
-                });
-            }
-
-            return false;   // Prevent page refresh
-        }
     </script>
 
     <script src="~/Scripts/jquery-1.12.4.min.js"></script>

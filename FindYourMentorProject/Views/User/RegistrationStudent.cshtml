@@ -99,7 +99,7 @@
 
                 <div class="State-section">
                     <p>Select State:</p>
-                    @Html.DropDownListFor(m => m.State, new SelectList(Enum.GetValues(typeof(FindYourMentorProject.Models.RegisterStudent.States))), "Select your state ..");<br />
+                    @Html.DropDownListFor(m => m.State, new SelectList(Enum.GetValues(typeof(FindYourMentorProject.Models.RegisterStudent.States))), "Select your state ..");
                     @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
                 </div>
 
