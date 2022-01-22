@@ -262,6 +262,7 @@
     <Content Include="Scripts\jquery-ui-1.12.1.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
     <Content Include="Scripts\notify.min.js" />
+    <Content Include="uiImages\favicon.ico" />
     <Content Include="uiImages\Fees\Mastercard.png" />
     <Content Include="uiImages\Fees\PaymentDone.png" />
     <Content Include="uiImages\Fees\Rupay.png" />

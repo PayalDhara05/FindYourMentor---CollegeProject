@@ -4,7 +4,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
 }
 
 body {
@@ -219,13 +218,6 @@ form input[type="submit"] {
 form input[type="checkbox"] {
     accent-color: #833471;
 }
-/* #show-pass 
-{
-  display: none;
-}
-  .wrapper #password:valid ~ #show-pass{
-    display: block;
-  }  */
 #checkbox {
     color: black;
 }
@@ -326,11 +318,6 @@ form input[type="button"] {
     font-size:1.5rem;
     margin:-2rem 0 2rem 0;
 }
-/*#resetpass-form
-{
-    height:25rem;
-    width:70rem;
-}*/
 .text-danger, .loginmsg {
     color: red;
     margin-bottom:3rem!important;

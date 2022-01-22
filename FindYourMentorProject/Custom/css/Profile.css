@@ -1,7 +1,4 @@
-﻿@import url("https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap");
-
-* {
+﻿* {
     margin: 0;
     padding: 0;
     -webkit-box-sizing: border-box;
@@ -20,7 +17,7 @@ html, body {
 
 .main-container
 {
-    margin-top:-30rem!important;
+    margin-top:-27rem!important;
 }
 .outer-container {
     height: 100%;
@@ -44,21 +41,25 @@ html, body {
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
     flex-direction: column;
-    margin-top: -7rem;
+    margin-top: -9rem;
 }
+    .profile-container h2 
+    {
+        margin-top:23rem!important;
+    }
 
-.Image-container {
-    margin-top: 5rem;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-}
+    .Image-container {
+        margin-top: 5rem;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+    }
 
     .Image-container img {
         border: 2px solid #383838;
