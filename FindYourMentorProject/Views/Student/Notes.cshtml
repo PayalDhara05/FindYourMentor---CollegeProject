@@ -3,27 +3,10 @@
     ViewBag.Title = "NotesMentee";
     Layout = "~/Views/Shared/_StudentLayout.cshtml";
 }
-
-@*<style>
-    .ui-dialog-titlebar-close:after {
-        content: 'X' !important;
-        position: absolute;
-        top: -2px;
-        right: 3px;
-    }
-    #notes-form {
-        margin-left: 2rem;
-        margin-top: 5rem;
-        width: 90%;
-        display: flex;
-        flex-direction: column;
-    }
-</style>*@
-
-<link href="~/Custom/css/Notes.css" rel="stylesheet" />
+<link href="~/Custom/css/ViewMenteeFee.css" rel="stylesheet" />
 <div class="main-table-container">
     <a class="create-btn" onclick="PopupForm('@Url.Action("AddorEditNotes","Student")')"><i class="fa fa-plus"></i>&nbsp;Create</a>
-        <table id="Notes" style="width:100%;height:auto">
+        <table id="Fee" style="width:100%;height:auto">
             <thead>
                 <tr>
                     <th>Title</th>
@@ -32,7 +15,6 @@
                     <th>Actions</th>
                 </tr>
             </thead>
-
             <tbody>
             </tbody>
         </table>
@@ -52,12 +34,10 @@
         screenHeight = window.screen.height;
 
         if (screenWidth < 705) {
-           /* alert("love");*/
             dialogWidth = screenWidth * .75;
             dialogHeight = screenHeight * .90;
         }
         else if (screenWidth < 553) {
-            alert("cute");
             dialogWidth = screenWidth * .73;
             dialogHeight = screenHeight * .80;
         }
@@ -68,14 +48,15 @@
         }
 
         $(document).ready(function () {
-            dataTable = $("#Notes").DataTable({
+            dataTable = $("#Fee").DataTable({                      //instantiate the DataTable on the table with the id Fee.
                 "ajax": {
                     "url": "/Student/NotesData",
                     "type": "GET",
                     "datatype": "json",
                     "dataSrc": ""
                 },
-                "responsive": true,
+                "responsive": "true",
+                "scrollX": true,
                 "columns": [
                     { "mData": "Title" },
                     { "mData": "Description" },
@@ -96,7 +77,7 @@
                     },
 
                    {"mData":"NoteID" , "render" : function (data) {
-                       return "<a onclick=PopupForm('@Url.Action("AddorEditNotes", "Student")/" + data + "')><i class='fa fa-pencil'></i>&nbsp;</a><a style='margin-left:5px' onclick=Delete(" + data + ")><i class='fa fa-trash'></i>&nbsp;</a><a style='margin-left:5px' href='/Student/ViewNotes/" + data + "')><i class='fa fa-eye'></i>&nbsp;</a>";
+                       return "<a onclick=PopupForm('@Url.Action("AddorEditNotes", "Student")/" + data + "')><i class='fa fa-pencil'></i>&nbsp;</a><a style='margin-left:5px' onclick=Delete(" + data + ")><i class='fa fa-trash' id='trash'></i>&nbsp;</a><a style='margin-left:5px' href='/Student/ViewNotes/" + data + "')><i class='fa fa-eye'></i>&nbsp;</a>";
                     },
                         "orderable": false,
                         "searchable":false,
@@ -142,7 +123,6 @@
                     data: $(form).serialize(),
                     success: function (data) {
                         if (data.success) {
-                            /*alert("close");*/
                             Popup.dialog('close');
                             dataTable.ajax.reload();
 
@@ -154,7 +134,7 @@
                     }
                 });
             }
-            return false;
+            return false;   // to tell the event to not actually fire. In the onsubmit case, this would mean that the form is not submitted.
         }
 
         function Delete(id) {

@@ -1,78 +1,15 @@
-﻿@model IEnumerable<FindYourMentorProject.Models.CourseAdvertisement>
+﻿@model FindYourMentorProject.Models.AdvertisementBookmarkViewModel
 
 @{
     ViewBag.Title = "ViewAdvertisement";
     Layout = "~/Views/Shared/_StudentLayout.cshtml";
 }
 
-@*<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-    <h2>ViewAdvertisement</h2>
-    @Html.ActionLink("Save List", "ViewSavedList", "student");
-    @Html.ActionLink("AppliedFor", "ViewApppliedCourse", "student");
-    @Html.ActionLink("View Approved Application", "ViewApprovedApplication", "student");
-
-    <div>
-        <table class="table">
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.ClassName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.CourseName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.MentorName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Description)
-                </th>
-
-                <th>
-                    @Html.DisplayNameFor(model => model.BatchesAvailable)
-                </th>
-
-                <th>
-
-                </th>
-            </tr>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ClassName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CourseName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.MentorName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Description)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.BatchesAvailable)
-                    </td>
-                    <td>
-                        @Html.ActionLink("ViewFullAdvertisement", "ViewFullAdvertisement", new { id = item.AdvertisementID })
-                    </td>
-
-                    <td>
-                        <button onclick="PopupForm(@item.AdvertisementID)" id="Apply">Apply</button>
-                    </td>
-                    <td>
-                        <button onclick="PopupForm2(@item.AdvertisementID)" id="Apply">Appointment</button>
-                    </td>
-                    <td>
-                        <button class="btn-link glyphicon glyphicon-heart-empty" id="onsave" onclick="Fav(@item.AdvertisementID)"></button>
-                    </td>
-                </tr>
-            }
-        </table>
-
-    </div>*@
 <link href="~/Custom/css/StudentIndex.css" rel="stylesheet" />
 <body>
+    <div id="loader-all" style="display:none;height:500px;">
+        <img src="~/uiImages/load1.gif" />
+    </div>
     <div class="whole-container">
         <div class="all-filters">
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem esse unde maxime commodi ut voluptatum labore odio, ea, earum ex velit porro consequatur nulla nostrum obcaecati magnam deserunt vero veritatis possimus debitis tempora? Deleniti distinctio quo commodi quas! Reiciendis, incidunt. Eius nam quos sed totam ea debitis inventore in autem.</p>
@@ -80,40 +17,59 @@
         <div class="all-adv">
             <div class="all-cards">
 
-                @foreach (var item in Model)
+                @foreach (var adv in Model.CourseAdvertisement)
                 {
                     <div class="indiv-card">
                         <div class="course-info">
-                            <p>@item.CourseName</p>
-                            <i id="onsave" onclick="Fav(@item.AdvertisementID)" class="fas fa-heart" title="Add to save list"></i>
+                            <p>@adv.CourseName</p>
+                            @{
+                                int count = 0;
+                            }
+                            @foreach (var bookmarked in Model.SavedList)
+                            {
+                                if (adv.AdvertisementID == bookmarked.AdvertisementID)
+                                {
+                                    count++;
+                                }
+                            }
+
+                            @if (count > 0)
+                            {
+                                <i id="onsave" onclick="Fav(@adv.AdvertisementID)" class="fas fa-bookmark" title="Remove from Bookmarks"></i>
+                            }
+                            else
+                            {
+                                <i id="onsave" onclick="Fav(@adv.AdvertisementID)" class="far fa-bookmark" title="Add to Bookmarks"></i>
+                            }
+
                         </div>
                         <div class="All-info">
-                            <p class="Description">@item.Description !!!</p>
-                            <p class="Class-name">Will get conducted at @item.ClassName</p>
-                            <p class="mentor-name">By Mentor:&nbsp;&nbsp;&nbsp;<span>@item.MentorName</span></p>
+                            <p class="Description">@adv.Description !!!</p>
+                            <p class="Class-name">Will get conducted at @adv.ClassName</p>
+                            <p class="mentor-name">By Mentor:&nbsp;&nbsp;&nbsp;<span>@adv.MentorName</span></p>
 
                             <div class="seats-info">
-                                <p>@(item.TotalSeats-item.SeatsOccupied) Seats are left !!!</p>
-                                <p>Total Seats are <span>@item.TotalSeats</span></p>
+                                <p>@(adv.TotalSeats- adv.SeatsOccupied) Seats are left !!!</p>
+                                <p>Total Seats are <span>@adv.TotalSeats</span></p>
                             </div>
 
                             <div class="add-info">
-                                <p class="Address"><span class="Address-title">Address: </span>@item.Address</p>
-                                <p class="State"><span class="state-title">State: </span>@item.State</p>
+                                <p class="Address"><span class="Address-title">Address: </span>@adv.Address</p>
+                                <p class="State"><span class="state-title">State: </span>@adv.State</p>
                             </div>
                         </div>
                         <div class="operation-btn">
-                            <button onclick="PopupForm2(@item.AdvertisementID)" id="Apply">Appointment</button>
-                            <button onclick="PopupForm(@item.AdvertisementID)" id="Apply">Apply</button>
+                            <button onclick="PopupForm2(@adv.AdvertisementID)" id="Apply">Appointment</button>
+                            <button onclick="PopupForm(@adv.AdvertisementID)" id="Apply">Apply</button>
                         </div>
                         <div class="card-btn">
-                            <button><a href='/Student/ShowFullAdvertisement/@item.AdvertisementID'>FeedBack & More</a></button>
+                            <button><a href='/Student/ShowFullAdvertisement/@adv.AdvertisementID'>FeedBack & More</a></button>
                         </div>
                     </div>
-                 }
+                }
 
 
-                </div>
+            </div>
         </div>
     </div>
 </body>
@@ -179,6 +135,12 @@
                     show: { effect: 'drop'},
                     modal: true,
                     draggable: true,
+                    beforeSend: function () {
+                        $("#loader-all").show();
+                    },
+                    complete: function () {
+                        $("#loader-all").hide();
+                    },
                     success: function (data) {
                         if (data.success) {
 

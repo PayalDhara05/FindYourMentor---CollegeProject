@@ -267,6 +267,7 @@
     <Content Include="uiImages\Fees\PaymentDone.png" />
     <Content Include="uiImages\Fees\Rupay.png" />
     <Content Include="uiImages\Fees\Visa.png" />
+    <Content Include="uiImages\load1.gif" />
     <Content Include="uiImages\Loader.gif" />
     <Content Include="uiImages\mainlayout\bg.mp4" />
     <Content Include="uiImages\mainlayout\Contact1.gif" />
@@ -300,6 +301,7 @@
     <Compile Include="Models\AddNotesMentor.cs">
       <DependentUpon>AllModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\AdvertisementBookmarkViewModel.cs" />
     <Compile Include="Models\AllModels.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

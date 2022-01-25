@@ -1,8 +1,4 @@
-﻿@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;600;700&family=PT+Sans&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap");
-
-* {
+﻿* {
     margin: 0;
     padding: 0;
     -webkit-box-sizing: border-box;
@@ -17,6 +13,33 @@ html, body {
     padding: 0px;
     font-size: 10px;
 }
+
+.create-btn {
+    font-size: 2rem;
+    color: white;
+    padding: 1rem 2rem;
+    background-color: #006400;
+    margin-top: 4rem;
+    width: 15rem;
+    display: flex;
+    font-family: 'Open Sans', sans-serif;
+    justify-content: center;
+    margin-left: 4rem;
+    cursor: pointer;
+    font-weight: bold;
+    border: 2px solid #006400;
+    transition: all .3s linear;
+}
+
+    .create-btn:hover {
+        color: #006400;
+        background-color: white;
+        border: 2px solid #006400;
+    }
+
+    .create-btn i {
+        margin-top: 0.3rem;
+    }
 
 .main-table-container {
     display: flex;
@@ -434,4 +457,138 @@ table::-webkit-scrollbar-thumb {
 {
     display:flex;
     justify-content:space-evenly;
+}
+
+/* Notes form */
+.ui-dialog-titlebar {
+    background-color: #fab1a0;
+    margin: 0;
+    padding: 0;
+}
+
+.ui-dialog-title {
+    color: #833471;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.ui-widget input, .ui-widget textarea {
+    font-size: 2rem !important;
+    outline: none;
+    padding-left: 1rem;
+    width: 100%;
+}
+
+.ui-widget input {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+#Desc {
+    margin-top: 2rem;
+}
+
+.ui-widget textarea {
+    padding-top: 1rem;
+}
+
+    .ui-widget textarea::placeholder {
+        padding-top: 0rem;
+    }
+
+form {
+    margin-left: 0rem !important;
+    margin-top: 1rem !important;
+}
+
+.btn-success,
+.btn-reset {
+    background-color: #006400;
+    padding: 1rem 6rem !important;
+    color: white;
+    font-size: 2rem;
+    border: none;
+    outline: none;
+    border: 2px solid #006400;
+    transition: all .3s linear;
+    width: 30rem !important;
+    margin-top: 2rem;
+}
+
+    .btn-success:hover {
+        border: 2px solid #006400;
+        color: #006400;
+        background-color: white;
+    }
+
+.btn-reset {
+    background-color: #D2042D !important;
+    border: 2px solid #D2042D !important;
+}
+
+    .btn-reset:hover {
+        border: 2px solid #D2042D !important;
+        color: #D2042D !important;
+        background-color: white !important;
+    }
+
+@media screen and (max-width:705px) {
+    .btn-success,
+    .btn-reset {
+        width: 20rem !important;
+    }
+}
+
+@media screen and (max-width:500px) {
+    .btn-success,
+    .btn-reset {
+        width: 10rem !important;
+        padding: 1rem 3rem !important;
+        padding-left: 2rem !important;
+        text-align: center;
+    }
+}
+
+#notes-form {
+    margin-top: 5rem;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+}
+
+.ui-dialog-title {
+    font-size: 1.8rem;
+}
+
+.notes-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.notes-caption {
+    display: flex;
+    font-size: 2.5rem;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    color: #833471;
+}
+
+.notes-data {
+    display: flex;
+    flex-direction: column;
+}
+.text-danger, .loginmsg {
+    color: red;
+    margin-bottom: 3rem !important;
+    text-align: center;
+    background-color: white;
+    font-weight: bold;
+    font-size: 1.2rem;
+    font-family: "Open Sans", sans-serif;
+}
+#trash 
+{
+    font-size:2rem;
 }

@@ -1,54 +1,40 @@
 ﻿@model FindYourMentorProject.Models.AddNotesMentee
 
-@*<link href="~/Custom/css/AddorEditNotes.css" rel="stylesheet" />
-@using (Html.BeginForm("AddorEditNotes","Student",FormMethod.Post, new { onSubmit = "return SubmitForm(this)" }))
-{
-    @Html.AntiForgeryToken()
- 
 <div class="notes-container">
-    <table>
-        @Html.HiddenFor(model => model.NoteID)
-        @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
-        @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
-
-
-        @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-        @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", rows="5" } })
-        @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
-
-        <input type="submit" value="Done" class="btn-success" />
-        <input type="reset" value="Reset" class="btn-reset" />
-    </table>
-</div>
-
-}*@
-
-@*<link href="~/Custom/css/AddorEditNotes.css" rel="stylesheet" />*@
-<div class="notes-container">
-    @using (Html.BeginForm("AddorEditNotes", "Student", FormMethod.Post, new { onSubmit = "return SubmitForm(this)", @id="notes-form" }))
+    @using (Html.BeginForm("AddorEditNotes", "Student", FormMethod.Post, new { onSubmit = "return SubmitForm(this)", @id = "notes-form" }))
     {
+        @Html.AntiForgeryToken();
         <input data-val="true" data-val-number="The field NoteID must be a number." data-val-required="The NoteID field is required." id="NoteID" name="NoteID" type="hidden" value="@Model.NoteID">
 
         <div class="notes-caption">
             <label class="form-label" for="Title">Title</label>
         </div>
         <div class="notes-data">
-            <input placeholder="Give a title" data-val="true" data-val-minlength="Atleast 3 characters are expected" data-val-minlength-min="3" data-val-required="Title required" id="Title" name="Title" type="text" value="@Model.Title">
-            <span class="field-validation-valid text-danger" data-valmsg-for="Title" data-valmsg-replace="true" id="title-error"></span>
+            @Html.EditorFor(m => m.Title, Model.Title, new { HtmlAttributes = new { @placeholder = "Give a title" } })
+            @Html.ValidationMessageFor(m => m.Title,"",new { @class = "text-danger" })
         </div>
 
         <div class="notes-caption">
             <label class="form-label" for="Description" id="Desc">Description</label>
         </div>
         <div class="notes-data">
-            <textarea placeholder="Description .." data-val="true" data-val-minlength="Atleast 3 characters are expected" data-val-minlength-min="3" data-val-required="Description required" id="Description" name="Description" rows="5" type="text">@Model.Description</textarea>
-            <span class="field-validation-valid text-danger" data-valmsg-for="Description" data-valmsg-replace="true"></span>
+            @Html.EditorFor(m => m.Description, Model.Description, new { HtmlAttributes = new { @placeholder = "Give a Description" } })
+            @Html.ValidationMessageFor(m => m.Description, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-btns">
             <input type="submit" value="Done" class="btn-success">
-            <input type="reset" value="Reset" class="btn-reset">
+            <input type="button" value="Reset" onclick="callReset(form);" class="btn-reset">
         </div>
     }
     </div>
+
+<script>
+    function callReset(form)
+    {
+        alert("inside reset");
+        let noteform = document.getElementById("notes-form");
+        noteform.elements['Title'].value = '';
+        noteform.elements['Description'].value = '';
+    }
+</script>

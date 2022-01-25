@@ -12,6 +12,7 @@
     <div class="profile-container">
         <h2>Profile Picture</h2>
         <form action="/Student/ProfilePicture" method="post" enctype="multipart/form-data">
+            @Html.AntiForgeryToken();
             <div class="Image-container">
                 @if (Model.ProfilePicture != null)
                 {
@@ -49,6 +50,7 @@
     <div class="userinfo-container">
         <h1>User Information</h1>
         <form action="/Student/UpdatePersonalInfo" method="POST">
+            @Html.AntiForgeryToken();
             <div class="input-fields">
                 <fieldset class="field_set">
                     <legend>Firstname</legend>
@@ -68,15 +70,15 @@
             <div class="input-fields">
                 <fieldset class="field_set">
                     <legend>EmailID</legend>
-                    <input type="email" name="EmailID" disabled value="@Model.EmailID">
+                    <input type="email" name="EmailID" readonly="readonly" value="@Model.EmailID">
                 </fieldset>
                 <fieldset class="field_set">
                     <legend>Rolee</legend>
-                    <input type="text" name="Role" value="@Model.Role" disabled>
+                    <input type="text" name="Role" value="@Model.Role" readonly="readonly">
                 </fieldset>
                 <fieldset class="field_set">
                     <legend>Age</legend>
-                    <input type="number" min="5" max="85" title="Please enter your correct age"  name="Age" value="@Model.Age" />
+                    <input type="number" min="5" max="85" title="Please enter your correct age" name="Age" value="@Model.Age" />
                 </fieldset>
             </div>
 
@@ -87,11 +89,11 @@
                 </fieldset>
                 <fieldset class="field_set">
                     <legend>Pincode</legend>
-                    <input type="text" placeholder="Pincode" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)/g, '');" pattern="[1-9][0-9]{5}" title="Please enter valid pincode" minlength="6" maxlength="6"  name="Pincode" value="@Model.Pincode">
+                    <input type="text" placeholder="Pincode" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)/g, '');" pattern="[1-9][0-9]{5}" title="Please enter valid pincode" minlength="6" maxlength="6" name="Pincode" value="@Model.Pincode">
                 </fieldset>
                 <fieldset class="field_set">
                     <legend>City</legend>
-                    <input type="text" name="City" value="@Model.City"  maxlength="50" minlength="3">
+                    <input type="text" name="City" value="@Model.City" maxlength="50" minlength="3">
                 </fieldset>
             </div>
 
@@ -109,11 +111,11 @@
             <div class="input-fields">
                 <fieldset class="field_set">
                     <legend>LinkedIN</legend>
-                    <input type="text" name="LinkedInID" value="@Model.LinkedInID"  maxlength="50" minlength="3">
+                    <input type="text" name="LinkedInID" value="@Model.LinkedInID" maxlength="50" minlength="3">
                 </fieldset>
                 <fieldset class="field_set">
                     <legend>GitHub</legend>
-                    <input type="text" name="GitHubID" value="@Model.GitHubID"  maxlength="50" minlength="3">
+                    <input type="text" name="GitHubID" value="@Model.GitHubID" maxlength="50" minlength="3">
                 </fieldset>
                 <input type="submit" value="Save Changes" class="Submit-btn">
             </div>

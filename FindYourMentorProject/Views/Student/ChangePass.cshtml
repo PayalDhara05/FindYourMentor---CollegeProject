@@ -20,6 +20,7 @@
 
             @using(Html.BeginForm("ChangePass", "Student", FormMethod.Post))
             {
+                @Html.AntiForgeryToken();
                 <div class="forgotpassword-text-success">
                     @ViewBag.Message
                 </div>

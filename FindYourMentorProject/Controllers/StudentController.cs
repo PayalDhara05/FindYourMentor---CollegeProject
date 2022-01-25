@@ -48,7 +48,8 @@ namespace FindYourMentorProject.Controllers
         }
 
         [HttpPost]
-        public ActionResult ProfilePicture(HttpPostedFileBase file, string submitButton)
+        [ValidateAntiForgeryToken]
+        public ActionResult ProfilePicture(HttpPostedFileBase file, string submitButton)                           //Done - (25-01-22)
         {
             if (userid != 0)
             {
@@ -103,7 +104,7 @@ namespace FindYourMentorProject.Controllers
         }
 
         [HttpGet]
-        public ActionResult PersonalInfo()
+        public ActionResult PersonalInfo()             //Done - (25-01-22)
         {
             using (FindYourMentorProjectEntities dc = new FindYourMentorProjectEntities())
             {
@@ -113,23 +114,29 @@ namespace FindYourMentorProject.Controllers
         }
 
         [HttpPost]
-        public ActionResult UpdatePersonalInfo(RegisterStudent obj)
+        [ValidateAntiForgeryToken]
+        public ActionResult UpdatePersonalInfo(RegisterStudent obj)          //Done - (25-01-22)
         {
             using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
             {
-                var existinguser = db.RegisterStudents.Find(userid);
-                existinguser.FirstName = obj.FirstName;
-                existinguser.LastName = obj.LastName;
-                existinguser.City = obj.City;
-                existinguser.State = obj.State;
-                existinguser.Pincode = obj.Pincode;
-                existinguser.ContactNo = obj.ContactNo;
-                existinguser.GitHubID = obj.GitHubID;
-                existinguser.LinkedInID = obj.LinkedInID;
-                existinguser.Description = obj.Description;
-                existinguser.Age = obj.Age;
-                existinguser.Address = obj.Address;
-                db.Configuration.ValidateOnSaveEnabled = false;
+                obj.UserID = userid;
+                db.Entry(obj).State = EntityState.Modified;
+                db.Entry(obj).Property("Password").IsModified = false;             //Prevention of update null value error
+                db.Entry(obj).Property("IsEmailVerified").IsModified = false;
+                // 1st method - If you have an entity that you know already exists in the database but to which changes may have been made then you can tell the db to attach the entity and set its state to Modified.
+                //var existinguser = db.RegisterStudents.Find(userid);  //2nd method - Traditional approach
+                //existinguser.FirstName = obj.FirstName;
+                //existinguser.LastName = obj.LastName;
+                //existinguser.City = obj.City;
+                //existinguser.State = obj.State;
+                //existinguser.Pincode = obj.Pincode;
+                //existinguser.ContactNo = obj.ContactNo;
+                //existinguser.GitHubID = obj.GitHubID;
+                //existinguser.LinkedInID = obj.LinkedInID;
+                //existinguser.Description = obj.Description;
+                //existinguser.Age = obj.Age;
+                //existinguser.Address = obj.Address;
+                db.Configuration.ValidateOnSaveEnabled = false;                 //To prevent error on validation of password and confirm password
                 db.SaveChanges();
                 return RedirectToAction("PersonalInfo", "Student");
             }
@@ -137,14 +144,15 @@ namespace FindYourMentorProject.Controllers
 
 
         [HttpGet]
-        public ActionResult ChangePass()
+        public ActionResult ChangePass()         //Done - (25-01-22)
         {
             return View();
         }
 
 
         [HttpPost]
-        public ActionResult ChangePass(ChangePasswordModel pass)
+        [ValidateAntiForgeryToken]
+        public ActionResult ChangePass(ChangePasswordModel pass)        //Done - (25-01-22)
         {
             string message = "";
             string message1 = "";
@@ -200,30 +208,31 @@ namespace FindYourMentorProject.Controllers
                 {
                     CourseAdvertisement cAdv = db.CourseAdvertisements.Where(x => x.AdvertisementID == id).FirstOrDefault<CourseAdvertisement>();
 
-                    SavedList save = new SavedList();
-
-                    save.ClassName = cAdv.ClassName;
-                    save.CourseName = cAdv.CourseName;
-                    save.MentorName = cAdv.MentorName;
-                    save.Description = cAdv.Description;
-                    save.AdvertisementID = id;
-                    save.MenteeID = userid;
-                    save.MentorID = cAdv.MentorID;
-                    save.BatchesFull = cAdv.BatchesFull;
-                    save.BatchesAvailable = cAdv.BatchesAvailable;
-                    save.TotalSeats = cAdv.TotalSeats;
-                    save.SeatsOccupied = cAdv.SeatsOccupied;
-                    save.Fees = cAdv.Fees;
-                    save.YearsOfExperience = cAdv.YearsOfExperience;
-                    save.Field = cAdv.Field;
-                    save.SpokenLanguage1 = cAdv.SpokenLanguage1;
-                    save.Address = cAdv.Address;
-                    save.State = cAdv.State;
-                    save.GitHub = cAdv.GitHubAccount;
-                    save.City = cAdv.City;
-                    save.SpokenLanguage2 = cAdv.SpokenLanguage2;
-                    save.Mode = cAdv.Mode;
-                    save.Duration = cAdv.Duration;
+                    SavedList save = new SavedList()
+                    {
+                        ClassName = cAdv.ClassName,
+                        CourseName = cAdv.CourseName,
+                        MentorName = cAdv.MentorName,
+                        Description = cAdv.Description,
+                        AdvertisementID = id,
+                        MenteeID = userid,
+                        MentorID = cAdv.MentorID,
+                        BatchesFull = cAdv.BatchesFull,
+                        BatchesAvailable = cAdv.BatchesAvailable,
+                        TotalSeats = cAdv.TotalSeats,
+                        SeatsOccupied = cAdv.SeatsOccupied,
+                        Fees = cAdv.Fees,
+                        YearsOfExperience = cAdv.YearsOfExperience,
+                        Field = cAdv.Field,
+                        SpokenLanguage1 = cAdv.SpokenLanguage1,
+                        Address = cAdv.Address,
+                        State = cAdv.State,
+                        GitHub = cAdv.GitHubAccount,
+                        City = cAdv.City,
+                        SpokenLanguage2 = cAdv.SpokenLanguage2,
+                        Mode = cAdv.Mode,
+                        Duration = cAdv.Duration
+                    };
                     db.SavedLists.Add(save);
                     db.Configuration.ValidateOnSaveEnabled = false;
                     db.SaveChanges();
@@ -296,6 +305,7 @@ namespace FindYourMentorProject.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult AddorEditNotes(AddNotesMentee mentee)
        {
             if (ModelState.IsValid)
@@ -330,6 +340,7 @@ namespace FindYourMentorProject.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult AddorEditNotesExternal(AddNotesMentee mentee)
         {
             if (ModelState.IsValid)
@@ -377,7 +388,10 @@ namespace FindYourMentorProject.Controllers
         {
             using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
             {
-                return View(db.CourseAdvertisements.OrderByDescending(r => r.AdvertisementID).ToList());
+                AdvertisementBookmarkViewModel AdvSaveModel = new AdvertisementBookmarkViewModel();
+                AdvSaveModel.CourseAdvertisement = db.CourseAdvertisements.ToList();
+                AdvSaveModel.SavedList = db.SavedLists.ToList();
+                return View(AdvSaveModel);
             }
         }
 
@@ -414,39 +428,22 @@ namespace FindYourMentorProject.Controllers
                 if (appln != null)
                 {
                     ViewBag.status = "Applied";
-                    ViewBag.Mentee = user.FirstName;
-                    ViewBag.EmailID = user.EmailID;
-                    ViewBag.Contact = user.ContactNo;
-                    ViewBag.Age = user.Age;
-                    ViewBag.Address = user.Address;
-                    ViewBag.State = user.State;
-                    ViewBag.GitHub = user.GitHubID;
-                    ViewBag.Linkedin = user.LinkedInID;
-                    ViewBag.MenteeMessage = appln.MenteeMessage;
-                    ViewBag.MenteeExpectations = appln.MenteeExpectations;
-                    ViewBag.MenteeWorkingStatus = appln.WorkingStatus;
-                    ViewBag.MenteeBackground = appln.MenteeBackground;
-                    ViewBag.Time = appln.AppliedTime;
+                    ViewBag.User = user;
+                    ViewBag.Application = appln;
                     return View();
                 }
                 else
                 {
-                    
                     ViewBag.Id = userid;
-                    ViewBag.Mentee = user.FirstName;
-                    ViewBag.EmailID = user.EmailID;
-                    ViewBag.Contact = user.ContactNo;
-                    ViewBag.Age = user.Age;
-                    ViewBag.Address = user.Address;
-                    ViewBag.State = user.State;
-                    ViewBag.GitHub = user.GitHubID;
-                    ViewBag.Linkedin = user.LinkedInID;
-                    ViewBag.Message = id;
+                    ViewBag.User = user;
+                    ViewBag.Message = id;   //AdvertisementID
                     return View();
                 }
             }
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult SubmitApppliedCourse(Application app)
         {
             if (ModelState.IsValid)
@@ -535,39 +532,23 @@ namespace FindYourMentorProject.Controllers
                 if (appln != null)
                 {
                     ViewBag.status = "Applied";
-                    ViewBag.Mentee = user.FirstName;
-                    ViewBag.EmailID = user.EmailID;
-                    ViewBag.Contact = user.ContactNo;
-                    ViewBag.Age = user.Age;
-                    ViewBag.Address = user.Address;
-                    ViewBag.State = user.State;
-                    ViewBag.GitHub = user.GitHubID;
-                    ViewBag.Linkedin = user.LinkedInID;
-                    ViewBag.AppointmentDate = appln.AppointmentDate;
-                    ViewBag.AppointmentTime = appln.AppointmentTime;
-                    ViewBag.MenteeWorkingStatus = appln.MenteeWorkingStatus;
-                    ViewBag.AppointmentMode = appln.AppointmentMode;
-                    ViewBag.Time = appln.AppointmentApplied;
+                    ViewBag.User = user;
+                    ViewBag.Appointment = appln;
                     return View();
                 }
                 else
                 {
 
                     ViewBag.Id = userid;
-                    ViewBag.Mentee = user.FirstName;
-                    ViewBag.EmailID = user.EmailID;
-                    ViewBag.Contact = user.ContactNo;
-                    ViewBag.Age = user.Age;
-                    ViewBag.Address = user.Address;
-                    ViewBag.State = user.State;
-                    ViewBag.GitHub = user.GitHubID;
-                    ViewBag.Linkedin = user.LinkedInID;
-                    ViewBag.Message = id;
+                    ViewBag.User = user;
+                    ViewBag.Message = id;   //AdvertisementID
                     return View();
                 }
             }
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult SubmitAppointment(Appointment appoint)
         {
             if (ModelState.IsValid)
@@ -684,35 +665,16 @@ namespace FindYourMentorProject.Controllers
                 if (feeappln != null)
                 {
                     ViewBag.status = "Paid";
-                    ViewBag.Mentee = user.FirstName;
-                    ViewBag.EmailID = user.EmailID;
-                    ViewBag.Contact = user.ContactNo;
-                    ViewBag.Age = user.Age;
-                    ViewBag.Address = user.Address;
-                    ViewBag.State = user.State;
-                    ViewBag.GitHub = user.GitHubID;
-                    ViewBag.Linkedin = user.LinkedInID;
-                    ViewBag.Mode = feeappln.PaymentMode;
-                    ViewBag.PaymentStatus = feeappln.PaymentStatus;
-                    ViewBag.PaymentTime = feeappln.PaymentTime;
-                    ViewBag.Fees = cdv.Fees;
+                    ViewBag.User = user;
+                    ViewBag.Fee = feeappln;
                     return View();
                 }
                 else
                 { 
 
                     ViewBag.Id = userid;
-                    ViewBag.Fees = cdv.Fees;
-                    ViewBag.Firstname = user.FirstName;
-                    ViewBag.Lastname = user.LastName;
-                    ViewBag.EmailID = user.EmailID;
-                    ViewBag.Contact = user.ContactNo;
-                    ViewBag.Age = user.Age;
-                    ViewBag.Address = user.Address;
-                    ViewBag.State = user.State;
-                    ViewBag.GitHub = user.GitHubID;
-                    ViewBag.Linkedin = user.LinkedInID;
-                    ViewBag.Message = id;
+                    ViewBag.User = user;
+                    ViewBag.Message = id;   //AdvertisementID
                     return View();
                 }
             }
@@ -720,7 +682,6 @@ namespace FindYourMentorProject.Controllers
 
         public ActionResult SubmitFeeApplication(Fee feeApln)
         {
-            String validation = "";
             if (ModelState.IsValid)
             {
                 int userid = Convert.ToInt32(Session["UserID"]);

@@ -1,8 +1,4 @@
-﻿@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;600;700&family=PT+Sans&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap");
-
-* {
+﻿* {
     margin: 0;
     padding: 0;
     -webkit-box-sizing: border-box;
@@ -68,7 +64,6 @@ html, body {
 #Notes {
     margin-top: 10rem!important;
     width: 100%;
-    overflow-x:scroll;
 }
     #Notes th {
         color: #833471;
@@ -252,4 +247,13 @@ form {
 }
 #Notes td {
     padding:0.3rem!important;
+}
+.text-danger, .loginmsg {
+    color: red;
+    margin-bottom: 3rem !important;
+    text-align: center;
+    background-color: white;
+    font-weight: bold;
+    font-size: 1.2rem;
+    font-family: "Open Sans", sans-serif;
 }

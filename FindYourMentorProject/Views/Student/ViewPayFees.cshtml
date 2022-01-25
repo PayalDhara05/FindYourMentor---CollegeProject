@@ -7,93 +7,97 @@
         color: red !important;
     }
 </style>
+@{
+    var Mentee = ViewBag.User;
+    var fee = ViewBag.Fee;
+}
 @if (ViewBag.status == "Paid")
 {
-<div class="submitted-appln">
-    <h3>You have already filled this form. Below is your submitted application form</h3>
-    <div class="Indiv-form-elem">
-        @Html.LabelFor(model => model.MenteeName, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="Indiv-form-text">
-            @Html.EditorFor(model => model.MenteeName, new { htmlAttributes = new { @Value = ViewBag.Mentee, @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
-            @Html.ValidationMessageFor(model => model.MenteeName, "", new { @class = "text-danger" })
+    <div class="submitted-appln">
+        <h3>You have already filled this form. Below is your submitted application form</h3>
+        <div class="Indiv-form-elem">
+            @Html.LabelFor(model => model.MenteeName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="Indiv-form-text">
+                @Html.EditorFor(model => model.MenteeName, new { htmlAttributes = new { @Value = (@Mentee.FirstName + @Mentee.LastName), @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.MenteeName, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
 
-    <div class="Indiv-form-elem">
-        @Html.LabelFor(model => model.MenteeEmailID, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="Indiv-form-text">
-            @Html.EditorFor(model => model.MenteeEmailID, new { htmlAttributes = new { @Value = ViewBag.EmailID, @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
-            @Html.ValidationMessageFor(model => model.MenteeEmailID, "", new { @class = "text-danger" })
+        <div class="Indiv-form-elem">
+            @Html.LabelFor(model => model.MenteeEmailID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="Indiv-form-text">
+                @Html.EditorFor(model => model.MenteeEmailID, new { htmlAttributes = new { @Value = @Mentee.MenteeEmailID, @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.MenteeEmailID, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
 
-    <div class="Indiv-form-elem">
-        @Html.LabelFor(model => model.MenteeContactNo, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="Indiv-form-text">
-            @Html.EditorFor(model => model.MenteeContactNo, new { htmlAttributes = new { @Value = ViewBag.Contact, @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
-            @Html.ValidationMessageFor(model => model.MenteeContactNo, "", new { @class = "text-danger" })
+        <div class="Indiv-form-elem">
+            @Html.LabelFor(model => model.MenteeContactNo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="Indiv-form-text">
+                @Html.EditorFor(model => model.MenteeContactNo, new { htmlAttributes = new { @Value = @Mentee.MenteeContactNo, @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.MenteeContactNo, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
 
-    <div class="Indiv-form-elem">
-        @Html.LabelFor(model => model.MenteeAge, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="Indiv-form-text">
-            @Html.EditorFor(model => model.MenteeAge, new { htmlAttributes = new { @Value = ViewBag.Age, @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
-            @Html.ValidationMessageFor(model => model.MenteeAge, "", new { @class = "text-danger" })
+        <div class="Indiv-form-elem">
+            @Html.LabelFor(model => model.MenteeAge, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="Indiv-form-text">
+                @Html.EditorFor(model => model.MenteeAge, new { htmlAttributes = new { @Value = @Mentee.Age, @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.MenteeAge, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
 
-    <div class="Indiv-form-elem">
-        @Html.LabelFor(model => model.MenteeGitHub, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="Indiv-form-text">
-            @Html.EditorFor(model => model.MenteeGitHub, new { htmlAttributes = new { @Value = ViewBag.Address, @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
-            @Html.ValidationMessageFor(model => model.MenteeGitHub, "", new { @class = "text-danger" })
+        <div class="Indiv-form-elem">
+            @Html.LabelFor(model => model.MenteeGitHub, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="Indiv-form-text">
+                @Html.EditorFor(model => model.MenteeGitHub, new { htmlAttributes = new { @Value = @Mentee.MenteeGitHub, @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.MenteeGitHub, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
 
-    <div class="Indiv-form-elem">
-        @Html.LabelFor(model => model.MenteeLinkedIn, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="Indiv-form-text">
-            @Html.EditorFor(model => model.MenteeLinkedIn, new { htmlAttributes = new { @Value = ViewBag.Linkedin, disabled = "disabled", @readonly = "readonly" } })
+        <div class="Indiv-form-elem">
+            @Html.LabelFor(model => model.MenteeLinkedIn, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="Indiv-form-text">
+                @Html.EditorFor(model => model.MenteeLinkedIn, new { htmlAttributes = new { @Value = @Mentee.MenteeLinkedIn, disabled = "disabled", @readonly = "readonly" } })
+            </div>
         </div>
-    </div>
 
-    <div class="Indiv-form-elem">
-        @Html.LabelFor(model => model.MenteeState, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="Indiv-form-text">
-            @Html.EditorFor(model => model.MenteeState, new { htmlAttributes = new { @Value = ViewBag.State, @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
-            @Html.ValidationMessageFor(model => model.MenteeState, "", new { @class = "text-danger" })
+        <div class="Indiv-form-elem">
+            @Html.LabelFor(model => model.MenteeState, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="Indiv-form-text">
+                @Html.EditorFor(model => model.MenteeState, new { htmlAttributes = new { @Value = @Mentee.MenteeState, @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.MenteeState, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
 
-    <div class="Indiv-form-elem">
-        <label>Total fees of this course : <span>@ViewBag.Fees</span> </label>
-    </div>
-
-    <div class="Indiv-form-elem">
-        @Html.LabelFor(model => model.PaymentMode, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="Indiv-form-text">
-            @Html.EditorFor(model => model.PaymentMode, new { htmlAttributes = new { @Value = ViewBag.Mode, disabled = "disabled", @readonly = "readonly", @class = "form-control" } })
+        <div class="Indiv-form-elem">
+            <label>Total fees of this course : <span>@ViewBag.Fees</span> </label>
         </div>
-    </div>
 
-    <div class="Indiv-form-elem">
-        @Html.LabelFor(model => model.PaymentStatus, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="Indiv-form-text">
-            @Html.EditorFor(model => model.PaymentStatus, new { htmlAttributes = new { @Value = ViewBag.PaymentStatus, @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
-            @Html.ValidationMessageFor(model => model.PaymentTime, "", new { @class = "text-danger" })
+        <div class="Indiv-form-elem">
+            @Html.LabelFor(model => model.PaymentMode, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="Indiv-form-text">
+                @Html.EditorFor(model => model.PaymentMode, new { htmlAttributes = new { @Value = ViewBag.Mode, disabled = "disabled", @readonly = "readonly", @class = "form-control" } })
+            </div>
         </div>
-    </div>
 
-    <div class="Indiv-form-elem">
-        <label>Form filled at </label>
-        <div class="Indiv-form-text">
-            @Html.EditorFor(model => model.PaymentTime, new { htmlAttributes = new { @Value = ViewBag.PaymentTime, @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
-            @Html.ValidationMessageFor(model => model.PaymentTime, "", new { @class = "text-danger" })
+        <div class="Indiv-form-elem">
+            @Html.LabelFor(model => model.PaymentStatus, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="Indiv-form-text">
+                @Html.EditorFor(model => model.PaymentStatus, new { htmlAttributes = new { @Value = ViewBag.PaymentStatus, @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.PaymentTime, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
 
-</div>
+        <div class="Indiv-form-elem">
+            <label>Form filled at </label>
+            <div class="Indiv-form-text">
+                @Html.EditorFor(model => model.PaymentTime, new { htmlAttributes = new { @Value = ViewBag.PaymentTime, @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.PaymentTime, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+    </div>
 }
 else
 {
@@ -101,182 +105,182 @@ else
     {
         @Html.AntiForgeryToken()
 
-        if(@ViewBag.Message != null)
-                    {
-                        <h2>@ViewBag.Validation</h2>
-                    }
-<div class="form-horizontal">
-
-    @Html.TextBoxFor(m => m.AdvertisementID, new { @Value = @ViewBag.Message, @type = "hidden" })
-    <div class="Indiv-form-elem">
-        @Html.LabelFor(model => model.MenteeName, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="Indiv-form-text">
-            @Html.EditorFor(model => model.MenteeName, new { htmlAttributes = new { @Value = ViewBag.Firstname, @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
-            @Html.ValidationMessageFor(model => model.MenteeName, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="Indiv-form-elem">
-        @Html.LabelFor(model => model.MentorEmailID, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="Indiv-form-text">
-            @Html.EditorFor(model => model.MentorEmailID, new { htmlAttributes = new { @Value = ViewBag.EmailID, @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
-            @Html.ValidationMessageFor(model => model.MentorEmailID, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="Indiv-form-elem">
-        @Html.LabelFor(model => model.MenteeContactNo, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="Indiv-form-text">
-            @Html.EditorFor(model => model.MenteeContactNo, new { htmlAttributes = new { @Value = ViewBag.Contact, @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
-            @Html.ValidationMessageFor(model => model.MenteeContactNo, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="Indiv-form-elem">
-        @Html.LabelFor(model => model.MenteeAge, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="Indiv-form-text">
-            @Html.EditorFor(model => model.MenteeAge, new { htmlAttributes = new { @Value = ViewBag.Age, @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
-            @Html.ValidationMessageFor(model => model.MenteeAge, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="Indiv-form-elem">
-        @Html.LabelFor(model => model.MenteeState, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="Indiv-form-text">
-            @Html.EditorFor(model => model.MenteeState, new { htmlAttributes = new { @Value = ViewBag.State, @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
-            @Html.ValidationMessageFor(model => model.MenteeState, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="Indiv-form-elem">
-        @Html.LabelFor(model => model.MenteeGitHub, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="Indiv-form-text">
-            @Html.EditorFor(model => model.MenteeGitHub, new { htmlAttributes = new { @Value = ViewBag.Address, @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
-            @Html.ValidationMessageFor(model => model.MenteeGitHub, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="Indiv-form-elem">
-        @Html.LabelFor(model => model.MenteeLinkedIn, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="Indiv-form-text">
-            @Html.EditorFor(model => model.MenteeLinkedIn, new { htmlAttributes = new { @Value = ViewBag.Linkedin, disabled = "disabled", @readonly = "readonly" } })
-        </div>
-    </div>
-
-
-    <div class="Indiv-form-elem">
-        <label>Total fees of this course : <span>@ViewBag.Fees</span> </label>
-    </div>
-
-    <div class="Indiv-form-elem">
-        @Html.LabelFor(model => model.PaymentMode, htmlAttributes: new { @class = "control-label col-md-2" })
-        @Html.ValidationMessageFor(model => model.PaymentMode, "", new { @class = "text-danger" })
-        <div class="Indiv-form-radio">
-            <input type="radio" data-val="true" data-val-required="Please select any one option" name="PaymentMode" id="Offline" value="Offline" onclick="javascript:yesnoCheck();" />
-            @*@Html.RadioButtonFor(model => model.PaymentMode, "Offline", new { htmlAttributes = new { onclick = "javascript:yesnoCheck();", id = "Offline" } })*@
-            <span>Offline</span><br />
-            @*@Html.RadioButtonFor(model => model.PaymentMode, "Online", new { htmlAttributes = new { onclick = "javascript:yesnoCheck();", id = "Online" } })*@
-            <input type="radio" data-val="true" data-val-required="Please select any one option" name="PaymentMode" id="Online" value="Online" onclick="javascript:yesnoCheck();" />
-            <span>Online</span><br />
-        </div>
-    </div>
-
-    <div id="ifOnline" style="display:none" class="Indiv-form-elem">
-        <div class="Indiv-form-elem-1">
-            <label>Card Type</label>
-            <div class="card-type-select">
-                <input type="radio" checked />
-                <div class="credit-card-img">
-                    <img src="~/uiImages/Fees/Visa.png" />
-                    <img src="~/uiImages/Fees/Rupay.png" />
-                    <img src="~/uiImages/Fees/Mastercard.png" />
-                </div>
-            </div>
-        </div>
-
-        <div class="Indiv-form-elem">
-            <label>Card Number</label>
-            <div class="Indiv-form-text">
-                <input name="CardNumber" data-val="true" data-val-required="16 digits are expected" id="CardNumber" pattern="[3-5]{1}[0-9]{11}" type="text" maxlength="16" minlength="16" title="Invalid number. Start with 3,4 or 5" placeholder="################" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)/g, '');" required disabled>
-                @Html.ValidationMessageFor(model => model.CardNumber, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="Indiv-form-elem">
-            <label>Name on Card</label>
-            <div class="Indiv-form-text">
-                <input name="CardName" data-val="true" data-val-required="Atleast 3 characters are required" id="CardName" type="text" maxlength="50" minlength="3" placeholder="Name on your Card" oninput="this.value = this.value.replace(/[0-9.]/g, '').replace(/(\..*)/g, '');" required disabled>
-                @Html.ValidationMessageFor(model => model.CardName, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="Indiv-form-elem">
-            <label>CVV</label>
-            <div class="Indiv-form-text">
-                <input name="cvv_new" data-val="true" data-val-required="4 digits are expected" id="CVV"  type="text" maxlength="4" minlength="4" placeholder="####" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)/g, '');" required disabled>
-                @Html.ValidationMessageFor(model => model.cvv_new, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        @*<div class="Indiv-form-elem">
-            <label>CVV</label>
-            <div class="Indiv-form-text">
-                <input name="CVV" data-val="true" data-val-required="4 digits are expected" id="CVV" type="text" maxlength="4" minlength="4" placeholder="CVV" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)/g, '');" required disabled>
-                @Html.ValidationMessageFor(model => model.CVV, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
-
-        <div class="Indiv-form-elem">
-            <div class="Expiry-Field">
-                <div>
-                    <input list="list1" placeholder="Month" name="ExpiryDate" data-val="true" data-val-required="This field is required" class="ExpiryDate" id="ExpiryDate"><br />
-                    @Html.ValidationMessageFor(model => model.ExpiryDate, "", new { @class = "text-danger" })
-                    <datalist id="list1">
-                        @for (int i = 1; i <= 12; i++)
-                        {
-                            <option value="@i">@i</option>
-                        }
-                    </datalist>
-                </div>
-
-                <div>
-                    <input list="list2" data-val="true" data-val-required="This field is required" placeholder="Year" name="ExpiryYear" class="ExpiryDate" id="ExpiryYear"><br />
-                    @Html.ValidationMessageFor(model => model.ExpiryYear, "", new { @class = "text-danger" })
-                    <datalist id="list2">
-                        @for (int i = 2021; i <= 2026; i++)
-                        {
-                            <option value="@i">@i</option>
-                        }
-                    </datalist>
-                </div>
-            </div>
-        </div>
-
-    </div>
-    <div class="Indiv-form-elem">
-        <input type="submit" value="CONFIRM FEE PAYMENT" class="supply-appln" />
-    </div>
-</div>
-    }
-    }
-    <script type="text/javascript">
-
-        function yesnoCheck() {
-            if (document.getElementById('Online').checked) {
-                document.getElementById('ifOnline').style.display = 'block';
-                document.getElementById('CardNumber').disabled = false;
-                document.getElementById('CardName').disabled = false;
-                document.getElementById('CVV').disabled = false;
-                //document.getElementById('ExpiryDate').disabled = false;
-                //document.getElementById('ExpiryYear').disabled = false;
-            } else {
-                document.getElementById('ifOnline').style.display = 'none';
-                document.getElementById('CardNumber').disabled = true;
-                document.getElementById('CardName').disabled = true;
-                document.getElementById('CVV').disabled = true;
-                //document.getElementById('ExpiryDate').disabled = true;
-                //document.getElementById('ExpiryYear').disabled = true;
-            }
+        if (@ViewBag.Message != null)
+        {
+            <h2>@ViewBag.Validation</h2>
         }
+        <div class="form-horizontal">
 
-    </script>
+            @Html.TextBoxFor(m => m.AdvertisementID, new { @Value = @ViewBag.Message, @type = "hidden" })
+            <div class="Indiv-form-elem">
+                @Html.LabelFor(model => model.MenteeName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="Indiv-form-text">
+                    @Html.EditorFor(model => model.MenteeName, new { htmlAttributes = new { @Value = ViewBag.Firstname, @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.MenteeName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="Indiv-form-elem">
+                @Html.LabelFor(model => model.MentorEmailID, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="Indiv-form-text">
+                    @Html.EditorFor(model => model.MentorEmailID, new { htmlAttributes = new { @Value = ViewBag.EmailID, @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.MentorEmailID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="Indiv-form-elem">
+                @Html.LabelFor(model => model.MenteeContactNo, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="Indiv-form-text">
+                    @Html.EditorFor(model => model.MenteeContactNo, new { htmlAttributes = new { @Value = ViewBag.Contact, @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.MenteeContactNo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="Indiv-form-elem">
+                @Html.LabelFor(model => model.MenteeAge, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="Indiv-form-text">
+                    @Html.EditorFor(model => model.MenteeAge, new { htmlAttributes = new { @Value = ViewBag.Age, @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.MenteeAge, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="Indiv-form-elem">
+                @Html.LabelFor(model => model.MenteeState, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="Indiv-form-text">
+                    @Html.EditorFor(model => model.MenteeState, new { htmlAttributes = new { @Value = ViewBag.State, @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.MenteeState, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="Indiv-form-elem">
+                @Html.LabelFor(model => model.MenteeGitHub, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="Indiv-form-text">
+                    @Html.EditorFor(model => model.MenteeGitHub, new { htmlAttributes = new { @Value = ViewBag.Address, @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.MenteeGitHub, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="Indiv-form-elem">
+                @Html.LabelFor(model => model.MenteeLinkedIn, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="Indiv-form-text">
+                    @Html.EditorFor(model => model.MenteeLinkedIn, new { htmlAttributes = new { @Value = ViewBag.Linkedin, disabled = "disabled", @readonly = "readonly" } })
+                </div>
+            </div>
+
+
+            <div class="Indiv-form-elem">
+                <label>Total fees of this course : <span>@ViewBag.Fees</span> </label>
+            </div>
+
+            <div class="Indiv-form-elem">
+                @Html.LabelFor(model => model.PaymentMode, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.ValidationMessageFor(model => model.PaymentMode, "", new { @class = "text-danger" })
+                <div class="Indiv-form-radio">
+                    <input type="radio" data-val="true" data-val-required="Please select any one option" name="PaymentMode" id="Offline" value="Offline" onclick="javascript:yesnoCheck();" />
+                    @*@Html.RadioButtonFor(model => model.PaymentMode, "Offline", new { htmlAttributes = new { onclick = "javascript:yesnoCheck();", id = "Offline" } })*@
+                    <span>Offline</span><br />
+                    @*@Html.RadioButtonFor(model => model.PaymentMode, "Online", new { htmlAttributes = new { onclick = "javascript:yesnoCheck();", id = "Online" } })*@
+                    <input type="radio" data-val="true" data-val-required="Please select any one option" name="PaymentMode" id="Online" value="Online" onclick="javascript:yesnoCheck();" />
+                    <span>Online</span><br />
+                </div>
+            </div>
+
+            <div id="ifOnline" style="display:none" class="Indiv-form-elem">
+                <div class="Indiv-form-elem-1">
+                    <label>Card Type</label>
+                    <div class="card-type-select">
+                        <input type="radio" checked />
+                        <div class="credit-card-img">
+                            <img src="~/uiImages/Fees/Visa.png" />
+                            <img src="~/uiImages/Fees/Rupay.png" />
+                            <img src="~/uiImages/Fees/Mastercard.png" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="Indiv-form-elem">
+                    <label>Card Number</label>
+                    <div class="Indiv-form-text">
+                        <input name="CardNumber" data-val="true" data-val-required="16 digits are expected" id="CardNumber" pattern="[3-5]{1}[0-9]{11}" type="text" maxlength="16" minlength="16" title="Invalid number. Start with 3,4 or 5" placeholder="################" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)/g, '');" required disabled>
+                        @Html.ValidationMessageFor(model => model.CardNumber, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="Indiv-form-elem">
+                    <label>Name on Card</label>
+                    <div class="Indiv-form-text">
+                        <input name="CardName" data-val="true" data-val-required="Atleast 3 characters are required" id="CardName" type="text" maxlength="50" minlength="3" placeholder="Name on your Card" oninput="this.value = this.value.replace(/[0-9.]/g, '').replace(/(\..*)/g, '');" required disabled>
+                        @Html.ValidationMessageFor(model => model.CardName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="Indiv-form-elem">
+                    <label>CVV</label>
+                    <div class="Indiv-form-text">
+                        <input name="cvv_new" data-val="true" data-val-required="4 digits are expected" id="CVV" type="text" maxlength="4" minlength="4" placeholder="####" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)/g, '');" required disabled>
+                        @Html.ValidationMessageFor(model => model.cvv_new, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                @*<div class="Indiv-form-elem">
+                        <label>CVV</label>
+                        <div class="Indiv-form-text">
+                            <input name="CVV" data-val="true" data-val-required="4 digits are expected" id="CVV" type="text" maxlength="4" minlength="4" placeholder="CVV" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)/g, '');" required disabled>
+                            @Html.ValidationMessageFor(model => model.CVV, "", new { @class = "text-danger" })
+                        </div>
+                    </div>*@
+
+                <div class="Indiv-form-elem">
+                    <div class="Expiry-Field">
+                        <div>
+                            <input list="list1" placeholder="Month" name="ExpiryDate" data-val="true" data-val-required="This field is required" class="ExpiryDate" id="ExpiryDate"><br />
+                            @Html.ValidationMessageFor(model => model.ExpiryDate, "", new { @class = "text-danger" })
+                            <datalist id="list1">
+                                @for (int i = 1; i <= 12; i++)
+                                {
+                                    <option value="@i">@i</option>
+                                }
+                            </datalist>
+                        </div>
+
+                        <div>
+                            <input list="list2" data-val="true" data-val-required="This field is required" placeholder="Year" name="ExpiryYear" class="ExpiryDate" id="ExpiryYear"><br />
+                            @Html.ValidationMessageFor(model => model.ExpiryYear, "", new { @class = "text-danger" })
+                            <datalist id="list2">
+                                @for (int i = 2021; i <= 2026; i++)
+                                {
+                                    <option value="@i">@i</option>
+                                }
+                            </datalist>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="Indiv-form-elem">
+                <input type="submit" value="CONFIRM FEE PAYMENT" class="supply-appln" />
+            </div>
+        </div>
+    }
+}
+<script type="text/javascript">
+
+    function yesnoCheck() {
+        if (document.getElementById('Online').checked) {
+            document.getElementById('ifOnline').style.display = 'block';
+            document.getElementById('CardNumber').disabled = false;
+            document.getElementById('CardName').disabled = false;
+            document.getElementById('CVV').disabled = false;
+            //document.getElementById('ExpiryDate').disabled = false;
+            //document.getElementById('ExpiryYear').disabled = false;
+        } else {
+            document.getElementById('ifOnline').style.display = 'none';
+            document.getElementById('CardNumber').disabled = true;
+            document.getElementById('CardName').disabled = true;
+            document.getElementById('CVV').disabled = true;
+            //document.getElementById('ExpiryDate').disabled = true;
+            //document.getElementById('ExpiryYear').disabled = true;
+        }
+    }
+
+</script>
