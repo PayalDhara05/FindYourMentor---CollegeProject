@@ -1,6 +1,4 @@
-﻿@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;600;700&family=PT+Sans&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap");
+﻿@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap");
 
 * {
     margin: 0;
@@ -17,285 +15,430 @@ html, body {
     padding: 0px;
     font-size: 10px;
 }
-
-.whole-container {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-}
-
-    .whole-container .all-filters {
-        width: 70rem;
-        margin: 0 0rem 0 5rem;
-        border-right: 12px double purple;
-        height: 100vh;
-    }
-
-.all-adv {
-    height: 100vh;
-    overflow-y: scroll;
-    width: 100%;
-    background-color: #EAE7DC;
-}
-
-.all-cards {
+.mainIndex {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    margin-top: 5rem;
+    height: auto;
 }
 
-.indiv-card {
-    -webkit-box-shadow: 2px 2px #666;
-    box-shadow: 2px 2px #666;
-    margin: 1rem;
-    width: 60rem;
-    border-top-right-radius: 40px;
-}
-
-.course-info {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    -webkit-box-pack: justify;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
-    background-color: #182C61;
-    padding: 2rem;
-    border-top-right-radius: 40px;
-}
-
-    .course-info p {
-        font-size: 3rem;
-        font-weight: bold;
-        color: white;
-        font-family: 'Montserrat', sans-serif;
+    .mainIndex .all-filters {
+        margin-top: 10rem;
+        width: 40%;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        position: -webkit-sticky;
+        position: sticky;
+        top: 0;
+        -ms-flex-item-align: start;
+        align-self: flex-start;
     }
 
-    .course-info i {
-        font-size: 3rem;
-        color: red;
-    }
-
-i:hover {
-    -webkit-filter: drop-shadow(2px 2px 5px white);
-    filter: drop-shadow(2px 2px 5px white);
-}
-
-.All-info {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    background-color: #b2bec3;
-    color: white;
-}
-
-    .All-info .Description, .All-info .Class-name, .All-info .mentor-name {
-        font-size: 2rem;
-        font-family: 'Open Sans', sans-serif;
-        color: #2d3436;
-        font-weight: bold;
-        color: #130f40;
-        text-align: center;
-    }
-
-    .All-info .Description {
-        margin-top: 4rem;
-    }
-
-    .All-info .mentor-name span {
-        text-decoration: underline;
-    }
-
-    .All-info .Class-name {
-        margin-bottom: 3rem;
-    }
-
-    .All-info .Address .Address-title, .All-info .state-title {
-        font-size: 1.5rem;
-        color: #666;
-        font-weight: bold;
-        font-family: 'Open Sans', sans-serif;
-        margin-bottom: 2rem;
-    }
-
-    .All-info .Address, .All-info .State {
-        font-size: 1.5rem;
-        font-weight: bold;
-        font-family: 'Open Sans', sans-serif;
-        margin-bottom: 2rem;
-        color: black;
-        padding: 0rem 2rem 0rem 2rem;
-    }
-
-    .All-info .add-info {
-        border-top: 2px solid #182C61;
-        margin-top: 4rem;
-    }
-
-    .All-info .Address {
-        margin-top: 2rem;
-    }
-
-.seats-info {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    margin-top: 2rem;
-}
-
-    .seats-info p {
-        font-size: 2rem;
-        font-family: 'Open Sans', sans-serif;
-        font-weight: bold;
-        color: #130f40;
-    }
-
-        .seats-info p:nth-child(1) {
-            margin-bottom: 1rem;
+        .mainIndex .all-filters .filter-one {
+            width: 100%;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+            flex-direction: column;
         }
 
-        .seats-info p span {
-            text-decoration: underline;
+        .mainIndex .all-filters .filter-heading {
+            margin-bottom: 3rem;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
         }
 
-hr {
-    outline: 2px solid #666;
-    margin-bottom: 2rem;
-}
+            .mainIndex .all-filters .filter-heading p {
+                font-size: 2rem;
+                font-family: 'Montserrat', sans-serif;
+                color: #313030;
+                font-weight: bold;
+            }
 
-.card-btn, .operation-btn {
-    background-color: #30336b;
-    width: 60rem;
-    height: 5rem;
-}
+            .mainIndex .all-filters .filter-heading i {
+                color: #833471;
+                font-size: 1.5rem;
+                margin-right: 1rem;
+            }
 
-    .card-btn button, .operation-btn button {
-        float: right;
-        margin-top: 0.5rem;
-        padding: 1rem 5rem;
-        font-size: 1.5rem;
-        font-weight: bold;
-        font-family: 'Open Sans', sans-serif;
-        background-color: #9AECDB;
-        border: none;
-        outline: none;
-        border-radius: 30px;
-        -webkit-transition: all .2s linear;
-        transition: all .2s linear;
-    }
+        .mainIndex .all-filters .sub-filter-one, .mainIndex .all-filters .sub-filter-two, .mainIndex .all-filters .sub-filter-three, .mainIndex .all-filters .sub-filter-four {
+            padding: 0rem 10rem;
+        }
 
-.operation-btn {
-    background-color: #32367c;
-}
+            .mainIndex .all-filters .sub-filter-one p, .mainIndex .all-filters .sub-filter-two p, .mainIndex .all-filters .sub-filter-three p, .mainIndex .all-filters .sub-filter-four p {
+                margin-top: 1rem;
+                font-size: 1.5rem;
+                font-weight: bold;
+                color: #666;
+                font-family: 'Montserrat', sans-serif;
+            }
 
-    .operation-btn button:nth-child(1) {
-        float: left;
-    }
+            .mainIndex .all-filters .sub-filter-one input, .mainIndex .all-filters .sub-filter-two input, .mainIndex .all-filters .sub-filter-three input, .mainIndex .all-filters .sub-filter-four input {
+                margin-top: 0.7rem;
+                width: 100%;
+                padding: 0.5rem 0.3rem;
+            }
 
-button:hover {
-    background-color: #130f40;
-    color: white;
-}
+        .mainIndex .all-filters .all-checkboxes {
+            margin-top: 2rem;
+            padding: 0rem 10rem;
+        }
 
-.indiv-card:hover {
-    -webkit-box-shadow: 10px 10px 16px #666;
-    box-shadow: 10px 10px 16px #666;
-}
+            .mainIndex .all-filters .all-checkboxes span {
+                font-size: 1.5rem;
+                font-weight: bolder;
+                color: #666;
+                font-family: 'Montserrat', sans-serif;
+            }
 
-@media screen and (max-width: 615px) {
-    .indiv-card {
-        width: 100%;
-        height: auto;
-    }
+            .mainIndex .all-filters .all-checkboxes .indiv-checkbox {
+                margin-top: 0.8rem;
+            }
 
-    .card-btn, .operation-btn {
-        width: 100%;
-    }
+            .mainIndex .all-filters .all-checkboxes input[type="checkbox"] {
+                margin-left: 1rem;
+                height: 2rem;
+                width: 2rem;
+                margin-top: 0.3rem;
+                accent-color: #833471;
+            }
 
-    .container {
-        width: 100%;
-    }
-
-        .container .search-field {
+        .mainIndex .all-filters .footer-one-box {
             width: 100%;
         }
-}
 
-@media screen and (max-width: 615px) {
-    html {
-        font-size: 7px;
-    }
-}
+            .mainIndex .all-filters .footer-one-box p {
+                float: right;
+                font-size: 1.5rem;
+                color: #833471;
+                font-family: 'Montserrat', sans-serif;
+                font-weight: bold;
+                margin-right: 10rem;
+                cursor: pointer;
+            }
 
-.saved-list-filter {
-    margin-top: 5rem;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    font-size: 3rem;
-    font-family: 'Open Sans', sans-serif;
-}
+                .mainIndex .all-filters .footer-one-box p:hover {
+                    text-decoration: underline;
+                    -webkit-text-decoration-color: #833471;
+                    text-decoration-color: #833471;
+                }
 
-    .saved-list-filter label {
-        margin-top: 5rem;
-        margin-right: 2rem;
-        color: #D2042D;
-        font-weight: bold;
-    }
-
-    .saved-list-filter .grp-radios, .saved-list-filter .grp-radios-1 {
-        margin-top: 5rem;
-        color: #833471;
-        font-weight: bold;
-    }
-
-        .saved-list-filter .grp-radios input[type="radio"], .saved-list-filter .grp-radios-1 input[type="radio"] {
-            margin-left: 3rem;
-            width: 2.5rem;
-            height: 2.5rem;
-            accent-color: #833471;
+        .mainIndex .all-filters .separation {
+            width: 65%;
+            margin: 0rem 10rem;
         }
 
-    .saved-list-filter .grp-radios-1 {
-        display: none;
+            .mainIndex .all-filters .separation p {
+                text-align: center;
+                font-size: 2rem;
+                font-family: 'Montserrat', sans-serif;
+                font-weight: bold;
+                color: #833471;
+            }
+
+        .mainIndex .all-filters .filter-two {
+            margin-top: 2rem;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            width: 100%;
+        }
+
+            .mainIndex .all-filters .filter-two p {
+                margin-top: 1rem;
+                font-size: 2rem;
+                font-weight: bold;
+                color: #666;
+                font-family: 'Montserrat', sans-serif;
+            }
+
+            .mainIndex .all-filters .filter-two input {
+                margin-top: 0.7rem;
+                width: 70%;
+                padding: 0.5rem 0.3rem;
+            }
+
+        .mainIndex .all-filters .input-search {
+            margin-top: 2rem;
+            width: 65%;
+            height: 4.9rem;
+            border: 1px solid black;
+        }
+
+            .mainIndex .all-filters .input-search input {
+                width: 85.6%;
+                padding: 1rem 0.5rem;
+                border: none;
+                outline: none;
+                font-size: 1.5rem;
+            }
+
+            .mainIndex .all-filters .input-search button {
+                width: 10%;
+                height: 5rem;
+                width: 5rem;
+                background-color: #833471;
+                border: none;
+                outline: none;
+                margin-top: -0.1rem;
+                -webkit-transition: all .3s linear;
+                transition: all .3s linear;
+                cursor: pointer;
+            }
+
+                .mainIndex .all-filters .input-search button i {
+                    font-size: 2rem;
+                    padding: 0.5rem 1rem;
+                    color: white;
+                }
+
+                .mainIndex .all-filters .input-search button:hover {
+                    background-color: #f13bf1;
+                }
+
+    .mainIndex .all-courses {
+        width: 60%;
+        margin-right: 10rem;
     }
+
+        .mainIndex .all-courses .indiv-course {
+            margin-top: 2rem;
+            padding: 2rem 3rem;
+            -webkit-box-shadow: 1px 1px 3px #666;
+            box-shadow: 1px 1px 3px #666;
+            padding-top: 3rem;
+        }
+
+        .mainIndex .all-courses .bookmark-logo {
+            width: 100%;
+        }
+
+            .mainIndex .all-courses .bookmark-logo i {
+                float: right;
+                font-size: 3rem;
+                color: red;
+                margin-right: 1rem;
+                margin-bottom: 2rem;
+                cursor: pointer;
+            }
+
+                .mainIndex .all-courses .bookmark-logo i:hover {
+                    -webkit-filter: drop-shadow(1px 1px 5px #ee5a5a);
+                    filter: drop-shadow(1px 1px 5px #ee5a5a);
+                }
+
+        .mainIndex .all-courses .name-logo {
+            width: 100%;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+            justify-content: space-between;
+        }
+
+            .mainIndex .all-courses .name-logo img {
+                height: 4rem;
+                width: 4rem;
+            }
+
+            .mainIndex .all-courses .name-logo p {
+                font-size: 3rem;
+                font-weight: bold;
+                color: #833471;
+                font-family: 'Montserrat', sans-serif;
+            }
+
+        .mainIndex .all-courses #State {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #666;
+            font-family: 'Montserrat', sans-serif;
+        }
+        .mainIndex .all-courses #course-name {
+            margin-top: 1rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #666;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .mainIndex .all-courses .seat-info {
+            margin-top: 1rem;
+        }
+
+            .mainIndex .all-courses .seat-info p {
+                text-align: center;
+                font-size: 1.5rem;
+                font-weight: bold;
+                color: #666;
+                font-family: 'Montserrat', sans-serif;
+            }
+
+        .mainIndex .all-courses .course-fields {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-pack: distribute;
+            justify-content: space-around;
+            margin-top: 3rem;
+        }
+
+            .mainIndex .all-courses .course-fields .field-header {
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                -ms-flex-pack: distribute;
+                justify-content: space-around;
+            }
+
+                .mainIndex .all-courses .course-fields .field-header p {
+                    font-size: 1.5rem;
+                    font-weight: bold;
+                    font-family: 'Montserrat', sans-serif;
+                }
+
+                .mainIndex .all-courses .course-fields .field-header i {
+                    font-size: 1.7rem;
+                    margin-left: 1rem;
+                    color: #833471;
+                }
+
+            .mainIndex .all-courses .course-fields .indiv-course p {
+                font-size: 1.7rem;
+            }
+
+        .mainIndex .all-courses .value-text {
+            font-size: 1.4rem;
+            margin-top: 1rem;
+            font-family: 'Montserrat', sans-serif;
+            color: #252424;
+            font-weight: bold;
+        }
+
+        .mainIndex .all-courses .Mentor-name {
+            font-size: 1.5rem;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            text-align: center;
+            margin-top: 2rem;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: bold;
+        }
+
+            .mainIndex .all-courses .Mentor-name span {
+                color: #666;
+            }
+
+        .mainIndex .all-courses .course-btn {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            -ms-flex-pack: distribute;
+            justify-content: space-around;
+            margin-top: 3rem;
+            font-size: 1.7rem;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: bold;
+        }
+
+        .mainIndex .all-courses .course-btn {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            -ms-flex-pack: distribute;
+            justify-content: space-around;
+            margin-top: 3rem;
+        }
+
+            .mainIndex .all-courses .course-btn button {
+                font-size: 1.5rem;
+                font-family: 'Montserrat', sans-serif;
+                font-weight: bold;
+                border: 2px solid #833471;
+                background-color: #833471;
+                outline: none;
+                color: white;
+                -webkit-transition: all .3s linear;
+                transition: all .3s linear;
+                cursor: pointer;
+                width: 15rem;
+                padding: 0.8rem 0.5rem;
+                border-radius: 20px;
+            }
+
+                .mainIndex .all-courses .course-btn button:hover {
+                    background-color: white;
+                    color: #833471;
+                }
+
+        .mainIndex .all-courses .detail-all p {
+            float: right;
+            font-size: 1.5rem;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: bold;
+        }
+
+            .mainIndex .all-courses .detail-all p a {
+                color: #833471;
+                text-decoration: none;
+            }
+
+                .mainIndex .all-courses .detail-all p a:hover {
+                    text-decoration: underline;
+                    -webkit-text-decoration-color: #833471;
+                    text-decoration-color: #833471;
+                }
 
 .container {
     margin-top: 3rem;

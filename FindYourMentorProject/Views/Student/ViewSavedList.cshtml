@@ -32,19 +32,19 @@
     @if (@Model.Count() == 0)
     {
         <div class="no-records-msg">
-            <p>No more Courses saved !! Add More</p>
+            <p>No bookmarks added !! Add More</p>
         </div>   
     }
     else
     {
-        <div class="all-cards">
-            @foreach (var item in Model)
-            {
+<div class="all-cards">
+    @foreach (var item in Model)
+    {
 
-            <div class="indiv-card">
+        @*<div class="indiv-card">
                 <div class="course-info">
                     <p>@item.CourseName</p>
-                    <i class="fas fa-bookmark" onclick="Del(@item.AdvertisementID)" id="delete_icon" title="Remove from Bookmarks"></i>
+                    <i class="fas fa-bookmark" onclick="Del(@item.AdvertisementID)" id="delete_icon" title="Remove from Bookmark"></i>
                 </div>
                 <div class="All-info">
                     <p class="Description">@item.Description</p>
@@ -58,10 +58,97 @@
                 <div class="card-btn">
                     <button>FeedBack & More</button>
                 </div>
-            </div>
+            </div>*@
+        <div class="indiv-card">
+            <div class="bookmark-logo">
+                @{
+                    int count = 0;
+                }
+                @foreach (var bookmarked in Model)
+                {
+                    if (item.AdvertisementID == bookmarked.AdvertisementID)
+                    {
+                        count++;
+                    }
+                }
 
+                @if (count > 0)
+                {
+                    <i id="onsave" onclick="Del(@item.AdvertisementID)" class="fas fa-bookmark" title="Remove from Bookmarks"></i>
+                }
+                else
+                {
+                    <i id="onsave" onclick="Fav(@item.AdvertisementID)" class="far fa-bookmark" title="Add to Bookmarks"></i>
+                }
+            </div>
+            <div class="name-logo">
+                <p>@item.ClassName</p>
+                @if (!string.IsNullOrEmpty(item.logo))
+                {
+                    <img src="@Url.Content(item.logo)" alt="logo" />
+                }
+            </div>
+            <p id="State">@item.State</p>
+            <p id="course-name">@item.CourseName</p>
+            <div class="course-fields">
+                <div class="indiv-field">
+                    <div class="field-header">
+                        <p>Duration</p>
+                        <i class="far fa-calendar"></i>
+                    </div>
+                    <p class="value-text">@item.Duration Months</p>
+                </div>
+                <div class="indiv-field">
+                    <div class="field-header">
+                        <p>Fees</p>
+                        <i class="far fa-credit-card"></i>
+                    </div>
+                    <p class="value-text">₹ @item.Fees</p>
+                </div>
+                <div class="indiv-field">
+                    <div class="field-header">
+                        <p>Starting from</p>
+                        <i class="fas fa-hourglass-start"></i>
+                    </div>
+                    <p class="value-text">@item.StartDate.ToShortDateString()</p>
+                </div>
+            </div>
+            <div class="Mentor-name">
+                <p><span>Mentor's :- </span>@item.MentorName</p>
+            </div>
+            @{
+                int seatCount = @item.TotalSeats - @item.SeatsOccupied;
             }
+            @if (seatCount > 1)
+            {
+                <div class="seat-info">
+                    <p>@seatCount seats are still left !!</p>
+                </div>
+            }
+            else if (seatCount == 1)
+            {
+                <div class="seat-info">
+                    <p>@seatCount seat is still left !!</p>
+                </div>
+            }
+            else
+            {
+                <div class="seat-info">
+                    <p>All seats are occupied.. Apply next time :)</p>
+                </div>
+            }
+
+            <div class="course-btn">
+                <button onclick="PopupForm(@item.AdvertisementID)">Apply</button>
+                <button onclick="PopupForm2(@item.AdvertisementID)">Appointment</button>
+            </div>
+            <div class="detail-all">
+                <p><a href='/Student/ShowFullAdvertisement/@item.AdvertisementID'>View details</a></p>
+            </div>
         </div>
+
+    }
+</div>
     }
 </body>
 
@@ -69,7 +156,7 @@
 
     function Del(id) {
 
-       if (confirm('Are You Sure to Delete this Advertisement from saved list ?')) {
+       if (confirm('Are You Sure to remove this bookmark ?')) {
                 $.ajax({
                     type: "POST",
                     url: '@Url.Action("RemoveFromSavedList", "Student")/' + id,

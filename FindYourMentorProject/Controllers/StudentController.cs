@@ -123,6 +123,7 @@ namespace FindYourMentorProject.Controllers
                 db.Entry(obj).State = EntityState.Modified;
                 db.Entry(obj).Property("Password").IsModified = false;             //Prevention of update null value error
                 db.Entry(obj).Property("IsEmailVerified").IsModified = false;
+                db.Entry(obj).Property("ProfilePicture").IsModified = false;
                 // 1st method - If you have an entity that you know already exists in the database but to which changes may have been made then you can tell the db to attach the entity and set its state to Modified.
                 //var existinguser = db.RegisterStudents.Find(userid);  //2nd method - Traditional approach
                 //existinguser.FirstName = obj.FirstName;
@@ -661,17 +662,18 @@ namespace FindYourMentorProject.Controllers
             {
                 var user = db.RegisterStudents.Where(a => a.UserID == userid).FirstOrDefault();
                 Fee feeappln = db.Fees.Where(x => x.AdvertisementID == id && x.MenteeID == userid).FirstOrDefault();
-                var cdv = db.CourseAdvertisements.Where(x => x.AdvertisementID == id).FirstOrDefault();
+                var cadv = db.CourseAdvertisements.Where(a => a.AdvertisementID == id).FirstOrDefault();
                 if (feeappln != null)
                 {
                     ViewBag.status = "Paid";
                     ViewBag.User = user;
                     ViewBag.Fee = feeappln;
+                    ViewBag.Fees = cadv.Fees;
                     return View();
                 }
                 else
-                { 
-
+                {
+                    ViewBag.Fees = cadv.Fees;
                     ViewBag.Id = userid;
                     ViewBag.User = user;
                     ViewBag.Message = id;   //AdvertisementID
@@ -684,7 +686,6 @@ namespace FindYourMentorProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                int userid = Convert.ToInt32(Session["UserID"]);
                 using (FindYourMentorProjectEntities db = new FindYourMentorProjectEntities())
                 {
                     var user = db.RegisterStudents.Where(a => a.UserID == userid).FirstOrDefault();
@@ -744,7 +745,6 @@ namespace FindYourMentorProject.Controllers
 
         public ActionResult AdmissionStatusData()
         {
-            int userid = Convert.ToInt32(Session["UserID"]);
             FindYourMentorProjectEntities db = new FindYourMentorProjectEntities();
             db.Configuration.ProxyCreationEnabled = false;
             List<Fee> FeeList = db.Fees.Where(a => a.MenteeID == userid).ToList();
@@ -764,7 +764,7 @@ namespace FindYourMentorProject.Controllers
 
             var fromEmail = new MailAddress("payaldhara05@gmail.com", "Find Your Mentor");
             var toEmail = new MailAddress(mentorEmail);
-            var fromEmailPassword = "****";
+            var fromEmailPassword = "priyapayu";
 
             subject = "Mentee Application Request";
             body = "Name : " + menteeName + "<br>" + "Location : " + State + "<br>" + "Above mentee has requested to apply for the Course Advertisement that you have posted on " + creationDate + " for courses " + CourseName + " under Mentor " + mentorName + ".<br> Please visit our portal for more infomation.<br><br><br><br>Thanks & Regards<br>Find Your Mentor";

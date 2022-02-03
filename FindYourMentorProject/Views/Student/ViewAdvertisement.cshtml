@@ -7,71 +7,148 @@
 
 <link href="~/Custom/css/StudentIndex.css" rel="stylesheet" />
 <body>
-    <div id="loader-all" style="display:none;height:500px;">
-        <img src="~/uiImages/load1.gif" />
-    </div>
-    <div class="whole-container">
+    <div class="mainIndex">
         <div class="all-filters">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem esse unde maxime commodi ut voluptatum labore odio, ea, earum ex velit porro consequatur nulla nostrum obcaecati magnam deserunt vero veritatis possimus debitis tempora? Deleniti distinctio quo commodi quas! Reiciendis, incidunt. Eius nam quos sed totam ea debitis inventore in autem.</p>
+            <div class="filter-one">
+                <div class="filter-heading">
+                    <i class="fas fa-filter"></i>
+                    <p>Filters</p>
+                </div>
+                <div class="sub-filter-one">
+                    <p>Category</p>
+                    <input type="text" name="" id="" placeholder="e.g. IT">
+                </div>
+                <div class="sub-filter-two">
+                    <p>Location</p>
+                    <input type="text" name="" id="" placeholder="e.g. Maharashtra">
+                </div>
+                <div class="sub-filter-three">
+                    <p>City</p>
+                    <input type="text" name="" id="" placeholder="e.g. Mumbai">
+                </div>
+                <div class="sub-filter-four">
+                    <p>Fee</p>
+                    <input type="text" name="" id="" placeholder="e.g. High">
+                </div>
+                <div class="all-checkboxes">
+                    <div class="indiv-checkbox">
+                        <span>Online Mode</span><input type="checkbox" name="" id="">
+                    </div>
+                    <div class="indiv-checkbox">
+                        <span>Offline Mode</span><input type="checkbox" name="" id="">
+                    </div>
+                    <div class="indiv-checkbox">
+                        <span>Both Mode</span><input type="checkbox" name="" id="">
+                    </div>
+                </div>
+                <div class="footer-one-box">
+                    <p>Clear all</p>
+                </div>
+            </div>
+            <div class="separation">
+                <p>OR</p>
+            </div>
+            <div class="filter-two">
+                <p>Search</p>
+                <div class="input-search">
+                    <input type="text" name="" id="" placeholder="Search By Category/Location/City">
+                    <button type="submit"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
         </div>
-        <div class="all-adv">
-            <div class="all-cards">
 
-                @foreach (var adv in Model.CourseAdvertisement)
+        <div class="all-courses">
+            @foreach (var adv in Model.CourseAdvertisement)
+            {
+            <div class="indiv-course">
+                <div class="bookmark-logo">
+                    @{
+                        int count = 0;
+                    }
+                    @foreach (var bookmarked in Model.SavedList)
+                    {
+                        if (adv.AdvertisementID == bookmarked.AdvertisementID)
+                        {
+                            count++;
+                        }
+                    }
+
+                    @if (count > 0)
+                    {
+                        <i id="onsave" onclick="Del(@adv.AdvertisementID)" class="fas fa-bookmark" title="Remove from Bookmarks"></i>
+                    }
+                    else
+                    {
+                        <i id="onsave" onclick="Fav(@adv.AdvertisementID)" class="far fa-bookmark" title="Add to Bookmarks"></i>
+                    }
+                </div>
+                <div class="name-logo">
+                    <p>@adv.ClassName</p>
+                    @if (!string.IsNullOrEmpty(adv.logo))
+                    {
+                        <img src="@Url.Content(adv.logo)" alt="logo" />
+                    }
+                </div>
+                <p id="State">@adv.State</p>
+                <p id="course-name">@adv.CourseName</p>
+                <div class="course-fields">
+                    <div class="indiv-field">
+                        <div class="field-header">
+                            <p>Duration</p>
+                            <i class="far fa-calendar"></i>
+                        </div>
+                        <p class="value-text">@adv.Duration Months</p>
+                    </div>
+                    <div class="indiv-field">
+                        <div class="field-header">
+                            <p>Fees</p>
+                            <i class="far fa-credit-card"></i>
+                        </div>
+                        <p class="value-text">₹ @adv.Fees</p>
+                    </div>
+                    <div class="indiv-field">
+                        <div class="field-header">
+                            <p>Starting from</p>
+                            <i class="fas fa-hourglass-start"></i>
+                        </div>
+                        <p class="value-text">@adv.StartDate.ToShortDateString()</p>
+                    </div>
+                </div>
+                <div class="Mentor-name">
+                    <p><span>Mentor's :- </span>@adv.MentorName</p>
+                </div>
+                @{
+                    int seatCount = @adv.TotalSeats - @adv.SeatsOccupied;
+                }
+                @if (seatCount > 1)
                 {
-                    <div class="indiv-card">
-                        <div class="course-info">
-                            <p>@adv.CourseName</p>
-                            @{
-                                int count = 0;
-                            }
-                            @foreach (var bookmarked in Model.SavedList)
-                            {
-                                if (adv.AdvertisementID == bookmarked.AdvertisementID)
-                                {
-                                    count++;
-                                }
-                            }
-
-                            @if (count > 0)
-                            {
-                                <i id="onsave" onclick="Fav(@adv.AdvertisementID)" class="fas fa-bookmark" title="Remove from Bookmarks"></i>
-                            }
-                            else
-                            {
-                                <i id="onsave" onclick="Fav(@adv.AdvertisementID)" class="far fa-bookmark" title="Add to Bookmarks"></i>
-                            }
-
-                        </div>
-                        <div class="All-info">
-                            <p class="Description">@adv.Description !!!</p>
-                            <p class="Class-name">Will get conducted at @adv.ClassName</p>
-                            <p class="mentor-name">By Mentor:&nbsp;&nbsp;&nbsp;<span>@adv.MentorName</span></p>
-
-                            <div class="seats-info">
-                                <p>@(adv.TotalSeats- adv.SeatsOccupied) Seats are left !!!</p>
-                                <p>Total Seats are <span>@adv.TotalSeats</span></p>
-                            </div>
-
-                            <div class="add-info">
-                                <p class="Address"><span class="Address-title">Address: </span>@adv.Address</p>
-                                <p class="State"><span class="state-title">State: </span>@adv.State</p>
-                            </div>
-                        </div>
-                        <div class="operation-btn">
-                            <button onclick="PopupForm2(@adv.AdvertisementID)" id="Apply">Appointment</button>
-                            <button onclick="PopupForm(@adv.AdvertisementID)" id="Apply">Apply</button>
-                        </div>
-                        <div class="card-btn">
-                            <button><a href='/Student/ShowFullAdvertisement/@adv.AdvertisementID'>FeedBack & More</a></button>
-                        </div>
+                    <div class="seat-info">
+                        <p>@seatCount seats are still left !!</p>
+                    </div>
+                }
+                else if (seatCount == 1)
+                {
+                    <div class="seat-info">
+                        <p>@seatCount seat is still left !!</p>
+                    </div>
+                }
+                else
+                {
+                    <div class="seat-info">
+                        <p>All seats are occupied.. Apply next time :)</p>
                     </div>
                 }
 
-
+                <div class="course-btn">
+                    <button onclick="PopupForm(@adv.AdvertisementID)">Apply</button>
+                    <button onclick="PopupForm2(@adv.AdvertisementID)">Appointment</button>
+                </div>
+                <div class="detail-all">
+                    <p><a href='/Student/ShowFullAdvertisement/@adv.AdvertisementID'>View details</a></p>
+                </div>
             </div>
+            }
         </div>
-    </div>
 </body>
 
 <script type="text/javascript">
@@ -114,6 +191,7 @@
                         globalPosition: "top center",
                         className: "success"
                     })
+                document.location.reload();
 
             }
         });
@@ -245,6 +323,26 @@
         }
         return false;
     }
+
+    function Del(id) {
+
+       if (confirm('Are You Sure to Delete this Advertisement from saved list ?')) {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("RemoveFromSavedList", "Student")/' + id,
+                    success: function (data) {
+                        if (data.success) {
+                            $.notify(data.message, {
+                                globalPosition: "top center",
+                                className: "success"
+                            })
+                        }
+                        document.location.reload();
+                    }
+
+                });
+            }
+        };
 </script>
 
 

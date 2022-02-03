@@ -1,4 +1,6 @@
-﻿* {
+﻿@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap");
+
+* {
     margin: 0;
     padding: 0;
     -webkit-box-sizing: border-box;
@@ -28,143 +30,193 @@ html, body {
     justify-content: center;
 }
 
-.indiv-card {
-    -webkit-box-shadow: 2px 2px #666;
-    box-shadow: 2px 2px #666;
-    margin: 1rem;
-    width: 60rem;
-    border-top-right-radius: 40px;
-}
+    .all-cards .indiv-card {
+        width: 45%;
+        margin-top: 2rem;
+        padding: 2rem 3rem;
+        -webkit-box-shadow: 1px 1px 3px #666;
+        box-shadow: 1px 1px 3px #666;
+        padding-top: 3rem;
+        margin: 1rem;
+    }
 
-.course-info {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    -webkit-box-pack: justify;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
-    background-color: #182C61;
-    padding: 2rem;
-    border-top-right-radius: 40px;
-}
+    .all-cards .bookmark-logo {
+        width: 100%;
+    }
 
-    .course-info p {
-        font-size: 3rem;
+        .all-cards .bookmark-logo i {
+            float: right;
+            font-size: 3rem;
+            color: red;
+            margin-right: 1rem;
+            margin-bottom: 2rem;
+            cursor: pointer;
+        }
+
+            .all-cards .bookmark-logo i:hover {
+                -webkit-filter: drop-shadow(1px 1px 5px #ee5a5a);
+                filter: drop-shadow(1px 1px 5px #ee5a5a);
+            }
+
+    .all-cards .name-logo {
+        width: 100%;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+    }
+
+        .all-cards .name-logo img {
+            height: 4rem;
+            width: 4rem;
+        }
+
+        .all-cards .name-logo p {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #833471;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+    .all-cards #State {
+        font-size: 2rem;
         font-weight: bold;
-        color: white;
+        color: #666;
         font-family: 'Montserrat', sans-serif;
     }
 
-    .course-info i {
-        font-size: 3rem;
-        color: red;
-    }
-
-i:hover {
-    -webkit-filter: drop-shadow(2px 2px 5px white);
-    filter: drop-shadow(2px 2px 5px white);
-}
-
-.All-info {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    background-color: #b2bec3;
-    color: white;
-}
-
-    .All-info .Description, .All-info .Class-name, .All-info .mentor-name {
-        font-size: 2rem;
-        font-family: 'Open Sans', sans-serif;
-        color: #2d3436;
-        font-weight: bold;
-        color: #130f40;
-        text-align: center;
-    }
-
-    .All-info .Description {
-        margin-top: 4rem;
-    }
-
-    .All-info .mentor-name span {
-        text-decoration: underline;
-    }
-
-    .All-info .Class-name {
-        margin-bottom: 3rem;
-    }
-
-    .All-info .Address .Address-title, .All-info .state-title {
+    .all-cards #course-name {
+        margin-top: 1rem;
         font-size: 1.5rem;
+        font-weight: bold;
         color: #666;
-        font-weight: bold;
-        font-family: 'Open Sans', sans-serif;
-        margin-bottom: 2rem;
+        font-family: 'Montserrat', sans-serif;
     }
 
-    .All-info .Address, .All-info .State {
+    .all-cards .course-fields {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-pack: distribute;
+        justify-content: space-around;
+        margin-top: 3rem;
+    }
+
+        .all-cards .course-fields .field-header {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-pack: distribute;
+            justify-content: space-around;
+        }
+
+            .all-cards .course-fields .field-header p {
+                font-size: 1.5rem;
+                font-weight: bold;
+                font-family: 'Montserrat', sans-serif;
+            }
+
+            .all-cards .course-fields .field-header i {
+                font-size: 1.7rem;
+                margin-left: 1rem;
+                color: #833471;
+            }
+
+        .all-cards .course-fields .indiv-course p {
+            font-size: 1.7rem;
+        }
+
+    .all-cards .value-text {
+        font-size: 1.4rem;
+        margin-top: 1rem;
+        font-family: 'Montserrat', sans-serif;
+        color: #252424;
+        font-weight: bold;
+    }
+
+    .all-cards .Mentor-name {
         font-size: 1.5rem;
-        font-weight: bold;
-        font-family: 'Open Sans', sans-serif;
-        margin-bottom: 2rem;
-        color: black;
-        padding: 0rem 2rem 0rem 2rem;
-    }
-
-    .All-info .add-info {
-        border-top: 2px solid #182C61;
-        margin-top: 4rem;
-    }
-
-    .All-info .Address {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        text-align: center;
         margin-top: 2rem;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: bold;
     }
 
-hr {
-    outline: 2px solid #666;
-    margin-bottom: 2rem;
-}
+        .all-cards .Mentor-name span {
+            color: #666;
+        }
 
-.card-btn {
-    background-color: #30336b;
-    width: 60rem;
-    height: 5rem;
-}
+    .all-cards .course-btn {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -ms-flex-pack: distribute;
+        justify-content: space-around;
+        margin-top: 3rem;
+    }
 
-    .card-btn button {
+        .all-cards .course-btn button {
+            font-size: 1.5rem;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: bold;
+            border: 2px solid #833471;
+            background-color: #833471;
+            outline: none;
+            color: white;
+            -webkit-transition: all .3s linear;
+            transition: all .3s linear;
+            cursor: pointer;
+            width: 15rem;
+            padding: 0.8rem 0.5rem;
+            border-radius: 20px;
+        }
+
+            .all-cards .course-btn button:hover {
+                background-color: white;
+                color: #833471;
+            }
+
+    .all-cards .detail-all p {
         float: right;
-        margin-top: 0.5rem;
-        padding: 1rem 5rem;
+        font-size: 1.5rem;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: bold;
+    }
+
+        .all-cards .detail-all p a {
+            color: #833471;
+            text-decoration: none;
+        }
+
+            .all-cards .detail-all p a:hover {
+                text-decoration: underline;
+                -webkit-text-decoration-color: #833471;
+                text-decoration-color: #833471;
+            }
+    .all-cards .seat-info p {
+        text-align: center;
         font-size: 1.5rem;
         font-weight: bold;
-        font-family: 'Open Sans', sans-serif;
-        background-color: #9AECDB;
-        border: none;
-        outline: none;
-        border-radius: 30px;
-        -webkit-transition: all .2s linear;
-        transition: all .2s linear;
+        color: #666;
+        font-family: 'Montserrat', sans-serif;
     }
-
-button:hover {
-    background-color: #130f40;
-    color: white;
-}
-
-.indiv-card:hover {
-    -webkit-box-shadow: 10px 10px 16px #666;
-    box-shadow: 10px 10px 16px #666;
-}
 
 @media screen and (max-width: 615px) {
     .indiv-card {
@@ -192,7 +244,7 @@ button:hover {
 }
 
 .saved-list-filter {
-    margin-top: 0rem;
+    margin-top: 5rem;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -202,14 +254,14 @@ button:hover {
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
-    font-size: 3rem;
+    font-size: 2rem;
     font-family: 'Open Sans', sans-serif;
 }
 
     .saved-list-filter label {
         margin-top: 5rem;
         margin-right: 2rem;
-        color: #01796f;
+        color: #D2042D;
         font-weight: bold;
     }
 
@@ -221,8 +273,8 @@ button:hover {
 
         .saved-list-filter .grp-radios input[type="radio"], .saved-list-filter .grp-radios-1 input[type="radio"] {
             margin-left: 3rem;
-            width: 2.5rem;
-            height: 2.5rem;
+            width: 1.5rem;
+            height: 1.5rem;
             accent-color: #833471;
         }
 
@@ -245,11 +297,8 @@ button:hover {
 }
 
 .search-field {
-    border: 2px solid #666;
-    -webkit-box-shadow: 1px 1px #666;
-    box-shadow: 1px 1px #666;
-    border-radius: 4px;
-    width: 60.2rem;
+    border: 1px solid #666;
+    width: 60rem;
     outline: none;
 }
 
@@ -262,7 +311,9 @@ button:hover {
             padding: 0.5rem;
             padding-left: 1.5rem;
             width: 50rem;
-            font-size: 2rem;
+            font-size: 1.5rem;
+            outline: none;
+            border: none;
         }
 
     .search-field button {
@@ -273,11 +324,17 @@ button:hover {
         padding: 0.9rem 4rem;
         border: none;
         outline: none;
-        border-radius: 4px;
+        margin-left: 0.05rem;
+        cursor:pointer;
+        transition:all .3s linear;
     }
+        .search-field button:hover 
+        {
+            background-color:deeppink;
+        }
 
-@media screen and (max-width: 715px) {
-    .saved-list-filter {
+        @media screen and (max-width: 715px) {
+            .saved-list-filter {
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
@@ -356,6 +413,20 @@ button:hover {
         display: block !important;
     }
 }
+
+@media screen and (max-width: 940px) {
+    .all-cards {
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+    }
+
+        .all-cards .indiv-card {
+            width: 100%;
+        }
+}
+/*# sourceMappingURL=SavedList.css.map */
 .no-records-msg {
     display:flex;
     justify-content:center;
@@ -369,16 +440,6 @@ button:hover {
     }
 #delete_icon 
 {
-    color:white;
+    color:red;
     cursor:pointer;
 }
-footer {
-    font-family: 'Montserrat', sans-serif;
-}
-/*
-* {
-    background: #000 !important;
-    color: #0f0 !important;
-    outline: solid #f00 1px !important;
-}*/
-/*# sourceMappingURL=SavedList.css.map */

@@ -517,6 +517,10 @@ input[type="file"] {
         flex-direction: column !important;
     }
 }
+.logout-form-div form
+{
+    margin-top:1rem!important;
+}
 /** {
     background: #000 !important;
     color: #0f0 !important;

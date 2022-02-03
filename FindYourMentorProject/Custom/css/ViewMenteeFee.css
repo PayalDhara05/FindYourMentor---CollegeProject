@@ -592,3 +592,6 @@ form {
 {
     font-size:2rem;
 }
+.logout-form-div form {
+    line-height: 2rem!important;
+}

@@ -152,7 +152,6 @@ namespace FindYourMentorProject.Controllers
             {
                 if (userid != 0)
                 {
-                    int userid = Convert.ToInt32(Session["UserID"]);
                     using (FindYourMentorProjectEntities dc = new FindYourMentorProjectEntities())
                     {
                         var user = dc.RegisterMentors.Single(c => c.UserID == userid);
@@ -334,7 +333,9 @@ namespace FindYourMentorProject.Controllers
                         {
                             if (file != null)
                             {
-                                string fileName = SaveToDisk(file);
+                                string fileName = Path.GetFileName(file.FileName);
+                                String filepath = Path.Combine(Server.MapPath("~/Logo/"), fileName);
+                                file.SaveAs(filepath);
                                 adv.logo = "/Logo/" + fileName;
                             }
 

@@ -412,9 +412,8 @@ html, body {
     margin-top: 7rem;
     margin-left: 7rem;
     font-weight: bold;
-    height: 20rem;
+    /*height: 20rem;*/
     width: 100%;
-    margin-bottom:40rem;
 }
     .comment-section .comment-box {
         margin-top: 4rem;

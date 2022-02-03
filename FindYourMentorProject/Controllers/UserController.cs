@@ -227,7 +227,7 @@ namespace FindYourMentorProject.Controllers
 
             var fromEmail = new MailAddress("payaldhara05@gmail.com", "Find Your Mentor");
             var toEmail = new MailAddress(emailID);
-            var fromEmailPassword = "****"; 
+            var fromEmailPassword = "priyapayu"; 
 
             string subject = "";
             string body = "";

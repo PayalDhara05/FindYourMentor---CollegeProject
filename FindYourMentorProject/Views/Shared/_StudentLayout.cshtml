@@ -22,47 +22,49 @@
         <a id="open-nav" href="#1" onclick="openNav()" style="font-size: 3rem;cursor: pointer;text-decoration: none;">&#9776;</a>
         <div class="nav-section">
             <a id="abc"></a><ul>
-                <li><a>Welcome @HttpContext.Current.User.Identity.Name</a></li>
-                <li><a href="/Student/ViewAdvertisement"><i class="fas fa-book-reader"></i>Courses</a></li>
-                <li>
-                    <a><i class="fas fa-user-circle"></i>Profile&nbsp;<i class="fas fa-sort-down" id="arrowdown"></i></a>
-                    <ul>
-                        <li><a href="/Student/PersonalInfo">Personal Information</a></li>
-                        <li><a href="/Student/ViewSavedList">Bookmarks</a></li>
-                        <li><a href="/Student/ChangePass">Change Password</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#catalogue"><i class="fas fa-book-reader"></i>Course&nbsp;<i class="fas fa-sort-down" id="arrowdown"></i></a>
-                    <ul>
-                        <li><a href="/Student/ViewApppliedCourse">Application</a></li>
-                        <li><a href="/Student/ViewApppliedAppointment">Appointment</a></li>
-                        <li>
-                            <a href="">Fees&nbsp;<i class="fas fa-caret-right" id="arrowright"></i></a>
-                            <ul>
-                                <li><a href="/Student/ViewApprovedApplication">Approved Applications</a></li>
-                                <li><a href="/Student/AdmissionStatus">Admission status</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a><i class="fas fa-clipboard"></i>Personal Space&nbsp;<i class="fas fa-sort-down" id="arrowdown"></i></a>
-                    <ul>
-                        <li><a href="/Student/ViewVideos">Search Video Online</a></li>
-                        <li><a href="/Student/Notes">Notes</a></li>
-                    </ul>
-                </li>
-                @if (Request.IsAuthenticated)
-                {
-                    using (Html.BeginForm("Logout", "User", FormMethod.Post, new { @id = "logoutForm" }))
-                    {
-                        <button class="logout-btn">LOGOUT</button>
-                    }
-                }
-            </ul>
+    <li><a>Welcome @HttpContext.Current.User.Identity.Name</a></li>
+    <li><a href="/Student/ViewAdvertisement"><i class="fas fa-book-reader"></i>Courses</a></li>
+    <li>
+        <a><i class="fas fa-user-circle"></i>Profile&nbsp;<i class="fas fa-sort-down" id="arrowdown"></i></a>
+        <ul>
+            <li><a href="/Student/PersonalInfo">Personal Information</a></li>
+            <li><a href="/Student/ViewSavedList">Bookmarks</a></li>
+            <li><a href="/Student/ChangePass">Change Password</a></li>
+        </ul>
+    </li>
+    <li>
+        <a href="#catalogue"><i class="fas fa-book-reader"></i>Course&nbsp;<i class="fas fa-sort-down" id="arrowdown"></i></a>
+        <ul>
+            <li><a href="/Student/ViewApppliedCourse">Application</a></li>
+            <li><a href="/Student/ViewApppliedAppointment">Appointment</a></li>
+            <li>
+                <a href="">Fees&nbsp;<i class="fas fa-caret-right" id="arrowright"></i></a>
+                <ul>
+                    <li><a href="/Student/ViewApprovedApplication">Approved Applications</a></li>
+                    <li><a href="/Student/AdmissionStatus">Admission status</a></li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <a><i class="fas fa-clipboard"></i>Personal Space&nbsp;<i class="fas fa-sort-down" id="arrowdown"></i></a>
+        <ul>
+            <li><a href="/Student/ViewVideos">Search Video Online</a></li>
+            <li><a href="/Student/Notes">Notes</a></li>
+        </ul>
+    </li>
+    @if (Request.IsAuthenticated)
+    {
+        <div class="logout-form-div">
+            @using (Html.BeginForm("Logout", "User", FormMethod.Post, new { @id = "logoutForm" }))
+            {
+            <button class="logout-btn">LOGOUT</button>
+            }
         </div>
-    </nav>
+    }
+</ul>
+                </div>
+            </nav>
     <p id="home"></p>
 
     <div class="sidenav" id="mynav">
@@ -95,10 +97,12 @@
             </li>
             @if (Request.IsAuthenticated)
             {
-                using (Html.BeginForm("Logout", "User", FormMethod.Post, new { @id = "logoutForm" }))
-                {
+                
+                    using (Html.BeginForm("Logout", "User", FormMethod.Post, new { @id = "logoutForm" }))
+                    {
                     <button class="auth-btn">LOGOUT</button>
-                }
+                    }
+                
             }
         </ul>
     </div>

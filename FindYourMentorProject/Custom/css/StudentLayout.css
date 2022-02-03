@@ -556,6 +556,7 @@ footer p {
     justify-content: space-evenly;
     color: black;
     font: 2rem "Open Sans", sans-serif;
+    font-weight:bold;
 }
 
 @media screen and (max-width: 548px) {
@@ -956,3 +957,29 @@ footer {
             width: 100%;
         }
 }
+.logout-form-div {
+    height: 7rem;
+}
+.logout-form-div form
+{
+    line-height:7rem;
+}
+    .logout-form-div form button {
+        font-size: 1.5rem;
+        font-weight: bold;
+        background-color: #833471;
+        font-family: 'Open Sans', sans-serif;
+        border: none;
+        outline: none;
+        -webkit-transition: all .2s linear;
+        transition: all .3s linear;
+        padding: 0.1rem 0.5rem;
+        color: white;
+        padding: 1rem 3rem;
+        cursor:pointer;
+        margin-right: .5rem;
+    }
+        .logout-form-div form button:hover {
+            background-color: #df9fd0;
+            color: black;
+        }
